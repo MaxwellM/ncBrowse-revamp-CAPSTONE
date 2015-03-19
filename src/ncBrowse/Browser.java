@@ -32,6 +32,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -159,12 +160,27 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     component12 = Box.createVerticalStrut(12);
     component13 = Box.createVerticalStrut(12);
     component14 = Box.createHorizontalStrut(3);
-    setResizable(false);
+    setResizable(true);
     setJMenuBar(menuBar);
     setTitle("NetCDF File Browser");
     setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
     contentPane.setLayout(borderLayout1);
-    setSize(571,218);
+
+      //My CODE
+      Rectangle2D result = new Rectangle2D.Double();
+      GraphicsEnvironment localGE = GraphicsEnvironment.getLocalGraphicsEnvironment();
+      for (GraphicsDevice gd : localGE.getScreenDevices()) {
+          for (GraphicsConfiguration graphicsConfiguration : gd.getConfigurations()) {
+              result.union(result, graphicsConfiguration.getBounds(), result);
+          }
+      }
+      int fullWidth = (int) result.getWidth();
+      int fullHeight = (int) result.getHeight();
+      int winSizeWidth = (fullWidth/4);
+      int winSizeHeight = (fullHeight/2);
+      //My CODE
+
+    setSize(600,300);
     setVisible(false);
     this.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent e) {
@@ -182,18 +198,18 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     JLabel1.setText("File:");
     numDimText.setMaximumSize(new Dimension(2147483647, 40));
     numDimText.setEditable(false);
-    numDimText.setColumns(10);
+    numDimText.setColumns(5);
     numVarText.setEditable(false);
-    numVarText.setColumns(10);
+    numVarText.setColumns(5);
     numVarText.setMaximumSize(new Dimension(2147483647, 40));
     numVarText.setToolTipText("Right click mouse for Variable List");
     numVarText.addMouseListener(aSymMouse);
     numAttText.setMaximumSize(new Dimension(2147483647, 40));
     numAttText.setEditable(false);
-    numAttText.setColumns(10);
+    numAttText.setColumns(5);
     fileText.setMaximumSize(new Dimension(2147483647, 40));
     fileText.setEditable(false);
-    fileText.setColumns(10);
+    fileText.setColumns(5);
     JLabel3.setMaximumSize(new Dimension(80, 40));
     JLabel3.setMinimumSize(new Dimension(80, 17));
     JLabel3.setPreferredSize(new Dimension(80, 17));
@@ -236,9 +252,16 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     openFile.setText("Open File...");
     openFile.setActionCommand("Open...");
     openFile.setMnemonic((int)'O');
+      openFileInWindows.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+      openFileInWindows.setText("Split File Into Multiple Windows...");
+      //openFileInWindows.setActionCommand("Open...");
+      //penFileInWindows.setMnemonic((int)'O');
     fileMenu.add(newBrowser);
     fileMenu.addSeparator();
     fileMenu.add(openFile);
+      fileMenu.addSeparator();
+      fileMenu.add(openFileInWindows);
+      fileMenu.addSeparator();
     fileMenu.add(openWeb);
     fileMenu.add(openLas);
 
@@ -388,13 +411,13 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     asTableItem.setActionCommand("As Table...");
     asTreeItem.setActionCommand("As Tree...");
 
-
     SymWindow aSymWindow = new SymWindow();
     this.addWindowListener(aSymWindow);
     SymAction lSymAction = new SymAction();
     openDapper.addActionListener(lSymAction);
     newBrowser.addActionListener(lSymAction);
     openFile.addActionListener(lSymAction);
+      openFileInWindows.addActionListener(lSymAction);
     openWeb.addActionListener(lSymAction);
     openOPeNDAP.addActionListener(lSymAction);
     openLas.addActionListener(lSymAction);
@@ -580,6 +603,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
   javax.swing.JMenuBar menuBar = new javax.swing.JMenuBar();
   javax.swing.JMenu fileMenu = new javax.swing.JMenu();
   javax.swing.JMenuItem openFile = new javax.swing.JMenuItem();
+    javax.swing.JMenuItem openFileInWindows = new javax.swing.JMenuItem();
   //  javax.swing.JSeparator JSeparator2 = new javax.swing.JSeparator();
   javax.swing.JMenuItem exportCdlItem = new javax.swing.JMenuItem();
   javax.swing.JMenuItem exportUNHItem = new javax.swing.JMenuItem();
@@ -704,9 +728,11 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
         newBrowser_actionPerformed(event);
       else if (object == openFile) {
           openFile_actionPerformed(event);
-          VariableWindows swingControlDemo = new VariableWindows();
-          swingControlDemo.openVariableWindows();
       }
+      else if (object == openFileInWindows){
+          openFileInWindows_actionPerformed(event);
+      }
+
       else if (object == openWeb)
         openWeb_actionPerformed(event);
       else if (object == openDapper)
@@ -810,6 +836,10 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
 //
 //        ncDumpTextField.setText(baos.toString());
 //    }
+    void openFileInWindows_actionPerformed(ActionEvent event){
+        VariableWindows swingControlDemo = new VariableWindows();
+        swingControlDemo.openVariableWindows();
+    }
 
   void openFile_actionPerformed(ActionEvent event) {
     File file = null;
@@ -1013,6 +1043,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
 //    Iterator as = ncFile_.getGlobalAttributeIterator();
 //    Iterator ds = ncFile_.getDimensionIterator();
     fileText.setText(name);
+      fileText.setHorizontalAlignment(JTextField.CENTER);
     setTitle(name + " - NetCDF File Browser");
     int vcount = 0;
     int dcount = 0;
@@ -1037,8 +1068,11 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
       acount++;
     }
     numVarText.setText(Integer.toString(vcount));
+      numVarText.setHorizontalAlignment(JTextField.CENTER);
     numDimText.setText(Integer.toString(dcount));
+      numDimText.setHorizontalAlignment(JTextField.CENTER);
     numAttText.setText(Integer.toString(acount));
+      numAttText.setHorizontalAlignment(JTextField.CENTER);
     //
     // clear vMapModel list
     //

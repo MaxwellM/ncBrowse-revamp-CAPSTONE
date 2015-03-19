@@ -61,8 +61,8 @@ public class VariableWindows {
     public static JTextArea commentTextArea8 = new JTextArea();
     int fullWidth;
     int fullHeight;
-    int winSizeWidth;
-    int winSizeHeight;
+    public int winSizeWidth;
+    public int winSizeHeight;
     int locWin1X;
     int locWin1Y;
     int locWin2X;

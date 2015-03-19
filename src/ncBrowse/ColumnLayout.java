@@ -25,7 +25,7 @@ import java.awt.*;
  * @version 1.0, Apr 1 1996
  * @author  David Geary
  * @see     Orientation
- * @see     RowLayout
+ * @see     //RowLayout
  */
 public class ColumnLayout implements LayoutManager {
     static private int _defaultGap = 5;

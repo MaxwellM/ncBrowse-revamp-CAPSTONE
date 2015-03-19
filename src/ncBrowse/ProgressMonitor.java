@@ -11,20 +11,12 @@ package ncBrowse;
 
 
 
-import java.io.*;
-import java.awt.BorderLayout;
-import java.awt.Frame;
-import java.awt.Component;
-import java.awt.Container;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
-import javax.swing.JLabel;
-import javax.swing.UIManager;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 
 
@@ -52,7 +44,7 @@ import javax.swing.UIManager;
  *
  * <p>
  * Set maximum and set minimum now reset the JProgressBar -- J. Sirott
- * @see ProgressMonitorInputStream
+ * @see //ProgressMonitorInputStream
  * @author James Gosling
  * @version 1.25 12/03/01
  */
@@ -355,7 +347,7 @@ public class ProgressMonitor extends Object
      * Returns the amount of time this object waits before deciding whether
      * or not to popup a progress monitor.
      *
-     * @param millisToDecideToPopup  an int specifying waiting time,
+     * @param //millisToDecideToPopup  an int specifying waiting time,
      *        in milliseconds
      * @see #setMillisToDecideToPopup
      */
@@ -380,7 +372,7 @@ public class ProgressMonitor extends Object
     /**
      * Returns the amount of time it will take for the popup to appear.
      *
-     * @param millisToPopup  an int specifying the time in milliseconds
+     * @param //millisToPopup  an int specifying the time in milliseconds
      * @see #setMillisToPopup
      */
     public int getMillisToPopup() {

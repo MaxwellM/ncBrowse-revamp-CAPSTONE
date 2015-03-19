@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="sgt_src_v2">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../CAPSTONE/sgt_src_v2.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ncBrowse</OriginalElement>
+  <nodes>
+    <node x="0.0" y="4677.0">ncBrowse.URLSelectionDialog_navigationText_hyperlinkAdapter</node>
+    <node x="3476.25" y="4153.0">ncBrowse.AboutBrowse.SymWindow</node>
+    <node x="1025.25" y="3918.0">ncBrowse.WindowList</node>
+    <node x="1618.0" y="4381.0">ncBrowse.SimpleFileFilter</node>
+    <node x="1219.0" y="4796.0">ncBrowse.Debug</node>
+    <node x="1966.5" y="4381.0">ncBrowse.NcBrowseResources</node>
+    <node x="4037.0" y="3918.0">ncBrowse.URLSelectionDialog</node>
+    <node x="2935.0" y="2372.0">ncBrowse.DomainSelector.MyAction</node>
+    <node x="71.5" y="3918.0">ncBrowse.TableView</node>
+    <node x="67.00568181818187" y="3476.5">ncBrowse.VariableText</node>
+    <node x="1240.0" y="2393.0">ncBrowse.DapperNcFile</node>
+    <node x="761.0" y="2503.0">ncBrowse.DODSNcFile</node>
+    <node x="470.0" y="4796.0">ncBrowse.LASSelectionDialog_goButton_actionAdapter</node>
+    <node x="1734.5384615384617" y="640.0">ncBrowse.ConfigAdvancedPlotOptions</node>
+    <node x="3720.0" y="3918.0">ncBrowse.VariableTable</node>
+    <node x="2956.0" y="4381.0">ncBrowse.ConfigCustomOrientation</node>
+    <node x="756.0" y="1578.5">ncBrowse.Browser.UrlHandler</node>
+    <node x="729.0" y="4381.0">ncBrowse.ColumnLayout</node>
+    <node x="2917.25" y="4107.0">ncBrowse.HTTPServer.Worker</node>
+    <node x="547.0" y="3918.0">ncBrowse.VariableListDialog</node>
+    <node x="2603.5511363636365" y="3729.5">ncBrowse.TreeView.SymWindow</node>
+    <node x="514.0" y="4677.0">ncBrowse.URLSelectionDialog_acceptButton_actionAdapter</node>
+    <node x="3091.0" y="2372.0">ncBrowse.DomainSelector.SymWindow</node>
+    <node x="1990.25" y="3918.0">ncBrowse.SwingWorker</node>
+    <node x="565.0" y="1578.5">ncBrowse.Browser.CheckBoxAction</node>
+    <node x="1496.25" y="3918.0">ncBrowse.TimeHelpDialog</node>
+    <node x="260.0" y="3810.5">ncBrowse.VariableText.SymWindow</node>
+    <node x="3391.0" y="4381.0">ncBrowse.TenPixelBorder</node>
+    <node x="1588.5511363636365" y="3197.0">ncBrowse.SelectionRange</node>
+    <node x="971.5511363636365" y="3799.5">ncBrowse.VariableGraph.MyMouse</node>
+    <node x="4103.0" y="4381.0">ncBrowse.Orientation</node>
+    <node x="1971.0" y="2382.0">ncBrowse.LocalNcFile</node>
+    <node x="1363.0" y="4796.0">ncBrowse.images</node>
+    <node x="3676.0" y="4086.0">ncBrowse.VariableTable.VarTableModel</node>
+    <node x="3649.5511363636365" y="3197.0">ncBrowse.ProgressMonitor</node>
+    <node x="2649.0" y="4381.0">ncBrowse.Assert</node>
+    <node x="938.0" y="4796.0">ncBrowse.RankNotSupportedException</node>
+    <node x="1958.0" y="4505.0">ncBrowse.NcBrowseResources_en_US</node>
+    <node x="815.5511363636365" y="3799.0">ncBrowse.VariableGraph.MyAction</node>
+    <node x="1611.5384615384617" y="839.0">ncBrowse.map</node>
+    <node x="1249.5511363636365" y="3498.5">ncBrowse.ExportCdl</node>
+    <node x="195.53846153846166" y="189.0">ncBrowse.Browser</node>
+    <node x="3059.5511363636365" y="3197.0">ncBrowse.LASSelectionDialog</node>
+    <node x="1481.5384615384617" y="839.0">ncBrowse.VisAD</node>
+    <node x="3446.0" y="4677.0">ncBrowse.URLSelectionDialog_backButton_actionAdapter</node>
+    <node x="610.3011363636365" y="3197.0">ncBrowse.VariableProcessThread</node>
+    <node x="2758.0" y="2361.0">ncBrowse.DomainSelector.MyMouse</node>
+    <node x="2753.25" y="4151.5">ncBrowse.HTTPServer.HTTPHandler</node>
+    <node x="2210.0" y="4381.0">ncBrowse.MenuBar3D</node>
+    <node x="938.0" y="1578.5">ncBrowse.Browser.SymAction</node>
+    <node x="0.0" y="4381.0">ncBrowse.LasTreeModel</node>
+    <node x="3793.0511363636365" y="3520.0">ncBrowse.ProgressMonitor.ProgressOptionPane</node>
+    <node x="260.0" y="4285.0">ncBrowse.TableView.SymWindow</node>
+    <node x="0.0" y="3810.5">ncBrowse.VariableText.MyAction</node>
+    <node x="394.0" y="4381.0">ncBrowse.NcUtil</node>
+    <node x="1271.0" y="1568.0">ncBrowse.Browser.SymMenu</node>
+    <node x="1525.0" y="4796.0">ncBrowse.dm</node>
+    <node x="2309.25" y="3918.0">ncBrowse.OptionsDialog</node>
+    <node x="2774.5511363636365" y="3741.0">ncBrowse.TreeView.SymAction</node>
+    <node x="3711.0" y="4381.0">ncBrowse.MaintenanceTimer</node>
+    <node x="1100.0" y="1578.5">ncBrowse.Browser.SymWindow</node>
+    <node x="3257.0" y="3918.0">ncBrowse.AboutBrowse</node>
+    <node x="3927.0" y="4677.0">ncBrowse.LASSelectionDialog_fileURLField_actionAdapter</node>
+    <node x="1649.75" y="4219.0">ncBrowse.TimeHelpDialog.SymAction</node>
+    <node x="278.0" y="1568.0">ncBrowse.Browser.SymMouse</node>
+    <node x="1077.0" y="4381.0">ncBrowse.OPeNDAPSelectionDialog</node>
+    <node x="2029.75" y="4174.0">ncBrowse.SwingWorker.ThreadVar</node>
+    <node x="752.5511363636365" y="3410.0">ncBrowse.VariableGraph</node>
+    <node x="3216.25" y="4164.5">ncBrowse.AboutBrowse.SymAction</node>
+    <node x="0.0" y="4285.0">ncBrowse.TableView.SymAction</node>
+    <node x="1984.0" y="4677.0">ncBrowse.URLSelectionDialog_webURLcBox_actionAdapter</node>
+    <node x="2437.75" y="4175.0">ncBrowse.OptionsDialog.SymAction</node>
+    <node x="2878.25" y="3918.0">ncBrowse.HTTPServer</node>
+    <node x="0.0" y="2338.0">ncBrowse.LasFile</node>
+    <node x="2433.0511363636365" y="3197.0">ncBrowse.TreeView</node>
+    <node x="0.0" y="4796.0">ncBrowse.URLSelectionDialog_goButton_actionAdapter</node>
+    <node x="1954.1250000000002" y="44.0">ncBrowse.ButtonMaintainer</node>
+    <node x="740.25" y="4252.5">ncBrowse.VariableListDialog.SymAction</node>
+    <node x="1005.0" y="4677.0">ncBrowse.URLSelectionDialog_cancelButton_actionAdapter</node>
+    <node x="2472.0" y="4677.0">ncBrowse.LASSelectionDialog_cancelButton_actionAdapter</node>
+    <node x="1245.5511363636365" y="3810.5">ncBrowse.VariableGraph.SymAction</node>
+    <node x="450.55113636363643" y="3509.5">ncBrowse.ExportUNH</node>
+    <node x="2960.0" y="4677.0">ncBrowse.LASSelectionDialog_webURLcBox_actionAdapter</node>
+    <node x="3223.0511363636365" y="3586.0">ncBrowse.LASSelectionDialog.TimerListener</node>
+    <node x="538.9886363636365" y="3810.5">ncBrowse.VariableGraph.SymWindow</node>
+    <node x="1392.9134615384617" y="0.0">ncBrowse.DialogClient</node>
+    <node x="547.25" y="4241.0">ncBrowse.VariableListDialog.SymListSelection</node>
+    <node x="1495.0" y="4677.0">ncBrowse.LASSelectionDialog_acceptButton_actionAdapter</node>
+    <node x="312.0" y="3101.0">ncBrowse.LasFile.LasReader</node>
+    <node x="2340.5511363636365" y="3718.0">ncBrowse.TreeView.VariableNode</node>
+    <node x="2679.0" y="1708.0">ncBrowse.DomainSelector</node>
+    <node x="885.0" y="1708.0">ncBrowse.NcFile</node>
+    <node x="0.0" y="1590.0">ncBrowse.Browser.SymListSelection</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ncBrowse.Browser.UrlHandler" target="ncBrowse.Browser">
+      <point x="0.0" y="-37.0" />
+      <point x="837.0" y="1543.0" />
+      <point x="828.5384615384614" y="1543.0" />
+      <point x="-2.2737367544323206E-13" y="664.5" />
+    </edge>
+    <edge source="ncBrowse.DapperNcFile" target="ncBrowse.NcFile">
+      <point x="0.0" y="-301.5" />
+      <point x="1595.5" y="2318.0" />
+      <point x="1395.0" y="2318.0" />
+      <point x="102.0" y="290.0" />
+    </edge>
+    <edge source="ncBrowse.ExportUNH" target="ncBrowse.VariableProcessThread">
+      <point x="0.0" y="-70.0" />
+      <point x="591.5511363636365" y="3390.0" />
+      <point x="746.0511363636365" y="3390.0" />
+      <point x="-45.25" y="81.5" />
+    </edge>
+    <edge source="ncBrowse.Browser.SymAction" target="ncBrowse.Browser">
+      <point x="0.0" y="-37.0" />
+      <point x="180.85714285714266" y="664.5" />
+    </edge>
+    <edge source="ncBrowse.AboutBrowse.SymWindow" target="ncBrowse.AboutBrowse">
+      <point x="0.0" y="-37.0" />
+      <point x="3551.75" y="4128.0" />
+      <point x="3537.5" y="4128.0" />
+      <point x="93.5" y="92.5" />
+    </edge>
+    <edge source="ncBrowse.VariableGraph.SymWindow" target="ncBrowse.VariableGraph">
+      <point x="0.0" y="-25.5" />
+      <point x="659.9886363636365" y="3774.0" />
+      <point x="812.1761363636365" y="3774.0" />
+      <point x="-178.875" y="169.5" />
+    </edge>
+    <edge source="ncBrowse.DomainSelector.MyAction" target="ncBrowse.DomainSelector">
+      <point x="0.0" y="-37.0" />
+      <point x="0.0" y="301.5" />
+    </edge>
+    <edge source="ncBrowse.NcBrowseResources_en_US" target="ncBrowse.NcBrowseResources">
+      <point x="0.0" y="-25.5" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="ncBrowse.VariableText.SymWindow" target="ncBrowse.VariableText">
+      <point x="0.0" y="-25.5" />
+      <point x="381.0" y="3774.0" />
+      <point x="327.25568181818187" y="3774.0" />
+      <point x="86.75" y="103.0" />
+    </edge>
+    <edge source="ncBrowse.OptionsDialog.SymAction" target="ncBrowse.OptionsDialog">
+      <point x="0.0" y="-37.0" />
+      <point x="0.0" y="103.5" />
+    </edge>
+    <edge source="ncBrowse.ProgressMonitor.ProgressOptionPane" target="ncBrowse.ProgressMonitor">
+      <point x="0.0" y="-48.5" />
+      <point x="0.0" y="136.5" />
+    </edge>
+    <edge source="ncBrowse.LASSelectionDialog.TimerListener" target="ncBrowse.LASSelectionDialog">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="169.5" />
+    </edge>
+    <edge source="ncBrowse.HTTPServer.Worker" target="ncBrowse.HTTPServer">
+      <point x="63.5" y="-70.0" />
+      <point x="3107.75" y="4082.0" />
+      <point x="3049.0833333333335" y="4082.0" />
+      <point x="68.33333333333326" y="69.5" />
+    </edge>
+    <edge source="ncBrowse.Browser.SymWindow" target="ncBrowse.Browser">
+      <point x="0.0" y="-37.0" />
+      <point x="1175.5" y="1543.0" />
+      <point x="1190.252747252747" y="1543.0" />
+      <point x="361.7142857142853" y="664.5" />
+    </edge>
+    <edge source="ncBrowse.VariableGraph.MyMouse" target="ncBrowse.VariableGraph">
+      <point x="0.0" y="-36.5" />
+      <point x="1098.5511363636365" y="3774.0" />
+      <point x="1050.6761363636365" y="3774.0" />
+      <point x="59.625" y="169.5" />
+    </edge>
+    <edge source="ncBrowse.VariableListDialog.SymListSelection" target="ncBrowse.VariableListDialog">
+      <point x="0.0" y="-37.0" />
+      <point x="633.75" y="4216.0" />
+      <point x="647.0" y="4216.0" />
+      <point x="-100.0" y="136.5" />
+    </edge>
+    <edge source="ncBrowse.VariableGraph" target="ncBrowse.VariableProcessThread">
+      <point x="0.0" y="-169.5" />
+      <point x="991.0511363636365" y="3390.0" />
+      <point x="836.5511363636365" y="3390.0" />
+      <point x="45.25" y="81.5" />
+    </edge>
+    <edge source="ncBrowse.DomainSelector.MyMouse" target="ncBrowse.DomainSelector">
+      <point x="0.0" y="-48.0" />
+      <point x="2836.5" y="2336.0" />
+      <point x="2787.0" y="2336.0" />
+      <point x="-216.0" y="301.5" />
+    </edge>
+    <edge source="ncBrowse.TreeView.SymAction" target="ncBrowse.TreeView">
+      <point x="0.0" y="-25.5" />
+      <point x="2894.5511363636365" y="3693.0" />
+      <point x="2843.0511363636365" y="3693.0" />
+      <point x="164.0" y="235.5" />
+    </edge>
+    <edge source="ncBrowse.map" target="ncBrowse.ButtonMaintainer">
+      <point x="25.75" y="-14.5" />
+      <point x="1688.7884615384617" y="164.0" />
+      <point x="1997.8750000000002" y="164.0" />
+      <point x="-43.75" y="25.5" />
+    </edge>
+    <edge source="ncBrowse.SwingWorker.ThreadVar" target="ncBrowse.SwingWorker">
+      <point x="0.0" y="-48.0" />
+      <point x="0.0" y="103.0" />
+    </edge>
+    <edge source="ncBrowse.ConfigAdvancedPlotOptions" target="ncBrowse.ButtonMaintainer">
+      <point x="0.0" y="-213.5" />
+      <point x="2320.538461538462" y="164.0" />
+      <point x="2085.375" y="164.0" />
+      <point x="43.75" y="25.5" />
+    </edge>
+    <edge source="ncBrowse.TreeView.SymWindow" target="ncBrowse.TreeView">
+      <point x="0.0" y="-37.0" />
+      <point x="0.0" y="235.5" />
+    </edge>
+    <edge source="ncBrowse.VariableText.MyAction" target="ncBrowse.VariableText">
+      <point x="0.0" y="-25.5" />
+      <point x="120.0" y="3774.0" />
+      <point x="153.75568181818187" y="3774.0" />
+      <point x="-86.75" y="103.0" />
+    </edge>
+    <edge source="ncBrowse.map" target="ncBrowse.DialogClient">
+      <point x="-25.75" y="-14.5" />
+      <point x="1637.2884615384617" y="164.0" />
+      <point x="1635.4134615384617" y="164.0" />
+      <point x="97.0" y="69.5" />
+    </edge>
+    <edge source="ncBrowse.Browser.CheckBoxAction" target="ncBrowse.Browser">
+      <point x="0.0" y="-37.0" />
+      <point x="650.5" y="1543.0" />
+      <point x="647.6813186813187" y="1543.0" />
+      <point x="-180.857142857143" y="664.5" />
+    </edge>
+    <edge source="ncBrowse.DODSNcFile" target="ncBrowse.NcFile">
+      <point x="1.1368683772161603E-13" y="-191.5" />
+      <point x="990.5" y="2318.0" />
+      <point x="1191.0" y="2318.0" />
+      <point x="-102.0" y="290.0" />
+    </edge>
+    <edge source="ncBrowse.VariableTable.VarTableModel" target="ncBrowse.VariableTable">
+      <point x="0.0" y="-70.5" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="ncBrowse.LasFile.LasReader" target="ncBrowse.LasFile">
+      <point x="0.0" y="-25.5" />
+      <point x="0.0" y="356.5" />
+    </edge>
+    <edge source="ncBrowse.TableView.SymAction" target="ncBrowse.TableView">
+      <point x="0.0" y="-25.5" />
+      <point x="120.0" y="4260.0" />
+      <point x="161.0" y="4260.0" />
+      <point x="-89.5" y="158.5" />
+    </edge>
+    <edge source="ncBrowse.LasFile" target="ncBrowse.NcFile">
+      <point x="0.0" y="-356.5" />
+      <point x="370.5" y="2308.0" />
+      <point x="987.0" y="2308.0" />
+      <point x="-306.0" y="290.0" />
+    </edge>
+    <edge source="ncBrowse.TimeHelpDialog.SymAction" target="ncBrowse.TimeHelpDialog">
+      <point x="0.0" y="-37.0" />
+      <point x="0.0" y="125.5" />
+    </edge>
+    <edge source="ncBrowse.LocalNcFile" target="ncBrowse.NcFile">
+      <point x="0.0" y="-312.5" />
+      <point x="2302.5" y="2308.0" />
+      <point x="1599.0" y="2308.0" />
+      <point x="306.0" y="290.0" />
+    </edge>
+    <edge source="ncBrowse.Browser.SymMouse" target="ncBrowse.Browser">
+      <point x="0.0" y="-47.5" />
+      <point x="411.5" y="1543.0" />
+      <point x="466.8241758241759" y="1543.0" />
+      <point x="-361.7142857142858" y="664.5" />
+    </edge>
+    <edge source="ncBrowse.Browser.SymMenu" target="ncBrowse.Browser">
+      <point x="0.0" y="-47.5" />
+      <point x="1402.0" y="1543.0" />
+      <point x="1371.1098901098899" y="1543.0" />
+      <point x="542.5714285714282" y="664.5" />
+    </edge>
+    <edge source="ncBrowse.VisAD" target="ncBrowse.DialogClient">
+      <point x="0.0" y="-14.5" />
+      <point x="1536.5384615384617" y="164.0" />
+      <point x="1538.4134615384617" y="164.0" />
+      <point x="0.0" y="69.5" />
+    </edge>
+    <edge source="ncBrowse.TableView.SymWindow" target="ncBrowse.TableView">
+      <point x="0.0" y="-25.5" />
+      <point x="381.0" y="4260.0" />
+      <point x="340.0" y="4260.0" />
+      <point x="89.5" y="158.5" />
+    </edge>
+    <edge source="ncBrowse.HTTPServer.HTTPHandler" target="ncBrowse.HTTPServer">
+      <point x="0.0" y="-25.5" />
+      <point x="2825.25" y="4082.0" />
+      <point x="2912.416666666667" y="4082.0" />
+      <point x="-68.33333333333326" y="69.5" />
+    </edge>
+    <edge source="ncBrowse.ExportCdl" target="ncBrowse.VariableProcessThread">
+      <point x="0.0" y="-81.0" />
+      <point x="1396.5511363636365" y="3380.0" />
+      <point x="927.0511363636365" y="3380.0" />
+      <point x="135.75" y="81.5" />
+    </edge>
+    <edge source="ncBrowse.AboutBrowse.SymAction" target="ncBrowse.AboutBrowse">
+      <point x="0.0" y="-25.5" />
+      <point x="3336.25" y="4128.0" />
+      <point x="3350.5" y="4128.0" />
+      <point x="-93.5" y="92.5" />
+    </edge>
+    <edge source="ncBrowse.DomainSelector.SymWindow" target="ncBrowse.DomainSelector">
+      <point x="0.0" y="-37.0" />
+      <point x="3166.5" y="2336.0" />
+      <point x="3219.0" y="2336.0" />
+      <point x="216.0" y="301.5" />
+    </edge>
+    <edge source="ncBrowse.Browser" target="ncBrowse.DialogClient">
+      <point x="0.0" y="-664.5" />
+      <point x="828.5384615384617" y="164.0" />
+      <point x="1441.4134615384617" y="164.0" />
+      <point x="-97.0" y="69.5" />
+    </edge>
+    <edge source="ncBrowse.Browser.SymListSelection" target="ncBrowse.Browser">
+      <point x="0.0" y="-25.5" />
+      <point x="129.0" y="1543.0" />
+      <point x="285.9670329670331" y="1543.0" />
+      <point x="-542.5714285714286" y="664.5" />
+    </edge>
+    <edge source="ncBrowse.TreeView.VariableNode" target="ncBrowse.TreeView">
+      <point x="0.0" y="-48.5" />
+      <point x="2462.0511363636365" y="3693.0" />
+      <point x="2515.0511363636365" y="3693.0" />
+      <point x="-164.0" y="235.5" />
+    </edge>
+    <edge source="ncBrowse.VariableText" target="ncBrowse.VariableProcessThread">
+      <point x="0.0" y="-103.0" />
+      <point x="240.50568181818187" y="3380.0" />
+      <point x="655.5511363636365" y="3380.0" />
+      <point x="-135.75" y="81.5" />
+    </edge>
+    <edge source="ncBrowse.VariableListDialog.SymAction" target="ncBrowse.VariableListDialog">
+      <point x="0.0" y="-25.5" />
+      <point x="860.25" y="4216.0" />
+      <point x="847.0" y="4216.0" />
+      <point x="100.0" y="136.5" />
+    </edge>
+    <edge source="ncBrowse.VariableGraph.SymAction" target="ncBrowse.VariableGraph">
+      <point x="0.0" y="-25.5" />
+      <point x="1365.5511363636365" y="3774.0" />
+      <point x="1169.9261363636365" y="3774.0" />
+      <point x="178.875" y="169.5" />
+    </edge>
+    <edge source="ncBrowse.VariableGraph.MyAction" target="ncBrowse.VariableGraph">
+      <point x="0.0" y="-37.0" />
+      <point x="883.5511363636365" y="3774.0" />
+      <point x="931.4261363636365" y="3774.0" />
+      <point x="-59.625" y="169.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6471734892787524" x="2039.612951807229" y="63.0" />
+  <SelectedNodes>
+    <node>ncBrowse.LASSelectionDialog_webURLcBox_actionAdapter</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+    <Category>Constructors</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="netcdfAll-4.2" level="project" />
+    <orderEntry type="library" name="noaa_pmel" level="project" />
+    <orderEntry type="library" name="visad" level="project" />
+    <orderEntry type="library" name="lashandler" level="project" />
+    <orderEntry type="library" name="lax" level="project" />
+    <orderEntry type="library" name="ndedit" level="project" />
+    <orderEntry type="library" name="ndeditgifs" level="project" />
+    <orderEntry type="library" name="ncBrowse" level="project" />
+    <orderEntry type="library" name="png" level="project" />
+    <orderEntry type="library" name="src" level="project" />
+  </component>
+</module>

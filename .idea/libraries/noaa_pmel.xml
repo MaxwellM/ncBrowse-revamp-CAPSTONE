@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="noaa_pmel">
+    <CLASSES>
+      <root url="jar://C:/Program Files (x86)/ncBrowse/noaa_pmel.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

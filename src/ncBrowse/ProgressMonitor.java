@@ -252,7 +252,7 @@ public class ProgressMonitor extends Object
                         dialog = pane.createDialog(parentComponent,
                             UIManager.getString(
                                 "ProgressMonitor.progressText"));
-                        dialog.show();
+                        dialog.setVisible(true);
                     }
                 }
             }

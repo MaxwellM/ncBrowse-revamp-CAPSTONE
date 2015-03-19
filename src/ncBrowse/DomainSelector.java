@@ -3,30 +3,27 @@
  */
 package ncBrowse;
 
-import javax.swing.*;
-import javax.swing.border.TitledBorder;
-import java.beans.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
-import java.io.IOException;
-import javax.swing.SwingConstants;
-import java.util.Iterator;
-import java.lang.reflect.*;
-
-import ucar.nc2.Variable;
-import ucar.nc2.Attribute;
-import ucar.ma2.Array;
-
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.IllegalTimeValue;
+import gov.noaa.pmel.sgt.dm.Collection;
+import gov.noaa.pmel.sgt.dm.SGTData;
+import gov.noaa.pmel.sgt.dm.SGTLine;
 import gov.noaa.pmel.swing.SelectDoubleDialog;
 import gov.noaa.pmel.swing.SelectTimeDialog;
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.Collection;
-import gov.noaa.pmel.sgt.dm.SGTLine;
+import gov.noaa.pmel.util.GeoDate;
+import gov.noaa.pmel.util.IllegalTimeValue;
+import ucar.ma2.Array;
+import ucar.nc2.Attribute;
+import ucar.nc2.Variable;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.Iterator;
 
 /**
  * Provides an interface for setting the domain for extracting data
@@ -1062,7 +1059,8 @@ public class DomainSelector extends javax.swing.JFrame implements Runnable {
         }
       }
     } catch (RankNotSupportedException e) {
-      System.out.println(e);
+        String s = e.toString();
+      System.out.println(s);
       return;
     }
 
@@ -1113,7 +1111,8 @@ public class DomainSelector extends javax.swing.JFrame implements Runnable {
         try {
           anArray = ((Variable)dimOrVar_[i]).read().copyTo1DJavaArray();
         } catch (IOException e) {
-          System.out.println(e);
+            String s = e.toString();
+            System.out.println(s);
         }
         if(isTime_[i]) {
           GeoDate min = null;
@@ -1318,7 +1317,8 @@ public class DomainSelector extends javax.swing.JFrame implements Runnable {
           Array arr = ((Variable)dimOrVar_[i]).read();
           anArray = arr.copyTo1DJavaArray();
         } catch (IOException e) {
-          System.out.println(e);
+            String s = e.toString();
+            System.out.println(s);
         }
         if(isTime_[i]) {
           GeoDate min = null;
@@ -1493,7 +1493,8 @@ public class DomainSelector extends javax.swing.JFrame implements Runnable {
           Array arr = ((Variable)dimOrVar_[i]).read();
           anArray = arr.copyTo1DJavaArray();
         } catch (IOException e) {
-          System.out.println(e);
+            String s = e.toString();
+            System.out.println(s);
         }
         if(isTime_[i]) {
           GeoDate min = null;

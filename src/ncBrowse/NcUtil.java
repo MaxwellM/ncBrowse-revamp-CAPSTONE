@@ -3,13 +3,13 @@
  */
 package ncBrowse;
 
-import ucar.nc2.*;
-import ucar.ma2.Array;
-
-import java.io.IOException;
-
 import gov.noaa.pmel.util.GeoDate;
 import gov.noaa.pmel.util.IllegalTimeValue;
+import ucar.ma2.Array;
+import ucar.nc2.Attribute;
+import ucar.nc2.Variable;
+
+import java.io.IOException;
 
 /**
  * supplies common functions for DODSNcFile and LocalNcFile
@@ -71,7 +71,8 @@ public class NcUtil {
       Array arr = var.read();
       anArray = arr.copyTo1DJavaArray();
     } catch (IOException e) {
-      System.out.println(e);
+        String s = e.toString();
+        System.out.println(s);
       return null;
     }
     if(isVariableTime(var)) {
@@ -86,7 +87,8 @@ public class NcUtil {
         try {
           refDate_ = new GeoDate(ref, tFormat_.substring(0, len));
         } catch (IllegalTimeValue e) {
-          System.out.println(e);
+            String s = e.toString();
+            System.out.println(s);
           try {
             refDate_ = new GeoDate("1970-01-01 00:00:00",
                                    "yyyy-MM-dd HH:mm:ss");
@@ -142,7 +144,8 @@ public class NcUtil {
             Array arr = time2.read();
             time2_ = (int[])arr.copyTo1DJavaArray();
           } catch (IOException e) {
-            System.out.println(e);
+              String s = e.toString();
+              System.out.println(s);
             return null;
           }
           int jday = ((int[])anArray)[index];

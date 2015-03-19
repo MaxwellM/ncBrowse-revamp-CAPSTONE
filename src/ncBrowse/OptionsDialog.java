@@ -3,8 +3,8 @@
  */
 package ncBrowse;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Title:        netCDF File Browser
@@ -154,7 +154,7 @@ public class OptionsDialog extends JDialog {
         int x = pt.x + sz.width + 20;
         int y = 50;
         TimeHelpDialog1.setLocation(x, y);
-        TimeHelpDialog1.show();
+        TimeHelpDialog1.setVisible(true);
       }
     } catch (java.lang.Exception e) {
     }

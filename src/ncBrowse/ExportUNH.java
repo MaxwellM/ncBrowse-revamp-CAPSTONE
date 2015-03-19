@@ -3,24 +3,21 @@
  */
 package ncBrowse;
 
-import java.awt.Frame;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintWriter;
-import java.io.IOException;
-import java.text.DecimalFormat;
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-
 import gov.noaa.pmel.sgt.dm.SGTData;
 import gov.noaa.pmel.sgt.dm.SGTGrid;
+import ucar.nc2.Variable;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DecimalFormat;
 
 //  import ucar.netcdf.Variable;
 //  import ucar.netcdf.DimensionIterator;
 //  import ucar.netcdf.Attribute;
-
-import ucar.nc2.Variable;
-import ucar.nc2.Attribute;
 
 /**
  * Export netCDF variable in UNH ascii format.
@@ -179,7 +176,8 @@ public class ExportUNH extends VariableProcessThread {
     try {
       fos = new FileOutputStream(outpath);
     } catch (IOException e) {
-      System.out.println(e);
+        String s = e.toString();
+        System.out.println(s);
       return;
     }
     PrintWriter ps = new PrintWriter(fos, true);

@@ -3,20 +3,17 @@
  */
 package ncBrowse;
 
-import java.awt.Frame;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import gov.noaa.pmel.sgt.dm.SGTData;
+import ucar.ma2.InvalidRangeException;
+import ucar.nc2.Variable;
+
 import javax.swing.*;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
-import gov.noaa.pmel.sgt.dm.SGTData;
-
 //  import ucar.netcdf.Variable;
-
-import ucar.nc2.Variable;
-import ucar.ma2.InvalidRangeException;
 
 /**
  * Presents <code>String</code> variable data in a window.
@@ -82,7 +79,8 @@ public class VariableText extends VariableProcessThread {
         //	array = (char[])ncVar.toArray(array, maOrigin, maShape);
         array = (char[])ncVar.read(maOrigin, maShape).copyTo1DJavaArray();
       } catch (IOException e) {
-        System.out.println(e);
+          String s = e.toString();
+          System.out.println(s);
       } catch (InvalidRangeException e) {
         e.printStackTrace();
       }
@@ -95,7 +93,8 @@ public class VariableText extends VariableProcessThread {
           //	  array = (char[])ncVar.toArray(array, maOrigin, maShape);
         array = (char[])ncVar.read(maOrigin, maShape).copyTo1DJavaArray();
         } catch (IOException e) {
-          System.out.println(e);
+            String s = e.toString();
+            System.out.println(s);
         } catch (InvalidRangeException e) {
           e.printStackTrace();
         }
@@ -132,7 +131,8 @@ public class VariableText extends VariableProcessThread {
           //	  array = (char[])ncVar.toArray(array, maOrigin, maShape);
         array = (char[])ncVar.read(maOrigin, maShape).copyTo1DJavaArray();
         } catch (IOException e) {
-          System.out.println(e);
+            String s = e.toString();
+            System.out.println(s);
         } catch (InvalidRangeException e) {
           e.printStackTrace();
         }

@@ -3,8 +3,8 @@
  */
 package ncBrowse;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * Basic information about netCDF Browser application.
@@ -42,23 +42,23 @@ public class AboutBrowse extends javax.swing.JDialog {
     setTitle("netCDF Browser");
     setModal(true);
     panel1.setLayout(borderLayout1);
-    jLabel1.setFont(new java.awt.Font("Dialog", 1, 14));
+    jLabel1.setFont(new java.awt.Font("Dialog", Font.PLAIN, 14));
     jLabel1.setToolTipText("");
     jLabel1.setText("Java netCDF from Unidata");
-    jLabel2.setFont(new java.awt.Font("Dialog", 2, 12));
+    jLabel2.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
     jLabel2.setText("(http://www.unidata.ucar.edu/packages/netcdf)");
-    jLabel3.setFont(new java.awt.Font("Dialog", 1, 14));
+    jLabel3.setFont(new java.awt.Font("Dialog", Font.PLAIN, 14));
     jLabel3.setToolTipText("");
     jLabel3.setText("Web Access by HTTPClient");
-    jLabel4.setFont(new java.awt.Font("Dialog", 2, 12));
+    jLabel4.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
     jLabel4.setText("(http://www.innovation.ch/java/HTTPClient)");
-    JLabel5.setFont(new java.awt.Font("Dialog", 2, 12));
-    JLabel7.setFont(new java.awt.Font("Dialog", 2, 12));
+    JLabel5.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
+    JLabel7.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
     jPanel1.setLayout(flowLayout2);
     flowLayout2.setVgap(0);
-    jLabel5.setFont(new java.awt.Font("Dialog", 1, 14));
+    jLabel5.setFont(new java.awt.Font("Dialog", Font.PLAIN, 14));
     jLabel5.setText("Live Acces Server from TMAP");
-    jLabel6.setFont(new java.awt.Font("Dialog", 2, 12));
+    jLabel6.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
     jLabel6.setText("(http://ferret.pmel.noaa.gov/Ferret/LAS/ferret_LAS.html)");
     jLabel7.setText("Thanks to");
     jLabel8.setText("John Osborne for 3D using VisAD");
@@ -76,14 +76,14 @@ public class AboutBrowse extends javax.swing.JDialog {
     iconLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     jLabel11.setText("ncBrowse");
     jLabel11.setForeground(Color.blue);
-    jLabel11.setFont(new java.awt.Font("Dialog", 1, 48));
+    jLabel11.setFont(new java.awt.Font("Dialog", Font.PLAIN, 48));
     aboutLabel1.setFont(new Font("Dialog", Font.BOLD, 16));
     aboutLabel1.setText("A netCDF Browser Application");
     aboutLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     JLabel10.setText(version_);
-    jLabel10.setFont(new java.awt.Font("Dialog", 1, 14));
+    jLabel10.setFont(new java.awt.Font("Dialog", Font.PLAIN, 14));
     jLabel10.setText("VisAD from Univ of Wisconsin-Madison");
-    jLabel12.setFont(new java.awt.Font("Dialog", 2, 12));
+    jLabel12.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
     jLabel12.setText("(http://www.ssec.wisc.edu/~billh/visad.html)");
     getContentPane().add(panel1);
 
@@ -123,7 +123,7 @@ public class AboutBrowse extends javax.swing.JDialog {
     JPanel2.add(JPanel4,  new GridBagConstraints(0, 2, 1, 1, 1.0, 1.0
             ,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
     JLabel8.setText("Graphics powered by");
-    JLabel8.setFont(new java.awt.Font("Dialog", 1, 14));
+    JLabel8.setFont(new java.awt.Font("Dialog", Font.PLAIN, 14));
     JLabel9.setText("sgt!");
     JLabel9.setForeground(java.awt.Color.red);
     JLabel9.setFont(new Font("Dialog", Font.BOLD, 14));
@@ -208,11 +208,11 @@ public class AboutBrowse extends javax.swing.JDialog {
     Insets insets = getInsets();
     setSize(insets.left + insets.right + d.width, insets.top + insets.bottom + d.height);
     Component components[] = getContentPane().getComponents();
-    for (int i = 0; i < components.length; i++) {
-      Point p = components[i].getLocation();
-      p.translate(insets.left, insets.top);
-      components[i].setLocation(p);
-    }
+      for (Component component : components) {
+          Point p = component.getLocation();
+          p.translate(insets.left, insets.top);
+          component.setLocation(p);
+      }
     fComponentsAdjusted = true;
   }
 

@@ -3,44 +3,30 @@
  */
 package ncBrowse;
 
-import java.awt.Frame;
-import java.awt.Color;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.PrintJob;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.util.Properties;
-import javax.swing.*;
-import java.awt.print.*;
-
-import gov.noaa.pmel.sgt.JPane;
 import gov.noaa.pmel.sgt.AbstractPane;
-import gov.noaa.pmel.sgt.LineCartesianRenderer;
+import gov.noaa.pmel.sgt.JPane;
 import gov.noaa.pmel.sgt.LineAttribute;
+import gov.noaa.pmel.sgt.LineCartesianRenderer;
 import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.swing.JGraphicLayout;
-import gov.noaa.pmel.sgt.swing.JPlotLayout;
 import gov.noaa.pmel.sgt.swing.JClassTree;
+import gov.noaa.pmel.sgt.swing.JPlotLayout;
 import gov.noaa.pmel.sgt.swing.prop.LineAttributeDialog;
-
 import gov.noaa.pmel.util.Dimension2D;
 import gov.noaa.pmel.util.Rectangle2D;
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.IllegalTimeValue;
-
-import ucar.nc2.Variable;
 import ucar.ma2.Array;
 import ucar.ma2.Index;
 import ucar.ma2.InvalidRangeException;
+import ucar.nc2.Variable;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.IOException;
 /**
  * Creates a <code>sgt</code> based graph of a netCDF variable.
  *
@@ -115,7 +101,8 @@ public class VariableGraph extends VariableProcessThread {
         ind = marr.getIndex();
         val = marr.getDouble(ind.set(index));
       } catch (IOException e) {
-        System.out.println(e);
+          String s = e.toString();
+          System.out.println(s);
       } catch (InvalidRangeException e) {
         e.printStackTrace();
       }
@@ -129,7 +116,8 @@ public class VariableGraph extends VariableProcessThread {
       try {
         subset_ = range_.getDataModel();
       } catch (RankNotSupportedException e) {
-        System.out.println(e);
+          String s = e.toString();
+          System.out.println(s);
         return;
       }
       if(subset_.getXRange().isStartOrEndMissing() ||
@@ -366,7 +354,7 @@ public class VariableGraph extends VariableProcessThread {
     JClassTree ct = new JClassTree();
     ct.setModal(false);
     ct.setJPane(layout_);
-    ct.show();
+    ct.setVisible(true);
   }
 
   private void makeTextFrame(double val) {

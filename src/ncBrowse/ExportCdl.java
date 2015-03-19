@@ -3,20 +3,18 @@
  */
 package ncBrowse;
 
+import ucar.ma2.InvalidRangeException;
+import ucar.nc2.Attribute;
+import ucar.nc2.Dimension;
+import ucar.nc2.Variable;
+
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Iterator;
-
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileFilter;
-
-import ucar.ma2.InvalidRangeException;
-import ucar.nc2.Attribute;
-import ucar.nc2.Dimension;
-import ucar.nc2.Variable;
 
 /**
  * Export netCDF variable in CDL format.
@@ -118,7 +116,8 @@ public class ExportCdl extends VariableProcessThread {
     try {
       fos = new FileOutputStream(outpath);
     } catch (IOException e) {
-      System.out.println(e);
+        String s = e.toString();
+        System.out.println(s);
       return;
     }
     PrintWriter ps = new PrintWriter(fos, true);
@@ -222,7 +221,8 @@ public class ExportCdl extends VariableProcessThread {
       } catch (InvalidRangeException ire) {
 	ire.printStackTrace();
       } catch (IOException e) {
-        System.out.println(e);
+          String s = e.toString();
+          System.out.println(s);
       }
       writeArray(varArray, ps, time2Var.getName());
     }
@@ -234,7 +234,8 @@ public class ExportCdl extends VariableProcessThread {
     } catch (InvalidRangeException ire) {
       ire.printStackTrace();
     } catch (IOException e) {
-      System.out.println(e);
+        String s = e.toString();
+        System.out.println(s);
     }
     writeArray(varArray, ps, ncVar.getName());
     //

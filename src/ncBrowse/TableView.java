@@ -3,16 +3,20 @@
  */
 package ncBrowse;
 
+import ucar.nc2.Attribute;
+import ucar.nc2.Variable;
+
 import javax.swing.*;
-import javax.swing.border.*;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.TableColumn;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.ListSelectionEvent;
-import java.beans.*;
 import java.awt.*;
-import java.util.Vector;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.Vector;
 
 //  import ucar.netcdf.DimensionIterator;
 //  import ucar.netcdf.DimensionSet;
@@ -22,16 +26,13 @@ import java.util.Iterator;
 //  import ucar.netcdf.AttributeSet;
 //  import ucar.netcdf.Attribute;
 
-import ucar.nc2.Variable;
-import ucar.nc2.Attribute;
-
 /**
  * Creates a <code>JTable</code> summarizing the netCDF file variables.
  *
  * @author Donald Denbo
  * @version $Revision: 1.18 $, $Date: 2001/06/01 19:00:02 $
  */
-public class TableView extends javax.swing.JFrame {
+public class TableView extends JFrame {
   private NcFile ncFile;
   private JTable varTable = null;
   private JTable dimTable = null;
@@ -119,15 +120,15 @@ public class TableView extends javax.swing.JFrame {
   // Used for addNotify check.
   boolean fComponentsAdjusted = false;
 
-  class SymWindow extends java.awt.event.WindowAdapter {
-    public void windowClosing(java.awt.event.WindowEvent event) {
+  class SymWindow extends WindowAdapter {
+    public void windowClosing(WindowEvent event) {
       Object object = event.getSource();
       if (object == TableView.this)
   TableView_WindowClosing(event);
     }
   }
 
-  void TableView_WindowClosing(java.awt.event.WindowEvent event) {
+  void TableView_WindowClosing(WindowEvent event) {
     dispose();		 // dispose of the Frame.
   }
 
@@ -287,26 +288,26 @@ public class TableView extends javax.swing.JFrame {
     return sbuf.toString();
   }
 
-  javax.swing.JPanel buttonPanel = new javax.swing.JPanel();
-  javax.swing.JButton closeButton = new javax.swing.JButton();
-  javax.swing.JPanel tablePanel = new javax.swing.JPanel();
-  javax.swing.JScrollPane dimScrollPane = new javax.swing.JScrollPane();
-  javax.swing.JScrollPane attScrollPane = new javax.swing.JScrollPane();
-  javax.swing.JScrollPane varScrollPane = new javax.swing.JScrollPane();
+  JPanel buttonPanel = new JPanel();
+  JButton closeButton = new JButton();
+  JPanel tablePanel = new JPanel();
+  JScrollPane dimScrollPane = new JScrollPane();
+  JScrollPane attScrollPane = new JScrollPane();
+  JScrollPane varScrollPane = new JScrollPane();
 
-  class SymAction implements java.awt.event.ActionListener {
-    public void actionPerformed(java.awt.event.ActionEvent event) {
+  class SymAction implements ActionListener {
+    public void actionPerformed(ActionEvent event) {
       Object object = event.getSource();
       if (object == closeButton)
   closeButton_actionPerformed(event);
     }
   }
 
-  void closeButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void closeButton_actionPerformed(ActionEvent event) {
     try {
       this.setVisible(false);
       this.dispose();
-    } catch (java.lang.Exception e) {
+    } catch (Exception e) {
     }
   }
 }

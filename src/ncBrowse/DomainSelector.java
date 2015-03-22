@@ -17,10 +17,7 @@ import ucar.nc2.Variable;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
@@ -32,7 +29,7 @@ import java.util.Iterator;
  * @author Donald Denbo
  * @version $Revision: 1.40 $, $Date: 2006/02/15 22:33:23 $
  */
-public class DomainSelector extends javax.swing.JFrame implements Runnable {
+public class DomainSelector extends JFrame implements Runnable {
   private int processType_;
   private String variable_;
 
@@ -202,15 +199,15 @@ public class DomainSelector extends javax.swing.JFrame implements Runnable {
 
   // Used for addNotify check.
   boolean fComponentsAdjusted = false;
-  class SymWindow extends java.awt.event.WindowAdapter {
-    public void windowClosing(java.awt.event.WindowEvent event) {
+  class SymWindow extends WindowAdapter {
+    public void windowClosing(WindowEvent event) {
       Object object = event.getSource();
       if (object == DomainSelector.this)
         DomainSelector_WindowClosing(event);
     }
   }
 
-  void DomainSelector_WindowClosing(java.awt.event.WindowEvent event) {
+  void DomainSelector_WindowClosing(WindowEvent event) {
     dispose();           // dispose of the Frame.
   }
 
@@ -764,17 +761,17 @@ public class DomainSelector extends javax.swing.JFrame implements Runnable {
     return panel;
   }
 
-  javax.swing.JPanel buttonPanel = new javax.swing.JPanel();
-  javax.swing.JButton closeButton = new javax.swing.JButton();
-  javax.swing.JButton actionButton = new javax.swing.JButton();
-  javax.swing.JPanel mainPanel = new javax.swing.JPanel();
-  javax.swing.JScrollPane infoScrollPane = new javax.swing.JScrollPane();
-  javax.swing.JTextArea infoText = new javax.swing.JTextArea();
-  javax.swing.JScrollPane axesScrollPane = new javax.swing.JScrollPane();
+  JPanel buttonPanel = new JPanel();
+  JButton closeButton = new JButton();
+  JButton actionButton = new JButton();
+  JPanel mainPanel = new JPanel();
+  JScrollPane infoScrollPane = new JScrollPane();
+  JTextArea infoText = new JTextArea();
+  JScrollPane axesScrollPane = new JScrollPane();
   TitledBorder axesBorder;
 
-  javax.swing.JButton openButton = new javax.swing.JButton();
-  javax.swing.JComboBox sendCBox = new javax.swing.JComboBox();
+  JButton openButton = new JButton();
+  JComboBox sendCBox = new JComboBox();
   DefaultComboBoxModel sendCBoxModel = new DefaultComboBoxModel();
 
   /** @link dependency */
@@ -795,7 +792,7 @@ public class DomainSelector extends javax.swing.JFrame implements Runnable {
       if (object instanceof JTextField)
         maybePopupTrigger(event);
     }
-    public void mousePressed(java.awt.event.MouseEvent event) {
+    public void mousePressed(MouseEvent event) {
       Object object = event.getSource();
       if (object instanceof JTextField)
         maybePopupTrigger(event);
@@ -980,15 +977,15 @@ public class DomainSelector extends javax.swing.JFrame implements Runnable {
     }
   }
 
-  void closeButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void closeButton_actionPerformed(ActionEvent event) {
     try {
       this.setVisible(false);
       this.dispose();
-    } catch (java.lang.Exception e) {
+    } catch (Exception e) {
     }
   }
 
-  void actionButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void actionButton_actionPerformed(ActionEvent event) {
     if(isText_) {
       processText();
     } else if(isGraph_) {
@@ -998,7 +995,7 @@ public class DomainSelector extends javax.swing.JFrame implements Runnable {
     }
   }
 
-  void button_actionPerformed(java.awt.event.ActionEvent event) {
+  void button_actionPerformed(ActionEvent event) {
     JButton obj = (JButton)event.getSource();
     for(int i=0; i < rank_; i++) {
       if(obj == minPopupButton_[i] || obj == maxPopupButton_[i]) {

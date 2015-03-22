@@ -4,7 +4,10 @@
 package ncBrowse;
 
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Title:        netCDF File Browser
@@ -102,20 +105,20 @@ public class OptionsDialog extends JDialog {
     tFormatField.setText(parent_.getTimeFormat());
   }
 
-  javax.swing.JPanel buttonPanel = new javax.swing.JPanel();
-  javax.swing.JButton okButton = new javax.swing.JButton();
-  javax.swing.JButton cancelButton = new javax.swing.JButton();
-  javax.swing.JPanel mainPanel = new javax.swing.JPanel();
-  javax.swing.JCheckBox showAllVariables = new javax.swing.JCheckBox();
-  javax.swing.JLabel JLabel1 = new javax.swing.JLabel();
-  javax.swing.JTextField tFormatField = new javax.swing.JTextField();
-  javax.swing.JButton tFormatHelp = new javax.swing.JButton();
-  javax.swing.border.EtchedBorder etchedBorder1 = new javax.swing.border.EtchedBorder();
+  JPanel buttonPanel = new JPanel();
+  JButton okButton = new JButton();
+  JButton cancelButton = new JButton();
+  JPanel mainPanel = new JPanel();
+  JCheckBox showAllVariables = new JCheckBox();
+  JLabel JLabel1 = new JLabel();
+  JTextField tFormatField = new JTextField();
+  JButton tFormatHelp = new JButton();
+  EtchedBorder etchedBorder1 = new EtchedBorder();
   FlowLayout flowLayout1 = new FlowLayout();
   GridBagLayout gridBagLayout1 = new GridBagLayout();
 
-  class SymAction implements java.awt.event.ActionListener {
-    public void actionPerformed(java.awt.event.ActionEvent event) {
+  class SymAction implements ActionListener {
+    public void actionPerformed(ActionEvent event) {
       Object object = event.getSource();
       if (object == cancelButton)
         cancelButton_actionPerformed(event);
@@ -126,25 +129,25 @@ public class OptionsDialog extends JDialog {
     }
   }
 
-  void cancelButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void cancelButton_actionPerformed(ActionEvent event) {
     try {
       // OptionsDialog Hide the OptionsDialog
       this.setVisible(false);
-    } catch (java.lang.Exception e) {
+    } catch (Exception e) {
     }
   }
 
-  void okButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void okButton_actionPerformed(ActionEvent event) {
     parent_.setShowAllVariables(showAllVariables.isSelected());
     parent_.setTimeFormat(tFormatField.getText());
     try {
       // OptionsDialog Hide the OptionsDialog
       this.setVisible(false);
-    } catch (java.lang.Exception e) {
+    } catch (Exception e) {
     }
   }
 
-  void tFormatHelp_actionPerformed(java.awt.event.ActionEvent event) {
+  void tFormatHelp_actionPerformed(ActionEvent event) {
     try {
       {
         TimeHelpDialog TimeHelpDialog1 = new TimeHelpDialog(((Frame)getParent()));
@@ -156,7 +159,7 @@ public class OptionsDialog extends JDialog {
         TimeHelpDialog1.setLocation(x, y);
         TimeHelpDialog1.setVisible(true);
       }
-    } catch (java.lang.Exception e) {
+    } catch (Exception e) {
     }
   }
 }

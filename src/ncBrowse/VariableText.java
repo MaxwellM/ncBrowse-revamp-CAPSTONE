@@ -11,6 +11,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 //  import ucar.netcdf.Variable;
@@ -196,15 +198,15 @@ public class VariableText extends VariableProcessThread {
     //
   }
 
-  class SymWindow extends java.awt.event.WindowAdapter {
-    public void windowClosing(java.awt.event.WindowEvent event) {
+  class SymWindow extends WindowAdapter {
+    public void windowClosing(WindowEvent event) {
       Object object = event.getSource();
       if (object == display_)
         display_WindowClosing(event);
     }
   }
 
-  void display_WindowClosing(java.awt.event.WindowEvent event) {
+  void display_WindowClosing(WindowEvent event) {
     display_.setVisible(false);
     display_.dispose();		 // dispose of the Frame.
   }
@@ -216,11 +218,11 @@ public class VariableText extends VariableProcessThread {
     }
   }
 
-  void closeButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void closeButton_actionPerformed(ActionEvent event) {
     try {
       display_.setVisible(false);
       display_.dispose();
-    } catch (java.lang.Exception e) {
+    } catch (Exception e) {
     }
   }
 

@@ -3,13 +3,18 @@
  */
 package ncBrowse;
 
-import java.awt.*;
+import ucar.nc2.Variable;
+
 import javax.swing.*;
-import java.util.Vector;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Iterator;
+import java.util.Vector;
 
 //  import ucar.netcdf.VariableIterator;
-import ucar.nc2.Variable;
 
 /**
  * Creates a popup list of netCDF variables.
@@ -17,7 +22,7 @@ import ucar.nc2.Variable;
  * @author Donald Denbo
  * @version $Revision: 1.12 $, $Date: 2001/06/01 19:00:02 $
  */
-public class VariableListDialog extends javax.swing.JDialog {
+public class VariableListDialog extends JDialog {
   NcFile ncFile;
   Browser parent_;
   String buttonText;
@@ -45,7 +50,7 @@ public class VariableListDialog extends javax.swing.JDialog {
     JScrollPane1.setToolTipText("Select a Variable");
     getContentPane().add(JScrollPane1, "Center");
     JScrollPane1.setBounds(0,0,131,257);
-    VariableList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+    VariableList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     VariableList.setToolTipText("Select a Variable");
     JScrollPane1.getViewport().add(VariableList);
     VariableList.setBounds(0,0,128,254);
@@ -113,24 +118,24 @@ public class VariableListDialog extends javax.swing.JDialog {
   // Used by addNotify
   boolean frameSizeAdjusted = false;
 
-  javax.swing.JScrollPane JScrollPane1 = new javax.swing.JScrollPane();
-  javax.swing.JList VariableList = new javax.swing.JList();
-  javax.swing.JPanel buttonPanel = new javax.swing.JPanel();
-  javax.swing.JButton closeButton = new javax.swing.JButton();
+  JScrollPane JScrollPane1 = new JScrollPane();
+  JList VariableList = new JList();
+  JPanel buttonPanel = new JPanel();
+  JButton closeButton = new JButton();
 
   /** @link dependency
    * @stereotype instantiate*/
   /*#DomainSelector lnkDomainSelector;*/
 
-  class SymListSelection implements javax.swing.event.ListSelectionListener {
-    public void valueChanged(javax.swing.event.ListSelectionEvent event) {
+  class SymListSelection implements ListSelectionListener {
+    public void valueChanged(ListSelectionEvent event) {
       Object object = event.getSource();
       if (object == VariableList)
 	VariableList_valueChanged(event);
     }
   }
 
-  void VariableList_valueChanged(javax.swing.event.ListSelectionEvent event) {
+  void VariableList_valueChanged(ListSelectionEvent event) {
     JList jl = (JList)event.getSource();
     if(jl.isSelectionEmpty() || event.getValueIsAdjusting()) return;
     String varName = (String)jl.getSelectedValue();
@@ -152,15 +157,15 @@ public class VariableListDialog extends javax.swing.JDialog {
 
   }
 
-  class SymAction implements java.awt.event.ActionListener {
-    public void actionPerformed(java.awt.event.ActionEvent event) {
+  class SymAction implements ActionListener {
+    public void actionPerformed(ActionEvent event) {
       Object object = event.getSource();
       if (object == closeButton)
 	closeButton_actionPerformed(event);
     }
   }
 
-  void closeButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void closeButton_actionPerformed(ActionEvent event) {
     this.setVisible(false);
     this.dispose();
   }

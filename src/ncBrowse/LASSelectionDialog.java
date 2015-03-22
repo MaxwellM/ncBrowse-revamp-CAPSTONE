@@ -1,18 +1,19 @@
 package ncBrowse;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
-import java.util.List;
+import gov.noaa.pmel.las.LASHandler;
 
+import javax.swing.*;
+import javax.swing.Timer;
+import javax.swing.event.TreeModelListener;
+import javax.swing.tree.DefaultTreeSelectionModel;
+import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.tree.*;
-
-import gov.noaa.pmel.las.*;
-import javax.swing.Timer;
+import java.io.IOException;
+import java.net.URL;
+import java.util.*;
+import java.util.List;
 
 /**
  * Title:        netCDF File Browser
@@ -288,7 +289,7 @@ public class LASSelectionDialog extends JDialog {
 
 
 
-class LASSelectionDialog_goButton_actionAdapter implements java.awt.event.ActionListener {
+class LASSelectionDialog_goButton_actionAdapter implements ActionListener {
   LASSelectionDialog adaptee;
 
   LASSelectionDialog_goButton_actionAdapter(LASSelectionDialog adaptee) {
@@ -299,7 +300,7 @@ class LASSelectionDialog_goButton_actionAdapter implements java.awt.event.Action
   }
 }
 
-class LASSelectionDialog_acceptButton_actionAdapter implements java.awt.event.ActionListener {
+class LASSelectionDialog_acceptButton_actionAdapter implements ActionListener {
   LASSelectionDialog adaptee;
 
   LASSelectionDialog_acceptButton_actionAdapter(LASSelectionDialog adaptee) {
@@ -310,7 +311,7 @@ class LASSelectionDialog_acceptButton_actionAdapter implements java.awt.event.Ac
   }
 }
 
-class LASSelectionDialog_cancelButton_actionAdapter implements java.awt.event.ActionListener {
+class LASSelectionDialog_cancelButton_actionAdapter implements ActionListener {
   LASSelectionDialog adaptee;
 
   LASSelectionDialog_cancelButton_actionAdapter(LASSelectionDialog adaptee) {
@@ -321,7 +322,7 @@ class LASSelectionDialog_cancelButton_actionAdapter implements java.awt.event.Ac
   }
 }
 
-class LASSelectionDialog_webURLcBox_actionAdapter implements java.awt.event.ActionListener {
+class LASSelectionDialog_webURLcBox_actionAdapter implements ActionListener {
   LASSelectionDialog adaptee;
 
   LASSelectionDialog_webURLcBox_actionAdapter(LASSelectionDialog adaptee) {
@@ -428,7 +429,7 @@ class LasTreeModel implements TreeModel {
 
 }
 
-class LASSelectionDialog_fileURLField_actionAdapter implements java.awt.event.ActionListener {
+class LASSelectionDialog_fileURLField_actionAdapter implements ActionListener {
   LASSelectionDialog adaptee;
 
   LASSelectionDialog_fileURLField_actionAdapter(LASSelectionDialog adaptee) {

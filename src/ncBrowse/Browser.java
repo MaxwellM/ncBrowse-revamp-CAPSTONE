@@ -30,6 +30,10 @@ import ucar.nc2.Variable;
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
@@ -46,7 +50,7 @@ import java.util.List;
  * @author Donald Denbo
  * @version $Revision: 1.72 $, $Date: 2005/03/31 23:44:47 $
  */
-public class Browser extends javax.swing.JFrame implements DialogClient, SelectionListener {
+public class Browser extends JFrame implements DialogClient, SelectionListener {
   private static boolean useOPeNDAP_ = false;
   private static boolean useVMap_ = false;
   private static boolean useSystemLF_ = false;
@@ -70,7 +74,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
   private WindowList windowList_;
   private CheckBoxAction cbAction_ = new CheckBoxAction();
   private boolean oceanShare_ = false;
-    public static javax.swing.JTextArea ncDumpTextField = new javax.swing.JTextArea();
+    public static JTextArea ncDumpTextField = new JTextArea();
 
   private DapperWizard dapperWiz_ = null;
 
@@ -163,7 +167,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     setResizable(true);
     setJMenuBar(menuBar);
     setTitle("NetCDF File Browser");
-    setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
+    setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     contentPane.setLayout(borderLayout1);
 
       //My CODE
@@ -194,7 +198,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     JLabel1.setMaximumSize(new Dimension(80, 40));
     JLabel1.setMinimumSize(new Dimension(80, 17));
     JLabel1.setPreferredSize(new Dimension(80, 17));
-    JLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    JLabel1.setHorizontalAlignment(SwingConstants.RIGHT);
     JLabel1.setText("File:");
     numDimText.setMaximumSize(new Dimension(2147483647, 40));
     numDimText.setEditable(false);
@@ -213,17 +217,17 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     JLabel3.setMaximumSize(new Dimension(80, 40));
     JLabel3.setMinimumSize(new Dimension(80, 17));
     JLabel3.setPreferredSize(new Dimension(80, 17));
-    JLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    JLabel3.setHorizontalAlignment(SwingConstants.RIGHT);
     JLabel3.setText("Dimensions:");
     JLabel2.setMaximumSize(new Dimension(80, 40));
     JLabel2.setMinimumSize(new Dimension(80, 17));
     JLabel2.setPreferredSize(new Dimension(80, 17));
-    JLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    JLabel2.setHorizontalAlignment(SwingConstants.RIGHT);
     JLabel2.setText("Variables:");
     JLabel4.setMaximumSize(new Dimension(80, 40));
     JLabel4.setMinimumSize(new Dimension(80, 17));
     JLabel4.setPreferredSize(new Dimension(80, 17));
-    JLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+    JLabel4.setHorizontalAlignment(SwingConstants.RIGHT);
     JLabel4.setText("Attributes:");
     varScrollPane.setMinimumSize(new Dimension(170, 48));
     varScrollPane.setPreferredSize(new Dimension(170, 160));
@@ -238,7 +242,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     openWeb.setActionCommand("Web...");
     openWeb.setMnemonic('W');
     openWeb.setText("Web...");
-    openWeb.setAccelerator(javax.swing.KeyStroke.getKeyStroke(87, java.awt.event.KeyEvent.CTRL_MASK, false));
+    openWeb.setAccelerator(KeyStroke.getKeyStroke(87, KeyEvent.CTRL_MASK, false));
     openOPeNDAP.setMnemonic('D');
     openOPeNDAP.setText("OPeNDAP...");
     newMapButton.setText("New Map...");
@@ -248,11 +252,11 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     openDapper.setText("Dapper...");
     newBrowser.setText("New Window");
     menuBar.add(fileMenu);
-    openFile.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
+    openFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
     openFile.setText("Open File...");
     openFile.setActionCommand("Open...");
     openFile.setMnemonic((int)'O');
-      openFileInWindows.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+      openFileInWindows.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
       openFileInWindows.setText("Split File Into Multiple Windows...");
       //openFileInWindows.setActionCommand("Open...");
       //penFileInWindows.setMnemonic((int)'O');
@@ -273,8 +277,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     //    fileMenu.add(JSeparator2);
     if(!oceanShare_) {
       exportCdlItem.setEnabled(false);
-      exportCdlItem.setAccelerator(KeyStroke.getKeyStroke(java.awt.event.
-          KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
+      exportCdlItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, InputEvent.CTRL_DOWN_MASK));
       exportCdlItem.setText("Export Variable to cdl...");
       exportCdlItem.setMnemonic((int) 'C');
       fileMenu.add(exportCdlItem);
@@ -579,7 +582,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     frameSizeAdjusted = true;
 
     // Adjust size of frame according to the insets and menu bar
-    javax.swing.JMenuBar menuBar = getRootPane().getJMenuBar();
+    JMenuBar menuBar = getRootPane().getJMenuBar();
     int menuBarHeight = 0;
     if (menuBar != null)
       menuBarHeight = menuBar.getPreferredSize().height;
@@ -591,47 +594,47 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
   // Used by addNotify
   boolean frameSizeAdjusted = false;
 
-  javax.swing.JPanel namePanel = new javax.swing.JPanel();
-  javax.swing.JTextField lnameTextField = new javax.swing.JTextField();
-  javax.swing.JPanel JPanel2 = new javax.swing.JPanel();
+  JPanel namePanel = new JPanel();
+  JTextField lnameTextField = new JTextField();
+  JPanel JPanel2 = new JPanel();
 
-    javax.swing.JScrollPane ncDump = new javax.swing.JScrollPane();
-    javax.swing.JPanel JPanel3 = new javax.swing.JPanel();
+    JScrollPane ncDump = new JScrollPane();
+    JPanel JPanel3 = new JPanel();
     TitledBorder titledBorder2 = new TitledBorder("ncDump");
 
-  javax.swing.JScrollPane varScrollPane = new javax.swing.JScrollPane();
-  javax.swing.JMenuBar menuBar = new javax.swing.JMenuBar();
-  javax.swing.JMenu fileMenu = new javax.swing.JMenu();
-  javax.swing.JMenuItem openFile = new javax.swing.JMenuItem();
-    javax.swing.JMenuItem openFileInWindows = new javax.swing.JMenuItem();
+  JScrollPane varScrollPane = new JScrollPane();
+  JMenuBar menuBar = new JMenuBar();
+  JMenu fileMenu = new JMenu();
+  JMenuItem openFile = new JMenuItem();
+    JMenuItem openFileInWindows = new JMenuItem();
   //  javax.swing.JSeparator JSeparator2 = new javax.swing.JSeparator();
-  javax.swing.JMenuItem exportCdlItem = new javax.swing.JMenuItem();
-  javax.swing.JMenuItem exportUNHItem = new javax.swing.JMenuItem();
-  javax.swing.JMenuItem closeItem = new javax.swing.JMenuItem();
-  javax.swing.JMenuItem exitItem = new javax.swing.JMenuItem();
-  javax.swing.JMenu editMenu = new javax.swing.JMenu();
-  javax.swing.JMenuItem optionItem = new javax.swing.JMenuItem();
-  javax.swing.JMenu viewMenu = new javax.swing.JMenu();
-  javax.swing.JMenuItem asTableItem = new javax.swing.JMenuItem();
-  javax.swing.JMenuItem asTreeItem = new javax.swing.JMenuItem();
-  javax.swing.JMenu windowMenu = new javax.swing.JMenu();
-  javax.swing.JMenuItem minAllItem = new javax.swing.JMenuItem();
-  javax.swing.JMenuItem maxAllItem = new javax.swing.JMenuItem();
-  javax.swing.JMenu helpMenu = new javax.swing.JMenu();
-  javax.swing.JMenuItem newsItem = new javax.swing.JMenuItem();
-  javax.swing.JMenuItem sysPropItem = new javax.swing.JMenuItem();
-  javax.swing.JMenuItem helpItem = new javax.swing.JMenuItem();
-  javax.swing.JMenuItem aboutItem = new javax.swing.JMenuItem();
+  JMenuItem exportCdlItem = new JMenuItem();
+  JMenuItem exportUNHItem = new JMenuItem();
+  JMenuItem closeItem = new JMenuItem();
+  JMenuItem exitItem = new JMenuItem();
+  JMenu editMenu = new JMenu();
+  JMenuItem optionItem = new JMenuItem();
+  JMenu viewMenu = new JMenu();
+  JMenuItem asTableItem = new JMenuItem();
+  JMenuItem asTreeItem = new JMenuItem();
+  JMenu windowMenu = new JMenu();
+  JMenuItem minAllItem = new JMenuItem();
+  JMenuItem maxAllItem = new JMenuItem();
+  JMenu helpMenu = new JMenu();
+  JMenuItem newsItem = new JMenuItem();
+  JMenuItem sysPropItem = new JMenuItem();
+  JMenuItem helpItem = new JMenuItem();
+  JMenuItem aboutItem = new JMenuItem();
   BevelBorder bevelBorder1 = new BevelBorder(BevelBorder.LOWERED);
   TitledBorder titledBorder1 = new TitledBorder("Select Variable for Display");
-  JLabel JLabel1 = new javax.swing.JLabel();
-  JTextField numDimText = new javax.swing.JTextField();
-  JTextField numVarText = new javax.swing.JTextField();
-  JTextField numAttText = new javax.swing.JTextField();
-  JTextField fileText = new javax.swing.JTextField();
-  JLabel JLabel3 = new javax.swing.JLabel();
-  JLabel JLabel2 = new javax.swing.JLabel();
-  JLabel JLabel4 = new javax.swing.JLabel();
+  JLabel JLabel1 = new JLabel();
+  JTextField numDimText = new JTextField();
+  JTextField numVarText = new JTextField();
+  JTextField numAttText = new JTextField();
+  JTextField fileText = new JTextField();
+  JLabel JLabel3 = new JLabel();
+  JLabel JLabel2 = new JLabel();
+  JLabel JLabel4 = new JLabel();
   Box box2;
   Box box4;
   Box box5;
@@ -692,15 +695,15 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     }
   }
 
-  class SymWindow extends java.awt.event.WindowAdapter {
-    public void windowClosing(java.awt.event.WindowEvent event) {
+  class SymWindow extends WindowAdapter {
+    public void windowClosing(WindowEvent event) {
       Object object = event.getSource();
       if (object == Browser.this)
         Browser_windowClosing(event);
     }
   }
 
-  void Browser_windowClosing(java.awt.event.WindowEvent event) {
+  void Browser_windowClosing(WindowEvent event) {
     openBrowsers.remove(this);
     if(oceanShare_) {
       this.setVisible(false);
@@ -721,8 +724,8 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     }
   }
 
-  class SymAction implements java.awt.event.ActionListener {
-    public void actionPerformed(java.awt.event.ActionEvent event) {
+  class SymAction implements ActionListener {
+    public void actionPerformed(ActionEvent event) {
       Object object = event.getSource();
       if (object == newBrowser)
         newBrowser_actionPerformed(event);
@@ -731,6 +734,9 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
       }
       else if (object == openFileInWindows){
           openFileInWindows_actionPerformed(event);
+          newMapButton_actionPerformed(event);
+          //button_actionPerformed(event);
+          //new VMapModel(ncFile_);
       }
 
       else if (object == openWeb)
@@ -772,13 +778,34 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     }
   }
 
-  class CheckBoxAction implements java.awt.event.ActionListener {
-    public void actionPerformed(java.awt.event.ActionEvent event) {
+  class CheckBoxAction implements ActionListener {
+    public void actionPerformed(ActionEvent event) {
       Object object = event.getSource();
       if (object instanceof JCheckBoxMenuItem)
         checkBoxItem_actionPerformed(event);
     }
   }
+//    void button_actionPerformed(ActionEvent event) {
+//        JButton obj = (JButton) event.getSource();
+//        Point screenLoc = obj.getLocationOnScreen();
+////        for(int i = 0; i < minPopupButton_.length; i++) {
+////            if(obj == minPopupButton_[i] || obj == maxPopupButton_[i]) {
+////                popupDialog(i, screenLoc, new Point(0, 0));
+////                return;
+////            }
+////            if(obj == movieButton_[i]) {
+//                popupMovieControl(1,screenLoc);
+////                return;
+////            }
+//        }
+//    void popupMovieControl(int i, Point screenLoc) {
+//        MovieControl mc = MovieControl.getInstance();
+//        //mc.setMapParameter(VariableMapDialog.vParam_[i]);
+//        //mc.setJPane(pane_);
+//        mc.setLocation(screenLoc);
+//        mc.setVisible(true);
+//    }
+
 
   void openWeb_actionPerformed(ActionEvent event) {
     URL url = null;
@@ -1086,7 +1113,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     asTreeItem.setEnabled(true);
   }
 
-  void exitItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void exitItem_actionPerformed(ActionEvent event) {
     openBrowsers.remove(this);
     if(oceanShare_) {
       this.setVisible(false);
@@ -1106,7 +1133,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     }
   }
 
-  void aboutItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void aboutItem_actionPerformed(ActionEvent event) {
     try {
       // JAboutDialog Create with owner and show as modal
       {
@@ -1118,7 +1145,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     }
   }
 
-  void asTableItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void asTableItem_actionPerformed(ActionEvent event) {
     TableView tblView = new TableView();
     tblView.setShowAllVariables(showAllVariables_);
     tblView.setNcFile(ncFile_);
@@ -1130,7 +1157,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     tblView.addWindowListener(windowList_);
   }
 
-  void asTreeItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void asTreeItem_actionPerformed(ActionEvent event) {
     TreeView treeView = new TreeView();
     treeView.setBrowser(this);
     treeView.setShowAllVariables(showAllVariables_);
@@ -1143,7 +1170,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     treeView.addWindowListener(windowList_);
   }
 
-  void sysPropItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void sysPropItem_actionPerformed(ActionEvent event) {
     try {
       // PropDisplay Create and show as non-modal
       {
@@ -1153,11 +1180,11 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
         windowList_.addElement(sysProps);
         sysProps.addWindowListener(windowList_);
       }
-    } catch (java.lang.Exception e) {
+    } catch (Exception e) {
     }
   }
 
-  void exportCdlItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void exportCdlItem_actionPerformed(ActionEvent event) {
     VariableListDialog vld = new VariableListDialog(this);
     vld.setNcFile(ncFile_);
     vld.setAction("Export Variable", VariableProcessThread.EXPORT_CDL);
@@ -1167,28 +1194,28 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
   }
 
 
-  class SymMouse extends java.awt.event.MouseAdapter {
-    public void mouseClicked(java.awt.event.MouseEvent event)
+  class SymMouse extends MouseAdapter {
+    public void mouseClicked(MouseEvent event)
     {
       Object object = event.getSource();
       if (object == VariableList)
         VariableList_mouseClicked(event);
     }
 
-    public void mouseReleased(java.awt.event.MouseEvent event) {
+    public void mouseReleased(MouseEvent event) {
       Object object = event.getSource();
       if (object == numVarText)
         maybePopupTrigger(event);
     }
 
-    public void mousePressed(java.awt.event.MouseEvent event) {
+    public void mousePressed(MouseEvent event) {
       Object object = event.getSource();
       if (object == numVarText)
         maybePopupTrigger(event);
     }
   }
 
-  void maybePopupTrigger(java.awt.event.MouseEvent event) {
+  void maybePopupTrigger(MouseEvent event) {
     if(event.isPopupTrigger()) {
       VariableListDialog vld = new VariableListDialog(this);
       vld.setNcFile(ncFile_);
@@ -1199,7 +1226,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     }
   }
 
-  void exportUNHItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void exportUNHItem_actionPerformed(ActionEvent event) {
     VariableListDialog vld = new VariableListDialog(this);
     vld.setNcFile(ncFile_);
     vld.setAction("Export Variable", VariableProcessThread.EXPORT_UNH);
@@ -1208,15 +1235,15 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     vld.setVisible(true);
   }
 
-  class SymListSelection implements javax.swing.event.ListSelectionListener {
-    public void valueChanged(javax.swing.event.ListSelectionEvent event) {
+  class SymListSelection implements ListSelectionListener {
+    public void valueChanged(ListSelectionEvent event) {
       Object object = event.getSource();
       if (object == VariableList)
         VariableList_valueChanged(event);
     }
   }
 
-  void VariableList_valueChanged(javax.swing.event.ListSelectionEvent event) {
+  void VariableList_valueChanged(ListSelectionEvent event) {
     JList jl = (JList)event.getSource();
     if(jl.isSelectionEmpty()) return;
 
@@ -1225,7 +1252,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     lnameTextField.setText("  " + lname);
   }
 
-  void VariableList_mouseClicked(java.awt.event.MouseEvent event) {
+  void VariableList_mouseClicked(MouseEvent event) {
     if(!((event.getClickCount() == 2) ||
          ((event.getModifiers()&InputEvent.BUTTON3_MASK) != 0))) return;
     String varName = (String)VariableList.getSelectedValue();
@@ -1311,7 +1338,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     }
   }
 
-  void newsItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void newsItem_actionPerformed(ActionEvent event) {
 //    JViewHTMLDialog ub = new JViewHTMLDialog(this, "ncBrowse News", false);
     JViewHTMLFrame ub = new JViewHTMLFrame("ncBrowse News");
     ub.setPage("http://www.epic.noaa.gov/java/ncBrowse/news.html");
@@ -1336,7 +1363,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     return showAllVariables_;
   }
 
-  void optionItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void optionItem_actionPerformed(ActionEvent event) {
     try {
       // OptionsDialog Create with owner and title, show as modal
       {
@@ -1345,11 +1372,11 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
         OptionsDialog1.setTitle("ncBrowse Options");
         OptionsDialog1.setVisible(true);
       }
-    } catch (java.lang.Exception e) {
+    } catch (Exception e) {
     }
   }
 
-  void closeItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void closeItem_actionPerformed(ActionEvent event) {
     openBrowsers.remove(this);
     if(oceanShare_) {
       this.setVisible(false);
@@ -1370,21 +1397,21 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     }
   }
 
-  class SymMenu implements javax.swing.event.MenuListener {
-    public void menuSelected(javax.swing.event.MenuEvent event) {
+  class SymMenu implements MenuListener {
+    public void menuSelected(MenuEvent event) {
       Object object = event.getSource();
       if (object == windowMenu)
         windowMenu_menuSelected(event);
     }
 
-    public void menuCanceled(javax.swing.event.MenuEvent event) {
+    public void menuCanceled(MenuEvent event) {
     }
 
-    public void menuDeselected(javax.swing.event.MenuEvent event) {
+    public void menuDeselected(MenuEvent event) {
     }
   }
 
-  void windowMenu_menuSelected(javax.swing.event.MenuEvent event) {
+  void windowMenu_menuSelected(MenuEvent event) {
     Object[] cb = windowList_.getMenuItems();
     int len = windowMenu.getItemCount();
     JCheckBoxMenuItem cbmi = null;
@@ -1432,7 +1459,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     }
   }
 
-  void minAllItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void minAllItem_actionPerformed(ActionEvent event) {
     Window win = null;
     for(Enumeration<Window> e = windowList_.elements(); e.hasMoreElements();) {
       win = e.nextElement();
@@ -1440,7 +1467,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     }
   }
 
-  void maxAllItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void maxAllItem_actionPerformed(ActionEvent event) {
     Window win = null;
     for(Enumeration<Window> e = windowList_.elements(); e.hasMoreElements();) {
       win = e.nextElement();
@@ -1455,7 +1482,7 @@ public class Browser extends javax.swing.JFrame implements DialogClient, Selecti
     return windowList_;
   }
 
-  void helpItem_actionPerformed(java.awt.event.ActionEvent event)       {
+  void helpItem_actionPerformed(ActionEvent event)       {
 //    JViewHTMLDialog ub = new JViewHTMLDialog(this, "ncBrowse Help", false);
     JViewHTMLFrame ub = new JViewHTMLFrame("ncBrowse Help");
     ub.setPage("http://www.epic.noaa.gov/java/ncBrowse/help.html");

@@ -4,7 +4,12 @@
 package ncBrowse;
 
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Basic information about netCDF Browser application.
@@ -12,7 +17,7 @@ import java.awt.*;
  * @author Donald Denbo
  * @version $Revision: 1.45 $, $Date: 2005/10/21 19:28:53 $
  */
-public class AboutBrowse extends javax.swing.JDialog {
+public class AboutBrowse extends JDialog {
   String version_ = "Version 1.6.7 (May 20, 2013)";
   BorderLayout borderLayout1 = new BorderLayout(0,0);
   FlowLayout flowLayout1 = new FlowLayout(FlowLayout.CENTER, 5,5);
@@ -42,23 +47,23 @@ public class AboutBrowse extends javax.swing.JDialog {
     setTitle("netCDF Browser");
     setModal(true);
     panel1.setLayout(borderLayout1);
-    jLabel1.setFont(new java.awt.Font("Dialog", Font.PLAIN, 14));
+    jLabel1.setFont(new Font("Dialog", Font.PLAIN, 14));
     jLabel1.setToolTipText("");
     jLabel1.setText("Java netCDF from Unidata");
-    jLabel2.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
+    jLabel2.setFont(new Font("Dialog", Font.BOLD, 12));
     jLabel2.setText("(http://www.unidata.ucar.edu/packages/netcdf)");
-    jLabel3.setFont(new java.awt.Font("Dialog", Font.PLAIN, 14));
+    jLabel3.setFont(new Font("Dialog", Font.PLAIN, 14));
     jLabel3.setToolTipText("");
     jLabel3.setText("Web Access by HTTPClient");
-    jLabel4.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
+    jLabel4.setFont(new Font("Dialog", Font.BOLD, 12));
     jLabel4.setText("(http://www.innovation.ch/java/HTTPClient)");
-    JLabel5.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
-    JLabel7.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
+    JLabel5.setFont(new Font("Dialog", Font.BOLD, 12));
+    JLabel7.setFont(new Font("Dialog", Font.BOLD, 12));
     jPanel1.setLayout(flowLayout2);
     flowLayout2.setVgap(0);
-    jLabel5.setFont(new java.awt.Font("Dialog", Font.PLAIN, 14));
+    jLabel5.setFont(new Font("Dialog", Font.PLAIN, 14));
     jLabel5.setText("Live Acces Server from TMAP");
-    jLabel6.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
+    jLabel6.setFont(new Font("Dialog", Font.BOLD, 12));
     jLabel6.setText("(http://ferret.pmel.noaa.gov/Ferret/LAS/ferret_LAS.html)");
     jLabel7.setText("Thanks to");
     jLabel8.setText("John Osborne for 3D using VisAD");
@@ -67,23 +72,23 @@ public class AboutBrowse extends javax.swing.JDialog {
     jPanel2.setLayout(gridBagLayout5);
     iconLabel1.setText("");
     iconLabel1.setText("icon");
-    iconLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    iconLabel1.setHorizontalAlignment(SwingConstants.CENTER);
     iconLabel2.setText("");
     iconLabel2.setText("icon");
-    iconLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    iconLabel2.setHorizontalAlignment(SwingConstants.CENTER);
     iconLabel3.setText("");
     iconLabel3.setText("icon");
-    iconLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    iconLabel3.setHorizontalAlignment(SwingConstants.CENTER);
     jLabel11.setText("ncBrowse");
     jLabel11.setForeground(Color.blue);
-    jLabel11.setFont(new java.awt.Font("Dialog", Font.PLAIN, 48));
+    jLabel11.setFont(new Font("Dialog", Font.PLAIN, 48));
     aboutLabel1.setFont(new Font("Dialog", Font.BOLD, 16));
     aboutLabel1.setText("A netCDF Browser Application");
-    aboutLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    aboutLabel1.setHorizontalAlignment(SwingConstants.CENTER);
     JLabel10.setText(version_);
-    jLabel10.setFont(new java.awt.Font("Dialog", Font.PLAIN, 14));
+    jLabel10.setFont(new Font("Dialog", Font.PLAIN, 14));
     jLabel10.setText("VisAD from Univ of Wisconsin-Madison");
-    jLabel12.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
+    jLabel12.setFont(new Font("Dialog", Font.BOLD, 12));
     jLabel12.setText("(http://www.ssec.wisc.edu/~billh/visad.html)");
     getContentPane().add(panel1);
 
@@ -101,7 +106,7 @@ public class AboutBrowse extends javax.swing.JDialog {
     JPanel1.setLayout(gridBagLayout2);
     JPanel2.add(JPanel1,  new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0
             ,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-    iconLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
     iconLabel.setText("icon");
     JLabel1.setText("by");
     JPanel1.add(JLabel1,          new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0
@@ -123,9 +128,9 @@ public class AboutBrowse extends javax.swing.JDialog {
     JPanel2.add(JPanel4,  new GridBagConstraints(0, 2, 1, 1, 1.0, 1.0
             ,GridBagConstraints.CENTER, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
     JLabel8.setText("Graphics powered by");
-    JLabel8.setFont(new java.awt.Font("Dialog", Font.PLAIN, 14));
+    JLabel8.setFont(new Font("Dialog", Font.PLAIN, 14));
     JLabel9.setText("sgt!");
-    JLabel9.setForeground(java.awt.Color.red);
+    JLabel9.setForeground(Color.red);
     JLabel9.setFont(new Font("Dialog", Font.BOLD, 14));
     JLabel7.setText("(http://www.epic.noaa.gov/sgt)");
     JPanel4.add(jLabel4,    new GridBagConstraints(0, 5, 1, 1, 0.0, 0.0
@@ -219,23 +224,23 @@ public class AboutBrowse extends javax.swing.JDialog {
   // Used for addNotify check.
   boolean fComponentsAdjusted = false;
 
-  javax.swing.JPanel buttonPanel = new javax.swing.JPanel();
-  javax.swing.JButton okButton = new javax.swing.JButton();
-  javax.swing.JPanel JPanel2 = new javax.swing.JPanel();
-  javax.swing.JPanel JPanel1 = new javax.swing.JPanel();
-  javax.swing.JLabel iconLabel = new javax.swing.JLabel();
-  javax.swing.JLabel JLabel1 = new javax.swing.JLabel();
-  javax.swing.JLabel JLabel2 = new javax.swing.JLabel();
-  javax.swing.JLabel JLabel3 = new javax.swing.JLabel();
-  javax.swing.JPanel JPanel4 = new javax.swing.JPanel();
-  javax.swing.JLabel JLabel8 = new javax.swing.JLabel();
-  javax.swing.JLabel JLabel9 = new javax.swing.JLabel();
-  javax.swing.JLabel JLabel7 = new javax.swing.JLabel();
-  javax.swing.JPanel JPanel3 = new javax.swing.JPanel();
-  javax.swing.JLabel JLabel4 = new javax.swing.JLabel();
-  javax.swing.JLabel JLabel5 = new javax.swing.JLabel();
-  javax.swing.border.EtchedBorder etchedBorder1 = new javax.swing.border.EtchedBorder();
-  javax.swing.border.EtchedBorder etchedBorder2 = new javax.swing.border.EtchedBorder(javax.swing.border.EtchedBorder.RAISED);
+  JPanel buttonPanel = new JPanel();
+  JButton okButton = new JButton();
+  JPanel JPanel2 = new JPanel();
+  JPanel JPanel1 = new JPanel();
+  JLabel iconLabel = new JLabel();
+  JLabel JLabel1 = new JLabel();
+  JLabel JLabel2 = new JLabel();
+  JLabel JLabel3 = new JLabel();
+  JPanel JPanel4 = new JPanel();
+  JLabel JLabel8 = new JLabel();
+  JLabel JLabel9 = new JLabel();
+  JLabel JLabel7 = new JLabel();
+  JPanel JPanel3 = new JPanel();
+  JLabel JLabel4 = new JLabel();
+  JLabel JLabel5 = new JLabel();
+  EtchedBorder etchedBorder1 = new EtchedBorder();
+  EtchedBorder etchedBorder2 = new EtchedBorder(EtchedBorder.RAISED);
   JLabel jLabel1 = new JLabel();
   JLabel jLabel2 = new JLabel();
   JLabel jLabel3 = new JLabel();
@@ -248,25 +253,25 @@ public class AboutBrowse extends javax.swing.JDialog {
   private JLabel jLabel8 = new JLabel();
   private JLabel jLabel9 = new JLabel();
   private JPanel jPanel2 = new JPanel();
-  private JLabel iconLabel1 = new javax.swing.JLabel();
-  private JLabel iconLabel2 = new javax.swing.JLabel();
-  private JLabel iconLabel3 = new javax.swing.JLabel();
+  private JLabel iconLabel1 = new JLabel();
+  private JLabel iconLabel2 = new JLabel();
+  private JLabel iconLabel3 = new JLabel();
   private JLabel jLabel11 = new JLabel();
-  private JLabel aboutLabel1 = new javax.swing.JLabel();
-  private JLabel JLabel10 = new javax.swing.JLabel();
+  private JLabel aboutLabel1 = new JLabel();
+  private JLabel JLabel10 = new JLabel();
   private GridBagLayout gridBagLayout5 = new GridBagLayout();
   private JLabel jLabel10 = new JLabel();
   private JLabel jLabel12 = new JLabel();
 
-  class SymWindow extends java.awt.event.WindowAdapter {
-    public void windowClosing(java.awt.event.WindowEvent event) {
+  class SymWindow extends WindowAdapter {
+    public void windowClosing(WindowEvent event) {
       Object object = event.getSource();
       if (object == AboutBrowse.this)
   jAboutDialog_windowClosing(event);
     }
   }
 
-  void jAboutDialog_windowClosing(java.awt.event.WindowEvent event) {
+  void jAboutDialog_windowClosing(WindowEvent event) {
     try {
       // JAboutDialog Hide the JAboutDialog
       this.setVisible(false);
@@ -274,15 +279,15 @@ public class AboutBrowse extends javax.swing.JDialog {
     }
   }
 
-  class SymAction implements java.awt.event.ActionListener  {
-    public void actionPerformed(java.awt.event.ActionEvent event) {
+  class SymAction implements ActionListener {
+    public void actionPerformed(ActionEvent event) {
       Object object = event.getSource();
       if (object == okButton)
   okButton_actionPerformed(event);
     }
   }
 
-  void okButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void okButton_actionPerformed(ActionEvent event) {
     try {
       // JAboutDialog Hide the JAboutDialog
       this.setVisible(false);

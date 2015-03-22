@@ -1,14 +1,9 @@
 package ncBrowse;
 
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
-import java.io.*;
-import java.beans.*;
-import java.util.zip.*;
-import javax.swing.border.*;
+import java.util.ResourceBundle;
 
 public class ConfigCustomOrientation extends JDialog implements ActionListener {
 	protected Component mComp;
@@ -29,7 +24,7 @@ public class ConfigCustomOrientation extends JDialog implements ActionListener {
 
     	mFrame = this;
 		WindowListener windowListener = new WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			public void windowClosing(WindowEvent e) {
 				mClient.dialogCancelled(mFrame);
 			}
 		};

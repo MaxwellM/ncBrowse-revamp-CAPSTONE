@@ -3,14 +3,13 @@
  */
 package ncBrowse;
 
+import ucar.nc2.Attribute;
+import ucar.nc2.Variable;
+
 import javax.swing.*;
-import java.beans.*;
-import java.awt.*;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.InputEvent;
 import javax.swing.tree.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.Iterator;
 
 //  import ucar.netcdf.Variable;
@@ -22,16 +21,13 @@ import java.util.Iterator;
 //  import ucar.netcdf.DimensionIterator;
 //  import ucar.netcdf.UnlimitedDimension;
 
-import ucar.nc2.Variable;
-import ucar.nc2.Attribute;
-
 /**
  * Provides a <code>JTree</code> view of netCDF files.
  *
  * @author Donald Denbo
  * @version $Revision: 1.25 $, $Date: 2001/12/18 22:54:08 $
  */
-public class TreeView extends javax.swing.JFrame {
+public class TreeView extends JFrame {
   private NcFile ncFile_;
   private JTree treeView_;
   private DefaultMutableTreeNode root_;
@@ -309,15 +305,15 @@ public class TreeView extends javax.swing.JFrame {
   // Used for addNotify check.
   boolean fComponentsAdjusted = false;
 
-  class SymWindow extends java.awt.event.WindowAdapter {
-    public void windowClosing(java.awt.event.WindowEvent event) {
+  class SymWindow extends WindowAdapter {
+    public void windowClosing(WindowEvent event) {
       Object object = event.getSource();
       if (object == TreeView.this)
         TreeView_WindowClosing(event);
     }
   }
 
-  void TreeView_WindowClosing(java.awt.event.WindowEvent event) {
+  void TreeView_WindowClosing(WindowEvent event) {
     this.setVisible(false);
     dispose();		 // dispose of the Frame.
   }
@@ -335,14 +331,14 @@ public class TreeView extends javax.swing.JFrame {
     treeScrollPane.setViewportView(tree);
   }
 
-  javax.swing.JPanel buttonPanel = new javax.swing.JPanel();
-  javax.swing.JButton expandButton = new javax.swing.JButton();
-  javax.swing.JButton collapseButton = new javax.swing.JButton();
-  javax.swing.JButton closeButton = new javax.swing.JButton();
-  javax.swing.JScrollPane treeScrollPane = new javax.swing.JScrollPane();
+  JPanel buttonPanel = new JPanel();
+  JButton expandButton = new JButton();
+  JButton collapseButton = new JButton();
+  JButton closeButton = new JButton();
+  JScrollPane treeScrollPane = new JScrollPane();
 
-  class SymAction implements java.awt.event.ActionListener {
-    public void actionPerformed(java.awt.event.ActionEvent event) {
+  class SymAction implements ActionListener {
+    public void actionPerformed(ActionEvent event) {
       Object object = event.getSource();
       if (object == closeButton)
         closeButton_actionPerformed(event);
@@ -353,12 +349,12 @@ public class TreeView extends javax.swing.JFrame {
     }
   }
 
-  void closeButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void closeButton_actionPerformed(ActionEvent event) {
     this.setVisible(false);
     this.dispose();
   }
 
-  void expandButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void expandButton_actionPerformed(ActionEvent event) {
     int row=0;
     while(row < treeView_.getRowCount()) {
       if(treeView_.isCollapsed(row)) {
@@ -368,7 +364,7 @@ public class TreeView extends javax.swing.JFrame {
     }
   }
 
-  void collapseButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void collapseButton_actionPerformed(ActionEvent event) {
     DefaultTreeModel tm = (DefaultTreeModel)treeView_.getModel();
     TreePath tp = new TreePath(tm.getPathToRoot((TreeNode)dimRoot_));
     treeView_.collapsePath(tp);

@@ -1,14 +1,17 @@
 package ncBrowse;
 
-import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.event.*;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
+import javax.swing.text.html.HTMLDocument;
+import javax.swing.text.html.HTMLFrameHyperlinkEvent;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Vector;
-import javax.swing.text.html.HTMLFrameHyperlinkEvent;
-import javax.swing.text.html.HTMLDocument;
 
 /**
  * Title:        netCDF File Browser
@@ -142,7 +145,7 @@ public class URLSelectionDialog extends JDialog {
   void acceptButton_actionPerformed(ActionEvent e) {
     try {
       fileURL = new URL(fileURLField.getText());
-    } catch (java.net.MalformedURLException ex) {
+    } catch (MalformedURLException ex) {
       ex.printStackTrace();
       fileURL = null;
     }
@@ -222,7 +225,7 @@ public class URLSelectionDialog extends JDialog {
 
 
 
-class URLSelectionDialog_goButton_actionAdapter implements java.awt.event.ActionListener {
+class URLSelectionDialog_goButton_actionAdapter implements ActionListener {
   URLSelectionDialog adaptee;
 
   URLSelectionDialog_goButton_actionAdapter(URLSelectionDialog adaptee) {
@@ -233,7 +236,7 @@ class URLSelectionDialog_goButton_actionAdapter implements java.awt.event.Action
   }
 }
 
-class URLSelectionDialog_acceptButton_actionAdapter implements java.awt.event.ActionListener {
+class URLSelectionDialog_acceptButton_actionAdapter implements ActionListener {
   URLSelectionDialog adaptee;
 
   URLSelectionDialog_acceptButton_actionAdapter(URLSelectionDialog adaptee) {
@@ -244,7 +247,7 @@ class URLSelectionDialog_acceptButton_actionAdapter implements java.awt.event.Ac
   }
 }
 
-class URLSelectionDialog_cancelButton_actionAdapter implements java.awt.event.ActionListener {
+class URLSelectionDialog_cancelButton_actionAdapter implements ActionListener {
   URLSelectionDialog adaptee;
 
   URLSelectionDialog_cancelButton_actionAdapter(URLSelectionDialog adaptee) {
@@ -255,7 +258,7 @@ class URLSelectionDialog_cancelButton_actionAdapter implements java.awt.event.Ac
   }
 }
 
-class URLSelectionDialog_navigationText_hyperlinkAdapter implements javax.swing.event.HyperlinkListener {
+class URLSelectionDialog_navigationText_hyperlinkAdapter implements HyperlinkListener {
   URLSelectionDialog adaptee;
 
   URLSelectionDialog_navigationText_hyperlinkAdapter(URLSelectionDialog adaptee) {
@@ -266,7 +269,7 @@ class URLSelectionDialog_navigationText_hyperlinkAdapter implements javax.swing.
   }
 }
 
-class URLSelectionDialog_webURLcBox_actionAdapter implements java.awt.event.ActionListener {
+class URLSelectionDialog_webURLcBox_actionAdapter implements ActionListener {
   URLSelectionDialog adaptee;
 
   URLSelectionDialog_webURLcBox_actionAdapter(URLSelectionDialog adaptee) {
@@ -277,7 +280,7 @@ class URLSelectionDialog_webURLcBox_actionAdapter implements java.awt.event.Acti
   }
 }
 
-class URLSelectionDialog_backButton_actionAdapter implements java.awt.event.ActionListener {
+class URLSelectionDialog_backButton_actionAdapter implements ActionListener {
   URLSelectionDialog adaptee;
 
   URLSelectionDialog_backButton_actionAdapter(URLSelectionDialog adaptee) {

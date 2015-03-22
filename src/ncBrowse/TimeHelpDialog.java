@@ -3,9 +3,11 @@
  */
 package ncBrowse;
 
-import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Provides help for setting formats for parsing and 
@@ -14,7 +16,7 @@ import javax.swing.border.EtchedBorder;
  * @author Donald Denbo
  * @version $Revision: 1.5 $, $Date: 2000/12/08 00:46:42 $
  */
-public class TimeHelpDialog extends javax.swing.JDialog {
+public class TimeHelpDialog extends JDialog {
   BorderLayout borderLayout1 = new BorderLayout(0,0);
   FlowLayout flowLayout1 = new FlowLayout(FlowLayout.CENTER,5,5);
 
@@ -94,10 +96,10 @@ public class TimeHelpDialog extends javax.swing.JDialog {
   // Used by addNotify
   boolean frameSizeAdjusted = false;
 
-  javax.swing.JPanel buttonPanel = new javax.swing.JPanel();
-  javax.swing.JButton closeButton = new javax.swing.JButton();
-  javax.swing.JScrollPane JScrollPane1 = new javax.swing.JScrollPane();
-  javax.swing.JEditorPane helpText = new javax.swing.JEditorPane();
+  JPanel buttonPanel = new JPanel();
+  JButton closeButton = new JButton();
+  JScrollPane JScrollPane1 = new JScrollPane();
+  JEditorPane helpText = new JEditorPane();
   EtchedBorder etchedBorder1 = new EtchedBorder();
 
   private void setHelpText() {
@@ -151,19 +153,19 @@ public class TimeHelpDialog extends javax.swing.JDialog {
 "<p>\n");
   }
 
-  class SymAction implements java.awt.event.ActionListener {
-    public void actionPerformed(java.awt.event.ActionEvent event) {
+  class SymAction implements ActionListener {
+    public void actionPerformed(ActionEvent event) {
       Object object = event.getSource();
       if (object == closeButton)
         closeButton_actionPerformed(event);
     }
   }
   
-  void closeButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void closeButton_actionPerformed(ActionEvent event) {
     try {
       this.setVisible(false);
       this.dispose();
-    } catch (java.lang.Exception e) {
+    } catch (Exception e) {
     }
   }
 }

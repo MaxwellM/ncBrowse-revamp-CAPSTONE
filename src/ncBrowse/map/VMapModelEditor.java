@@ -3,57 +3,32 @@
  */
 package ncBrowse.map;
 
-import ncBrowse.*;
-
-import java.awt.*;
-import javax.swing.*;
-import java.awt.event.*;
-import javax.swing.border.*;
-import java.lang.reflect.*;
-
-import java.util.Iterator;
-
-import gov.noaa.pmel.sgt.JPane;
-import gov.noaa.pmel.util.SoTRange;
-import gov.noaa.pmel.util.SoTValue;
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.IllegalTimeValue;
+import gov.noaa.pmel.sgt.*;
+import gov.noaa.pmel.sgt.ColorMap;
+import gov.noaa.pmel.sgt.dm.*;
+import gov.noaa.pmel.sgt.swing.JClassTree;
+import gov.noaa.pmel.sgt.swing.JPlotLayout;
+import gov.noaa.pmel.swing.JViewHTMLFrame;
 import gov.noaa.pmel.swing.SelectDoubleDialog;
 import gov.noaa.pmel.swing.SelectTimeDialog;
-import gov.noaa.pmel.sgt.dm.SGTVector;
-import gov.noaa.pmel.sgt.dm.SGTLine;
-import gov.noaa.pmel.sgt.dm.SGTGrid;
-import gov.noaa.pmel.sgt.dm.ThreeDGrid;
-import gov.noaa.pmel.util.Dimension2D;
-import gov.noaa.pmel.util.Rectangle2D;
-import gov.noaa.pmel.util.Range2D;
+import gov.noaa.pmel.swing.Swatch;
+import gov.noaa.pmel.util.*;
+import ncBrowse.*;
+import ncBrowse.Debug;
 import ncBrowse.VisAD.*;
-import gov.noaa.pmel.swing.*;
 
-import gov.noaa.pmel.sgt.JPane;
-import gov.noaa.pmel.sgt.AbstractPane;
-import gov.noaa.pmel.sgt.Attribute;
-import gov.noaa.pmel.sgt.GridAttribute;
-import gov.noaa.pmel.sgt.VectorAttribute;
-import gov.noaa.pmel.sgt.ColorMap;
-import gov.noaa.pmel.sgt.TransformAccess;
-import gov.noaa.pmel.sgt.DataNotFoundException;
-import gov.noaa.pmel.sgt.swing.JPlotLayout;
-import gov.noaa.pmel.sgt.swing.prop.LineAttributeDialog;
-import gov.noaa.pmel.sgt.swing.prop.VectorAttributeDialog;
-import gov.noaa.pmel.sgt.swing.JClassTree;
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.Collection;
-import ncBrowse.NcFile;
-import java.awt.print.PrinterJob;
-import java.awt.print.PrinterException;
-import ncBrowse.MaintenanceTimer;
-import ncBrowse.ButtonMaintainer;
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.util.*;
-import gov.noaa.pmel.swing.JViewHTMLFrame;
-import gov.noaa.pmel.swing.Swatch;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.lang.reflect.Method;
+import java.util.Iterator;
+import java.util.ResourceBundle;
 
 /**
  * <pre>
@@ -365,8 +340,7 @@ public class VMapModelEditor
     //line1.add(mCBOnlyLegend);
 
     mAdvancedButton.setText(b.getString("kAdvancedOptions2"));
-    mAdvancedButton.addActionListener(new
-                                      VMapModelEditor_advButton_actionAdapter(this));
+    mAdvancedButton.addActionListener(new VMapModelEditor_advButton_actionAdapter(this));
 
     JPanel line1c = new JPanel();
     line1c.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));

@@ -3,25 +3,21 @@
  */
 package ncBrowse.map;
 
-import java.util.ResourceBundle;
-import java.util.Vector;
+import gov.noaa.pmel.swing.JViewHTMLFrame;
+import ncBrowse.*;
 
-import java.awt.*;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DropTarget;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import gov.noaa.pmel.swing.JViewHTMLFrame;
-import ncBrowse.ButtonMaintainer;
-import ncBrowse.Debug;
-import ncBrowse.DialogClient;
-import ncBrowse.MaintenanceTimer;
-import ncBrowse.NcFile;
+import java.awt.*;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.util.ResourceBundle;
+import java.util.Vector;
 
 /**
  * <pre>
@@ -87,8 +83,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
   private ResourceBundle b = ResourceBundle.getBundle(
       "ncBrowse.NcBrowseResources");
 
-  public VariableMapDialog(Frame frame, String title,
-                           NcFile ncFile, boolean modal) {
+  public VariableMapDialog(Frame frame, String title, NcFile ncFile, boolean modal) {
     super(frame, title, modal);
     mClient = (DialogClient)frame;
     try {
@@ -136,8 +131,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     sourcePanel.setLayout(borderLayout2);
     buttonPanel.setLayout(flowLayout1);
     doneButton.setText(b.getString("kDDone"));
-    doneButton.addActionListener(
-        new VariableMapDialog_doneButton_actionAdapter(this));
+    doneButton.addActionListener(new VariableMapDialog_doneButton_actionAdapter(this));
     this.getRootPane().setDefaultButton(doneButton);
     applyButton.setText(b.getString("kApply"));
     applyButton.addActionListener(
@@ -330,6 +324,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
 
   void applyButton_actionPerformed(ActionEvent e) {
     finis();
+      System.out.println("DONE BUTTON");
     if(Debug.DEBUG) {
       System.out.println("Grid Type = " + currentMap_.getGridType());
     }
@@ -346,30 +341,21 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
   }
 
   private boolean finis() {
-    if(!variableNameTF.getText().equals(" ") &&
-       !variableNameTF.getText().equals("")) {
+    if(!variableNameTF.getText().equals(" ") && !variableNameTF.getText().equals("")) {
       if(Debug.DEBUG) {
         System.out.println("Variable = " + variableNameTF.getText());
       }
       currentMap_.setName(variableNameTF.getText());
     } else {
-      JOptionPane.showMessageDialog(this, "Variable name must be defined",
-                                    "Definition Incomplete",
-                                    JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(this, "Variable name must be defined", "Definition Incomplete", JOptionPane.ERROR_MESSAGE);
       return false;
     }
     if(!currentMap_.isValid()) {
-      JOptionPane.showMessageDialog(this,
-                                    currentMap_.getErrorMessage(),
-                                    "Definition Incomplete",
-                                    JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(this, currentMap_.getErrorMessage(), "Definition Incomplete", JOptionPane.ERROR_MESSAGE);
       return false;
     }
     if(currentMap_.getGridType() == VMapModel.TYPE_3) {
-      JOptionPane.showMessageDialog(this,
-          "X and Y axes must not have common parameters",
-                                    "Unsupported Grid Structure",
-                                    JOptionPane.ERROR_MESSAGE);
+      JOptionPane.showMessageDialog(this, "X and Y axes must not have common parameters", "Unsupported Grid Structure", JOptionPane.ERROR_MESSAGE);
       return false;
     }
     if(Debug.DEBUG) {
@@ -1080,8 +1066,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     }
   }
 
-  class VariableMapDialog_quitButton_actionAdapter implements java.awt.event.
-      ActionListener {
+  class VariableMapDialog_quitButton_actionAdapter implements ActionListener {
     VariableMapDialog adaptee;
 
     VariableMapDialog_quitButton_actionAdapter(VariableMapDialog adaptee) {
@@ -1093,8 +1078,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     }
   }
 
-  class VariableMapDialog_helpButton_actionAdapter implements java.awt.event.
-      ActionListener {
+  class VariableMapDialog_helpButton_actionAdapter implements ActionListener {
     VariableMapDialog adaptee;
 
     VariableMapDialog_helpButton_actionAdapter(VariableMapDialog adaptee) {
@@ -1106,8 +1090,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     }
   }
 
-  class VariableMapDialog_clearButton_actionAdapter implements java.awt.event.
-      ActionListener {
+  class VariableMapDialog_clearButton_actionAdapter implements ActionListener {
     VariableMapDialog adaptee;
 
     VariableMapDialog_clearButton_actionAdapter(VariableMapDialog adaptee) {
@@ -1119,8 +1102,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     }
   }
 
-  class VariableMapDialog_applyButton_actionAdapter implements java.awt.event.
-      ActionListener {
+  class VariableMapDialog_applyButton_actionAdapter implements ActionListener {
     VariableMapDialog adaptee;
 
     VariableMapDialog_applyButton_actionAdapter(VariableMapDialog adaptee) {
@@ -1132,8 +1114,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     }
   }
 
-  class VariableMapDialog_doneButton_actionAdapter implements java.awt.event.
-      ActionListener {
+  class VariableMapDialog_doneButton_actionAdapter implements ActionListener {
     VariableMapDialog adaptee;
 
     VariableMapDialog_doneButton_actionAdapter(VariableMapDialog adaptee) {
@@ -1145,8 +1126,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     }
   }
 
-  class VariableMapDialog_showDimsCB_actionAdapter implements java.awt.event.
-      ActionListener {
+  class VariableMapDialog_showDimsCB_actionAdapter implements ActionListener {
     VariableMapDialog adaptee;
 
     VariableMapDialog_showDimsCB_actionAdapter(VariableMapDialog adaptee) {

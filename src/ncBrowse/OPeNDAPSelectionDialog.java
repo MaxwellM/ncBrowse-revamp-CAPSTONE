@@ -1,10 +1,13 @@
 package ncBrowse;
 
-import java.io.*;
-import java.awt.*;
-import java.util.Vector;
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Vector;
 
 /**
  * Title:        netCDF File Browser
@@ -59,13 +62,13 @@ public class OPeNDAPSelectionDialog extends JDialog {
   void jbInit() throws Exception {
     panel1.setLayout(borderLayout1);
     acceptButton.setText("Accept");
-    acceptButton.addActionListener(new java.awt.event.ActionListener() {
+    acceptButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         acceptButton_actionPerformed(e);
       }
     });
     cancelButton.setText("Cancel");
-    cancelButton.addActionListener(new java.awt.event.ActionListener() {
+    cancelButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         cancelButton_actionPerformed(e);
       }
@@ -76,10 +79,10 @@ public class OPeNDAPSelectionDialog extends JDialog {
     fileURLField.setColumns(40);
     this.setTitle("OPeNDAP Connection Dialog");
     fileURLPanel.setLayout(gridBagLayout2);
-    jLabel1.setFont(new java.awt.Font("Dialog", 0, 14));
+    jLabel1.setFont(new Font("Dialog", 0, 14));
     jLabel1.setText("Enter OPeNDAP URL");
     jLabel3.setText("Select:");
-    fileCB.addActionListener(new java.awt.event.ActionListener() {
+    fileCB.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         fileCB_actionPerformed(e);
       }

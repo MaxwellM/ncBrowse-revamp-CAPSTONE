@@ -19,11 +19,9 @@ import ucar.ma2.InvalidRangeException;
 import ucar.nc2.Variable;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.IOException;
@@ -185,7 +183,7 @@ public class VariableGraph extends VariableProcessThread {
       graphPane_.add(layout_, BorderLayout.CENTER);
       //
       keyPanel_.setLayout(new BorderLayout());
-      keyPanel_.setBorder(new javax.swing.border.LineBorder(Color.gray, 2));
+      keyPanel_.setBorder(new LineBorder(Color.gray, 2));
       keyPane_.setSize(new Dimension(533, 100));
       layout_.setKeyLayerSizeP(new Dimension2D(6.7, 1.25));
       layout_.setKeyBoundsP(new Rectangle2D.Double(0.0, 1.25, 6.7, 1.25));
@@ -287,21 +285,21 @@ public class VariableGraph extends VariableProcessThread {
     System.out.println("keyPane_: " + keyPane_.getSize());
     System.out.println("keyPane(layer): " + layout_.getKeyLayerSizeP());
   }
-  class SymWindow extends java.awt.event.WindowAdapter {
-    public void windowClosing(java.awt.event.WindowEvent event) {
+  class SymWindow extends WindowAdapter {
+    public void windowClosing(WindowEvent event) {
       Object object = event.getSource();
       if (object == display_)
         display_WindowClosing(event);
     }
   }
 
-  void display_WindowClosing(java.awt.event.WindowEvent event) {
+  void display_WindowClosing(WindowEvent event) {
     display_.setVisible(false);
     display_.dispose();		 // dispose of the Frame.
   }
 
-  class SymAction implements java.awt.event.ActionListener {
-    public void actionPerformed(java.awt.event.ActionEvent event) {
+  class SymAction implements ActionListener {
+    public void actionPerformed(ActionEvent event) {
       Object object = event.getSource();
       if (object == exitMenuItem_)
         exitMenuItem_actionPerformed(event);
@@ -314,12 +312,12 @@ public class VariableGraph extends VariableProcessThread {
     }
   }
 
-  void exitMenuItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void exitMenuItem_actionPerformed(ActionEvent event) {
     //    if(Debug.DEBUG) printSizes();
     display_.setVisible(false);
     display_.dispose();
   }
-  void printMenuItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void printMenuItem_actionPerformed(ActionEvent event) {
     Color saveColor;
 
     if(Debug.DEBUG)printSizes();
@@ -345,12 +343,12 @@ public class VariableGraph extends VariableProcessThread {
     }
   }
 
-  void resetZoomMenuItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void resetZoomMenuItem_actionPerformed(ActionEvent event) {
     layout_.resetZoom();
     layout_.setClipping(false);
   }
 
-  void classTreeMenuItem_actionPerformed(java.awt.event.ActionEvent event) {
+  void classTreeMenuItem_actionPerformed(ActionEvent event) {
     JClassTree ct = new JClassTree();
     ct.setModal(false);
     ct.setJPane(layout_);
@@ -385,11 +383,11 @@ public class VariableGraph extends VariableProcessThread {
     }
   }
 
-  void closeButton_actionPerformed(java.awt.event.ActionEvent event) {
+  void closeButton_actionPerformed(ActionEvent event) {
     try {
       display_.setVisible(false);
       display_.dispose();
-    } catch (java.lang.Exception e) {
+    } catch (Exception e) {
     }
   }
 

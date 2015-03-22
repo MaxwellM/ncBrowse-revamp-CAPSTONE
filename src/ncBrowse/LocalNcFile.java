@@ -84,6 +84,7 @@ public class LocalNcFile implements NcFile {
 //        System.out.println(String.valueOf("8"+String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(8).getName())))));
 
     }
+
     public String NcDump() {
         // Create a stream to hold the output
         ByteArrayOutputStream baos = new ByteArrayOutputStream();

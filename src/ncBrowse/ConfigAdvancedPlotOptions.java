@@ -1,16 +1,12 @@
 package ncBrowse;
 
+import ncBrowse.VisAD.VisADPlotSpecification;
+import ncBrowse.map.VMapModel;
+
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
-import java.io.*;
-import java.beans.*;
-import java.util.zip.*;
-import javax.swing.border.*;
-import ncBrowse.map.*;
-import ncBrowse.VisAD.*;
+import java.util.ResourceBundle;
 
 public class ConfigAdvancedPlotOptions extends JDialog implements ActionListener, ButtonMaintainer {
 	protected Component mComp;
@@ -70,7 +66,7 @@ public class ConfigAdvancedPlotOptions extends JDialog implements ActionListener
 
     	mFrame = this;
 		WindowListener windowListener = new WindowAdapter() {
-			public void windowClosing(java.awt.event.WindowEvent e) {
+			public void windowClosing(WindowEvent e) {
 				mClient.dialogCancelled(mFrame);
 			}
 		};

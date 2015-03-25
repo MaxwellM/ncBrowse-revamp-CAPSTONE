@@ -81,6 +81,8 @@ public class VariableWindows extends JFrame {
     int locWin7Y;
     int locWin8X;
     int locWin8Y;
+    static int locXMid;
+    static int locYMid;
 
     public VariableWindows(){
         Rectangle2D result = new Rectangle2D.Double();
@@ -92,6 +94,8 @@ public class VariableWindows extends JFrame {
         }
         fullWidth = (int) result.getWidth();
         fullHeight = (int) result.getHeight();
+        locXMid = (fullWidth/2);
+        locYMid = (fullHeight/2);
         winSizeWidth = (fullWidth/4);
         winSizeHeight = (fullHeight/2);
         locWin1X = 0;
@@ -181,6 +185,12 @@ public class VariableWindows extends JFrame {
     }
     public static int getWinSizeHeight(){
         return winSizeHeight;
+    }
+    public static int getLocXMid(){
+        return locXMid;
+    }
+    public static int getLocYMid(){
+        return locYMid;
     }
 
     public void prepareWin1GUI(){

@@ -508,7 +508,8 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   void helpButton_actionPerformed(ActionEvent e) {
     JViewHTMLFrame ub = new JViewHTMLFrame("Model Editor Help");
     ub.setPage("http://www.epic.noaa.gov/java/ncBrowse/help.html");
-    ub.setLocation(100, 100);
+    ub.setLocationRelativeTo(null);
+    //ub.setLocation(100, 100);
     ub.setVisible(true);
   }
 

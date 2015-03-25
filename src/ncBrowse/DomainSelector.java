@@ -241,6 +241,7 @@ public class DomainSelector extends JFrame implements Runnable {
   public void setPosition(int x, int y) {
     x_ = x;
     y_ = y;
+    //setLocationRelativeTo(null);
     setLocation(x,y);
   }
 

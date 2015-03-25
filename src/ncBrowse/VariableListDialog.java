@@ -151,6 +151,7 @@ public class VariableListDialog extends JDialog {
     Dimension ds = domSel.getSize();
     int x = loc.x + bs.width/2 - ds.width/2;
     int y = loc.y + bs.height + 10;
+    //domSel.setLocationRelativeTo(null);
     domSel.setPosition(x, y);
     new Thread(domSel).start();
     //    domSel.setVisible(true, x, y);

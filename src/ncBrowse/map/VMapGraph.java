@@ -4,56 +4,27 @@
 /** another stupid change */
 package ncBrowse.map;
 
-import javax.swing.JOptionPane;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JMenuItem;
-import javax.swing.JMenuBar;
-import javax.swing.JSeparator;
-import javax.swing.JMenu;
-import javax.swing.RepaintManager;
-import java.awt.print.PrinterJob;
-import java.awt.print.PrinterException;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import ncBrowse.Browser;
-import ncBrowse.NcFile;
-import ncBrowse.Debug;
-
-import gov.noaa.pmel.sgt.JPane;
-import gov.noaa.pmel.sgt.AbstractPane;
-import gov.noaa.pmel.sgt.LineCartesianRenderer;
-import gov.noaa.pmel.sgt.VectorCartesianRenderer;
-import gov.noaa.pmel.sgt.Attribute;
-import gov.noaa.pmel.sgt.LineAttribute;
-import gov.noaa.pmel.sgt.GridAttribute;
-import gov.noaa.pmel.sgt.VectorAttribute;
-import gov.noaa.pmel.sgt.ColorMap;
-import gov.noaa.pmel.sgt.TransformAccess;
-import gov.noaa.pmel.sgt.DataNotFoundException;
+import gov.noaa.pmel.sgt.*;
+import gov.noaa.pmel.sgt.dm.SGTData;
+import gov.noaa.pmel.sgt.dm.SGTGrid;
+import gov.noaa.pmel.sgt.swing.JClassTree;
 import gov.noaa.pmel.sgt.swing.JPlotLayout;
 import gov.noaa.pmel.sgt.swing.prop.LineAttributeDialog;
 import gov.noaa.pmel.sgt.swing.prop.VectorAttributeDialog;
-import gov.noaa.pmel.sgt.swing.JClassTree;
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTVector;
-import gov.noaa.pmel.sgt.dm.SGTLine;
-import gov.noaa.pmel.sgt.dm.SGTGrid;
-import gov.noaa.pmel.sgt.dm.ThreeDGrid;
 import gov.noaa.pmel.util.Dimension2D;
-import gov.noaa.pmel.util.Rectangle2D;
 import gov.noaa.pmel.util.Range2D;
-import ncBrowse.VisAD.*;
+import gov.noaa.pmel.util.Rectangle2D;
+import ncBrowse.Browser;
+import ncBrowse.Debug;
+import ncBrowse.NcFile;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 
 
 /**
@@ -321,8 +292,9 @@ public class VMapGraph extends Thread implements ChangeListener {
     String name = ncFile_.getFileName();
     String s = model_.getName();
     display_ = new JFrame(s + " from " + name);
-    display_.getContentPane().setLayout(new BorderLayout(0,0));
+    display_.getContentPane().setLayout(new BorderLayout(0, 0));
     display_.setJMenuBar(makeMenuBar());
+    //display_.setLocationRelativeTo(null);
     //
     keyPane_ = layout_.getKeyPane();
     //    layout_.setBatch(true, "VMapGraph");
@@ -466,15 +438,15 @@ public class VMapGraph extends Thread implements ChangeListener {
     System.out.println("keyPane(layer): " + layout_.getKeyLayerSizeP());
   }
 
-  class SymWindow extends java.awt.event.WindowAdapter {
-    public void windowClosing(java.awt.event.WindowEvent event) {
+  class SymWindow extends WindowAdapter {
+    public void windowClosing(WindowEvent event) {
       Object object = event.getSource();
       if (object == display_)
         display_WindowClosing(event);
     }
   }
 
-  void display_WindowClosing(java.awt.event.WindowEvent event) {
+  void display_WindowClosing(WindowEvent event) {
     display_.setVisible(false);
     display_.dispose();		 // dispose of the Frame.
   }
@@ -538,6 +510,7 @@ public class VMapGraph extends Thread implements ChangeListener {
     JClassTree ct = new JClassTree();
     ct.setModal(false);
     ct.setJPane(layout_);
-    ct.show();
+    ct.setVisible(true);
+    //ct.show();
   }
 }

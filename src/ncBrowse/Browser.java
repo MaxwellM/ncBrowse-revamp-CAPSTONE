@@ -194,7 +194,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       int winSizeHeight = (fullHeight/2);
       //My CODE
 
-    setSize(600,300);
+    setSize(600, 300);
     setVisible(false);
     this.addWindowListener(new WindowAdapter() {
       public void windowClosing(WindowEvent e) {
@@ -202,6 +202,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       }
     });
     //$$ menuBar.move(24,204);
+
     fileMenu.setText("File");
     fileMenu.setActionCommand("File");
     fileMenu.setMnemonic((int)'F');
@@ -413,8 +414,10 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       ncDump.setBorder(titledBorder2);
       ncDump.setOpaque(true);
       contentPane.add(JPanel3, BorderLayout.CENTER);
+    //contentPane.add(new JSeparator(JSeparator.HORIZONTAL));
       JPanel3.add(ncDump, BorderLayout.CENTER);
       ncDump.getViewport().add(ncDumpTextField, null);
+    contentPane.add(new JSeparator(JSeparator.HORIZONTAL), BorderLayout.BEFORE_FIRST_LINE);
     //$$ JPopupMenu1.move(120,168);
     //$$ JMenuBar1.move(168,312);
     //$$ JMenuBar1.move(168,312);
@@ -1192,7 +1195,8 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     tblView.setShowAllVariables(showAllVariables_);
     tblView.setNcFile(ncFile_);
     Point pt = this.getLocationOnScreen();
-    tblView.setLocation(pt.x + 50, pt.y + 50);
+    tblView.setLocationRelativeTo(null);
+    //tblView.setLocation(pt.x + 50, pt.y + 50);
     tblView.setVisible(true);
     //
     windowList_.addElement(tblView);
@@ -1205,7 +1209,8 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     treeView.setShowAllVariables(showAllVariables_);
     treeView.setNcFile(ncFile_);
     Point pt = this.getLocationOnScreen();
-    treeView.setLocation(pt.x + 50, pt.y + 50);
+    treeView.setLocationRelativeTo(null);
+    //treeView.setLocation(pt.x + 50, pt.y + 50);
     treeView.setVisible(true);
     //
     windowList_.addElement(treeView);
@@ -1231,6 +1236,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     vld.setNcFile(ncFile_);
     vld.setAction("Export Variable", VariableProcessThread.EXPORT_CDL);
     Point pt = this.getLocationOnScreen();
+    //vld.setLocationRelativeTo(null);
     vld.setLocation(pt.x + 50, pt.y);
     vld.setVisible(true);
   }
@@ -1325,6 +1331,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         Dimension ds = domSel.getSize();
         int x = loc.x + bs.width/2 - ds.width/2;
         int y = loc.y + bs.height + 10;
+        //domSel.setLocationRelativeTo(null);
         domSel.setPosition(x, y);
         new Thread(domSel).start();
         //
@@ -1351,6 +1358,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
           VMapModel vmm = (VMapModel)model;
           VMapGraph vmg = new VMapGraph(vmm, this);
           vmg.start();
+          //vmg.setLocation(VariableWindows.getLocXMid(),VariableWindows.getLocYMid());
           //
           if(Debug.DEBUG) {
             System.out.println("Variable map model for " + varName);
@@ -1385,7 +1393,8 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 //    JViewHTMLDialog ub = new JViewHTMLDialog(this, "ncBrowse News", false);
     JViewHTMLFrame ub = new JViewHTMLFrame("ncBrowse News");
     ub.setPage("http://www.epic.noaa.gov/java/ncBrowse/news.html");
-    ub.setLocation(100,100);
+    ub.setLocationRelativeTo(null);
+   //ub.setLocation(100,100);
     ub.setVisible(true);
   }
 
@@ -1529,7 +1538,8 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 //    JViewHTMLDialog ub = new JViewHTMLDialog(this, "ncBrowse Help", false);
     JViewHTMLFrame ub = new JViewHTMLFrame("ncBrowse Help");
     ub.setPage("http://www.epic.noaa.gov/java/ncBrowse/help.html");
-    ub.setLocation(100,100);
+    ub.setLocationRelativeTo(null);
+    //ub.setLocation(100,100);
     ub.setVisible(true);
   }
 
@@ -1582,7 +1592,8 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     VariableMapDialog vmd = new VariableMapDialog(this,
                                                   "Create new Variable Map",
                                                   ncFile_, false);
-    vmd.setLocation(100,100);
+    vmd.setLocationRelativeTo(null);
+    //vmd.setLocation(100,100);
     vmd.setList(ncFile_, listdata);
     vmd.setVisible(true);
 
@@ -1644,7 +1655,8 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     newBrowser = new Browser();
     Dimension ss = getSize();
     Point pt = getLocationOnScreen();
-    newBrowser.setLocation(pt.x, pt.y + ss.height + 10);
+    newBrowser.setLocationRelativeTo(null);
+    //newBrowser.setLocation(pt.x, pt.y + ss.height + 10);
     newBrowser.setVisible(true);
     openBrowsers.addElement(newBrowser);
   }

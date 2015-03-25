@@ -120,20 +120,20 @@ public class DomainSelector extends JFrame implements Runnable {
     } else {
       actionButton.setText("Action");
       buttonPanel.add(actionButton);
-      actionButton.setBounds(341, 5, 71, 25);
+      //actionButton.setBounds(341, 5, 71, 25);
     }
 
     closeButton.setText("Close");
     closeButton.setActionCommand("Close");
     buttonPanel.add(closeButton);
-    closeButton.setBounds(265,5,51,25);
+    //closeButton.setBounds(265,5,51,25);
 
     mainPanel.setLayout(new BorderLayout(0,0));
     getContentPane().add(BorderLayout.CENTER,mainPanel);
-    mainPanel.setBounds(0,0,677,297);
+    //mainPanel.setBounds(0,0,677,297);
     infoScrollPane.setOpaque(true);
     mainPanel.add(BorderLayout.NORTH,infoScrollPane);
-    infoScrollPane.setBounds(0,0,677,108);
+    //infoScrollPane.setBounds(0,0,677,108);
     infoText.setEditable(false);
     infoText.setRows(7);
     infoText.setTabSize(2);
@@ -142,7 +142,7 @@ public class DomainSelector extends JFrame implements Runnable {
     axesBorder = new TitledBorder("Axes");
     axesScrollPane.setBorder(axesBorder);
     mainPanel.add(BorderLayout.CENTER,axesScrollPane);
-    axesScrollPane.setBounds(0,108,677,189);
+    //axesScrollPane.setBounds(0,108,677,189);
 
     setTitle("A Simple Frame");
 

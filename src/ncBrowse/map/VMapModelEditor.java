@@ -40,9 +40,7 @@ import java.util.ResourceBundle;
  * @author Donald Denbo
  * @version $Revision: 1.28 $, $Date: 2004/05/14 21:19:32 $
  */
-public class VMapModelEditor
-    extends JFrame
-    implements ButtonMaintainer, ChangeListener, DialogClient {
+public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeListener, DialogClient {
   private NcFile ncFile_;
   private Browser parent_;
   private JFrame display_;
@@ -135,8 +133,8 @@ public class VMapModelEditor
   private JLabel mLabel7;
   private JLabel mLabel8;
 
-  javax.swing.JButton openButton = new javax.swing.JButton();
-  javax.swing.JComboBox sendCBox = new javax.swing.JComboBox();
+  JButton openButton = new JButton();
+  JComboBox sendCBox = new JComboBox();
   DefaultComboBoxModel sendCBoxModel = new DefaultComboBoxModel();
 
   private static int epCount_ = 0;
@@ -174,11 +172,11 @@ public class VMapModelEditor
     model_.addChangeListener(this);
 
     WindowListener windowListener = new WindowAdapter() {
-      public void windowClosing(java.awt.event.WindowEvent e) {
+      public void windowClosing(WindowEvent e) {
         thisIsOpen = false;
       }
 
-      public void windowActivated(java.awt.event.WindowEvent event) {
+      public void windowActivated(WindowEvent event) {
         if(display_ != null && !display_.isVisible() && !thisIsOpen) {
           display_.setVisible(true);
           isPlotOpen = true;
@@ -638,7 +636,7 @@ public class VMapModelEditor
     int len;
     //
     panel.setLayout(new GridBagLayout());
-    panel.setBounds(0, 0, 449, 205);
+    //panel.setBounds(0, 0, 449, 205);
     //
     // construct labels
     //
@@ -1049,7 +1047,7 @@ public class VMapModelEditor
       }
     }
 
-    public void mousePressed(java.awt.event.MouseEvent event) {
+    public void mousePressed(MouseEvent event) {
       Object object = event.getSource();
       if(object instanceof JTextField) {
         maybePopupTrigger(event);
@@ -1165,8 +1163,7 @@ public class VMapModelEditor
     }
   }
 
-  class MyAction
-      implements ActionListener {
+  class MyAction implements ActionListener {
     public void actionPerformed(ActionEvent event) {
       Object object = event.getSource();
       if(object instanceof JCheckBox) {
@@ -1258,7 +1255,7 @@ public class VMapModelEditor
     }
   }
 
-  void button_actionPerformed(java.awt.event.ActionEvent event) {
+  void button_actionPerformed(ActionEvent event) {
     JButton obj = (JButton) event.getSource();
     Point screenLoc = obj.getLocationOnScreen();
     for(int i = 0; i < minPopupButton_.length; i++) {
@@ -1458,7 +1455,9 @@ public class VMapModelEditor
     // set the window name
     String name = ncFile_.getFileName();
     String s = model_.getName();
-    display_ = new JFrame(s + " from " + name);
+     // display_ = varWins.variableWindow1;
+      display_ = VariableWindows.getVarWin1Frame();
+    //display_ = new JFrame(s + " from " + name);
     display_.getContentPane().setLayout(new BorderLayout(0, 0));
     display_.setJMenuBar(makeMenuBar());
     //
@@ -1466,13 +1465,14 @@ public class VMapModelEditor
     //    layout_.setBatch(true, "VMapGraph");
     if(keyPane_ != null) {
       //      keyPane_.setBatch(true, "VMapGraph");
+        //graphPane_ = varWins.controlPanel1;
       graphPane_ = new JPanel();
       keyPanel_ = new JPanel();
 
       graphPane_.setLayout(new BorderLayout(0, 0));
       display_.getContentPane().add(graphPane_, BorderLayout.CENTER);
       graphPane_.setBackground(new Color(204, 204, 204));
-      graphPane_.setBounds(0, 4, 488, 669);
+      //graphPane_.setBounds(0, 4, 488, 669);
       graphPane_.add(layout_, BorderLayout.CENTER);
       //
       keyPanel_.setLayout(new BorderLayout());
@@ -1549,8 +1549,8 @@ public class VMapModelEditor
   }
 
   class SymWindow
-      extends java.awt.event.WindowAdapter {
-    public void windowClosing(java.awt.event.WindowEvent event) {
+      extends WindowAdapter {
+    public void windowClosing(WindowEvent event) {
 //      thisIsOpen = false;
       Object object = event.getSource();
       if(object == display_) {
@@ -1559,7 +1559,7 @@ public class VMapModelEditor
     }
   }
 
-  void display_WindowClosing(java.awt.event.WindowEvent event) {
+  void display_WindowClosing(WindowEvent event) {
     // turn off the btn maintainer thread
     display_.setVisible(false);
     //display_.dispose();		 // dispose of the Frame.
@@ -1708,8 +1708,7 @@ class VMapModelEditor_closeButton_actionAdapter
   }
 }
 
-class VMapModelEditor_helpButton_actionAdapter
-    implements java.awt.event.ActionListener {
+class VMapModelEditor_helpButton_actionAdapter implements ActionListener {
   VMapModelEditor adaptee;
 
   VMapModelEditor_helpButton_actionAdapter(VMapModelEditor adaptee) {
@@ -1734,8 +1733,7 @@ class VMapModelEditor_applyButton_actionAdapter
   }
 }
 
-class VMapModelEditor_doneButton_actionAdapter
-    implements java.awt.event.ActionListener {
+class VMapModelEditor_doneButton_actionAdapter implements ActionListener {
   VMapModelEditor adaptee;
 
   VMapModelEditor_doneButton_actionAdapter(VMapModelEditor adaptee) {
@@ -1747,8 +1745,7 @@ class VMapModelEditor_doneButton_actionAdapter
   }
 }
 
-class VMapModelEditor_advButton_actionAdapter
-    implements java.awt.event.ActionListener {
+class VMapModelEditor_advButton_actionAdapter implements ActionListener {
   VMapModelEditor adaptee;
 
   VMapModelEditor_advButton_actionAdapter(VMapModelEditor adaptee) {
@@ -1760,7 +1757,7 @@ class VMapModelEditor_advButton_actionAdapter
   }
 }
 
-class VMapModelEditor_openButton_actionAdapter implements java.awt.event.ActionListener {
+class VMapModelEditor_openButton_actionAdapter implements ActionListener {
   VMapModelEditor adaptee;
 
   VMapModelEditor_openButton_actionAdapter(VMapModelEditor adaptee) {

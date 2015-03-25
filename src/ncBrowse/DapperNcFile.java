@@ -115,7 +115,15 @@ public class DapperNcFile implements NcFile {
     return util_.getIncrement();
   }
 
-  /**
+    public void getVariableWindowData() {
+
+    }
+
+    public String NcDump() {
+        return null;
+    }
+
+    /**
    * findAttValueIgnoreCase
    *
    * @param v Variable

@@ -350,16 +350,16 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     namePanel.setBorder(bevelBorder1);
     namePanel.setLayout(gridBagLayout1);
     contentPane.add(namePanel, "South");
-    namePanel.setBounds(0,166,571,25);
+    //namePanel.setBounds(0,166,571,25);
     lnameTextField.setEditable(false);
     namePanel.add(lnameTextField, new
       GridBagConstraints(0,0,1,1,1.0,1.0,
                          GridBagConstraints.CENTER,GridBagConstraints.BOTH,
                          new Insets(0,0,0,0),0,2));
-    lnameTextField.setBounds(2,2,567,21);
+   //lnameTextField.setBounds(2,2,567,21);
     //$$ bevelBorder1.move(72,204);
     JPanel2.setLayout(borderLayout2);
-    JPanel2.setBounds(360,10,204,144);
+    //JPanel2.setBounds(360,10,204,144);
 
       JPanel3.setLayout(borderLayout3);
 
@@ -399,7 +399,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
           new Insets(0, 5, 0, 5), 0, 0));
     }
     varScrollPane.getViewport().add(VariableList, null);
-    varScrollPane.setBounds(0,0,204,144);
+    //varScrollPane.setBounds(0,0,204,144);
       ncDump.setBorder(titledBorder2);
       ncDump.setOpaque(true);
       contentPane.add(JPanel3, BorderLayout.CENTER);
@@ -451,14 +451,14 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 
     windowList_ = new WindowList(5);
     windowList_.setParent(this);
-    JLabel1.setBounds(10, 21, 110, 15);
-    numDimText.setBounds(125, 74, 229, 24);
-    numVarText.setBounds(125, 44, 229, 24);
-    numAttText.setBounds(125, 104, 229, 24);
-    fileText.setBounds(125, 14, 229, 24);
-    JLabel3.setBounds(10, 81, 110, 15);
-    JLabel2.setBounds(10, 51, 110, 15);
-    JLabel4.setBounds(10, 111, 110, 15);
+//    JLabel1.setBounds(10, 21, 110, 15);
+//    numDimText.setBounds(125, 74, 229, 24);
+//    numVarText.setBounds(125, 44, 229, 24);
+//    numAttText.setBounds(125, 104, 229, 24);
+//    fileText.setBounds(125, 14, 229, 24);
+//    JLabel3.setBounds(10, 81, 110, 15);
+//    JLabel2.setBounds(10, 51, 110, 15);
+//    JLabel4.setBounds(10, 111, 110, 15);
 
     // HTTP event handling from built in HTTP server
     HTTPServer.HTTPHandler handler = new HTTPServer.HTTPHandler(){
@@ -731,12 +731,14 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         newBrowser_actionPerformed(event);
       else if (object == openFile) {
           openFile_actionPerformed(event);
+          ncDump();
       }
-      else if (object == openFileInWindows){
+      else if (object == openFileInWindows) {
           openFileInWindows_actionPerformed(event);
-          newMapButton_actionPerformed(event);
+          //newMapButton_actionPerformed(event);
           //button_actionPerformed(event);
           //new VMapModel(ncFile_);
+          //System.out.println(vMapModel_.size());
       }
 
       else if (object == openWeb)
@@ -863,10 +865,37 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 //
 //        ncDumpTextField.setText(baos.toString());
 //    }
-    void openFileInWindows_actionPerformed(ActionEvent event){
-        VariableWindows swingControlDemo = new VariableWindows();
-        swingControlDemo.openVariableWindows();
+    void openFileInWindows_actionPerformed(ActionEvent event) {
+        VariableWindows variableWindows = new VariableWindows();
+        variableWindows.openVariableWindows();
+        windowList_.addElement(variableWindows);
+        ncFile_.getVariableWindowData();
+        if (!vMapModel_.isEmpty()) {
+            ArrayList<String> vMapModels = new ArrayList<String>();
+            Enumeration<String> evm = vMapModel_.keys();
+            VMapModel model = null;
+            while (evm.hasMoreElements()) {
+                String name = (String) evm.nextElement();
+                //listdata.addElement(name);
+                model = vMapModel_.get(name);
+                if (model instanceof VMapModel) {
+                    //System.out.println(((VMapModel) model).getName());
+                    vMapModels.add(model.getName());
+
+                }
+            }
+            //prints the elements in the ArrayList!
+            for (int i = 0; i < vMapModels.size(); i++) {
+                String name = vMapModels.get(i);
+                System.out.println(name);
+            }
+        }
     }
+
+    void ncDump(){
+        ncDumpTextField.setText(ncFile_.NcDump());
+    }
+
 
   void openFile_actionPerformed(ActionEvent event) {
     File file = null;
@@ -1288,7 +1317,8 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         //
         windowList_.addElement(domSel);
         domSel.addWindowListener(windowList_);
-      } else {  //  Variable Map
+      }
+      else {  //  Variable Map
         VMapModel model = vMapModel_.get(varName);
         if(model == null) {
           JOptionPane.showMessageDialog(this,

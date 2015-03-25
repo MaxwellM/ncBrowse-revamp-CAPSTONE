@@ -435,10 +435,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     public TwoDTargetPanel() {
       GridBagLayout gridBagLayout1 = new GridBagLayout();
       this.setLayout(gridBagLayout1);
-      Border border3 = BorderFactory.createCompoundBorder(
-          BorderFactory.createEtchedBorder(Color.white,
-                                           new Color(148, 145, 140)),
-          BorderFactory.createEmptyBorder(0, 5, 0, 0));
+      Border border3 = BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(Color.white, new Color(148, 145, 140)), BorderFactory.createEmptyBorder(0, 5, 0, 0));
       this.setBorder(border3);
 
       TargetMonitor tm = TargetMonitor.getInstance();
@@ -455,10 +452,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
       // V component
       vComponentPanel.setBackground(new Color(186, 217, 217));
       //    vLabel.setEditable(false);
-      vLabel.setDropTarget(
-          new DropTarget(vLabel, DnDConstants.ACTION_COPY_OR_MOVE,
-                         new LabelTarget(vLabel, VMapModel.V_COMPONENT), true,
-                         ncfm));
+      vLabel.setDropTarget(new DropTarget(vLabel, DnDConstants.ACTION_COPY_OR_MOVE, new LabelTarget(vLabel, VMapModel.V_COMPONENT), true, ncfm));
       vLabel.setForeground(Color.black);
       vLabel.setMaximumSize(new Dimension(0, 20));
       vLabel.setMinimumSize(new Dimension(0, 20));
@@ -469,10 +463,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
 
       // Z (Contour) Axis
       //    contLabel.setEditable(false);
-      contLabel.setDropTarget(
-          new DropTarget(contLabel, DnDConstants.ACTION_COPY_OR_MOVE,
-                         new LabelTarget(contLabel, VMapModel.Z_CONTOUR), true,
-                         ncfm));
+      contLabel.setDropTarget(new DropTarget(contLabel, DnDConstants.ACTION_COPY_OR_MOVE, new LabelTarget(contLabel, VMapModel.Z_CONTOUR), true, ncfm));
       contLabel.setForeground(Color.black);
       contLabel.setMaximumSize(new Dimension(0, 20));
       contLabel.setMinimumSize(new Dimension(0, 20));
@@ -485,9 +476,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
       // U Component
       //    uLabel.setEditable(false);
       uLabel.setDropTarget(
-          new DropTarget(uLabel, DnDConstants.ACTION_COPY_OR_MOVE,
-                         new LabelTarget(uLabel, VMapModel.U_COMPONENT), true,
-                         ncfm));
+          new DropTarget(uLabel, DnDConstants.ACTION_COPY_OR_MOVE, new LabelTarget(uLabel, VMapModel.U_COMPONENT), true, ncfm));
       uLabel.setForeground(Color.black);
       uLabel.setMaximumSize(new Dimension(0, 20));
       uLabel.setMinimumSize(new Dimension(0, 20));
@@ -501,10 +490,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
       colorPanel.setBackground(new Color(186, 217, 217)); ;
       colorPanel.setBorder(BorderFactory.createLoweredBevelBorder());
       colorPanel.setLayout(new BorderLayout());
-      colorLabel.setDropTarget(new DropTarget(colorLabel,
-                                              DnDConstants.ACTION_COPY_OR_MOVE,
-                                              new LabelTarget(colorLabel,
-          VMapModel.LINE_COLOR), true, ncfm));
+      colorLabel.setDropTarget(new DropTarget(colorLabel, DnDConstants.ACTION_COPY_OR_MOVE, new LabelTarget(colorLabel, VMapModel.LINE_COLOR), true, ncfm));
       colorLabel.setForeground(Color.black);
       colorLabel.setMaximumSize(new Dimension(0, 20));
       colorLabel.setMinimumSize(new Dimension(0, 20));
@@ -516,10 +502,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
       yAxisPanel.setBackground(new Color(186, 217, 217)); ;
       yAxisPanel.setBorder(BorderFactory.createLoweredBevelBorder());
       yAxisPanel.setLayout(borderLayout5);
-      yAxisLabel.setDropTarget(new DropTarget(yAxisLabel,
-                                              DnDConstants.ACTION_COPY_OR_MOVE,
-                                              new LabelTarget(yAxisLabel,
-          VMapModel.Y_AXIS), true, ncfm));
+      yAxisLabel.setDropTarget(new DropTarget(yAxisLabel, DnDConstants.ACTION_COPY_OR_MOVE, new LabelTarget(yAxisLabel, VMapModel.Y_AXIS), true, ncfm));
       yAxisLabel.setForeground(Color.black);
       yAxisLabel.setMaximumSize(new Dimension(0, 20));
       yAxisLabel.setMinimumSize(new Dimension(0, 20));
@@ -535,9 +518,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
       xAxisPanel.setBackground(new Color(186, 217, 217));
       xAxisPanel.setBorder(BorderFactory.createLoweredBevelBorder());
       xAxisPanel.setLayout(borderLayout4);
-      xAxisLabel.setDropTarget(new DropTarget(xAxisLabel,
-                                              new LabelTarget(xAxisLabel,
-          VMapModel.X_AXIS)));
+      xAxisLabel.setDropTarget(new DropTarget(xAxisLabel, new LabelTarget(xAxisLabel, VMapModel.X_AXIS)));
       xAxisLabel.setForeground(Color.black);
       xAxisLabel.setMaximumSize(new Dimension(0, 20));
       xAxisLabel.setMinimumSize(new Dimension(0, 20));

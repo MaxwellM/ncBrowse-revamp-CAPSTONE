@@ -3,18 +3,18 @@
  */
 package ncBrowse;
 
-import ucar.nc2.*;
-import ucar.nc2.dods.DODSNetcdfFile;
 import dods.dap.DODSException;
+import gov.noaa.pmel.util.GeoDate;
+import ucar.nc2.Attribute;
+import ucar.nc2.Variable;
+import ucar.nc2.dods.DODSNetcdfFile;
 
-import java.util.Vector;
-import java.util.Iterator;
-//import java.util.Enumeration;
-import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Iterator;
+import java.util.Vector;
 
-import gov.noaa.pmel.util.GeoDate;
+//import java.util.Enumeration;
 
 /**
  * Extends NetcdfFile to provide application required features.
@@ -108,7 +108,15 @@ public class DODSNcFile extends DODSNetcdfFile implements NcFile {
     return util_.getIncrement();
   }
 
-  @Override
+    public void getVariableWindowData() {
+
+    }
+
+    public String NcDump() {
+        return null;
+    }
+
+    @Override
   public String getPathName() {
     // TODO Auto-generated method stub
     return null;

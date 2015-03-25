@@ -56,4 +56,6 @@ public interface NcFile {
   public int[] getTime2();
   public GeoDate getRefDate();
   public int getIncrement();
+    public void getVariableWindowData();
+    public String NcDump();
 }

@@ -42,25 +42,25 @@ public class VariableListDialog extends JDialog {
   }
 
   void jbInit() throws Exception {
-    setResizable(false);
+    setResizable(true);
     setTitle("Variable Selection");
     getContentPane().setLayout(borderLayout1);
     setSize(131,292);
     setVisible(false);
     JScrollPane1.setToolTipText("Select a Variable");
     getContentPane().add(JScrollPane1, "Center");
-    JScrollPane1.setBounds(0,0,131,257);
+    //JScrollPane1.setBounds(0,0,131,257);
     VariableList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     VariableList.setToolTipText("Select a Variable");
     JScrollPane1.getViewport().add(VariableList);
-    VariableList.setBounds(0,0,128,254);
+    //VariableList.setBounds(0,0,128,254);
     buttonPanel.setLayout(flowLayout1);
     getContentPane().add(buttonPanel, "South");
-    buttonPanel.setBounds(0,257,131,35);
+    //buttonPanel.setBounds(0,257,131,35);
     closeButton.setText("Close");
     closeButton.setActionCommand("Close");
     buttonPanel.add(closeButton);
-    closeButton.setBounds(25,5,81,25);
+    //closeButton.setBounds(25,5,81,25);
 
     SymListSelection lSymListSelection = new SymListSelection();
     VariableList.addListSelectionListener(lSymListSelection);

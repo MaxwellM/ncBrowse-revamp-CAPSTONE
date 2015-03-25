@@ -9,10 +9,8 @@ import ucar.nc2.Dimension;
 import ucar.nc2.NetcdfFile;
 import ucar.nc2.Variable;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.List;
@@ -43,7 +41,8 @@ public class LocalNcFile implements NcFile {
 //      Browser dump = new Browser();
 //      dump.ncDumpTextField;
 //      System.out.println(cdfFile_);
-      getVariableWindowData();
+//      getVariableWindowData();
+//      Browser.ncDumpTextField.setText(cdfFile_.toString());
   }
 
   public LocalNcFile(String path) throws IOException {
@@ -54,7 +53,7 @@ public class LocalNcFile implements NcFile {
     util_ = new NcUtil(this);
   }
     public void getVariableWindowData(){
-        Browser.ncDumpTextField.setText(cdfFile_.toString());
+        //Browser.ncDumpTextField.setText(cdfFile_.toString());
         VariableWindows.commentlabel1.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(0).getName()));
         VariableWindows.commentTextArea1.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(0).getName()))));
         VariableWindows.commentlabel2.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(1).getName()));
@@ -86,25 +85,25 @@ public class LocalNcFile implements NcFile {
     }
 
     public String NcDump() {
-        // Create a stream to hold the output
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
-        // Tell Java to use your special stream
-        System.setOut(ps);
-        // Print some output: goes to your special stream
-        System.out.println(cdfFile_);
-        // Put things back
-        System.out.flush();
-        System.setOut(old);
-        // Show what happened
-        //System.out.println("Here: " + baos.toString());
-
-        //Browser dump = new Browser();
-        //dump.ncDumpTextField.setText(baos.toString());
-        //ncDumpTextField.setText(baos.toString());
-        return baos.toString();
+//        // Create a stream to hold the output
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        PrintStream ps = new PrintStream(baos);
+//        // IMPORTANT: Save the old System.out!
+//        PrintStream old = System.out;
+//        // Tell Java to use your special stream
+//        System.setOut(ps);
+//        // Print some output: goes to your special stream
+//        System.out.println(cdfFile_);
+//        // Put things back
+//        System.out.flush();
+//        System.setOut(old);
+//        // Show what happened
+//        //System.out.println("Here: " + baos.toString());
+//
+//        //Browser dump = new Browser();
+//        //dump.ncDumpTextField.setText(baos.toString());
+//        //ncDumpTextField.setText(baos.toString());
+        return cdfFile_.toString();
     }
 
   /**

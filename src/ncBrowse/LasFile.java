@@ -1,17 +1,17 @@
 package ncBrowse;
 
-import java.util.Iterator;
-import java.util.List;
-
-import ucar.nc2.*;
-import gov.noaa.pmel.util.GeoDate;
 import gov.noaa.pmel.las.LASHandler;
+import gov.noaa.pmel.util.GeoDate;
+import ucar.nc2.Attribute;
+import ucar.nc2.Dimension;
+import ucar.nc2.Variable;
+
 import java.io.File;
-import java.io.InputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import javax.swing.ProgressMonitor;
-import java.awt.event.*;
+import java.io.InputStream;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * <p>Title: </p>
@@ -165,7 +165,15 @@ public class LasFile implements NcFile {
     return mDelegate.getIncrement();
   }
 
-  public boolean isHttp() {
+    public void getVariableWindowData() {
+
+    }
+
+    public String NcDump() {
+        return null;
+    }
+
+    public boolean isHttp() {
     return false;
   }
 

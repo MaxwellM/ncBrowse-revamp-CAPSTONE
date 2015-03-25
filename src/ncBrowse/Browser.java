@@ -865,7 +865,8 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 //
 //        ncDumpTextField.setText(baos.toString());
 //    }
-    void openFileInWindows_actionPerformed(ActionEvent event) {
+
+  public void openFileInWindows_actionPerformed(ActionEvent event) {
         VariableWindows variableWindows = new VariableWindows();
         variableWindows.openVariableWindows();
         windowList_.addElement(variableWindows);

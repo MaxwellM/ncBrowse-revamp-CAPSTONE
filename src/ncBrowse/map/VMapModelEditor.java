@@ -149,6 +149,15 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   private double mXScaling = 1.0;
   private double mYScaling = 1.0;
   private double mZScaling = 1.0;
+  private boolean win1 = true;
+  private boolean win2 = false;
+  private boolean win3 = false;
+  private boolean win4 = false;
+  private boolean win5 = false;
+  private boolean win6 = false;
+  private boolean win7 = false;
+  private boolean win8 = false;
+  //private String win = VariableWindows.getVarWin1Frame().getTitle();
 
   public VMapModelEditor(VMapModel model, Browser parent) {
     super();
@@ -215,8 +224,8 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
     revYAxisCB.setSelected(model_.isZReversed());
     //
     revXAxisCB.setText(b.getString("kReverseX") + " (" +
-                       model_.getElementName(VMapModel.X_AXIS) +
-                       ")");
+            model_.getElementName(VMapModel.X_AXIS) +
+            ")");
     revYAxisCB.setText(b.getString("kReverseY") + " (" +
                        model_.getElementName(VMapModel.Y_AXIS) +
                        ")");
@@ -497,6 +506,8 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   }
 
   void doneButton_actionPerformed(ActionEvent e) {
+    //Browser.openFileInWindows_actionPerformed(e);
+    //parent_.openFileInWindows_actionPerformed(e);
     updateVMapModel();
     if(isPlotted && !isPlotOpen) {
       if(model_.is3D() && vizRend != null && vizRend.getDisplayWindow() != null) {
@@ -1291,8 +1302,19 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
       layout_.setLayerSizeP(new Dimension2D(6.0, 5.0));
       layout_.setTitleHeightP(0.25, 0.20);
       makeFrame();
-      display_.setSize(533, 600);
-      display_.setLocation(x_, y_);
+//      if (!win1){
+//        win2 = true;
+//      }
+      display_.setSize(VariableWindows.winSizeWidth, VariableWindows.winSizeHeight);
+//      if (win1){
+//        display_.setLocation(VariableWindows.getVarWin1Frame().getX(), VariableWindows.getVarWin1Frame().getY());
+//        win1 = false;
+//      }
+//      else if ((win2)&&(!win1)){
+//        display_.setLocation(VariableWindows.getVarWin2Frame().getX(), VariableWindows.getVarWin2Frame().getY());
+//        win2 = false;
+//      }
+      //display_.setLocation(VariableWindows.getVarWin1Frame().getX(), VariableWindows.getVarWin1Frame().getY());
       //parent_.getWindowList().addElement(display_);
       //display_.addWindowListener(parent_.getWindowList());
       //      layout_.addData(subset_, subset_.getTitle());
@@ -1450,13 +1472,39 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   }
 
   private void makeFrame() {
+    //boolean win1 = true;
+    //boolean win2 = true;
+    //win = VariableWindows.getVarWin1Frame().getTitle();
+//    switch (win){
+//      case "Variable Window 1": display_ = VariableWindows.getVarWin1Frame();
+//                                display_.setLocation(VariableWindows.getVarWin1Frame().getX(), VariableWindows.getVarWin1Frame().getY());
+//                                win = "OneDone";
+//                                break;
+//      case "OneDone":  display_ = VariableWindows.getVarWin2Frame();
+//                        display_.setLocation(VariableWindows.getVarWin2Frame().getX(), VariableWindows.getVarWin2Frame().getY());
+//        win = "TwoDone";
+//                        break;
+//      default: win = "";
+//        break;
+//    }
+    //win = VariableWindows.getVarWin1Frame().getTitle();
+    if(win1){
+      display_ = VariableWindows.getVarWin1Frame();
+      display_.setLocation(VariableWindows.getVarWin1Frame().getX(), VariableWindows.getVarWin1Frame().getY());
+      win1 = false;
+    }
+    if (win2){
+      display_ = VariableWindows.getVarWin2Frame();
+      display_.setLocation(VariableWindows.getVarWin2Frame().getX(), VariableWindows.getVarWin2Frame().getY());
+      win2 = false;
+    }
     lSymAction_ = new SymAction();
 
     // set the window name
     String name = ncFile_.getFileName();
     String s = model_.getName();
      // display_ = varWins.variableWindow1;
-      display_ = VariableWindows.getVarWin1Frame();
+      //display_ = VariableWindows.getVarWin1Frame();
     //display_ = new JFrame(s + " from " + name);
     display_.getContentPane().setLayout(new BorderLayout(0, 0));
     display_.setJMenuBar(makeMenuBar());
@@ -1476,8 +1524,9 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
       graphPane_.add(layout_, BorderLayout.CENTER);
       //
       keyPanel_.setLayout(new BorderLayout());
-      keyPanel_.setBorder(new javax.swing.border.LineBorder(Color.gray, 2));
-      keyPane_.setSize(new Dimension(533, 100));
+      keyPanel_.setBorder(new LineBorder(Color.gray, 2));
+      keyPane_.setSize(new Dimension(VariableWindows.winSizeWidth, 100));
+      //keyPane_.setSize(VariableWindows.WIDTH, VariableWindows.HEIGHT);
       layout_.setKeyLayerSizeP(new Dimension2D(6.7, 1.25));
       layout_.setKeyBoundsP(new Rectangle2D.Double(0.0, 1.25, 6.7, 1.25));
       keyPanel_.add(keyPane_, BorderLayout.CENTER);

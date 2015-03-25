@@ -8,7 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.geom.Rectangle2D;
 
-public class VariableWindows extends  JFrame{
+public class VariableWindows extends JFrame {
     //private NcFile ncFile_ = null;
     //private WindowList windowList_;
     public static JLabel  commentlabel1;
@@ -22,7 +22,7 @@ public class VariableWindows extends  JFrame{
     //private static  variableWindow1;
     private BorderLayout borderLayout3 = new BorderLayout(0, 0);
     public static JFrame variableWindow1;
-    private JFrame variableWindow2;
+    private static JFrame variableWindow2;
     private JFrame variableWindow3;
     private JFrame variableWindow4;
     private JFrame variableWindow5;
@@ -63,8 +63,8 @@ public class VariableWindows extends  JFrame{
     public static JTextArea commentTextArea8;
     int fullWidth;
     int fullHeight;
-    public int winSizeWidth;
-    public int winSizeHeight;
+    public static int winSizeWidth;
+    public static int winSizeHeight;
     int locWin1X;
     int locWin1Y;
     int locWin2X;
@@ -147,6 +147,15 @@ public class VariableWindows extends  JFrame{
     public static JFrame getVarWin1Frame() {
         return variableWindow1;
     	}
+    public static JFrame getVarWin2Frame() {
+        return variableWindow2;
+    }
+    public static int getWinSizeWidth(){
+        return winSizeWidth;
+    }
+    public static int getWinSizeHeight(){
+        return winSizeHeight;
+    }
 
     public void prepareWin1GUI(){
         variableWindow1 = new JFrame();
@@ -493,9 +502,9 @@ public class VariableWindows extends  JFrame{
         controlPanel2 = new JPanel();
         controlPanel2.setLayout(new BorderLayout(0,0));
 
-        variableWindow2.add(headerLabel2, BorderLayout.NORTH);
-        variableWindow2.add(controlPanel2, BorderLayout.CENTER);
-        variableWindow2.add(statusLabel2, BorderLayout.SOUTH);
+        //variableWindow2.add(headerLabel2, BorderLayout.NORTH);
+        //variableWindow2.add(controlPanel2, BorderLayout.CENTER);
+        //variableWindow2.add(statusLabel2, BorderLayout.SOUTH);
         headerLabel2.setText("Control in action: JTextArea");
 
 //        JLabel  commentlabel = new JLabel("Variable: ", JLabel.RIGHT);
@@ -532,9 +541,9 @@ public class VariableWindows extends  JFrame{
         controlPanel3 = new JPanel();
         controlPanel3.setLayout(new BorderLayout(0,0));
 
-        variableWindow3.add(headerLabel3, BorderLayout.NORTH);
-        variableWindow3.add(controlPanel3, BorderLayout.CENTER);
-        variableWindow3.add(statusLabel3, BorderLayout.SOUTH);
+        //variableWindow3.add(headerLabel3, BorderLayout.NORTH);
+        //variableWindow3.add(controlPanel3, BorderLayout.CENTER);
+        //variableWindow3.add(statusLabel3, BorderLayout.SOUTH);
         headerLabel3.setText("Control in action: JTextArea");
 
 //        JLabel  commentlabel = new JLabel("Variable: ", JLabel.RIGHT);
@@ -571,9 +580,9 @@ public class VariableWindows extends  JFrame{
         controlPanel4 = new JPanel();
         controlPanel4.setLayout(new BorderLayout(0,0));
 
-        variableWindow4.add(headerLabel4, BorderLayout.NORTH);
-        variableWindow4.add(controlPanel4, BorderLayout.CENTER);
-        variableWindow4.add(statusLabel4, BorderLayout.SOUTH);
+        //variableWindow4.add(headerLabel4, BorderLayout.NORTH);
+        //variableWindow4.add(controlPanel4, BorderLayout.CENTER);
+        //variableWindow4.add(statusLabel4, BorderLayout.SOUTH);
         headerLabel4.setText("Control in action: JTextArea");
 
 //        JLabel  commentlabel = new JLabel("Variable: ", JLabel.RIGHT);
@@ -610,9 +619,9 @@ public class VariableWindows extends  JFrame{
         controlPanel5 = new JPanel();
         controlPanel5.setLayout(new BorderLayout(0,0));
 
-        variableWindow5.add(headerLabel5, BorderLayout.NORTH);
-        variableWindow5.add(controlPanel5, BorderLayout.CENTER);
-        variableWindow5.add(statusLabel5, BorderLayout.SOUTH);
+        //variableWindow5.add(headerLabel5, BorderLayout.NORTH);
+        //variableWindow5.add(controlPanel5, BorderLayout.CENTER);
+        //variableWindow5.add(statusLabel5, BorderLayout.SOUTH);
         headerLabel5.setText("Control in action: JTextArea");
 
 //        JLabel  commentlabel = new JLabel("Variable: ", JLabel.RIGHT);
@@ -649,9 +658,9 @@ public class VariableWindows extends  JFrame{
         controlPanel6 = new JPanel();
         controlPanel6.setLayout(new BorderLayout(0,0));
 
-        variableWindow6.add(headerLabel6, BorderLayout.NORTH);
-        variableWindow6.add(controlPanel6, BorderLayout.CENTER);
-        variableWindow6.add(statusLabel6, BorderLayout.SOUTH);
+        //variableWindow6.add(headerLabel6, BorderLayout.NORTH);
+        //variableWindow6.add(controlPanel6, BorderLayout.CENTER);
+        //variableWindow6.add(statusLabel6, BorderLayout.SOUTH);
         headerLabel6.setText("Control in action: JTextArea");
 
 //        JLabel  commentlabel = new JLabel("Variable: ", JLabel.RIGHT);
@@ -688,9 +697,9 @@ public class VariableWindows extends  JFrame{
         controlPanel7 = new JPanel();
         controlPanel7.setLayout(new BorderLayout(0,0));
 
-        variableWindow7.add(headerLabel7, BorderLayout.NORTH);
-        variableWindow7.add(controlPanel7, BorderLayout.CENTER);
-        variableWindow7.add(statusLabel7, BorderLayout.SOUTH);
+        //variableWindow7.add(headerLabel7, BorderLayout.NORTH);
+        //variableWindow7.add(controlPanel7, BorderLayout.CENTER);
+        //variableWindow7.add(statusLabel7, BorderLayout.SOUTH);
         headerLabel7.setText("Control in action: JTextArea");
 
 //        JLabel  commentlabel = new JLabel("Variable: ", JLabel.RIGHT);
@@ -727,9 +736,9 @@ public class VariableWindows extends  JFrame{
         controlPanel8 = new JPanel();
         controlPanel8.setLayout(new BorderLayout(0,0));
 
-        variableWindow8.add(headerLabel8, BorderLayout.NORTH);
-        variableWindow8.add(controlPanel8, BorderLayout.CENTER);
-        variableWindow8.add(statusLabel8, BorderLayout.SOUTH);
+        //variableWindow8.add(headerLabel8, BorderLayout.NORTH);
+        //variableWindow8.add(controlPanel8, BorderLayout.CENTER);
+        //variableWindow8.add(statusLabel8, BorderLayout.SOUTH);
         headerLabel8.setText("Control in action: JTextArea");
 
 //        JLabel  commentlabel = new JLabel("Variable: ", JLabel.RIGHT);

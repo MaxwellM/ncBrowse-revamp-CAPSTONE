@@ -55,7 +55,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   private static boolean useVMap_ = false;
   private static boolean useSystemLF_ = false;
   private String OPeNDAPFile_ = null;
-  private static Vector<Browser> openBrowsers;
+  public static Vector<Browser> openBrowsers;
   private static Browser instance_ = null;
   public static boolean can3DMap = true;
 
@@ -71,7 +71,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   private Hashtable<String,VMapModel> vMapModel_;
   private boolean showAllVariables_ = false;
   private String timeFormat_ = "yyyy-MM-dd HH:mm:ss";
-  private WindowList windowList_;
+  public WindowList windowList_;
   private CheckBoxAction cbAction_ = new CheckBoxAction();
   private boolean oceanShare_ = false;
     public static JTextArea ncDumpTextField = new JTextArea();
@@ -88,6 +88,15 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 
   public Browser() {
     this(false);
+  }
+
+  public void setInt(int win) {
+    this.win = win;
+  }
+
+  private int win = 1;
+  public int getInt() {
+    return win;
   }
 
   public Browser(boolean oceanshare) {
@@ -130,6 +139,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 
     }
   }
+
 
   private void  jbInit() throws Exception {
       try {
@@ -775,8 +785,10 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         maxAllItem_actionPerformed(event);
       else if (object == helpItem)
         helpItem_actionPerformed(event);
-      else if (object == newMapButton)
+      else if (object == newMapButton) {
+        openFileInWindows_actionPerformed(event);
         newMapButton_actionPerformed(event);
+      }
     }
   }
 
@@ -1521,7 +1533,20 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     ub.setVisible(true);
   }
 
+//  void addWin_actionPerformed(ActionEvent e){
+//    VariableWindows variableWindows = new VariableWindows();
+//    variableWindows.openVariableWindows();
+//  }
+
   void newMapButton_actionPerformed(ActionEvent e) {
+//    VariableWindows variableWindows = new VariableWindows();
+//    variableWindows.openVariableWindows();
+//    windowList_.addElement(variableWindows);
+//    Frame[] allWin = getFrames();
+//    for (Frame anAllWin : allWin) {
+//      windowList_.addElement(anAllWin);
+//      //System.out.println("Added: "+anAllWin.getName());
+//    }
     Vector<Object> listdata = new Vector<Object>();
     Vector<Variable> varList = new Vector<Variable>();
     Vector<Variable> varDimList = new Vector<Variable>();

@@ -3,16 +3,18 @@
  */
 package ncBrowse.map;
 
+import gov.noaa.pmel.sgt.JPane;
 import ncBrowse.Browser;
 import ncBrowse.Debug;
 
-import gov.noaa.pmel.sgt.JPane;
-
-import java.awt.*;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.*;
-import javax.swing.event.*;
-import javax.swing.border.*;
 
 /**
  * Title:        netCDF File Browser
@@ -76,7 +78,7 @@ public class MovieControl extends JFrame implements ActionListener {
     return instance_;
   }
 
-  private MovieControl() {
+  public MovieControl() {
     timer_ = new Timer(1000, this);
     Class bClass = Browser.getInstance().getClass();
     rewindIcon_ = new ImageIcon(bClass.getResource("images/Rewind24.gif"));
@@ -89,13 +91,13 @@ public class MovieControl extends JFrame implements ActionListener {
     } catch(Exception e) {
       e.printStackTrace();
     }
-    addWindowListener(new java.awt.event.WindowAdapter() {
-      public void windowClosing(java.awt.event.WindowEvent event) {
+    addWindowListener(new WindowAdapter() {
+      public void windowClosing(WindowEvent event) {
         isStopped_ = true;
         runStopButton.setIcon(runIcon_);
         timer_.stop();
       }
-      public void windowOpened(java.awt.event.WindowEvent event) {
+      public void windowOpened(WindowEvent event) {
       }
     });
     pack();
@@ -259,7 +261,7 @@ public class MovieControl extends JFrame implements ActionListener {
   }
 }
 
-class MovieControl_doneButton_actionAdapter implements java.awt.event.ActionListener {
+class MovieControl_doneButton_actionAdapter implements ActionListener {
   MovieControl adaptee;
 
   MovieControl_doneButton_actionAdapter(MovieControl adaptee) {
@@ -270,7 +272,7 @@ class MovieControl_doneButton_actionAdapter implements java.awt.event.ActionList
   }
 }
 
-class MovieControl_rewindButton_actionAdapter implements java.awt.event.ActionListener {
+class MovieControl_rewindButton_actionAdapter implements ActionListener {
   MovieControl adaptee;
 
   MovieControl_rewindButton_actionAdapter(MovieControl adaptee) {
@@ -281,7 +283,7 @@ class MovieControl_rewindButton_actionAdapter implements java.awt.event.ActionLi
   }
 }
 
-class MovieControl_stepBackButton_actionAdapter implements java.awt.event.ActionListener {
+class MovieControl_stepBackButton_actionAdapter implements ActionListener {
   MovieControl adaptee;
 
   MovieControl_stepBackButton_actionAdapter(MovieControl adaptee) {
@@ -292,7 +294,7 @@ class MovieControl_stepBackButton_actionAdapter implements java.awt.event.Action
   }
 }
 
-class MovieControl_runStopButton_actionAdapter implements java.awt.event.ActionListener {
+class MovieControl_runStopButton_actionAdapter implements ActionListener {
   MovieControl adaptee;
 
   MovieControl_runStopButton_actionAdapter(MovieControl adaptee) {
@@ -303,7 +305,7 @@ class MovieControl_runStopButton_actionAdapter implements java.awt.event.ActionL
   }
 }
 
-class MovieControl_stepForwardButton_actionAdapter implements java.awt.event.ActionListener {
+class MovieControl_stepForwardButton_actionAdapter implements ActionListener {
   MovieControl adaptee;
 
   MovieControl_stepForwardButton_actionAdapter(MovieControl adaptee) {
@@ -314,7 +316,7 @@ class MovieControl_stepForwardButton_actionAdapter implements java.awt.event.Act
   }
 }
 
-class MovieControl_speedSlider_inputMethodAdapter implements java.awt.event.InputMethodListener {
+class MovieControl_speedSlider_inputMethodAdapter implements InputMethodListener {
   MovieControl adaptee;
 
   MovieControl_speedSlider_inputMethodAdapter(MovieControl adaptee) {
@@ -327,7 +329,7 @@ class MovieControl_speedSlider_inputMethodAdapter implements java.awt.event.Inpu
   }
 }
 
-class MovieControl_speedSlider_changeAdapter implements javax.swing.event.ChangeListener {
+class MovieControl_speedSlider_changeAdapter implements ChangeListener {
   MovieControl adaptee;
 
   MovieControl_speedSlider_changeAdapter(MovieControl adaptee) {
@@ -338,7 +340,7 @@ class MovieControl_speedSlider_changeAdapter implements javax.swing.event.Change
   }
 }
 
-class MovieControl_frameSlider_changeAdapter implements javax.swing.event.ChangeListener {
+class MovieControl_frameSlider_changeAdapter implements ChangeListener {
   MovieControl adaptee;
 
   MovieControl_frameSlider_changeAdapter(MovieControl adaptee) {

@@ -42,7 +42,7 @@ import java.util.ResourceBundle;
  */
 public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeListener, DialogClient {
   private NcFile ncFile_;
-  private Browser parent_;
+  public Browser parent_;
   private JFrame display_;
   private JPlotLayout layout_;
   private JPanel graphPane_;
@@ -77,6 +77,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   private Object[] maxRange_;
   private int[] rBoxGroup_;
   private boolean[] movieBtnsUsed;
+  public int win;
 
   /**
    * @label vParam_
@@ -149,20 +150,30 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   private double mXScaling = 1.0;
   private double mYScaling = 1.0;
   private double mZScaling = 1.0;
-  private boolean win1 = true;
-  private boolean win2 = false;
-  private boolean win3 = false;
-  private boolean win4 = false;
-  private boolean win5 = false;
-  private boolean win6 = false;
-  private boolean win7 = false;
-  private boolean win8 = false;
-  //private String win = VariableWindows.getVarWin1Frame().getTitle();
+//  private boolean win1 = true;
+//  private boolean win2 = false;
+//  private boolean win3 = false;
+//  private boolean win4 = false;
+//  private boolean win5 = false;
+//  private boolean win6 = false;
+//  private boolean win7 = false;
+//  private boolean win8 = false;
+  //private int win = parent_.win ;
+//  private String win1 = VariableWindows.getVarWin1Frame().getTitle();
+//  private String win2 = VariableWindows.getVarWin2Frame().getTitle();
+//  private String win3 = VariableWindows.getVarWin3Frame().getTitle();
+//  private String win4 = VariableWindows.getVarWin4Frame().getTitle();
+//  private String win5 = VariableWindows.getVarWin5Frame().getTitle();
+//  private String win6 = VariableWindows.getVarWin6Frame().getTitle();
+//  private String win7 = VariableWindows.getVarWin7Frame().getTitle();
+//  private String win8 = VariableWindows.getVarWin8Frame().getTitle();
 
   public VMapModelEditor(VMapModel model, Browser parent) {
     super();
     model_ = model;
     parent_ = parent;
+    win = Browser.getInstance().getInt();
+    //System.out.println("TEST: "+ Browser.getInstance().getInt());
     setSize(800, 600);
     setVisible(false);
     try {
@@ -1081,7 +1092,8 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   }
 
   void popupMovieControl(int i, Point screenLoc) {
-    MovieControl mc = MovieControl.getInstance();
+    MovieControl mc = new MovieControl();
+    //MovieControl mc = MovieControl.getInstance();
     mc.setMapParameter(vParam_[i]);
     mc.setJPane(pane_);
     mc.setLocation(screenLoc);
@@ -1301,7 +1313,14 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
       layout_.setTitles(title1, lname.trim(), " ");
       layout_.setLayerSizeP(new Dimension2D(6.0, 5.0));
       layout_.setTitleHeightP(0.25, 0.20);
+      //System.out.println("Before: " + Browser.getInstance().getInt());
       makeFrame();
+      //VariableWindows.setAllVisible();
+      //win = win + 1;
+      Browser.getInstance().setInt((Browser.getInstance().getInt() + 1));
+      //System.out.println("After: "+ Browser.getInstance().getInt());
+      //System.out.println(win += 1);
+      //win = +1;
 //      if (!win1){
 //        win2 = true;
 //      }
@@ -1487,17 +1506,67 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
 //      default: win = "";
 //        break;
 //    }
+    //System.out.println(win);
+    switch (win){
+      case 1: display_ = VariableWindows.getVarWin1Frame();
+              display_.setLocation(VariableWindows.getVarWin1Frame().getX(), VariableWindows.getVarWin1Frame().getY());
+              //System.out.println("Case 1");
+              display_.setVisible(true);
+              break;
+      case 2: display_ = VariableWindows.getVarWin2Frame();
+              display_.setLocation(VariableWindows.getVarWin2Frame().getX(), VariableWindows.getVarWin2Frame().getY());
+              //System.out.println("Case 2");
+              display_.setVisible(true);
+              break;
+      case 3: display_ = VariableWindows.getVarWin3Frame();
+              display_.setLocation(VariableWindows.getVarWin3Frame().getX(), VariableWindows.getVarWin3Frame().getY());
+              //System.out.println("Case 3");
+              display_.setVisible(true);
+              break;
+      case 4: display_ = VariableWindows.getVarWin4Frame();
+              display_.setLocation(VariableWindows.getVarWin4Frame().getX(), VariableWindows.getVarWin4Frame().getY());
+              //System.out.println("Case 4");
+              display_.setVisible(true);
+              break;
+      case 5: display_ = VariableWindows.getVarWin5Frame();
+              display_.setLocation(VariableWindows.getVarWin5Frame().getX(), VariableWindows.getVarWin5Frame().getY());
+              //System.out.println("Case 5");
+              display_.setVisible(true);
+              break;
+      case 6: display_ = VariableWindows.getVarWin6Frame();
+              display_.setLocation(VariableWindows.getVarWin6Frame().getX(), VariableWindows.getVarWin6Frame().getY());
+              //System.out.println("Case 6");
+              display_.setVisible(true);
+              break;
+      case 7: display_ = VariableWindows.getVarWin7Frame();
+              display_.setLocation(VariableWindows.getVarWin7Frame().getX(), VariableWindows.getVarWin7Frame().getY());
+              //System.out.println("Case 7");
+              display_.setVisible(true);
+              break;
+      case 8: display_ = VariableWindows.getVarWin8Frame();
+              display_.setLocation(VariableWindows.getVarWin8Frame().getX(), VariableWindows.getVarWin8Frame().getY());
+              //System.out.println("Case 8");
+              display_.setVisible(true);
+              break;
+      default: System.out.println("Failed!");
+               break;
+    }
     //win = VariableWindows.getVarWin1Frame().getTitle();
-    if(win1){
-      display_ = VariableWindows.getVarWin1Frame();
-      display_.setLocation(VariableWindows.getVarWin1Frame().getX(), VariableWindows.getVarWin1Frame().getY());
-      win1 = false;
-    }
-    if (win2){
-      display_ = VariableWindows.getVarWin2Frame();
-      display_.setLocation(VariableWindows.getVarWin2Frame().getX(), VariableWindows.getVarWin2Frame().getY());
-      win2 = false;
-    }
+//    System.out.println("Step 1");
+//    if(win1){
+//      System.out.println("Step 2: win1 true");
+//      display_ = VariableWindows.getVarWin1Frame();
+//      display_.setLocation(VariableWindows.getVarWin1Frame().getX(), VariableWindows.getVarWin1Frame().getY());
+//      win1 = false;
+//      System.out.println("Step 3 win1 false");
+//    }
+//    if (win2){
+//      System.out.println("Step 4: win2 true");
+//      display_ = VariableWindows.getVarWin2Frame();
+//      display_.setLocation(VariableWindows.getVarWin2Frame().getX(), VariableWindows.getVarWin2Frame().getY());
+//      win2 = false;
+//      System.out.println("Step 5: win2 false");
+//    }
     lSymAction_ = new SymAction();
 
     // set the window name

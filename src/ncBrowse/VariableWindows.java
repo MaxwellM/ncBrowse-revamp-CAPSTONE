@@ -23,12 +23,12 @@ public class VariableWindows extends JFrame {
     private BorderLayout borderLayout3 = new BorderLayout(0, 0);
     public static JFrame variableWindow1;
     private static JFrame variableWindow2;
-    private JFrame variableWindow3;
-    private JFrame variableWindow4;
-    private JFrame variableWindow5;
-    private JFrame variableWindow6;
-    private JFrame variableWindow7;
-    private JFrame variableWindow8;
+    private static JFrame variableWindow3;
+    private static JFrame variableWindow4;
+    private static JFrame variableWindow5;
+    private static JFrame variableWindow6;
+    private static JFrame variableWindow7;
+    private static JFrame variableWindow8;
     public JLabel headerLabel1;
     private JLabel headerLabel2;
     private JLabel headerLabel3;
@@ -138,6 +138,14 @@ public class VariableWindows extends JFrame {
         showTextAreaWin6();
         showTextAreaWin7();
         showTextAreaWin8();
+//        variableWindow1.setVisible(false);
+//        variableWindow2.setVisible(false);
+//        variableWindow3.setVisible(false);
+//        variableWindow4.setVisible(false);
+//        variableWindow5.setVisible(false);
+//        variableWindow6.setVisible(false);
+//        variableWindow7.setVisible(false);
+//        variableWindow8.setVisible(false);
     }
 
 //    public static void main(String[] args){
@@ -149,6 +157,24 @@ public class VariableWindows extends JFrame {
     	}
     public static JFrame getVarWin2Frame() {
         return variableWindow2;
+    }
+    public static JFrame getVarWin3Frame() {
+        return variableWindow3;
+    }
+    public static JFrame getVarWin4Frame() {
+        return variableWindow4;
+    }
+    public static JFrame getVarWin5Frame() {
+        return variableWindow5;
+    }
+    public static JFrame getVarWin6Frame() {
+        return variableWindow6;
+    }
+    public static JFrame getVarWin7Frame() {
+        return variableWindow7;
+    }
+    public static JFrame getVarWin8Frame() {
+        return variableWindow8;
     }
     public static int getWinSizeWidth(){
         return winSizeWidth;
@@ -192,7 +218,7 @@ public class VariableWindows extends JFrame {
 //        variableWindow1.add(headerLabel1, BorderLayout.NORTH);
 //        variableWindow1.add(controlPanel1, BorderLayout.CENTER);
 //        variableWindow1.add(statusLabel1, BorderLayout.SOUTH);
-        variableWindow1.setVisible(true);
+        variableWindow1.setVisible(false);
     }
     public void prepareWin2GUI(){
         variableWindow2 = new JFrame();
@@ -228,7 +254,7 @@ public class VariableWindows extends JFrame {
 //        variableWindow2.add(headerLabel2, BorderLayout.NORTH);
 //        variableWindow2.add(controlPanel2, BorderLayout.CENTER);
 //        variableWindow2.add(statusLabel2, BorderLayout.SOUTH);
-        variableWindow2.setVisible(true);
+        variableWindow2.setVisible(false);
     }
     public void prepareWin3GUI(){
         variableWindow3 = new JFrame();
@@ -264,7 +290,7 @@ public class VariableWindows extends JFrame {
 //        variableWindow3.add(headerLabel3, BorderLayout.NORTH);
 //        variableWindow3.add(controlPanel3, BorderLayout.CENTER);
 //        variableWindow3.add(statusLabel3, BorderLayout.SOUTH);
-        variableWindow3.setVisible(true);
+        variableWindow3.setVisible(false);
     }
     public void prepareWin4GUI(){
         variableWindow4 = new JFrame();
@@ -300,7 +326,7 @@ public class VariableWindows extends JFrame {
 //        variableWindow4.add(headerLabel4, BorderLayout.NORTH);
 //        variableWindow4.add(controlPanel4, BorderLayout.CENTER);
 //        variableWindow4.add(statusLabel4, BorderLayout.SOUTH);
-        variableWindow4.setVisible(true);
+        variableWindow4.setVisible(false);
     }
     public void prepareWin5GUI(){
         variableWindow5 = new JFrame();
@@ -336,7 +362,7 @@ public class VariableWindows extends JFrame {
 //        variableWindow5.add(headerLabel5, BorderLayout.NORTH);
 //        variableWindow5.add(controlPanel5, BorderLayout.CENTER);
 //        variableWindow5.add(statusLabel5, BorderLayout.SOUTH);
-        variableWindow5.setVisible(true);
+        variableWindow5.setVisible(false);
     }
     public void prepareWin6GUI(){
         variableWindow6 = new JFrame();
@@ -372,7 +398,7 @@ public class VariableWindows extends JFrame {
 //        variableWindow6.add(headerLabel6, BorderLayout.NORTH);
 //        variableWindow6.add(controlPanel6, BorderLayout.CENTER);
 //        variableWindow6.add(statusLabel6, BorderLayout.SOUTH);
-        variableWindow6.setVisible(true);
+        variableWindow6.setVisible(false);
     }
     public void prepareWin7GUI(){
         variableWindow7 = new JFrame();
@@ -408,7 +434,7 @@ public class VariableWindows extends JFrame {
 //        variableWindow7.add(headerLabel7, BorderLayout.NORTH);
 //        variableWindow7.add(controlPanel7, BorderLayout.CENTER);
 //        variableWindow7.add(statusLabel7, BorderLayout.SOUTH);
-        variableWindow7.setVisible(true);
+        variableWindow7.setVisible(false);
     }
     public void prepareWin8GUI(){
         variableWindow8 = new JFrame();
@@ -444,12 +470,22 @@ public class VariableWindows extends JFrame {
 //        variableWindow8.add(headerLabel8, BorderLayout.NORTH);
 //        variableWindow8.add(controlPanel8, BorderLayout.CENTER);
 //        variableWindow8.add(statusLabel8, BorderLayout.SOUTH);
-        variableWindow8.setVisible(true);
+        variableWindow8.setVisible(false);
     }
     public void setTextAreaWin1(){
         variableWindow1.add(headerLabel1, BorderLayout.NORTH);
         variableWindow1.add(controlPanel1, BorderLayout.CENTER);
         variableWindow1.add(statusLabel1, BorderLayout.SOUTH);
+    }
+    public static void setAllVisible(){
+        variableWindow1.setVisible(true);
+        variableWindow2.setVisible(true);
+        variableWindow3.setVisible(true);
+        variableWindow4.setVisible(true);
+        variableWindow5.setVisible(true);
+        variableWindow6.setVisible(true);
+        variableWindow7.setVisible(true);
+        variableWindow8.setVisible(true);
     }
 
     public void showTextAreaWin1(){
@@ -489,7 +525,7 @@ public class VariableWindows extends JFrame {
         controlPanel1.add(commentlabel1, BorderLayout.NORTH);
         controlPanel1.add(scrollPane, BorderLayout.CENTER);
         controlPanel1.add(showButton, BorderLayout.SOUTH);
-        variableWindow1.setVisible(true);
+        variableWindow1.setVisible(false);
     }
     public void showTextAreaWin2(){
         commentlabel2 = new JLabel();
@@ -528,7 +564,7 @@ public class VariableWindows extends JFrame {
         controlPanel2.add(commentlabel2, BorderLayout.NORTH);
         controlPanel2.add(scrollPane, BorderLayout.CENTER);
         controlPanel2.add(showButton, BorderLayout.SOUTH);
-        variableWindow2.setVisible(true);
+        variableWindow2.setVisible(false);
     }
     public void showTextAreaWin3(){
         commentlabel3 = new JLabel();
@@ -567,7 +603,7 @@ public class VariableWindows extends JFrame {
         controlPanel3.add(commentlabel3, BorderLayout.NORTH);
         controlPanel3.add(scrollPane, BorderLayout.CENTER);
         controlPanel3.add(showButton, BorderLayout.SOUTH);
-        variableWindow3.setVisible(true);
+        variableWindow3.setVisible(false);
     }
     public void showTextAreaWin4(){
         commentlabel4 = new JLabel();
@@ -606,7 +642,7 @@ public class VariableWindows extends JFrame {
         controlPanel4.add(commentlabel4, BorderLayout.NORTH);
         controlPanel4.add(scrollPane, BorderLayout.CENTER);
         controlPanel4.add(showButton, BorderLayout.SOUTH);
-        variableWindow4.setVisible(true);
+        variableWindow4.setVisible(false);
     }
     public void showTextAreaWin5(){
         commentlabel5 = new JLabel();
@@ -645,7 +681,7 @@ public class VariableWindows extends JFrame {
         controlPanel5.add(commentlabel5, BorderLayout.NORTH);
         controlPanel5.add(scrollPane, BorderLayout.CENTER);
         controlPanel5.add(showButton, BorderLayout.SOUTH);
-        variableWindow5.setVisible(true);
+        variableWindow5.setVisible(false);
     }
     public void showTextAreaWin6(){
         commentlabel6 = new JLabel();
@@ -684,7 +720,7 @@ public class VariableWindows extends JFrame {
         controlPanel6.add(commentlabel6, BorderLayout.NORTH);
         controlPanel6.add(scrollPane, BorderLayout.CENTER);
         controlPanel6.add(showButton, BorderLayout.SOUTH);
-        variableWindow6.setVisible(true);
+        variableWindow6.setVisible(false);
     }
     public void showTextAreaWin7(){
         commentlabel7 = new JLabel();
@@ -723,7 +759,7 @@ public class VariableWindows extends JFrame {
         controlPanel7.add(commentlabel7, BorderLayout.NORTH);
         controlPanel7.add(scrollPane, BorderLayout.CENTER);
         controlPanel7.add(showButton, BorderLayout.SOUTH);
-        variableWindow7.setVisible(true);
+        variableWindow7.setVisible(false);
     }
     public void showTextAreaWin8(){
         commentlabel8 = new JLabel();
@@ -762,6 +798,6 @@ public class VariableWindows extends JFrame {
         controlPanel8.add(commentlabel8, BorderLayout.NORTH);
         controlPanel8.add(scrollPane, BorderLayout.CENTER);
         controlPanel8.add(showButton, BorderLayout.SOUTH);
-        variableWindow8.setVisible(true);
+        variableWindow8.setVisible(false);
     }
 }

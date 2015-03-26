@@ -405,9 +405,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     JPanel2.add(component14, BorderLayout.EAST);
     if(useVMap_) {
       JPanel2.add(jPanel1, BorderLayout.SOUTH);
-      jPanel1.add(newMapButton, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0
-          ,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-          new Insets(0, 5, 0, 5), 0, 0));
+      jPanel1.add(newMapButton, new GridBagConstraints(0, 0, 1, 1, 0.0, 0.0,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(0, 5, 10, 5), 0, 0));
     }
     varScrollPane.getViewport().add(VariableList, null);
     //varScrollPane.setBounds(0,0,204,144);

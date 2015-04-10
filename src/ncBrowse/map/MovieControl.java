@@ -70,6 +70,7 @@ public class MovieControl extends JFrame implements ActionListener {
   Border border2;
   Border border3;
   TitledBorder titledBorder2;
+  boolean play_;
 
   public static MovieControl getInstance() {
     if(instance_ == null) {
@@ -80,6 +81,7 @@ public class MovieControl extends JFrame implements ActionListener {
 
   public MovieControl() {
     timer_ = new Timer(1000, this);
+    play_ = false;
     Class bClass = Browser.getInstance().getClass();
     rewindIcon_ = new ImageIcon(bClass.getResource("images/Rewind24.gif"));
     stepBackIcon_ = new ImageIcon(bClass.getResource("images/StepBack24.gif"));

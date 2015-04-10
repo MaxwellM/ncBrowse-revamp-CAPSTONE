@@ -1305,15 +1305,16 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
       // message = "Creating graphics frame for " + model_.getName() +
       //  " from " + name;
       // oPane.setMessage(message);
-      String title1 = ncFile_.getFileName().trim();
+      //String title1 = ncFile_.getFileName().trim();
       layout_ = new JPlotLayout(subset_[0], "ncBrowse", null, true);
+      //layout_.setPreferredSize(new Dimension(VariableWindows.winSizeWidth,VariableWindows.winSizeHeight));
       //
       //    layout_.setBatch(true, "VMapGraph");
       //
-      String lname = model_.getName();
-      layout_.setTitles(title1, lname.trim(), " ");
-      layout_.setLayerSizeP(new Dimension2D(6.0, 5.0));
-      layout_.setTitleHeightP(0.25, 0.20);
+      //String lname = model_.getName();
+      //layout_.setTitles(title1, lname.trim(), " ");
+      //layout_.setLayerSizeP(new Dimension2D(6.0, 5.0));
+      //layout_.setTitleHeightP(0.25, 0.20);
       //System.out.println("Before: " + Browser.getInstance().getInt());
       makeFrame();
       //VariableWindows.setAllVisible();
@@ -1575,7 +1576,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
     String s = model_.getName();
      // display_ = varWins.variableWindow1;
       //display_ = VariableWindows.getVarWin1Frame();
-    //display_ = new JFrame(s + " from " + name);
+    display_ = new JFrame(s + " from " + name);
     display_.getContentPane().setLayout(new BorderLayout(0, 0));
     display_.setJMenuBar(makeMenuBar());
     //
@@ -1595,7 +1596,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
       //
       keyPanel_.setLayout(new BorderLayout());
       keyPanel_.setBorder(new LineBorder(Color.gray, 2));
-      keyPane_.setSize(new Dimension(VariableWindows.winSizeWidth, 100));
+      keyPane_.setSize(new Dimension(VariableWindows.winSizeWidth, 50));
       //keyPane_.setSize(VariableWindows.WIDTH, VariableWindows.HEIGHT);
       layout_.setKeyLayerSizeP(new Dimension2D(6.7, 1.25));
       layout_.setKeyBoundsP(new Rectangle2D.Double(0.0, 1.25, 6.7, 1.25));

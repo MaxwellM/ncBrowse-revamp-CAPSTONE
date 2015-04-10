@@ -7,15 +7,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="netcdfAll-4.2" level="project" />
-    <orderEntry type="library" name="noaa_pmel" level="project" />
-    <orderEntry type="library" name="visad" level="project" />
-    <orderEntry type="library" name="lashandler" level="project" />
-    <orderEntry type="library" name="lax" level="project" />
-    <orderEntry type="library" name="ndedit" level="project" />
-    <orderEntry type="library" name="ndeditgifs" level="project" />
-    <orderEntry type="library" name="ncBrowse" level="project" />
-    <orderEntry type="library" name="png" level="project" />
-    <orderEntry type="library" name="src" level="project" />
+    <orderEntry type="library" exported="" name="netcdfAll-4.2" level="project" />
+    <orderEntry type="library" exported="" name="noaa_pmel" level="project" />
+    <orderEntry type="library" exported="" name="visad" level="project" />
+    <orderEntry type="library" exported="" name="lashandler" level="project" />
+    <orderEntry type="library" exported="" name="lax" level="project" />
+    <orderEntry type="library" exported="" name="ndedit" level="project" />
+    <orderEntry type="library" exported="" name="ndeditgifs" level="project" />
+    <orderEntry type="library" exported="" name="ncBrowse" level="project" />
+    <orderEntry type="library" exported="" name="png" level="project" />
+    <orderEntry type="library" exported="" name="src" level="project" />
   </component>
 </module>

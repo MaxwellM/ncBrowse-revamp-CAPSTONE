@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Provides help for setting formats for parsing and 
+ * Provides help for setting loci.formats for parsing and
  * printing time/date strings.
  *
  * @author Donald Denbo

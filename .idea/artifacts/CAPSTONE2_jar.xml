@@ -1,0 +1,18 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CAPSTONE2:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CAPSTONE2_jar</output-path>
+    <root id="archive" name="CAPSTONE2.jar">
+      <element id="module-output" name="CAPSTONE2" />
+      <element id="extracted-dir" path="C:/Program Files (x86)/ncBrowse/ncBrowse.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files (x86)/ncBrowse/lashandler.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files (x86)/ncBrowse/noaa_pmel.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files (x86)/ncBrowse/visad.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files (x86)/ncBrowse/ndedit.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files (x86)/ncBrowse/ndeditgifs.jar" path-in-jar="/" />
+      <element id="library" level="project" name="src" />
+      <element id="extracted-dir" path="C:/Program Files (x86)/ncBrowse/netcdfAll-4.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files (x86)/ncBrowse/png.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="C:/Program Files (x86)/ncBrowse/lax.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

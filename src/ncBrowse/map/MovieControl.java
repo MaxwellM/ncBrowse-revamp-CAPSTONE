@@ -80,10 +80,10 @@ public class MovieControl extends JFrame implements ActionListener {
   boolean play_;
 
   public static MovieControl getInstance() {
-    //if(instance_ == null) {
+//    if(instance_ == null) {
       instance_ = new MovieControl();
       movies.add(instance_);
-    //}
+//    }
 
     return instance_;
   }

@@ -1,0 +1,23 @@
+Installation:
+    To use the source code to edit the program please unpack the zip folder and import it into either IntelliJ or Eclipse.
+    To just run the application double click on the CAPSTONE2.jar file (Requires Java to be installed)
+
+Dependencies
+    *All dependencies are included in the src folder*
+
+    JavaSE 1.8
+    lashandler
+    lax
+    ncBrowse
+    ndedit
+    ndeditgifs
+    netcdfAll-4.2
+    noaa_pmel
+    png
+    visad
+
+Author
+    Donald Denbo (Original author)
+    Maxwell Morin
+
+License

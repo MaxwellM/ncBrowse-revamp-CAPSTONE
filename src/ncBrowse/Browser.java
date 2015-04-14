@@ -58,6 +58,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   public static Vector<Browser> openBrowsers;
   private static Browser instance_ = null;
   public static boolean can3DMap = true;
+  final static String LOOKANDFEEL = null;
 
   /**
    * @label ncFile_
@@ -74,7 +75,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   public WindowList windowList_;
   private CheckBoxAction cbAction_ = new CheckBoxAction();
   private boolean oceanShare_ = false;
-    public static JTextArea ncDumpTextField = new JTextArea();
+  public static JTextArea ncDumpTextField = new JTextArea();
 
   private DapperWizard dapperWiz_ = null;
 
@@ -82,7 +83,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   BorderLayout borderLayout1 = new BorderLayout(0,0);
   BorderLayout borderLayout2 = new BorderLayout(0,0);
 
-    BorderLayout borderLayout3 = new BorderLayout(0, 0);
+  BorderLayout borderLayout3 = new BorderLayout(0, 0);
 
   GridBagLayout gridBagLayout1 = new GridBagLayout();
 
@@ -126,7 +127,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         System.out.println("Browser size = " + as);
       }
       setLocation(ss.width/2 - as.width/2,
-                      (int)(ss.getHeight()*0.05));
+          (int)(ss.getHeight()*0.05));
       openBrowsers = new Vector<Browser>(5);
       openBrowsers.addElement(this);
       try {
@@ -139,22 +140,59 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 
     }
   }
+  private static void initLookAndFeel() {
+    String lookAndFeel = null;
+    if (LOOKANDFEEL != null) {
+      if (LOOKANDFEEL.equals("Metal")) {
+        lookAndFeel = UIManager.getCrossPlatformLookAndFeelClassName();
+      } else if (LOOKANDFEEL.equals("System")) {
+        lookAndFeel = UIManager.getSystemLookAndFeelClassName();
+      } else if (LOOKANDFEEL.equals("Motif")) {
+        lookAndFeel = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
+      } else if (LOOKANDFEEL.equals("GTK+")) { //new in 1.4.2
+        lookAndFeel = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
+      } else {
+        System.err.println("Unexpected value of LOOKANDFEEL specified: "
+            + LOOKANDFEEL);
+        lookAndFeel = UIManager.getCrossPlatformLookAndFeelClassName();
+      }
 
+      try {
+        UIManager.setLookAndFeel(lookAndFeel);
+      } catch (ClassNotFoundException e) {
+        System.err.println("Couldn't find class for specified look and feel:"
+            + lookAndFeel);
+        System.err.println("Did you include the L&F library in the class path?");
+        System.err.println("Using the default look and feel.");
+      } catch (UnsupportedLookAndFeelException e) {
+        System.err.println("Can't use the specified look and feel ("
+            + lookAndFeel
+            + ") on this platform.");
+        System.err.println("Using the default look and feel.");
+      } catch (Exception e) {
+        System.err.println("Couldn't get specified look and feel ("
+            + lookAndFeel
+            + "), for some reason.");
+        System.err.println("Using the default look and feel.");
+        e.printStackTrace();
+      }
+    }
+  }
 
   private void  jbInit() throws Exception {
-      try {
-          //recommended way to set Nimbus LaF because old versions of Java 6
-          //don't have it included
-          for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-              if ("Nimbus".equals(info.getName())) {
-                  UIManager.setLookAndFeel(info.getClassName());
-                  break;
-              }
-          }
-      } catch (Exception e) {
-          UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-      }
-      contentPane = (JPanel) this.getContentPane();
+//    try {
+//      //recommended way to set Nimbus LaF because old versions of Java 6
+//      //don't have it included
+//      for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+//        if ("Nimbus".equals(info.getName())) {
+//          UIManager.setLookAndFeel(info.getClassName());
+//          break;
+//        }
+//      }
+//    } catch (Exception e) {
+//      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//    }
+    contentPane = (JPanel) this.getContentPane();
     SymMouse aSymMouse = new SymMouse();
 
     box2 = Box.createHorizontalBox();
@@ -180,19 +218,19 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     contentPane.setLayout(borderLayout1);
 
-      //My CODE
-      Rectangle2D result = new Rectangle2D.Double();
-      GraphicsEnvironment localGE = GraphicsEnvironment.getLocalGraphicsEnvironment();
-      for (GraphicsDevice gd : localGE.getScreenDevices()) {
-          for (GraphicsConfiguration graphicsConfiguration : gd.getConfigurations()) {
-              result.union(result, graphicsConfiguration.getBounds(), result);
-          }
+    //My CODE
+    Rectangle2D result = new Rectangle2D.Double();
+    GraphicsEnvironment localGE = GraphicsEnvironment.getLocalGraphicsEnvironment();
+    for (GraphicsDevice gd : localGE.getScreenDevices()) {
+      for (GraphicsConfiguration graphicsConfiguration : gd.getConfigurations()) {
+        result.union(result, graphicsConfiguration.getBounds(), result);
       }
-      int fullWidth = (int) result.getWidth();
-      int fullHeight = (int) result.getHeight();
-      int winSizeWidth = (fullWidth/4);
-      int winSizeHeight = (fullHeight/2);
-      //My CODE
+    }
+    int fullWidth = (int) result.getWidth();
+    int fullHeight = (int) result.getHeight();
+    int winSizeWidth = (fullWidth/4);
+    int winSizeHeight = (fullHeight/2);
+    //My CODE
 
     setSize(600, 300);
     setVisible(false);
@@ -245,8 +283,8 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     JPanel2.setMinimumSize(new Dimension(170, 48));
     JPanel2.setPreferredSize(new Dimension(170, 270));
 
-      JPanel3.setMinimumSize(new Dimension(200, 48));
-      JPanel3.setPreferredSize(new Dimension(300, 270));
+    JPanel3.setMinimumSize(new Dimension(200, 48));
+    JPanel3.setPreferredSize(new Dimension(300, 270));
 
     borderLayout2.setHgap(3);
     borderLayout2.setVgap(3);
@@ -267,16 +305,16 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     openFile.setText("Open File...");
     openFile.setActionCommand("Open...");
     openFile.setMnemonic((int)'O');
-      openFileInWindows.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
-      openFileInWindows.setText("Split File Into Multiple Windows...");
-      //openFileInWindows.setActionCommand("Open...");
-      //penFileInWindows.setMnemonic((int)'O');
+    openFileInWindows.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+    openFileInWindows.setText("Split File Into Multiple Windows...");
+    //openFileInWindows.setActionCommand("Open...");
+    //penFileInWindows.setMnemonic((int)'O');
     fileMenu.add(newBrowser);
     fileMenu.addSeparator();
     fileMenu.add(openFile);
-      fileMenu.addSeparator();
-      fileMenu.add(openFileInWindows);
-      fileMenu.addSeparator();
+    fileMenu.addSeparator();
+    fileMenu.add(openFileInWindows);
+    fileMenu.addSeparator();
     fileMenu.add(openWeb);
     fileMenu.add(openLas);
 
@@ -364,15 +402,15 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     //namePanel.setBounds(0,166,571,25);
     lnameTextField.setEditable(false);
     namePanel.add(lnameTextField, new
-      GridBagConstraints(0,0,1,1,1.0,1.0,
-                         GridBagConstraints.CENTER,GridBagConstraints.BOTH,
-                         new Insets(0,0,0,0),0,2));
-   //lnameTextField.setBounds(2,2,567,21);
+        GridBagConstraints(0,0,1,1,1.0,1.0,
+        GridBagConstraints.CENTER,GridBagConstraints.BOTH,
+        new Insets(0,0,0,0),0,2));
+    //lnameTextField.setBounds(2,2,567,21);
     //$$ bevelBorder1.move(72,204);
     JPanel2.setLayout(borderLayout2);
     //JPanel2.setBounds(360,10,204,144);
 
-      JPanel3.setLayout(borderLayout3);
+    JPanel3.setLayout(borderLayout3);
 
     varScrollPane.setBorder(titledBorder1);
     varScrollPane.setOpaque(true);
@@ -409,12 +447,12 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     }
     varScrollPane.getViewport().add(VariableList, null);
     //varScrollPane.setBounds(0,0,204,144);
-      ncDump.setBorder(titledBorder2);
-      ncDump.setOpaque(true);
-      contentPane.add(JPanel3, BorderLayout.CENTER);
+    ncDump.setBorder(titledBorder2);
+    ncDump.setOpaque(true);
+    contentPane.add(JPanel3, BorderLayout.CENTER);
     //contentPane.add(new JSeparator(JSeparator.HORIZONTAL));
-      JPanel3.add(ncDump, BorderLayout.CENTER);
-      ncDump.getViewport().add(ncDumpTextField, null);
+    JPanel3.add(ncDump, BorderLayout.CENTER);
+    ncDump.getViewport().add(ncDumpTextField, null);
     contentPane.add(new JSeparator(JSeparator.HORIZONTAL), BorderLayout.BEFORE_FIRST_LINE);
     //$$ JPopupMenu1.move(120,168);
     //$$ JMenuBar1.move(168,312);
@@ -431,7 +469,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     openDapper.addActionListener(lSymAction);
     newBrowser.addActionListener(lSymAction);
     openFile.addActionListener(lSymAction);
-      openFileInWindows.addActionListener(lSymAction);
+    openFileInWindows.addActionListener(lSymAction);
     openWeb.addActionListener(lSymAction);
     openOPeNDAP.addActionListener(lSymAction);
     openLas.addActionListener(lSymAction);
@@ -555,7 +593,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         System.out.println("Browser size = " + as);
       }
       app.setLocation(ss.width/2 - as.width/2,
-                      (int)(ss.getHeight()*0.05));
+          (int)(ss.getHeight()*0.05));
       if(file != null) app.setFile(file);
       app.setVisible(true);
       openBrowsers = new Vector<Browser>(5);
@@ -599,7 +637,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       menuBarHeight = menuBar.getPreferredSize().height;
     Insets insets = getInsets();
     setSize(insets.left + insets.right + size.width,
-            insets.top + insets.bottom + size.height + menuBarHeight);
+        insets.top + insets.bottom + size.height + menuBarHeight);
   }
 
   // Used by addNotify
@@ -609,15 +647,15 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   JTextField lnameTextField = new JTextField();
   JPanel JPanel2 = new JPanel();
 
-    JScrollPane ncDump = new JScrollPane();
-    JPanel JPanel3 = new JPanel();
-    TitledBorder titledBorder2 = new TitledBorder("ncDump");
+  JScrollPane ncDump = new JScrollPane();
+  JPanel JPanel3 = new JPanel();
+  TitledBorder titledBorder2 = new TitledBorder("ncDump");
 
   JScrollPane varScrollPane = new JScrollPane();
   JMenuBar menuBar = new JMenuBar();
   JMenu fileMenu = new JMenu();
   JMenuItem openFile = new JMenuItem();
-    JMenuItem openFileInWindows = new JMenuItem();
+  JMenuItem openFileInWindows = new JMenuItem();
   //  javax.swing.JSeparator JSeparator2 = new javax.swing.JSeparator();
   JMenuItem exportCdlItem = new JMenuItem();
   JMenuItem exportUNHItem = new JMenuItem();
@@ -669,7 +707,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   JPanel jPanel1 = new JPanel();
   JButton newMapButton = new JButton();
   GridBagLayout gridBagLayout2 = new GridBagLayout();
-//  private JButton newNewMapButton = new JButton();
+  //  private JButton newNewMapButton = new JButton();
   JMenuItem openLas = new JMenuItem();
   JMenuItem openDapper = new JMenuItem();
   JMenuItem newBrowser = new JMenuItem();
@@ -692,10 +730,10 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       Toolkit.getDefaultToolkit().beep();
       // Show a confirmation dialog
       int reply = JOptionPane.showConfirmDialog(this,
-                                                "Do you really want to exit?",
-                                                "ncBrowse - Exit" ,
-                                                JOptionPane.YES_NO_OPTION,
-                                                JOptionPane.QUESTION_MESSAGE);
+          "Do you really want to exit?",
+          "ncBrowse - Exit" ,
+          JOptionPane.YES_NO_OPTION,
+          JOptionPane.QUESTION_MESSAGE);
       // If the confirmation was affirmative, handle exiting.
       if (reply == JOptionPane.YES_OPTION) {
         this.setVisible(false);    // hide the Frame
@@ -741,15 +779,16 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       if (object == newBrowser)
         newBrowser_actionPerformed(event);
       else if (object == openFile) {
-          openFile_actionPerformed(event);
-          ncDump();
+        openFile_actionPerformed(event);
+        ncDump();
+        openFileInWindows_actionPerformed(event);
       }
       else if (object == openFileInWindows) {
-          openFileInWindows_actionPerformed(event);
-          //newMapButton_actionPerformed(event);
-          //button_actionPerformed(event);
-          //new VMapModel(ncFile_);
-          //System.out.println(vMapModel_.size());
+        openFileInWindows_actionPerformed(event);
+        //newMapButton_actionPerformed(event);
+        //button_actionPerformed(event);
+        //new VMapModel(ncFile_);
+        //System.out.println(vMapModel_.size());
       }
 
       else if (object == openWeb)
@@ -787,7 +826,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       else if (object == helpItem)
         helpItem_actionPerformed(event);
       else if (object == newMapButton) {
-        openFileInWindows_actionPerformed(event);
+        //openFileInWindows_actionPerformed(event);
         newMapButton_actionPerformed(event);
       }
     }
@@ -852,10 +891,10 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       public void componentHidden(ComponentEvent ce) {
         ncFile_ = lsd_.getFile();
         if(ncFile_ != null)  {
-            setupDisplay();
-          }
-          repaint();
+          setupDisplay();
         }
+        repaint();
+      }
     };
     lsd_.addComponentListener(adapter);
   }
@@ -880,44 +919,54 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 //    }
 
   public void openFileInWindows_actionPerformed(ActionEvent event) {
-        VariableWindows variableWindows = new VariableWindows();
-        variableWindows.openVariableWindows();
-        windowList_.addElement(variableWindows);
-        ncFile_.getVariableWindowData();
-        if (!vMapModel_.isEmpty()) {
-            ArrayList<String> vMapModels = new ArrayList<String>();
-            Enumeration<String> evm = vMapModel_.keys();
-            VMapModel model = null;
-            while (evm.hasMoreElements()) {
-                String name = (String) evm.nextElement();
-                //listdata.addElement(name);
-                model = vMapModel_.get(name);
-                if (model instanceof VMapModel) {
-                    //System.out.println(((VMapModel) model).getName());
-                    vMapModels.add(model.getName());
+    VariableWindows variableWindows = new VariableWindows();
+    variableWindows.openVariableWindows();
+    windowList_.addElement(VariableWindows.getVarWin1Frame());
+    windowList_.addElement(VariableWindows.getVarWin2Frame());
+    windowList_.addElement(VariableWindows.getVarWin3Frame());
+    windowList_.addElement(VariableWindows.getVarWin4Frame());
+    windowList_.addElement(VariableWindows.getVarWin5Frame());
+    windowList_.addElement(VariableWindows.getVarWin6Frame());
+    windowList_.addElement(VariableWindows.getVarWin7Frame());
+    windowList_.addElement(VariableWindows.getVarWin8Frame());
+    for (int i = 0; i < windowList_.size(); i++){
+      String name = windowList_.get(i).getName();
+      System.out.println("Windowlist_ :" + name);
+    }
+    //ncFile_.getVariableWindowData();
+    if (!vMapModel_.isEmpty()) {
+      ArrayList<String> vMapModels = new ArrayList<String>();
+      Enumeration<String> evm = vMapModel_.keys();
+      VMapModel model = null;
+      while (evm.hasMoreElements()) {
+        String name = (String) evm.nextElement();
+        //listdata.addElement(name);
+        model = vMapModel_.get(name);
+        if (model instanceof VMapModel) {
+          //System.out.println(((VMapModel) model).getName());
+          vMapModels.add(model.getName());
 
-                }
-            }
-            //prints the elements in the ArrayList!
-            for (int i = 0; i < vMapModels.size(); i++) {
-                String name = vMapModels.get(i);
-                System.out.println(name);
-            }
         }
+      }
+      //prints the elements in the ArrayList!
+      for (String name : vMapModels) {
+        System.out.println(name);
+      }
     }
+  }
 
-    void ncDump(){
-        ncDumpTextField.setText(ncFile_.NcDump());
-    }
+  void ncDump(){
+    ncDumpTextField.setText(ncFile_.NcDump());
+  }
 
 
   void openFile_actionPerformed(ActionEvent event) {
     File file = null;
     file = getFileFromDialog();
     if(file != null){
-        setFile(file);
-        //System.out.println(file);
-        //ncDumpTextField.setText(String.valueOf(file));
+      setFile(file);
+      //System.out.println(file);
+      //ncDumpTextField.setText(String.valueOf(file));
     }
     //
     // frame having problems with repaint force one
@@ -1102,18 +1151,18 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     // extract meta information for display in mainTextArea
     //
     String name = ncFile_.getFileName();
-      if(ncFile_.isFile()) {
-        name = name + " (local)";
-      } else if(ncFile_.isHttp()) {
-        name = name + " (Web)";
-      } else if(ncFile_.isDODS()) {
-        name = name + " (OPeNDAP)";
-      }
+    if(ncFile_.isFile()) {
+      name = name + " (local)";
+    } else if(ncFile_.isHttp()) {
+      name = name + " (Web)";
+    } else if(ncFile_.isDODS()) {
+      name = name + " (OPeNDAP)";
+    }
 //    Iterator vi = ncFile_.getVariableIterator();
 //    Iterator as = ncFile_.getGlobalAttributeIterator();
 //    Iterator ds = ncFile_.getDimensionIterator();
     fileText.setText(name);
-      fileText.setHorizontalAlignment(JTextField.CENTER);
+    fileText.setHorizontalAlignment(JTextField.CENTER);
     setTitle(name + " - NetCDF File Browser");
     int vcount = 0;
     int dcount = 0;
@@ -1138,11 +1187,11 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       acount++;
     }
     numVarText.setText(Integer.toString(vcount));
-      numVarText.setHorizontalAlignment(JTextField.CENTER);
+    numVarText.setHorizontalAlignment(JTextField.CENTER);
     numDimText.setText(Integer.toString(dcount));
-      numDimText.setHorizontalAlignment(JTextField.CENTER);
+    numDimText.setHorizontalAlignment(JTextField.CENTER);
     numAttText.setText(Integer.toString(acount));
-      numAttText.setHorizontalAlignment(JTextField.CENTER);
+    numAttText.setHorizontalAlignment(JTextField.CENTER);
     //
     // clear vMapModel list
     //
@@ -1220,7 +1269,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       // PropDisplay Create and show as non-modal
       {
         JSystemPropertiesDialog sysProps =
-          new JSystemPropertiesDialog(this, "System Properties", false);
+            new JSystemPropertiesDialog(this, "System Properties", false);
         sysProps.setVisible(true);
         windowList_.addElement(sysProps);
         sysProps.addWindowListener(windowList_);
@@ -1300,7 +1349,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 
   void VariableList_mouseClicked(MouseEvent event) {
     if(!((event.getClickCount() == 2) ||
-         ((event.getModifiers()&InputEvent.BUTTON3_MASK) != 0))) return;
+        ((event.getModifiers()&InputEvent.BUTTON3_MASK) != 0))) return;
     String varName = (String)VariableList.getSelectedValue();
     openDomainSelector(varName);
   }
@@ -1320,10 +1369,10 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 //        if(ncFile_.findVariable(varName).getElementType().getName().equals("char")) {
         if(ncFile_.findVariable(varName).getDataType() == DataType.CHAR) {
           domSel.setActionButton("Show Char Data",
-                                 VariableProcessThread.TEXTUAL);
+              VariableProcessThread.TEXTUAL);
         } else {
           domSel.setActionButton("Graph Variable",
-                                 VariableProcessThread.GRAPHER);
+              VariableProcessThread.GRAPHER);
         }
         domSel.setVariable(ncFile_, varName);
         Dimension ds = domSel.getSize();
@@ -1340,9 +1389,9 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         VMapModel model = vMapModel_.get(varName);
         if(model == null) {
           JOptionPane.showMessageDialog(this,
-                                        "Variable not found in netCDF or Variable Map Lists",
-                                        "Variable Not Found",
-                                        JOptionPane.ERROR_MESSAGE);
+              "Variable not found in netCDF or Variable Map Lists",
+              "Variable Not Found",
+              JOptionPane.ERROR_MESSAGE);
           return;
         }
         /**
@@ -1392,7 +1441,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     JViewHTMLFrame ub = new JViewHTMLFrame("ncBrowse News");
     ub.setPage("http://www.epic.noaa.gov/java/ncBrowse/news.html");
     ub.setLocationRelativeTo(null);
-   //ub.setLocation(100,100);
+    //ub.setLocation(100,100);
     ub.setVisible(true);
   }
 
@@ -1481,7 +1530,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       cbmi = (JCheckBoxMenuItem)(cb[i]);
       if(win instanceof JFrame) {
         showing = win.isShowing() &&
-          ((JFrame)win).getState() == Frame.NORMAL;
+            ((JFrame)win).getState() == Frame.NORMAL;
       } else {
         showing = win.isShowing();
       }
@@ -1582,14 +1631,14 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         varList.addElement(ncVar);
       }
     }
-    
+
     // combine lists
     listdata.addAll(varDimList);
     listdata.addAll(varList);
 
     VariableMapDialog vmd = new VariableMapDialog(this,
-                                                  "Create new Variable Map",
-                                                  ncFile_, false);
+        "Create new Variable Map",
+        ncFile_, false);
     vmd.setLocationRelativeTo(null);
     //vmd.setLocation(100,100);
     vmd.setList(ncFile_, listdata);
@@ -1626,16 +1675,16 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     }
   }
 
-    // Cancel button
+  // Cancel button
   public void dialogCancelled(JDialog d){}
 
-    // something other than the OK button
+  // something other than the OK button
   public void dialogDismissedTwo(JDialog d){}
 
-    // Apply button, OK w/o dismissing the dialog
+  // Apply button, OK w/o dismissing the dialog
   public void dialogApply(JDialog d){}
 
-    // Apply button, OK w/o dismissing the dialog
+  // Apply button, OK w/o dismissing the dialog
   public void dialogApplyTwo(Object d){}
 
   void openDapper_actionPerformed(ActionEvent e) {

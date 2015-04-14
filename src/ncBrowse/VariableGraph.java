@@ -9,7 +9,6 @@ import gov.noaa.pmel.sgt.LineAttribute;
 import gov.noaa.pmel.sgt.LineCartesianRenderer;
 import gov.noaa.pmel.sgt.dm.SGTData;
 import gov.noaa.pmel.sgt.swing.JClassTree;
-import gov.noaa.pmel.sgt.swing.JPlotLayout;
 import gov.noaa.pmel.sgt.swing.prop.LineAttributeDialog;
 import gov.noaa.pmel.util.Dimension2D;
 import gov.noaa.pmel.util.Rectangle2D;
@@ -105,7 +104,7 @@ public class VariableGraph extends VariableProcessThread {
         e.printStackTrace();
       }
       makeTextFrame(val);
-      display_.setSize(400, 90);
+      display_.setSize(VariableWindows.getWinSizeWidth(), VariableWindows.getWinSizeHeight());
       display_.setLocation(x_, y_);
       display_.setVisible(true);
       parent_.getWindowList().addElement(display_);
@@ -131,11 +130,11 @@ public class VariableGraph extends VariableProcessThread {
       layout_ = new JPlotLayout(subset_, "ncBrowse", null, true);
       //
       if(long_name_ != null) lname = long_name_;
-      layout_.setTitles(title1, lname.trim(), " ");
-      layout_.setLayerSizeP(new Dimension2D(6.0, 5.0));
-      layout_.setTitleHeightP(0.25, 0.20);
+      //layout_.setTitles(title1, lname.trim(), " ");
+      //layout_.setLayerSizeP(new Dimension2D(6.0, 5.0));
+      //layout_.setTitleHeightP(0.25, 0.20);
       makeFrame();
-      display_.setSize(533,600);
+      display_.setSize(VariableWindows.getWinSizeWidth(),VariableWindows.getWinSizeHeight());
       display_.setLocation(x_, y_);
       parent_.getWindowList().addElement(display_);
       display_.addWindowListener(parent_.getWindowList());
@@ -176,15 +175,15 @@ public class VariableGraph extends VariableProcessThread {
       graphPane_ = new JPanel();
       keyPanel_ = new JPanel();
 
-      graphPane_.setLayout(new BorderLayout(0,0));
+      graphPane_.setLayout(new BorderLayout(0, 0));
       display_.getContentPane().add(graphPane_, BorderLayout.CENTER);
-      graphPane_.setBackground(new Color(204,204,204));
-      graphPane_.setBounds(0,4,488,669);
+      graphPane_.setBackground(new Color(204, 204, 204));
+      //graphPane_.setBounds(0,4,488,669);
       graphPane_.add(layout_, BorderLayout.CENTER);
       //
       keyPanel_.setLayout(new BorderLayout());
       keyPanel_.setBorder(new LineBorder(Color.gray, 2));
-      keyPane_.setSize(new Dimension(533, 100));
+      keyPane_.setSize(new Dimension(533, 50));
       layout_.setKeyLayerSizeP(new Dimension2D(6.7, 1.25));
       layout_.setKeyBoundsP(new Rectangle2D.Double(0.0, 1.25, 6.7, 1.25));
       keyPanel_.add(keyPane_, BorderLayout.CENTER);

@@ -89,7 +89,7 @@ public class VariableWindows extends JFrame {
         GraphicsEnvironment localGE = GraphicsEnvironment.getLocalGraphicsEnvironment();
         for (GraphicsDevice gd : localGE.getScreenDevices()) {
             for (GraphicsConfiguration graphicsConfiguration : gd.getConfigurations()) {
-                result.union(result, graphicsConfiguration.getBounds(), result);
+                Rectangle2D.union(result, graphicsConfiguration.getBounds(), result);
             }
         }
         fullWidth = (int) result.getWidth();
@@ -134,14 +134,14 @@ public class VariableWindows extends JFrame {
         prepareWin6GUI();
         prepareWin7GUI();
         prepareWin8GUI();
-        showTextAreaWin1();
-        showTextAreaWin2();
-        showTextAreaWin3();
-        showTextAreaWin4();
-        showTextAreaWin5();
-        showTextAreaWin6();
-        showTextAreaWin7();
-        showTextAreaWin8();
+//        showTextAreaWin1();
+//        showTextAreaWin2();
+//        showTextAreaWin3();
+//        showTextAreaWin4();
+//        showTextAreaWin5();
+//        showTextAreaWin6();
+//        showTextAreaWin7();
+//        showTextAreaWin8();
 //        variableWindow1.setVisible(false);
 //        variableWindow2.setVisible(false);
 //        variableWindow3.setVisible(false);

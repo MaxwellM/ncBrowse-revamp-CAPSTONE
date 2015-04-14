@@ -7,7 +7,6 @@ import gov.noaa.pmel.sgt.*;
 import gov.noaa.pmel.sgt.ColorMap;
 import gov.noaa.pmel.sgt.dm.*;
 import gov.noaa.pmel.sgt.swing.JClassTree;
-import gov.noaa.pmel.sgt.swing.JPlotLayout;
 import gov.noaa.pmel.swing.JViewHTMLFrame;
 import gov.noaa.pmel.swing.SelectDoubleDialog;
 import gov.noaa.pmel.swing.SelectTimeDialog;
@@ -27,6 +26,7 @@ import java.awt.event.*;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 
@@ -78,6 +78,8 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   private int[] rBoxGroup_;
   private boolean[] movieBtnsUsed;
   public int win;
+
+  private static ArrayList instances = new ArrayList();
 
   /**
    * @label vParam_
@@ -1093,8 +1095,9 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   }
 
   void popupMovieControl(int i, Point screenLoc) {
-    MovieControl mc = new MovieControl();
-    //MovieControl mc = MovieControl.getInstance();
+    //MovieControl mc = new MovieControl();
+    //instances.add(new java.lang.ref.WeakReference(mc));
+    MovieControl mc = MovieControl.getInstance();
     mc.setMapParameter(vParam_[i]);
     mc.setJPane(pane_);
     mc.setLocation(screenLoc);
@@ -1576,7 +1579,8 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
     String s = model_.getName();
      // display_ = varWins.variableWindow1;
       //display_ = VariableWindows.getVarWin1Frame();
-    display_ = new JFrame(s + " from " + name);
+    //NEVER HAVE THIS NEXT LINE ON!
+    //display_ = new JFrame(s + " from " + name);
     display_.getContentPane().setLayout(new BorderLayout(0, 0));
     display_.setJMenuBar(makeMenuBar());
     //

@@ -8,14 +8,12 @@ import gov.noaa.pmel.sgt.*;
 import gov.noaa.pmel.sgt.dm.SGTData;
 import gov.noaa.pmel.sgt.dm.SGTGrid;
 import gov.noaa.pmel.sgt.swing.JClassTree;
-import gov.noaa.pmel.sgt.swing.JPlotLayout;
 import gov.noaa.pmel.sgt.swing.prop.LineAttributeDialog;
 import gov.noaa.pmel.sgt.swing.prop.VectorAttributeDialog;
-import gov.noaa.pmel.util.Dimension2D;
 import gov.noaa.pmel.util.Range2D;
-import gov.noaa.pmel.util.Rectangle2D;
 import ncBrowse.Browser;
 import ncBrowse.Debug;
+import ncBrowse.JPlotLayout;
 import ncBrowse.NcFile;
 
 import javax.swing.*;
@@ -285,50 +283,50 @@ public class VMapGraph extends Thread implements ChangeListener {
     y_ = y;
   }
 
-  private void makeFrame() {
-    lSymAction_ = new SymAction();
-    
-    // set the window name
-    String name = ncFile_.getFileName();
-    String s = model_.getName();
-    display_ = new JFrame(s + " from " + name);
-    display_.getContentPane().setLayout(new BorderLayout(0, 0));
-    display_.setJMenuBar(makeMenuBar());
-    //display_.setLocationRelativeTo(null);
-    //
-    keyPane_ = layout_.getKeyPane();
-    //    layout_.setBatch(true, "VMapGraph");
-    if(keyPane_ != null) {
-      //      keyPane_.setBatch(true, "VMapGraph");
-      graphPane_ = new JPanel();
-      keyPanel_ = new JPanel();
-
-      graphPane_.setLayout(new BorderLayout(0,0));
-      display_.getContentPane().add(graphPane_, BorderLayout.CENTER);
-      graphPane_.setBackground(new Color(204,204,204));
-      graphPane_.setBounds(0,4,488,669);
-      graphPane_.add(layout_, BorderLayout.CENTER);
-      //
-      keyPanel_.setLayout(new BorderLayout());
-      keyPanel_.setBorder(new javax.swing.border.LineBorder(Color.gray, 2));
-      keyPane_.setSize(new Dimension(533, 100));
-      layout_.setKeyLayerSizeP(new Dimension2D(6.7, 1.25));
-      layout_.setKeyBoundsP(new Rectangle2D.Double(0.0, 1.25, 6.7, 1.25));
-      keyPanel_.add(keyPane_, BorderLayout.CENTER);
-      graphPane_.add(keyPanel_, BorderLayout.SOUTH);
-      //
-      layout_.setBackground(Color.white);
-      myMouse_ = new MyMouse();
-      keyPane_.addMouseListener(myMouse_);
-    } else {
-      display_.getContentPane().add(layout_, BorderLayout.CENTER);
-    }
-
-    //
-    SymWindow aSymWindow = new SymWindow();
-    display_.addWindowListener(aSymWindow);
-    //
-  }
+//  private void makeFrame() {
+//    lSymAction_ = new SymAction();
+//
+//    // set the window name
+//    String name = ncFile_.getFileName();
+//    String s = model_.getName();
+//    display_ = new JFrame(s + " from " + name);
+//    display_.getContentPane().setLayout(new BorderLayout(0, 0));
+//    display_.setJMenuBar(makeMenuBar());
+//    //display_.setLocationRelativeTo(null);
+//    //
+//    keyPane_ = layout_.getKeyPane();
+//    //    layout_.setBatch(true, "VMapGraph");
+//    if(keyPane_ != null) {
+//      //      keyPane_.setBatch(true, "VMapGraph");
+//      graphPane_ = new JPanel();
+//      keyPanel_ = new JPanel();
+//
+//      graphPane_.setLayout(new BorderLayout(0,0));
+//      display_.getContentPane().add(graphPane_, BorderLayout.CENTER);
+//      graphPane_.setBackground(new Color(204,204,204));
+//      graphPane_.setBounds(0,4,488,669);
+//      graphPane_.add(layout_, BorderLayout.CENTER);
+//      //
+//      keyPanel_.setLayout(new BorderLayout());
+//      keyPanel_.setBorder(new javax.swing.border.LineBorder(Color.gray, 2));
+//      keyPane_.setSize(new Dimension(533, 100));
+//      layout_.setKeyLayerSizeP(new Dimension2D(6.7, 1.25));
+//      layout_.setKeyBoundsP(new Rectangle2D.Double(0.0, 1.25, 6.7, 1.25));
+//      keyPanel_.add(keyPane_, BorderLayout.CENTER);
+//      graphPane_.add(keyPanel_, BorderLayout.SOUTH);
+//      //
+//      layout_.setBackground(Color.white);
+//      myMouse_ = new MyMouse();
+//      keyPane_.addMouseListener(myMouse_);
+//    } else {
+//      display_.getContentPane().add(layout_, BorderLayout.CENTER);
+//    }
+//
+//    //
+//    SymWindow aSymWindow = new SymWindow();
+//    display_.addWindowListener(aSymWindow);
+//    //
+//  }
 
   class MyMouse extends MouseAdapter {
     public void mouseReleased(MouseEvent event) {

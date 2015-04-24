@@ -23,6 +23,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
 import java.util.Enumeration;
+import java.util.Objects;
 
 public class JPlotLayout extends JGraphicLayout implements PropertyChangeListener {
   CartesianGraph coastLine_;
@@ -72,7 +73,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
   private static String BOTTOM_AXIS;
 
   public JPlotLayout(SGTData var1) {
-    this(var1, "", (Image)null, false);
+    this(var1, "", null, false);
   }
 
   public JPlotLayout(SGTData var1, String var2, Image var3, boolean var4) {
@@ -251,12 +252,12 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
     }
 
     double var18 = this.ySize_ - 1.0D * this.mainTitleHeight_;
-    Font var32 = new Font("Helvetica", 1, 14);
+    Font var32 = new Font("Helvetica", Font.BOLD, 14);
     this.mainTitle_ = new SGLabel("Line Profile Title", "Profile Plot", this.mainTitleHeight_, new gov.noaa.pmel.util.Point2D.Double(var16, var18), 2, var20);
     this.mainTitle_.setFont(var32);
     //var7.addChild(this.mainTitle_);
     var18 -= 1.0D * this.warnHeight_;
-    Font var33 = new Font("Helvetica", 0, 10);
+    Font var33 = new Font("Helvetica", Font.PLAIN, 10);
     this.title2_ = new SGLabel("Second Title", "Warning: Browse image only", this.warnHeight_, new gov.noaa.pmel.util.Point2D.Double(var16, var18), 2, var20);
     this.title2_.setFont(var33);
     //var7.addChild(this.title2_);
@@ -273,7 +274,6 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
       var24 = new GeoDate("1992-11-01", "yyyy-MM-dd");
       var25 = new GeoDate("1993-02-20", "yyyy-MM-dd");
     } catch (IllegalTimeValue var30) {
-      ;
     }
 
     Object var26;
@@ -295,7 +295,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
     SoTPoint var28 = new SoTPoint(((SoTRange)var26).getStart(), ((SoTRange)var27).getStart());
     var9.setXTransform(var10);
     var9.setYTransform(var11);
-    Font var29 = new Font("Helvetica", 2, 14);
+    Font var29 = new Font("Helvetica", Font.ITALIC, 14);
     if(this.isXTime_) {
       var14 = new TimeAxis(BOTTOM_AXIS, 0);
       var14.setRangeU((SoTRange)var26);
@@ -346,7 +346,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
     int[] var3 = new int[]{0, 143, 159, 175, 191, 207, 223, 239, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 247, 231, 215, 199, 183, 167, 151, 135, 119, 103, 87, 71, 55, 39, 23, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     IndexedColorMap var4 = new IndexedColorMap(var1, var2, var3);
     LinearTransform var5 = new LinearTransform(0.0D, (double)var1.length, 0.0D, 1.0D);
-    ((IndexedColorMap)var4).setTransform(var5);
+    var4.setTransform(var5);
     return var4;
   }
 
@@ -355,39 +355,39 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
   }
 
   public void addData(Collection var1) {
-    this.addData((Collection)var1, (Attribute)null, (String)null);
+    this.addData(var1, null, null);
   }
 
   public void addData(Collection var1, Attribute var2) {
-    this.addData((Collection)var1, var2, (String)null);
+    this.addData(var1, var2, null);
   }
 
   public void addData(PointCollection var1, String var2) {
-    this.addData((SGTData)var1, (String)var2);
+    this.addData((SGTData)var1, var2);
   }
 
   public void addData(Collection var1, String var2) {
-    this.addData((Collection)var1, (Attribute)null, var2);
+    this.addData(var1, null, var2);
   }
 
   public void addData(Collection var1, Attribute var2, String var3) {
     for(int var4 = 0; var4 < var1.size(); ++var4) {
       SGTLine var5 = (SGTLine)var1.elementAt(var4);
-      this.addData((SGTData)var5, var2, var5.getTitle());
+      this.addData(var5, var2, var5.getTitle());
     }
 
   }
 
   public void addData(SGTData var1) {
-    this.addData((SGTData)var1, (Attribute)null, (String)null);
+    this.addData(var1, null, null);
   }
 
   public void addData(SGTData var1, Attribute var2) {
-    this.addData((SGTData)var1, var2, (String)null);
+    this.addData(var1, var2, null);
   }
 
   public void addData(SGTData var1, String var2) {
-    this.addData((SGTData)var1, (Attribute)null, var2);
+    this.addData(var1, null, var2);
   }
 
   public void addData(SGTData var1, Attribute var2, String var3) {
@@ -537,7 +537,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
         var9.setLocationU(var30);
         var9.setTitle(var13);
       } catch (AxisNotFoundException var46) {
-        ;
+
       }
 
       if(var32) {
@@ -601,7 +601,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
 
         var20.addPropertyChangeListener(new WeakPropertyChangeListener(this, var20));
         this.addAttribute(var1, var20);
-        var6.setData((SGTLine)var1, var20);
+        var6.setData(var1, var20);
       } else if(this.plotType_ == 3) {
         if(var2 != null && var2 instanceof VectorAttribute) {
           var23 = (VectorAttribute)var2;
@@ -696,7 +696,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
           var8 = var6.getXAxis(BOTTOM_AXIS);
           var9 = var6.getYAxis(LEFT_AXIS);
         } catch (AxisNotFoundException var44) {
-          ;
+
         }
 
         SoTRange var51;
@@ -846,7 +846,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
           this.addAttribute(var1, var20);
           var7.setData(var1, var20);
         } else if(var1 instanceof SGTVector) {
-          ;
+
         }
 
         CartesianRenderer var56 = var7.getRenderer();
@@ -1191,7 +1191,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
         this.setAllClipping(false);
       }
     } catch (AxisNotFoundException var10) {
-      ;
+
     }
 
   }
@@ -1205,7 +1205,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
       var7 = Graph.computeRange(var4, this.autoXIntervals_);
     } else {
       var7 = var4;
-      ((gov.noaa.pmel.util.SoTRange.Double)var4).delta = ((gov.noaa.pmel.util.SoTRange.Double)Graph.computeRange(var4, this.autoXIntervals_)).delta;
+      var4.delta = ((gov.noaa.pmel.util.SoTRange.Double)Graph.computeRange(var4, this.autoXIntervals_)).delta;
     }
 
     var9.setRangeU((SoTRange)var7);
@@ -1225,7 +1225,6 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
         this.setAllClipping(false);
       }
     } catch (AxisNotFoundException var11) {
-      ;
     }
 
   }
@@ -1250,7 +1249,6 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
         this.setAllClipping(false);
       }
     } catch (AxisNotFoundException var10) {
-      ;
     }
 
   }
@@ -1275,7 +1273,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
       var8 = Graph.computeRange(var7, this.autoYIntervals_);
     } else {
       var8 = var7;
-      ((gov.noaa.pmel.util.SoTRange.Double)var7).delta = ((gov.noaa.pmel.util.SoTRange.Double)Graph.computeRange(var7, this.autoYIntervals_)).delta;
+      var7.delta = ((gov.noaa.pmel.util.SoTRange.Double)Graph.computeRange(var7, this.autoYIntervals_)).delta;
     }
 
     var11.setRangeU((SoTRange)var8);
@@ -1295,7 +1293,6 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
         this.setAllClipping(false);
       }
     } catch (AxisNotFoundException var13) {
-      ;
     }
 
   }
@@ -1316,19 +1313,19 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
         }
       }
     } catch (LayerNotFoundException var4) {
-      ;
+
     }
 
     return null;
   }
 
   public SGTData getData(CartesianRenderer var1) {
-    return (SGTData)(var1 instanceof LineCartesianRenderer?((LineCartesianRenderer)var1).getLine():(var1 instanceof GridCartesianRenderer?((GridCartesianRenderer)var1).getGrid():null));
+    return var1 instanceof LineCartesianRenderer?((LineCartesianRenderer)var1).getLine():(var1 instanceof GridCartesianRenderer?((GridCartesianRenderer)var1).getGrid():null);
   }
 
   public void clear() {
     this.data_.removeAllElements();
-    ((CartesianGraph)this.firstLayer_.getGraph()).setRenderer((CartesianRenderer)null);
+    ((CartesianGraph)this.firstLayer_.getGraph()).setRenderer(null);
     this.removeAll();
     this.add(this.firstLayer_, 0);
     if(this.coastLine_ != null) {
@@ -1353,7 +1350,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
       var2 = this.getLayerFromDataId(var1);
       this.remove(var2);
     } catch (LayerNotFoundException var5) {
-      ;
+
     }
 
     Enumeration var4 = this.data_.elements();
@@ -1370,7 +1367,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
     }
 
     if(this.getComponentCount() <= 0 || var2.equals(this.firstLayer_)) {
-      ((CartesianGraph)this.firstLayer_.getGraph()).setRenderer((CartesianRenderer)null);
+      ((CartesianGraph)this.firstLayer_.getGraph()).setRenderer(null);
       this.add(this.firstLayer_, 0);
     }
 
@@ -1423,9 +1420,9 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
     this.xSize_ = var1.width;
     this.ySize_ = var1.height;
 
-    for(int var6 = 0; var6 < var2.length; ++var6) {
-      if(var2[var6] instanceof Layer) {
-        ((Layer)var2[var6]).setSizeP(var1);
+    for (Component aVar2 : var2) {
+      if (aVar2 instanceof Layer) {
+        ((Layer) aVar2).setSizeP(var1);
       }
     }
 
@@ -1535,7 +1532,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
   }
 
   public void propertyChange(PropertyChangeEvent var1) {
-    if(var1.getSource() instanceof GridAttribute && var1.getPropertyName() == "style" && this.plotType_ == 2) {
+    if(var1.getSource() instanceof GridAttribute && Objects.equals(var1.getPropertyName(), "style") && this.plotType_ == 2) {
       SGTGrid var2 = (SGTGrid)this.data_.firstElement();
 
       try {
@@ -1568,7 +1565,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
         var7 = ((AttributeChangeEvent)var1).isLocal();
       }
 
-      this.changes_.firePropertyChange(new AttributeChangeEvent(this, "attribute", (Object)null, var1.getSource(), var7));
+      this.changes_.firePropertyChange(new AttributeChangeEvent(this, "attribute", null, var1.getSource(), var7));
     }
 
   }

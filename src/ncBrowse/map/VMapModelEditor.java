@@ -78,6 +78,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   private int[] rBoxGroup_;
   private boolean[] movieBtnsUsed;
   public int win;
+  public static int win2 = VariableWindows2.whatFrame();
 
   private static ArrayList instances = new ArrayList();
 
@@ -1322,6 +1323,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
       makeFrame();
       //VariableWindows.setAllVisible();
       //win = win + 1;
+     //VariableWindows2.incrementFrame();
       Browser.getInstance().setInt((Browser.getInstance().getInt() + 1));
       //System.out.println("After: "+ Browser.getInstance().getInt());
       //System.out.println(win += 1);
@@ -1511,45 +1513,45 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
 //      default: win = "";
 //        break;
 //    }
-    //System.out.println(win);
+//    System.out.println(win);
     switch (win){
-      case 1: display_ = VariableWindows.getVarWin1Frame();
-              display_.setLocation(VariableWindows.getVarWin1Frame().getX(), VariableWindows.getVarWin1Frame().getY());
+      case 1: display_ = VariableWindows.variableWindow1;
+              display_.setLocation(VariableWindows.variableWindow1.getX(), VariableWindows.variableWindow1.getY());
               //System.out.println("Case 1");
               display_.setVisible(true);
               break;
-      case 2: display_ = VariableWindows.getVarWin2Frame();
-              display_.setLocation(VariableWindows.getVarWin2Frame().getX(), VariableWindows.getVarWin2Frame().getY());
+      case 2: display_ = VariableWindows.variableWindow2;
+              display_.setLocation(VariableWindows.variableWindow2.getX(), VariableWindows.variableWindow2.getY());
               //System.out.println("Case 2");
               display_.setVisible(true);
               break;
-      case 3: display_ = VariableWindows.getVarWin3Frame();
-              display_.setLocation(VariableWindows.getVarWin3Frame().getX(), VariableWindows.getVarWin3Frame().getY());
+      case 3: display_ = VariableWindows.variableWindow3;
+              display_.setLocation(VariableWindows.variableWindow3.getX(), VariableWindows.variableWindow3.getY());
               //System.out.println("Case 3");
               display_.setVisible(true);
               break;
-      case 4: display_ = VariableWindows.getVarWin4Frame();
-              display_.setLocation(VariableWindows.getVarWin4Frame().getX(), VariableWindows.getVarWin4Frame().getY());
+      case 4: display_ = VariableWindows.variableWindow4;
+              display_.setLocation(VariableWindows.variableWindow4.getX(), VariableWindows.variableWindow4.getY());
               //System.out.println("Case 4");
               display_.setVisible(true);
               break;
-      case 5: display_ = VariableWindows.getVarWin5Frame();
-              display_.setLocation(VariableWindows.getVarWin5Frame().getX(), VariableWindows.getVarWin5Frame().getY());
+      case 5: display_ = VariableWindows.variableWindow5;
+              display_.setLocation(VariableWindows.variableWindow5.getX(), VariableWindows.variableWindow5.getY());
               //System.out.println("Case 5");
               display_.setVisible(true);
               break;
-      case 6: display_ = VariableWindows.getVarWin6Frame();
-              display_.setLocation(VariableWindows.getVarWin6Frame().getX(), VariableWindows.getVarWin6Frame().getY());
+      case 6: display_ = VariableWindows.variableWindow6;
+              display_.setLocation(VariableWindows.variableWindow6.getX(), VariableWindows.variableWindow6.getY());
               //System.out.println("Case 6");
               display_.setVisible(true);
               break;
-      case 7: display_ = VariableWindows.getVarWin7Frame();
-              display_.setLocation(VariableWindows.getVarWin7Frame().getX(), VariableWindows.getVarWin7Frame().getY());
+      case 7: display_ = VariableWindows.variableWindow7;
+              display_.setLocation(VariableWindows.variableWindow7.getX(), VariableWindows.variableWindow7.getY());
               //System.out.println("Case 7");
               display_.setVisible(true);
               break;
-      case 8: display_ = VariableWindows.getVarWin8Frame();
-              display_.setLocation(VariableWindows.getVarWin8Frame().getX(), VariableWindows.getVarWin8Frame().getY());
+      case 8: display_ = VariableWindows.variableWindow8;
+              display_.setLocation(VariableWindows.variableWindow8.getX(), VariableWindows.variableWindow8.getY());
               //System.out.println("Case 8");
               display_.setVisible(true);
               break;

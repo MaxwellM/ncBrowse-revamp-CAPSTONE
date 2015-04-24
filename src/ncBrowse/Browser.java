@@ -39,7 +39,6 @@ import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 import java.util.List;
@@ -56,6 +55,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   private static boolean useSystemLF_ = false;
   private String OPeNDAPFile_ = null;
   public static Vector<Browser> openBrowsers;
+  public static Vector<JFrame> openVariableWindows;
   private static Browser instance_ = null;
   public static boolean can3DMap = true;
   final static String LOOKANDFEEL = null;
@@ -118,7 +118,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    vMapModel_ = new Hashtable<String,VMapModel>();
+    vMapModel_ = new Hashtable<>();
     if(oceanShare_) {
       Dimension ss = getToolkit().getScreenSize();
       Dimension as = getSize();
@@ -128,7 +128,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       }
       setLocation(ss.width/2 - as.width/2,
           (int)(ss.getHeight()*0.05));
-      openBrowsers = new Vector<Browser>(5);
+      openBrowsers = new Vector<>(5);
       openBrowsers.addElement(this);
       try {
 //        Browser.getInstance().getClass();
@@ -180,18 +180,18 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   }
 
   private void  jbInit() throws Exception {
-//    try {
-//      //recommended way to set Nimbus LaF because old versions of Java 6
-//      //don't have it included
-//      for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-//        if ("Nimbus".equals(info.getName())) {
-//          UIManager.setLookAndFeel(info.getClassName());
-//          break;
-//        }
-//      }
-//    } catch (Exception e) {
-//      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//    }
+    try {
+      //recommended way to set Nimbus LaF because old versions of Java 6
+      //don't have it included
+      for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+        if ("Nimbus".equals(info.getName())) {
+          UIManager.setLookAndFeel(info.getClassName());
+          break;
+        }
+      }
+    } catch (Exception e) {
+      UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    }
     contentPane = (JPanel) this.getContentPane();
     SymMouse aSymMouse = new SymMouse();
 
@@ -510,11 +510,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 //    JLabel4.setBounds(10, 111, 110, 15);
 
     // HTTP event handling from built in HTTP server
-    HTTPServer.HTTPHandler handler = new HTTPServer.HTTPHandler(){
-      public void handle(URL url){
-        SwingUtilities.invokeLater(new UrlHandler(url));
-      }
-    };
+    HTTPServer.HTTPHandler handler = url -> SwingUtilities.invokeLater(new UrlHandler(url));
     HTTPServer.start(handler);
   }
 
@@ -581,7 +577,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         } else {
           UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
         }
-      } catch (Exception e) {}
+      } catch (Exception ignored) {}
 
       //Create a new instance of our application's frame, and make it visible.
       app = new Browser();
@@ -596,7 +592,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
           (int)(ss.getHeight()*0.05));
       if(file != null) app.setFile(file);
       app.setVisible(true);
-      openBrowsers = new Vector<Browser>(5);
+      openBrowsers = new Vector<>(5);
       openBrowsers.addElement(app);
     } catch (Throwable t) {
       t.printStackTrace();
@@ -740,7 +736,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         this.dispose();            // free the system resources
         System.exit(0);            // close the application
       }
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 
@@ -764,7 +760,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         this.setVisible(false);
         this.dispose();
         System.exit(0);
-      } catch (Exception e) {
+      } catch (Exception ignored) {
       }
     } else {
       this.windowList_.closeAll();
@@ -921,25 +917,28 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   public void openFileInWindows_actionPerformed(ActionEvent event) {
     VariableWindows variableWindows = new VariableWindows();
     variableWindows.openVariableWindows();
-    windowList_.addElement(VariableWindows.getVarWin1Frame());
-    windowList_.addElement(VariableWindows.getVarWin2Frame());
-    windowList_.addElement(VariableWindows.getVarWin3Frame());
-    windowList_.addElement(VariableWindows.getVarWin4Frame());
-    windowList_.addElement(VariableWindows.getVarWin5Frame());
-    windowList_.addElement(VariableWindows.getVarWin6Frame());
-    windowList_.addElement(VariableWindows.getVarWin7Frame());
-    windowList_.addElement(VariableWindows.getVarWin8Frame());
-    for (int i = 0; i < windowList_.size(); i++){
-      String name = windowList_.get(i).getName();
-      System.out.println("Windowlist_ :" + name);
+    openVariableWindows = new Vector<>(8);
+    openVariableWindows.add(VariableWindows.getVarWin1Frame());
+    openVariableWindows.add(VariableWindows.getVarWin2Frame());
+    openVariableWindows.add(VariableWindows.getVarWin3Frame());
+    openVariableWindows.add(VariableWindows.getVarWin4Frame());
+    openVariableWindows.add(VariableWindows.getVarWin5Frame());
+    openVariableWindows.add(VariableWindows.getVarWin6Frame());
+    openVariableWindows.add(VariableWindows.getVarWin7Frame());
+    openVariableWindows.add(VariableWindows.getVarWin8Frame());
+//    openVariableWindows.add(variableWindows.getVarWin7Frame());
+//    openVariableWindows.add(variableWindows.getVarWin8Frame());
+    for (int i = 0; i < openVariableWindows.size(); i++){
+      String name = openVariableWindows.get(i).getName();
+      System.out.println("openVariableWindows :" + name);
     }
     //ncFile_.getVariableWindowData();
     if (!vMapModel_.isEmpty()) {
-      ArrayList<String> vMapModels = new ArrayList<String>();
+      ArrayList<String> vMapModels = new ArrayList<>();
       Enumeration<String> evm = vMapModel_.keys();
       VMapModel model = null;
       while (evm.hasMoreElements()) {
-        String name = (String) evm.nextElement();
+        String name = evm.nextElement();
         //listdata.addElement(name);
         model = vMapModel_.get(name);
         if (model instanceof VMapModel) {
@@ -949,9 +948,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         }
       }
       //prints the elements in the ArrayList!
-      for (String name : vMapModels) {
-        System.out.println(name);
-      }
+      vMapModels.forEach(System.out::println);
     }
   }
 
@@ -1029,14 +1026,14 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     } else {
       vi = ncFile_.getNonDimensionVariables();
     }
-    listdata = new Vector<String>();
-    longName_ = new Hashtable<String,String>();
+    listdata = new Vector<>();
+    longName_ = new Hashtable<>();
     // Variable Map
     if(!vMapModel_.isEmpty()) {
       Enumeration<String> evm = vMapModel_.keys();
       Object model = null;
       while(evm.hasMoreElements()) {
-        String name = (String)evm.nextElement();
+        String name = evm.nextElement();
         listdata.addElement(name);
         model = vMapModel_.get(name);
 //        if(model instanceof ncBrowse.vmap.VMapModel) {
@@ -1049,7 +1046,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     }
     // original Variables
     while(vi.hasNext()) {
-      ncVar = (Variable)vi.next();
+      ncVar = vi.next();
       listdata.addElement(ncVar.getName());
       attr = ncVar.findAttribute("long_name");
       if(attr != null) {
@@ -1074,10 +1071,10 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     } else {
       vi = ncFile_.getNonDimensionVariables();
     }
-    listdata = new Vector<String>();
-    longName_ = new Hashtable<String,String>();
+    listdata = new Vector<>();
+    longName_ = new Hashtable<>();
     while(vi.hasNext()) {
-      ncVar = (Variable)vi.next();
+      ncVar = vi.next();
       listdata.addElement(ncVar.getName());
       attr = ncVar.findAttribute("long_name");
       if(attr != null) {
@@ -1091,13 +1088,13 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
       Enumeration<String> evm = vMapModel_.keys();
       VMapModel model = null;
       while(evm.hasMoreElements()) {
-        String name = (String)evm.nextElement();
+        String name = evm.nextElement();
         listdata.addElement(name);
         model = vMapModel_.get(name);
 //        if(model instanceof ncBrowse.vmap.VMapModel) {
 //          longName_.put(name, ((ncBrowse.vmap.VMapModel)model).getName() + "  (New Variable Map)");
         if(model instanceof VMapModel) {
-          longName_.put(name, ((VMapModel)model).getName() + "  (Variable Map)");
+          longName_.put(name, model.getName() + "  (Variable Map)");
 
         }
       }
@@ -1130,9 +1127,6 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     try{
       ncFile_ = new DODSNcFile(path);
     } catch (dods.dap.DODSException e) {
-      System.out.println(e + ": new DODSNcFile");
-      return;
-    } catch (MalformedURLException e) {
       System.out.println(e + ": new DODSNcFile");
       return;
     } catch (IOException e) {
@@ -1218,7 +1212,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         if (lsd_ != null) lsd_.dispose();
         this.dispose();
         System.exit(0);
-      } catch (Exception e) {
+      } catch (Exception ignored) {
       }
     } else {
       this.exitApplication();
@@ -1233,7 +1227,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         ab.setModal(true);
         ab.setVisible(true);
       }
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 
@@ -1274,7 +1268,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         windowList_.addElement(sysProps);
         sysProps.addWindowListener(windowList_);
       }
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 
@@ -1343,7 +1337,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     if(jl.isSelectionEmpty()) return;
 
     String varName = (String)jl.getSelectedValue();
-    String lname = (String)longName_.get(varName);
+    String lname = longName_.get(varName);
     lnameTextField.setText("  " + lname);
   }
 
@@ -1402,7 +1396,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         //
 //	vmm.setShowEditor(true);
         if(model instanceof VMapModel) {
-          VMapModel vmm = (VMapModel)model;
+          VMapModel vmm = model;
           VMapGraph vmg = new VMapGraph(vmm, this);
           vmg.start();
           //vmg.setLocation(VariableWindows.getLocXMid(),VariableWindows.getLocYMid());
@@ -1471,7 +1465,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         OptionsDialog1.setTitle("ncBrowse Options");
         OptionsDialog1.setVisible(true);
       }
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 
@@ -1487,7 +1481,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
         this.setVisible(false);
         this.dispose();
         System.exit(0);
-      } catch (Exception e) {
+      } catch (Exception ignored) {
       }
     } else {
       this.windowList_.closeAll();
@@ -1526,7 +1520,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     }
 
     for(int i=0; i < cb.length; i++) {
-      win = (Window)windowList_.get(i);
+      win = windowList_.get(i);
       cbmi = (JCheckBoxMenuItem)(cb[i]);
       if(win instanceof JFrame) {
         showing = win.isShowing() &&
@@ -1549,7 +1543,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     Object[] cb = windowList_.getMenuItems();
     for(int i=0; i < cb.length; i++) {
       if(cb[i].equals(cbmi)) {
-        win = (Window)windowList_.get(i);
+        win = windowList_.get(i);
       }
     }
     win.setVisible(cbmi.getState());
@@ -1604,9 +1598,9 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 //      windowList_.addElement(anAllWin);
 //      //System.out.println("Added: "+anAllWin.getName());
 //    }
-    Vector<Object> listdata = new Vector<Object>();
-    Vector<Variable> varList = new Vector<Variable>();
-    Vector<Variable> varDimList = new Vector<Variable>();
+    Vector<Object> listdata = new Vector<>();
+    Vector<Variable> varList = new Vector<>();
+    Vector<Variable> varDimList = new Vector<>();
 //    Variable ncVar;
 //    ucar.nc2.Dimension ncDim;
 //    Iterator iter;
@@ -1614,10 +1608,8 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
 
 //    iter = ncFile_.getDimensionIterator();
 //    while(iter.hasNext()) {
-    for(ucar.nc2.Dimension ncDim: ncFile_.getDimensions()) {
-//      ncDim = (ucar.nc2.Dimension)iter.next();
-      listdata.addElement(ncDim);
-    }
+    //      ncDim = (ucar.nc2.Dimension)iter.next();
+    ncFile_.getDimensions().forEach(listdata::addElement);
 
 //    iter = ncFile_.getVariableIterator();
 
@@ -1625,7 +1617,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     for(Variable ncVar: ncFile_.getVariables()) {
 //      ncVar = (Variable)iter.next();
       List<ucar.nc2.Dimension> al = ncVar.getDimensions();
-      if((al.size() == 1) && ((ucar.nc2.Dimension)al.get(0)).getName().equals(ncVar.getName())) {
+      if((al.size() == 1) && al.get(0).getName().equals(ncVar.getName())) {
         varDimList.addElement(ncVar);
       } else {
         varList.addElement(ncVar);

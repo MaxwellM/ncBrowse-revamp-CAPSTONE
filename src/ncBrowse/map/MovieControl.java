@@ -81,8 +81,8 @@ public class MovieControl extends JFrame implements ActionListener {
 
   public static MovieControl getInstance() {
 //    if(instance_ == null) {
-      instance_ = new MovieControl();
-      movies.add(instance_);
+    instance_ = new MovieControl();
+    movies.add(instance_);
 //    }
 
     return instance_;
@@ -99,7 +99,7 @@ public class MovieControl extends JFrame implements ActionListener {
     stepForwardIcon_ = new ImageIcon(bClass.getResource("images/StepForward24.gif"));
     try {
       jbInit();
-    } catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
     addWindowListener(new WindowAdapter() {
@@ -119,11 +119,11 @@ public class MovieControl extends JFrame implements ActionListener {
     //TESTING
     SliderListener sl = new SliderListener(this);
 
-    border1 = new EtchedBorder(EtchedBorder.RAISED,Color.white,new Color(142, 142, 142));
-    titledBorder1 = new TitledBorder(border1,"Current Frame");
+    border1 = new EtchedBorder(EtchedBorder.RAISED, Color.white, new Color(142, 142, 142));
+    titledBorder1 = new TitledBorder(border1, "Current Frame");
     border2 = BorderFactory.createCompoundBorder(new TitledBorder(BorderFactory.createEtchedBorder(Color.white, new Color(142, 142, 142)), "Current Frame"), BorderFactory.createEmptyBorder(5, 5, 10, 5));
-    border3 = BorderFactory.createEtchedBorder(Color.white,new Color(142, 142, 142));
-    titledBorder2 = new TitledBorder(border3,"Speed Control");
+    border3 = BorderFactory.createEtchedBorder(Color.white, new Color(142, 142, 142));
+    titledBorder2 = new TitledBorder(border3, "Speed Control");
     this.getContentPane().setLayout(borderLayout1);
     doneButton.setText("Done");
     doneButton.addActionListener(new MovieControl_doneButton_actionAdapter(this));
@@ -172,12 +172,12 @@ public class MovieControl extends JFrame implements ActionListener {
     speedPanel.add(jLabel2, null);
     controlsPanel.add(framePanel, BorderLayout.NORTH);
     framePanel.add(frameSlider, new GridBagConstraints(0, 1, 1, 1, 1.0, 0.0
-            ,GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(5, 5, 10, 5), 0, 0));
+        , GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL, new Insets(5, 5, 10, 5), 0, 0));
     this.getContentPane().add(titlePanel, BorderLayout.NORTH);
     titlePanel.add(titleLabel, new GridBagConstraints(0, 0, 1, 1, 1.0, 1.0
-            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(5, 0, 5, 0), 0, 0));
+        , GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(5, 0, 5, 0), 0, 0));
     titlePanel.add(paramLabel, new GridBagConstraints(0, 1, 1, 1, 1.0, 1.0
-            ,GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 10, 0), 0, 0));
+        , GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 0, 10, 0), 0, 0));
 //
     rewindButton.setIcon(rewindIcon_);
     stepBackButton.setIcon(stepBackIcon_);
@@ -214,24 +214,31 @@ public class MovieControl extends JFrame implements ActionListener {
 
   void rewindButton_actionPerformed(ActionEvent e) {
     //WORKING!
-    for (MovieControl instance_ : movies) {
-      instance_.paramIndex_ = 0;
-      //paramIndex_ = 0;
-      setValueIndex(instance_.paramIndex_);
-      instance_.frameSlider.setValue(instance_.paramIndex_);
-    }
+//    for (MovieControl instance_ : movies) {
+//      instance_.paramIndex_ = 0;
+//      //paramIndex_ = 0;
+//      setValueIndex(instance_.paramIndex_);
+//      instance_.frameSlider.setValue(instance_.paramIndex_);
+//    }
+    paramIndex_ = 0;
+    setValueIndex(paramIndex_);
+    frameSlider.setValue(paramIndex_);
   }
 
   void stepBackButton_actionPerformed(ActionEvent e) {
     //TESTING
-    for (MovieControl instance_ : movies) {
-      instance_.paramIndex_--;
-      if (instance_.paramIndex_ < 0) {
-        instance_.paramIndex_ = instance_.paramLen_ - 1;
-      }
-      instance_.vParam_.setValueIndex(instance_.paramIndex_);
-      instance_.frameSlider.setValue(instance_.paramIndex_);
-    }
+//    for (MovieControl instance_ : movies) {
+//      instance_.paramIndex_--;
+//      if (instance_.paramIndex_ < 0) {
+//        instance_.paramIndex_ = instance_.paramLen_ - 1;
+//      }
+//      instance_.vParam_.setValueIndex(instance_.paramIndex_);
+//      instance_.frameSlider.setValue(instance_.paramIndex_);
+//    }
+    paramIndex_--;
+    if(paramIndex_ < 0) paramIndex_ = paramLen_ - 1;
+    vParam_.setValueIndex(paramIndex_);
+    frameSlider.setValue(paramIndex_);
   }
 
 //  void syncMovies(ActionEvent e){
@@ -274,97 +281,125 @@ public class MovieControl extends JFrame implements ActionListener {
 
   void runStopButton_actionPerformed(ActionEvent e) {
     //WORKING!
-    for (MovieControl instance_ : movies) {
-      if (instance_.isStopped_) {
+//    for (MovieControl instance_ : movies) {
+//      if (instance_.isStopped_) {
+//        instance_.isStopped_ = false;
+//        instance_.runStopButton.setIcon(stopIcon_);
+//        instance_.timer_.setDelay(SLIDER_MAX - speedSlider.getValue() + SLIDER_MIN);
+//        timer_.start();
+//      } else {
+//        instance_.isStopped_ = true;
+//        instance_.runStopButton.setIcon(runIcon_);
+//        timer_.stop();
+//      }
+//    }
+    if(isStopped_) {
+      for (MovieControl instance_ : movies) {
         instance_.isStopped_ = false;
         instance_.runStopButton.setIcon(stopIcon_);
         instance_.timer_.setDelay(SLIDER_MAX - speedSlider.getValue() + SLIDER_MIN);
-        instance_.timer_.start();
-      } else {
+        //instance_.timer_.start();
+      }
+      timer_.start();
+    } else {
+      for (MovieControl instance_ : movies) {
         instance_.isStopped_ = true;
         instance_.runStopButton.setIcon(runIcon_);
-        instance_.timer_.stop();
+        //instance_.timer_.stop();
       }
+      timer_.stop();
     }
   }
+
   /**
    * Listen for Swing timer
+   *
    * @param event to be performed
    */
   public void actionPerformed(ActionEvent event) {
     //WORKING!
 //    for (MovieControl instance_ : movies) {
-      if (!isStopped_) {
-        paramIndex_++;
-        if (paramIndex_ >= paramLen_) {
-          paramIndex_ = 0;
-        }
-        setValueIndex(paramIndex_);
-        frameSlider.setValue(paramIndex_);
+    if (!isStopped_) {
+      paramIndex_++;
+      if (paramIndex_ >= paramLen_) {
+        paramIndex_ = 0;
       }
+      setValueIndex(paramIndex_);
+      frameSlider.setValue(paramIndex_);
     }
+  }
 //  }
 
   void stepForwardButton_actionPerformed(ActionEvent e) {
     //TESTING
-    for (MovieControl instance_ : movies) {
-      instance_.paramIndex_++;
-      if (instance_.paramIndex_ >= instance_.paramLen_) {
-        instance_.paramIndex_ = 0;
-      }
-      setValueIndex(instance_.paramIndex_);
-      instance_.frameSlider.setValue(instance_.paramIndex_);
-    }
+//    for (MovieControl instance_ : movies) {
+//      paramIndex_++;
+//      if (instance_.paramIndex_ >= instance_.paramLen_) {
+//        instance_.paramIndex_ = 0;
+//      }
+//      setValueIndex(instance_.paramIndex_);
+//      instance_.frameSlider.setValue(instance_.paramIndex_);
+//    }
+    paramIndex_++;
+    if(paramIndex_ >= paramLen_) paramIndex_ = 0;
+    setValueIndex(paramIndex_);
+    frameSlider.setValue(paramIndex_);
   }
 
   void speedSlider_caretPositionChanged(InputMethodEvent e) {
     //TESTING
-    if(speedSlider.getModel().getValueIsAdjusting()) {
-      System.out.println("No, speedSlider_stateChanged");
-      return;
-    }
-    System.out.println("slider(caretPosition) value = " + speedSlider.getValue());
+//    if(speedSlider.getModel().getValueIsAdjusting()) {
+//      System.out.println("No, speedSlider_stateChanged");
+//      return;
+//    }
+//    System.out.println("slider(caretPosition) value = " + speedSlider.getValue());
     timer_.setDelay(SLIDER_MAX - speedSlider.getValue() + SLIDER_MIN);
-    }
+  }
 
-
+  int getSpeedSliderValue() {
+    return speedSlider.getValue();
+  }
 
 
   void speedSlider_stateChanged(ChangeEvent e) {
     //TESTING
+    //int newvalue = instance_.speedSlider.getValue();
     for (MovieControl instance_ : movies) {
-      if (instance_.speedSlider.getModel().getValueIsAdjusting()) {
-        System.out.println("No, speedSlider_stateChanged");
-        return;
-      }
-      System.out.println("slider(stateChanged) value = " + instance_.speedSlider.getValue());
+//      if (instance_.speedSlider.getModel().getValueIsAdjusting()) {
+//        System.out.println("No, speedSlider_stateChanged");
+//        return;
+//      }
+//      System.out.println("slider(stateChanged) value = " + instance_.speedSlider.getValue());
       instance_.timer_.setDelay(SLIDER_MAX - speedSlider.getValue() + SLIDER_MIN);
+      instance_.speedSlider.setValue(speedSlider.getValue());
     }
   }
 
   void setValueIndex(int index) {
-    if(pane_ != null) {
+    if (pane_ != null) {
       pane_.setBatch(true);
     }
     vParam_.setValueIndex(index);
-    if(pane_ != null) {
+    if (pane_ != null) {
       pane_.setBatch(false);
     }
   }
 
   void frameSlider_stateChanged(ChangeEvent e) {
     //TESTING
-    if (frameSlider.getModel().getValueIsAdjusting()) {
-      return;
-    }
-    int index = frameSlider.getValue();
-    if (index != paramIndex_) {
-      paramIndex_ = index;
-      setValueIndex(paramIndex_);
-      //fireStateChanged();
+    for (MovieControl instance_ : movies) {
+//    if (frameSlider.getModel().getValueIsAdjusting()) {
+//      return;
+//    }
+      int index = frameSlider.getValue();
+      if (index != paramIndex_) {
+        paramIndex_ = index;
+        setValueIndex(paramIndex_);
+      }
+      instance_.frameSlider.setValue(frameSlider.getValue());
     }
   }
-  }
+}
 
 class SliderListener implements ChangeListener {
   MovieControl adaptee;
@@ -376,18 +411,6 @@ class SliderListener implements ChangeListener {
   public void stateChanged(ChangeEvent e)
   {
     JSlider source = (JSlider)e.getSource();
-//    if (source == mphSlider)
-//    {
-//      kphSlider.removeChangeListener(this);
-//      kphSlider.setValue((int)(mphSlider.getValue() / 0.6214));
-//      kphSlider.addChangeListener(this);
-//    }
-//    else
-//    {
-//      mphSlider.removeChangeListener(this);
-//      mphSlider.setValue((int)(kphSlider.getValue() * 0.6214));
-//      mphSlider.addChangeListener(this);
-//    }
   }
 }
 

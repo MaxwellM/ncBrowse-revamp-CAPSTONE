@@ -54,22 +54,22 @@ public class LocalNcFile implements NcFile {
   }
     public void getVariableWindowData(){
         //Browser.ncDumpTextField.setText(cdfFile_.toString());
-        VariableWindows.commentlabel1.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(0).getName()));
-      VariableWindows.commentTextArea1.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(0).getName()))));
-      VariableWindows.commentlabel2.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(1).getName()));
-      VariableWindows.commentTextArea2.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(1).getName()))));
-      VariableWindows.commentlabel3.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(2).getName()));
-      VariableWindows.commentTextArea3.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(2).getName()))));
-      VariableWindows.commentlabel4.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(3).getName()));
-      VariableWindows.commentTextArea4.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(3).getName()))));
-      VariableWindows.commentlabel5.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(4).getName()));
-      VariableWindows.commentTextArea5.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(4).getName()))));
-      VariableWindows.commentlabel6.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(5).getName()));
-      VariableWindows.commentTextArea6.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(5).getName()))));
-      VariableWindows.commentlabel7.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(6).getName()));
-      VariableWindows.commentTextArea7.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(6).getName()))));
-      VariableWindows.commentlabel8.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(7).getName()));
-      VariableWindows.commentTextArea8.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(7).getName()))));
+//        VariableWindows.commentlabel1.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(0).getName()));
+//      VariableWindows.commentTextArea1.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(0).getName()))));
+//      VariableWindows.commentlabel2.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(1).getName()));
+//      VariableWindows.commentTextArea2.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(1).getName()))));
+//      VariableWindows.commentlabel3.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(2).getName()));
+//      VariableWindows.commentTextArea3.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(2).getName()))));
+//      VariableWindows.commentlabel4.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(3).getName()));
+//      VariableWindows.commentTextArea4.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(3).getName()))));
+//      VariableWindows.commentlabel5.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(4).getName()));
+//      VariableWindows.commentTextArea5.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(4).getName()))));
+//      VariableWindows.commentlabel6.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(5).getName()));
+//      VariableWindows.commentTextArea6.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(5).getName()))));
+//      VariableWindows.commentlabel7.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(6).getName()));
+//      VariableWindows.commentTextArea7.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(6).getName()))));
+//      VariableWindows.commentlabel8.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(7).getName()));
+//      VariableWindows.commentTextArea8.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(7).getName()))));
 //        VariableWindows.commentlabel3.setText("Variable: "+String.valueOf(cdfFile_.getVariables().get(8).getName()));
 //        VariableWindows.commentTextArea3.setText(String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(8).getName()))));
 //        System.out.println(String.valueOf("0"+String.valueOf(cdfFile_.findVariable(String.valueOf(cdfFile_.getVariables().get(0).getName())))));

@@ -50,13 +50,14 @@ public class VariableGraph extends VariableProcessThread {
   private MyMouse myMouse_;
   private LineAttributeDialog lad_ = null;
   private DomainSelector ds_;
-
+  private int win;
   /** @link dependency
    * @stereotype access*/
   /*#SelectionRange lnkSelectionRange;*/
 
   public VariableGraph(Browser parent, String title) {
     super(parent, title);
+    win = Browser.getInstance().getInt();
   }
 
   public void run() {
@@ -134,10 +135,11 @@ public class VariableGraph extends VariableProcessThread {
       //layout_.setLayerSizeP(new Dimension2D(6.0, 5.0));
       //layout_.setTitleHeightP(0.25, 0.20);
       makeFrame();
-      display_.setSize(VariableWindows.getWinSizeWidth(),VariableWindows.getWinSizeHeight());
-      display_.setLocation(x_, y_);
+      Browser.getInstance().setInt((Browser.getInstance().getInt() + 1));
+      //display_.setSize(VariableWindows.getWinSizeWidth(),VariableWindows.getWinSizeHeight());
+      //display_.setLocation(x_, y_);
       parent_.getWindowList().addElement(display_);
-      display_.addWindowListener(parent_.getWindowList());
+      //display_.addWindowListener(parent_.getWindowList());
       layout_.addData(subset_, subset_.getTitle());
       //
       layout_.setBatch(false, "VariableGraph");
@@ -163,9 +165,61 @@ public class VariableGraph extends VariableProcessThread {
   }
 
   private void makeFrame() {
+    switch (win){
+      case 1: display_ = VariableWindows.variableWindow1;
+        display_.setLocation(VariableWindows.variableWindow1.getX(), VariableWindows.variableWindow1.getY());
+        //System.out.println("Case 1");
+        display_.setVisible(true);
+        display_.addWindowListener(parent_.getWindowList());
+        break;
+      case 2: display_ = VariableWindows.variableWindow2;
+        display_.setLocation(VariableWindows.variableWindow2.getX(), VariableWindows.variableWindow2.getY());
+        //System.out.println("Case 2");
+        display_.setVisible(true);
+        display_.addWindowListener(parent_.getWindowList());
+        break;
+      case 3: display_ = VariableWindows.variableWindow3;
+        display_.setLocation(VariableWindows.variableWindow3.getX(), VariableWindows.variableWindow3.getY());
+        //System.out.println("Case 3");
+        display_.setVisible(true);
+        display_.addWindowListener(parent_.getWindowList());
+        break;
+      case 4: display_ = VariableWindows.variableWindow4;
+        display_.setLocation(VariableWindows.variableWindow4.getX(), VariableWindows.variableWindow4.getY());
+        //System.out.println("Case 4");
+        display_.setVisible(true);
+        display_.addWindowListener(parent_.getWindowList());
+        break;
+      case 5: display_ = VariableWindows.variableWindow5;
+        display_.setLocation(VariableWindows.variableWindow5.getX(), VariableWindows.variableWindow5.getY());
+        //System.out.println("Case 5");
+        display_.setVisible(true);
+        display_.addWindowListener(parent_.getWindowList());
+        break;
+      case 6: display_ = VariableWindows.variableWindow6;
+        display_.setLocation(VariableWindows.variableWindow6.getX(), VariableWindows.variableWindow6.getY());
+        //System.out.println("Case 6");
+        display_.setVisible(true);
+        display_.addWindowListener(parent_.getWindowList());
+        break;
+      case 7: display_ = VariableWindows.variableWindow7;
+        display_.setLocation(VariableWindows.variableWindow7.getX(), VariableWindows.variableWindow7.getY());
+        //System.out.println("Case 7");
+        display_.setVisible(true);
+        display_.addWindowListener(parent_.getWindowList());
+        break;
+      case 8: display_ = VariableWindows.variableWindow8;
+        display_.setLocation(VariableWindows.variableWindow8.getX(), VariableWindows.variableWindow8.getY());
+        //System.out.println("Case 8");
+        display_.setVisible(true);
+        display_.addWindowListener(parent_.getWindowList());
+        break;
+      default: System.out.println("Failed!");
+        break;
+    }
     lSymAction_ = new SymAction();
     String name = ncFile_.getFileName();
-    display_ = new JFrame("Graphic Display from " + name);
+    //display_ = new JFrame("Graphic Display from " + name);
     //
     display_.getContentPane().setLayout(new BorderLayout(0,0));
     display_.setJMenuBar(makeMenuBar());

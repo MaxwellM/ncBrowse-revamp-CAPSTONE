@@ -156,11 +156,11 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     borderLayout2.setHgap(5);
     buttonPanel.setBorder(BorderFactory.createEtchedBorder());
     namePanel.setBorder(BorderFactory.createEtchedBorder());
-    jLabel1.setFont(new java.awt.Font("Dialog", 1, 12));
+    jLabel1.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
     jLabel1.setText(b.getString("kSource"));
     jPanel1.setLayout(gridBagLayout9);
     jPanel2.setLayout(borderLayout3);
-    jLabel3.setFont(new java.awt.Font("Dialog", 1, 12));
+    jLabel3.setFont(new java.awt.Font("Dialog", Font.BOLD, 12));
     jLabel3.setText(b.getString("kTarget"));
     jPanel3.setLayout(gridBagLayout10);
 

@@ -46,7 +46,7 @@ public class TreeView extends JFrame {
       ex.printStackTrace();
     }
   }
-  void jbInit() throws Exception {
+  void jbInit() {
 
     getContentPane().setLayout(borderLayout1);
     getContentPane().setFont(new Font("Dialog", Font.PLAIN, 12));
@@ -294,10 +294,10 @@ public class TreeView extends JFrame {
     setSize(ins.left + ins.right + d.width,
             ins.top + ins.bottom + d.height);
     Component components[] = getContentPane().getComponents();
-    for (int i = 0; i < components.length; i++) {
-      Point p = components[i].getLocation();
+    for (Component component : components) {
+      Point p = component.getLocation();
       p.translate(ins.left, ins.top);
-      components[i].setLocation(p);
+      component.setLocation(p);
     }
     fComponentsAdjusted = true;
   }
@@ -366,21 +366,21 @@ public class TreeView extends JFrame {
 
   void collapseButton_actionPerformed(ActionEvent event) {
     DefaultTreeModel tm = (DefaultTreeModel)treeView_.getModel();
-    TreePath tp = new TreePath(tm.getPathToRoot((TreeNode)dimRoot_));
+    TreePath tp = new TreePath(tm.getPathToRoot(dimRoot_));
     treeView_.collapsePath(tp);
-    tp = new TreePath(tm.getPathToRoot((TreeNode)attrRoot_));
+    tp = new TreePath(tm.getPathToRoot(attrRoot_));
     treeView_.collapsePath(tp);
-    tp = new TreePath(tm.getPathToRoot((TreeNode)varRoot_));
+    tp = new TreePath(tm.getPathToRoot(varRoot_));
     treeView_.collapsePath(tp);
   }
 
   private String getDimensionsAsString(Variable var) {
-    StringBuffer sbuf = new StringBuffer("(");
+    StringBuilder sbuf = new StringBuilder("(");
     Iterator di = var.getDimensions().iterator();
     int dimCount = 0;
     while(di.hasNext()) {
       ucar.nc2.Dimension dim = (ucar.nc2.Dimension)di.next();
-      sbuf.append(dim.getName() + ", ");
+      sbuf.append(dim.getName()).append(", ");
       dimCount++;
     }
     if(dimCount <= 0) {

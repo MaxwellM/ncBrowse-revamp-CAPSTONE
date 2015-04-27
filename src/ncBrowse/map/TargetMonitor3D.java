@@ -3,13 +3,12 @@
  */
 package ncBrowse.map;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.util.List;
-
-import ucar.nc2.Variable;
 import ucar.nc2.Dimension;
+import ucar.nc2.Variable;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
 /**
  * <pre>
  * Title:        Drag and Drop test application
@@ -26,12 +25,12 @@ public class TargetMonitor3D {
    */
   static TargetMonitor3D monitor_ = null;
 
-  JLabel[] title_;
-  JLabel[] item_;
-  JPanel[] panel_;
+  final JLabel[] title_;
+  final JLabel[] item_;
+  final JPanel[] panel_;
 
-  static Color ENABLED = new Color(186, 217, 217);
-  static Color DEFAULT = new Color(102, 102, 153);
+  static final Color ENABLED = new Color(186, 217, 217);
+  static final Color DEFAULT = new Color(102, 102, 153);
 
   private TargetMonitor3D() {
     title_ = new JLabel[VMapModel.ELEMENT_COUNT];
@@ -248,7 +247,7 @@ public class TargetMonitor3D {
       panel_[VMapModel.VOLUME].setBackground(Color.lightGray);
       item_[VMapModel.VOLUME].getDropTarget().setActive(false);
       break;
-    case VMapModel.VOLUME:;
+    case VMapModel.VOLUME:
       if (!map.isSet(VMapModel.X_AXIS)) {
         panel_[VMapModel.X_AXIS].setBackground(ENABLED);
         item_[VMapModel.X_AXIS].getDropTarget().setActive(true);
@@ -258,7 +257,7 @@ public class TargetMonitor3D {
         panel_[VMapModel.Y_AXIS].setBackground(ENABLED);
       item_[VMapModel.Y_AXIS].getDropTarget().setActive(true);
       title_[VMapModel.Y_AXIS].setForeground(Color.red);
-    };
+    }
       if (!map.isSet(VMapModel.Z_AXIS)) {
         panel_[VMapModel.Z_AXIS].setBackground(ENABLED);
         item_[VMapModel.Z_AXIS].getDropTarget().setActive(true);
@@ -305,26 +304,26 @@ public class TargetMonitor3D {
   }
 
   String getVariableLabel(int type, VMapModel map, Variable ncVar) {
-    StringBuffer sbuf = new StringBuffer();
+    StringBuilder sbuf = new StringBuilder();
     List al = ncVar.getDimensions();
     if((al.size() == 1) && ((Dimension)al.get(0)).getName().equals(ncVar.getName())) {
-      sbuf.append("<b>" + ncVar.getName() + "</b>   ");
+      sbuf.append("<b>").append(ncVar.getName()).append("</b>   ");
     } else {
-      sbuf.append(ncVar.getName() + "   ");
+      sbuf.append(ncVar.getName()).append("   ");
     }
     sbuf.append(getDimensionList(type, map, ncVar));
     return sbuf.toString();
   }
 
   String getDimensionLabel(int type, VMapModel map, Dimension ncDim) {
-    StringBuffer sbuf = new StringBuffer();
+    StringBuilder sbuf = new StringBuilder();
     if(map.hasMatch(type, ncDim)) {
       sbuf.append("<font color=green>");
     } else {
       sbuf.append("<font color=red>");
     }
-    sbuf.append("<em>" + ncDim.getName() + "</em></font>  ");
-    sbuf.append("<em>(" + ncDim.getLength() + " points)</em>");
+    sbuf.append("<em>").append(ncDim.getName()).append("</em></font>  ");
+    sbuf.append("<em>(").append(ncDim.getLength()).append(" points)</em>");
     return sbuf.toString();
   }
 
@@ -336,7 +335,7 @@ public class TargetMonitor3D {
     List al = ncVar.getDimensions();
     boolean[] match = new boolean[al.size()];
     boolean anyMatch = false;
-    StringBuffer sbuf = new StringBuffer("[");
+    StringBuilder sbuf = new StringBuilder("[");
     for(int i=0; i < al.size(); i++) {
       Dimension ncDim = (Dimension)al.get(i);
       match[i] = map.hasMatch(type, ncDim);
@@ -347,12 +346,12 @@ public class TargetMonitor3D {
       String name = ((Dimension)al.get(i)).getName();
       if(anyMatch) {
         if(match[i]) {
-          sbuf.append("<font color=green>" + name + "</font>");
+          sbuf.append("<font color=green>").append(name).append("</font>");
         } else {
           sbuf.append(/*"<font color=blue>" + */name /* + "</font>"*/);
         }
       } else {
-        sbuf.append("<font color=red>" + name + "</font>");
+        sbuf.append("<font color=red>").append(name).append("</font>");
       }
       if(i < al.size()-1) {
         sbuf.append(",");

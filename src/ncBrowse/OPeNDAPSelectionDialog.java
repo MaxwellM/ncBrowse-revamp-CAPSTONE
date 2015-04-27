@@ -3,7 +3,6 @@ package ncBrowse;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -62,17 +61,9 @@ public class OPeNDAPSelectionDialog extends JDialog {
   void jbInit() throws Exception {
     panel1.setLayout(borderLayout1);
     acceptButton.setText("Accept");
-    acceptButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        acceptButton_actionPerformed(e);
-      }
-    });
+    acceptButton.addActionListener(this::acceptButton_actionPerformed);
     cancelButton.setText("Cancel");
-    cancelButton.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        cancelButton_actionPerformed(e);
-      }
-    });
+    cancelButton.addActionListener(this::cancelButton_actionPerformed);
     buttonPanel.setBorder(BorderFactory.createEtchedBorder());
     navigationPanel.setLayout(gridBagLayout1);
     jLabel2.setText("Data File URL:");
@@ -82,11 +73,7 @@ public class OPeNDAPSelectionDialog extends JDialog {
     jLabel1.setFont(new Font("Dialog", 0, 14));
     jLabel1.setText("Enter OPeNDAP URL");
     jLabel3.setText("Select:");
-    fileCB.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        fileCB_actionPerformed(e);
-      }
-    });
+    fileCB.addActionListener(this::fileCB_actionPerformed);
     getContentPane().add(panel1);
     panel1.add(buttonPanel, BorderLayout.SOUTH);
     buttonPanel.add(acceptButton, null);

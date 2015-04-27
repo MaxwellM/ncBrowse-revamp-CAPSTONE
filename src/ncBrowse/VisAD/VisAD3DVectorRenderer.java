@@ -3,21 +3,22 @@
  */
 package ncBrowse.VisAD;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.*;
+import gov.noaa.pmel.sgt.dm.SGT3DVector;
+import gov.noaa.pmel.sgt.dm.SGTData;
+import gov.noaa.pmel.sgt.dm.SGTGrid;
+import gov.noaa.pmel.sgt.dm.SGTMetaData;
+import gov.noaa.pmel.util.GeoDate;
+import gov.noaa.pmel.util.SoTRange;
+import ncBrowse.Debug;
+import ncBrowse.NcFile;
+import ncBrowse.map.VMapModel;
 import visad.*;
 import visad.java3d.DisplayImplJ3D;
-import java.rmi.RemoteException;
-import gov.noaa.pmel.util.SoTRange;
-import gov.noaa.pmel.util.GeoDate;
-import ncBrowse.map.*;
-import visad.util.*;
-import ncBrowse.*;
+import visad.util.SelectRangeWidget;
 
-import gov.noaa.pmel.sgt.dm.SGT3DVector;
-import gov.noaa.pmel.sgt.dm.SGTGrid;
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTMetaData;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import java.rmi.RemoteException;
 
 /**
  * <pre>
@@ -101,7 +102,7 @@ public class VisAD3DVectorRenderer extends VisADPlotRenderer {
 						xRangeMap.setRange(min, max);
 						xMap.setRange(min, max);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = xGrid.getTimeArray();
@@ -114,7 +115,7 @@ public class VisAD3DVectorRenderer extends VisADPlotRenderer {
 						xRangeMap.setRange((float)min, (float)max);
 						xMap.setRange((float)min,(float) max);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 
 				if (!yGrid.isYTime()) {
@@ -125,7 +126,7 @@ public class VisAD3DVectorRenderer extends VisADPlotRenderer {
 						yRangeMap.setRange(min, max);
 						yMap.setRange(min, max);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = yGrid.getTimeArray();
@@ -136,7 +137,7 @@ public class VisAD3DVectorRenderer extends VisADPlotRenderer {
 						yRangeMap.setRange(min, max);
 						yMap.setRange(min, max);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 			}
 
@@ -216,11 +217,11 @@ public class VisAD3DVectorRenderer extends VisADPlotRenderer {
 				//zRGBMap.setRange(cmin, cmax);
 				//zRGBRangeMap.setRange(cmin, cmax);
 			}
-			catch (Exception ex) {}
+			catch (Exception ignored) {}
 		    try {
     			vals_ff.setSamples(flat_samples, false);
     		}
-    		catch (Exception ex) {}
+    		catch (Exception ignored) {}
 		}
 	}
 
@@ -278,7 +279,7 @@ public class VisAD3DVectorRenderer extends VisADPlotRenderer {
     	else
     		typeName = yMetaData.getName();
 	    try {
-	    	Y = new RealType(typeName, null, null);
+	    	Y = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -300,7 +301,7 @@ public class VisAD3DVectorRenderer extends VisADPlotRenderer {
     	else
     		typeName = xMetaData.getName();
 	    try {
-	    	X = new RealType(typeName, null, null);
+	    	X = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -324,7 +325,7 @@ public class VisAD3DVectorRenderer extends VisADPlotRenderer {
     	else
     		typeName = uMetaData.getName();
 	    try {
-	    	U = new RealType(typeName, null, null);
+	    	U = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -345,7 +346,7 @@ public class VisAD3DVectorRenderer extends VisADPlotRenderer {
     	else
     		typeName = vMetaData.getName();
 	    try {
-	    	V = new RealType(typeName, null, null);
+	    	V = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -366,7 +367,7 @@ public class VisAD3DVectorRenderer extends VisADPlotRenderer {
     	else
     		typeName = wMetaData.getName();
 	    try {
-	    	W = new RealType(typeName, null, null);
+	    	W = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -505,7 +506,7 @@ public class VisAD3DVectorRenderer extends VisADPlotRenderer {
     display.addDisplayListener(this);
 
     // Get display's graphics mode control and draw scales
-    GraphicsModeControl dispGMC = (GraphicsModeControl)  display.getGraphicsModeControl();
+    GraphicsModeControl dispGMC = display.getGraphicsModeControl();
     dispGMC.setScaleEnable(true);
 
     // Create the ScalarMaps

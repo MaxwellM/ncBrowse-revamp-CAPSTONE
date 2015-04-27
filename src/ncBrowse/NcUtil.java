@@ -41,7 +41,7 @@ public class NcUtil {
     //
     attr = var.findAttribute("units");
     if(attr != null) {
-      if(attr.getStringValue().indexOf("since") != -1) return true;
+      if(attr.getStringValue().contains("since")) return true;
     }
     //
     // if the epic_code is 624 it's time
@@ -92,26 +92,26 @@ public class NcUtil {
           try {
             refDate_ = new GeoDate("1970-01-01 00:00:00",
                                    "yyyy-MM-dd HH:mm:ss");
-          } catch (IllegalTimeValue ee) {}
+          } catch (IllegalTimeValue ignored) {}
           System.out.println("   Setting default reference date: " +
                              refDate_.toString());
         }
 
         date = new GeoDate(refDate_);
 
-        if(units.indexOf("second") != -1) {
+        if(units.contains("second")) {
           increment_ = GeoDate.SECONDS;
-        } else if(units.indexOf("min") != -1) {
+        } else if(units.contains("min")) {
           increment_ = GeoDate.MINUTES;
-        } else if(units.indexOf("hour") != -1) {
+        } else if(units.contains("hour")) {
           increment_ = GeoDate.HOURS;
-        } else if(units.indexOf("day") != -1) {
+        } else if(units.contains("day")) {
           increment_ = GeoDate.DAYS;
-        } else if(units.indexOf("month") != -1) {
+        } else if(units.contains("month")) {
           increment_ = GeoDate.MONTHS;
-        } else if(units.indexOf("year") != -1) {
+        } else if(units.contains("year")) {
           increment_ = GeoDate.YEARS;
-        } else if(units.indexOf("msec") != -1) {
+        } else if(units.contains("msec")) {
           increment_ = GeoDate.MSEC;
         } else {
           increment_ = GeoDate.SECONDS;
@@ -156,15 +156,15 @@ public class NcUtil {
       value = null;
     } else {
       if(anArray instanceof long[]) {
-        value = new Long(((long[])anArray)[index]);
+        value = ((long[]) anArray)[index];
       } else if(anArray instanceof int[]) {
-        value = new Integer(((int[])anArray)[index]);
+        value = ((int[]) anArray)[index];
       } else if(anArray instanceof short[]) {
-        value = new Short(((short[])anArray)[index]);
+        value = ((short[]) anArray)[index];
       } else if(anArray instanceof float[]) {
-        value = new Float(((float[])anArray)[index]);
+        value = ((float[]) anArray)[index];
       } else if(anArray instanceof double[]) {
-        value = new Double(((double[])anArray)[index]);
+        value = ((double[]) anArray)[index];
       } else {
         value = null;
       }
@@ -192,17 +192,17 @@ public class NcUtil {
     if(value == null) {
       return "decode error";
     } else if(value instanceof Long) {
-      return ((Long)value).toString();
+      return value.toString();
     } else if(value instanceof GeoDate) {
       return ((GeoDate)value).toString(tFormat_);
     } else if(value instanceof Integer) {
-      return ((Integer)value).toString();
+      return value.toString();
     } else if(value instanceof Short) {
-      return ((Short)value).toString();
+      return value.toString();
     } else if(value instanceof Float) {
-      return ((Float)value).toString();
+      return value.toString();
     } else if(value instanceof Double) {
-      return ((Double)value).toString();
+      return value.toString();
     } else {
       return "unsupported type";
     }

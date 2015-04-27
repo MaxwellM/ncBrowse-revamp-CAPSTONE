@@ -23,7 +23,7 @@ import ncBrowse.Debug;
 
 public class DnDTable extends JTable
   implements DragGestureListener, DragSourceListener {
-  DragSource dragSource;
+  final DragSource dragSource;
 
   public DnDTable() {
     super();
@@ -38,8 +38,8 @@ public class DnDTable extends JTable
     NcTableModel model = (NcTableModel)getModel();
     Object selected = model.getDimOrVarAt(index);
     if ( selected != null ){
-      StringBuffer str = new StringBuffer("<html>");
-      NcTransferable nct = new NcTransferable(new Integer(index));
+      StringBuilder str = new StringBuilder("<html>");
+      NcTransferable nct = new NcTransferable(index);
       dragSource.startDrag (dge, DragSource.DefaultCopyDrop, nct, this);
     } else {
       if(Debug.DEBUG) System.out.println( "nothing was selected");

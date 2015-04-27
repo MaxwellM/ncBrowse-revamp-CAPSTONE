@@ -3,21 +3,9 @@
  */
 package ncBrowse.map;
 
-import java.io.IOException;
-import java.util.*;
-
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import gov.noaa.pmel.sgt.SGLabel;
 import gov.noaa.pmel.sgt.dm.*;
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.GeoDateArray;
-import gov.noaa.pmel.util.Point2D;
-import gov.noaa.pmel.util.Range2D;
-import gov.noaa.pmel.util.SoTRange;
+import gov.noaa.pmel.util.*;
 import ncBrowse.Debug;
 import ncBrowse.NcFile;
 import ncBrowse.NcUtil;
@@ -27,6 +15,12 @@ import ucar.ma2.DataType;
 import ucar.nc2.Attribute;
 import ucar.nc2.Dimension;
 import ucar.nc2.Variable;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Variable Map Model. Some definitions for variable mapping.
@@ -91,7 +85,7 @@ public class VMapModel implements Runnable, ChangeListener {
   public static final int LINE_COLOR = 11;
   public static final int ELEMENT_COUNT = 12;
 
-  public static String[] names_ = {
+  public static final String[] names_ = {
       "X Axis",
       "Y Axis",
       "Z Axis",
@@ -124,7 +118,7 @@ public class VMapModel implements Runnable, ChangeListener {
   /**
    * Object array is treated like an associative array
    */
-  Object[] element_ = new Object[ELEMENT_COUNT];
+  final Object[] element_ = new Object[ELEMENT_COUNT];
 
   /**
    *@link aggregation
@@ -132,7 +126,7 @@ public class VMapModel implements Runnable, ChangeListener {
    * @supplierCardinality *
    * @label vmParameter_
    */
-  private Hashtable vmParameter_;
+  private final Hashtable vmParameter_;
 
   /**
    * @link aggregation
@@ -153,13 +147,13 @@ public class VMapModel implements Runnable, ChangeListener {
   private LThreeDGrid wComp3D_;
   private LThreeDGrid volume_;
 
-  private Vector changeListeners_ = new Vector();
-  private ChangeEvent event_ = new ChangeEvent(this);
+  private final Vector changeListeners_ = new Vector();
+  private final ChangeEvent event_ = new ChangeEvent(this);
 
   /**
    * @label ncFile_
    */
-  private NcFile ncFile_;
+  private final NcFile ncFile_;
   private boolean processed_ = false;
   private boolean showEditor_ = false;
 
@@ -231,9 +225,9 @@ public class VMapModel implements Runnable, ChangeListener {
       if(axis || (!axis && (i == X_AXIS || i == Y_AXIS || i == Z_AXIS))) {
         if((i != type) && (element_[i] != null)) {
           List al = getDimensionList(i);
-          for(int j = 0; j < al.size(); j++) {
-            String dimName = ((Dimension)al.get(j)).getName();
-            if(name.equals(dimName)) {
+          for (Object anAl : al) {
+            String dimName = ((Dimension) anAl).getName();
+            if (name.equals(dimName)) {
               return true;
             }
           }
@@ -262,7 +256,7 @@ public class VMapModel implements Runnable, ChangeListener {
     process();
     if(Debug.DEBUG) {
       for(Enumeration e = vmParameter_.elements(); e.hasMoreElements(); ) {
-        System.out.println(((VMapParameter)e.nextElement()).toString());
+        System.out.println(e.nextElement().toString());
       }
       System.out.println("VMapModel:  run(): editor_.init()");
     }
@@ -353,20 +347,20 @@ public class VMapModel implements Runnable, ChangeListener {
       vmParameter_.put(name, vParam);
     } else { // Variable
       List al = ((Variable)obj).getDimensions();
-      for(int j = 0; j < al.size(); j++) {
-        Dimension ncDim = (Dimension)al.get(j);
+      for (Object anAl : al) {
+        Dimension ncDim = (Dimension) anAl;
 //        Variable ncVar = ncDim.getCoordinateVariable();
         Variable ncVar = ncFile_.findVariable(ncDim.getName());
         name = ncDim.getName();
         match = hasMatch(type, ncDim);
-        if(vmParameter_.containsKey(name)) {
-          vParam = (VMapParameter)vmParameter_.get(name);
-          if(match) {
+        if (vmParameter_.containsKey(name)) {
+          vParam = (VMapParameter) vmParameter_.get(name);
+          if (match) {
             vParam.setRangeAllowed(true);
           }
           continue;
         }
-        if(ncVar == null) {
+        if (ncVar == null) {
           vParam = new VMapParameter(ncFile_, ncDim, match);
         } else {
           vParam = new VMapParameter(ncFile_, ncVar, match);
@@ -401,15 +395,15 @@ public class VMapModel implements Runnable, ChangeListener {
       vmParameter_.put(name, vParam);
     } else {
       List al = ((Variable)obj).getDimensions();
-      for(int j = 0; j < al.size(); j++) {
-        Dimension ncDim = (Dimension)al.get(j);
+      for (Object anAl : al) {
+        Dimension ncDim = (Dimension) anAl;
 //        Variable ncVar = ncDim.getCoordinateVariable();
         Variable ncVar = ncFile_.findVariable(ncDim.getName());
         name = ncDim.getName();
-        if(vmParameter_.containsKey(name)) {
+        if (vmParameter_.containsKey(name)) {
           continue;
         }
-        if(ncVar == null) {
+        if (ncVar == null) {
           vParam = new VMapParameter(ncFile_, ncDim, false);
         } else {
           vParam = new VMapParameter(ncFile_, ncVar, false);
@@ -819,10 +813,10 @@ public class VMapModel implements Runnable, ChangeListener {
     if(element_[type] instanceof Variable) {
       Variable var = (Variable)element_[type];
       String varName = var.getName();
-      for(int i = 0; i < dims.size(); i++) {
-        Dimension ncDim = (Dimension)dims.get(i);
+      for (Object dim : dims) {
+        Dimension ncDim = (Dimension) dim;
         String name = ncDim.getName();
-        if(varName.equals(name)) {
+        if (varName.equals(name)) {
           return true;
         }
       }
@@ -1020,8 +1014,8 @@ public class VMapModel implements Runnable, ChangeListener {
       } else if(element_[i] instanceof Variable) {
         List al = ((Variable)element_[i]).getDimensions();
         boolean anyMatch = false;
-        for(int j = 0; j < al.size(); j++) {
-          if(hasMatch(i, (Dimension)al.get(j))) {
+        for (Object anAl : al) {
+          if (hasMatch(i, (Dimension) anAl)) {
             anyMatch = true;
           }
         }
@@ -1041,32 +1035,32 @@ public class VMapModel implements Runnable, ChangeListener {
       Variable vVel = (Variable)element_[V_COMPONENT];
       List uDim = uVel.getDimensions();
       List vDim = vVel.getDimensions();
-      for(int i = 0; i < uDim.size(); i++) {
-        if(hasMatch(U_COMPONENT, (Dimension)uDim.get(i))) {
-          String name = ((Dimension)uDim.get(i)).getName();
+      for (Object anUDim1 : uDim) {
+        if (hasMatch(U_COMPONENT, (Dimension) anUDim1)) {
+          String name = ((Dimension) anUDim1).getName();
           boolean match = false;
-          for(int j = 0; j < vDim.size(); j++) {
-            if(name.equals(((Dimension)vDim.get(j)).getName())) {
+          for (Object aVDim : vDim) {
+            if (name.equals(((Dimension) aVDim).getName())) {
               match = true;
             }
           }
-          if(!match) {
+          if (!match) {
             errorMessage_ = "U component dimension " + name +
                 " not matched in V component";
             return false;
           }
         }
       }
-      for(int i = 0; i < vDim.size(); i++) {
-        if(hasMatch(V_COMPONENT, (Dimension)vDim.get(i))) {
-          String name = ((Dimension)vDim.get(i)).getName();
+      for (Object aVDim : vDim) {
+        if (hasMatch(V_COMPONENT, (Dimension) aVDim)) {
+          String name = ((Dimension) aVDim).getName();
           boolean match = false;
-          for(int j = 0; j < uDim.size(); j++) {
-            if(name.equals(((Dimension)uDim.get(j)).getName())) {
+          for (Object anUDim : uDim) {
+            if (name.equals(((Dimension) anUDim).getName())) {
               match = true;
             }
           }
-          if(!match) {
+          if (!match) {
             errorMessage_ = "V component dimension " + name +
                 " not matched in U component";
             return false;
@@ -1081,58 +1075,58 @@ public class VMapModel implements Runnable, ChangeListener {
       List uDim = uVel.getDimensions();
       List vDim = vVel.getDimensions();
       List wDim = wVel.getDimensions();
-      for(int i = 0; i < uDim.size(); i++) {
-        if(hasMatch(U_COMPONENT, (Dimension)uDim.get(i))) {
-          String name = ((Dimension)uDim.get(i)).getName();
+      for (Object anUDim1 : uDim) {
+        if (hasMatch(U_COMPONENT, (Dimension) anUDim1)) {
+          String name = ((Dimension) anUDim1).getName();
           boolean match = false;
-          for(int j = 0; j < vDim.size(); j++) {
-            if(name.equals(((Dimension)vDim.get(j)).getName())) {
+          for (Object aVDim : vDim) {
+            if (name.equals(((Dimension) aVDim).getName())) {
               match = true;
             }
           }
-          if(!match) {
+          if (!match) {
             errorMessage_ = "U component dimension " + name +
                 " not matched in W component";
             return false;
           }
         }
       }
-      for(int i = 0; i < vDim.size(); i++) {
-        if(hasMatch(V_COMPONENT, (Dimension)vDim.get(i))) {
-          String name = ((Dimension)vDim.get(i)).getName();
+      for (Object aVDim1 : vDim) {
+        if (hasMatch(V_COMPONENT, (Dimension) aVDim1)) {
+          String name = ((Dimension) aVDim1).getName();
           boolean match = false;
-          for(int j = 0; j < uDim.size(); j++) {
-            if(name.equals(((Dimension)uDim.get(j)).getName())) {
+          for (Object anUDim : uDim) {
+            if (name.equals(((Dimension) anUDim).getName())) {
               match = true;
             }
           }
-          if(!match) {
+          if (!match) {
             errorMessage_ = "V component dimension " + name +
                 " not matched in W component";
             return false;
           }
         }
       }
-      for(int i = 0; i < wDim.size(); i++) {
-        if(hasMatch(W_COMPONENT, (Dimension)wDim.get(i))) {
-          String name = ((Dimension)wDim.get(i)).getName();
+      for (Object aWDim : wDim) {
+        if (hasMatch(W_COMPONENT, (Dimension) aWDim)) {
+          String name = ((Dimension) aWDim).getName();
           boolean match = false;
-          for(int j = 0; j < uDim.size(); j++) {
-            if(name.equals(((Dimension)uDim.get(j)).getName())) {
+          for (Object anUDim : uDim) {
+            if (name.equals(((Dimension) anUDim).getName())) {
               match = true;
             }
           }
-          if(!match) {
+          if (!match) {
             errorMessage_ = "W component dimension " + name +
                 " not matched in U component";
             return false;
           }
-          for(int j = 0; j < vDim.size(); j++) {
-            if(name.equals(((Dimension)vDim.get(j)).getName())) {
+          for (Object aVDim : vDim) {
+            if (name.equals(((Dimension) aVDim).getName())) {
               match = true;
             }
           }
-          if(!match) {
+          if (!match) {
             errorMessage_ = "W component dimension " + name +
                 " not matched in V component";
             return false;
@@ -1167,7 +1161,7 @@ public class VMapModel implements Runnable, ChangeListener {
     Object end;
     VMapParameter vParam;
     SoTRange range;
-    StringBuffer sbuf = new StringBuffer(name_);
+    StringBuilder sbuf = new StringBuilder(name_);
     sbuf.append(" [");
     Enumeration e = vmParameter_.elements();
     boolean first = true;
@@ -1181,7 +1175,7 @@ public class VMapModel implements Runnable, ChangeListener {
         sbuf.append(", ");
       }
 
-      sbuf.append(vParam.getName() + "=");
+      sbuf.append(vParam.getName()).append("=");
       start = getValue(array, range.getStartObject());
       if(vParam.isSingle()) {
         sbuf.append(NcUtil.valueAsString(start));
@@ -1815,9 +1809,9 @@ public class VMapModel implements Runnable, ChangeListener {
     // 	vParam_[i].setSoTRange(range);
     // }
 
-    update3DGridData((LThreeDGrid)uComp3D_, U_COMPONENT);
-    update3DGridData((LThreeDGrid)vComp3D_, V_COMPONENT);
-    update3DGridData((LThreeDGrid)wComp3D_, W_COMPONENT);
+    update3DGridData(uComp3D_, U_COMPONENT);
+    update3DGridData(vComp3D_, V_COMPONENT);
+    update3DGridData(wComp3D_, W_COMPONENT);
 
     SGTFull3DVector vect = (SGTFull3DVector)dataset[0];
     vect.setComponents(uComp3D_, uComp3D_, uComp3D_);
@@ -1854,7 +1848,7 @@ public class VMapModel implements Runnable, ChangeListener {
     // 	vParam_[i].setSoTRange(range);
     // }
 
-    update3DGridData((LThreeDGrid)volume_, VOLUME);
+    update3DGridData(volume_, VOLUME);
   }
 
   private void updateSGT3DVector() {
@@ -2038,7 +2032,7 @@ public class VMapModel implements Runnable, ChangeListener {
   }
 
   private String arrayToString(int[] val) {
-    StringBuffer sbuf = new StringBuffer();
+    StringBuilder sbuf = new StringBuilder();
     for(int i = 0; i < val.length; i++) {
       if(i != 0) {
         sbuf.append(",");
@@ -2051,15 +2045,15 @@ public class VMapModel implements Runnable, ChangeListener {
   private Object getValue(Object array, Object val) {
     int index = getIndex(array, val);
     if(val instanceof Long) {
-      return new Long(((long[])array)[index]);
+      return ((long[]) array)[index];
     } else if(val instanceof Integer) {
-      return new Integer(((int[])array)[index]);
+      return ((int[]) array)[index];
     } else if(val instanceof Short) {
-      return new Short(((short[])array)[index]);
+      return ((short[]) array)[index];
     } else if(val instanceof Float) {
-      return new Float(((float[])array)[index]);
+      return ((float[]) array)[index];
     } else if(val instanceof Double) {
-      return new Double(((double[])array)[index]);
+      return ((double[]) array)[index];
     } else if(val instanceof GeoDate) {
       GeoDate[] tarray = createGeoDateArray(array);
       return new GeoDate(tarray[index]);
@@ -2076,7 +2070,7 @@ public class VMapModel implements Runnable, ChangeListener {
       // values are long
       //
       long[] longArray = (long[])array;
-      long value = ((Long)val).longValue();
+      long value = (Long) val;
       len = longArray.length;
       arrayIsReversed = longArray[len - 1] < longArray[0];
       if(len == 1) {
@@ -2123,7 +2117,7 @@ public class VMapModel implements Runnable, ChangeListener {
       // values are int
       //
       int[] intArray = (int[])array;
-      int value = ((Integer)val).intValue();
+      int value = (Integer) val;
       len = intArray.length;
       arrayIsReversed = intArray[len - 1] < intArray[0];
       if(len == 1) {
@@ -2170,7 +2164,7 @@ public class VMapModel implements Runnable, ChangeListener {
       // values are short
       //
       short[] shortArray = (short[])array;
-      short value = ((Short)val).shortValue();
+      short value = (Short) val;
       len = shortArray.length;
       arrayIsReversed = shortArray[len - 1] < shortArray[0];
       if(len == 1) {
@@ -2217,7 +2211,7 @@ public class VMapModel implements Runnable, ChangeListener {
       // values are float
       //
       float[] floatArray = (float[])array;
-      float value = ((Float)val).floatValue();
+      float value = (Float) val;
       len = floatArray.length;
       arrayIsReversed = floatArray[len - 1] < floatArray[0];
       if(len == 1) {
@@ -2264,7 +2258,7 @@ public class VMapModel implements Runnable, ChangeListener {
       // values are double
       //
       double[] doubleArray = (double[])array;
-      double value = ((Double)val).doubleValue();
+      double value = (Double) val;
       len = doubleArray.length;
       arrayIsReversed = doubleArray[len - 1] < doubleArray[0];
       if(len == 1) {
@@ -2312,9 +2306,8 @@ public class VMapModel implements Runnable, ChangeListener {
       //
       GeoDate start;
       GeoDate end;
-      Object time = array;
       GeoDate value = (GeoDate)val;
-      GeoDate[] tarray = createGeoDateArray(time);
+      GeoDate[] tarray = createGeoDateArray(array);
       len = tarray.length;
 
       if(len == 1) {
@@ -2457,7 +2450,7 @@ public class VMapModel implements Runnable, ChangeListener {
       outArray = new double[array.length];
       if(defaultMissing) {
         for(int j = 0; j < array.length; j++) {
-          temp = (int)array[j];
+          temp = array[j];
           if(scale_offset) {
             outArray[j] = temp * scale + offset;
           } else {
@@ -2471,7 +2464,7 @@ public class VMapModel implements Runnable, ChangeListener {
         }
       } else {
         for(int j = 0; j < array.length; j++) {
-          temp = (int)array[j];
+          temp = array[j];
           if(temp == missing) {
             outArray[j] = Double.NaN;
           } else {
@@ -2813,7 +2806,7 @@ public class VMapModel implements Runnable, ChangeListener {
     Object obj = e.getSource();
     if(obj instanceof VMapParameter) {
       if(Debug.DEBUG) {
-        System.out.println((VMapParameter)obj);
+        System.out.println(obj);
       }
       stateChanged();
     } else {
@@ -2867,19 +2860,19 @@ public class VMapModel implements Runnable, ChangeListener {
     long end = Long.MIN_VALUE;
     long value;
     int count = 0;
-    for(int i = 0; i < val.length; i++) {
-      if(!(val[i] == null || val[i].isMissing())) {
-        value = val[i].getTime();
+    for (GeoDate aVal : val) {
+      if (!(aVal == null || aVal.isMissing())) {
+        value = aVal.getTime();
         start = Math.min(start, value);
         end = Math.max(end, value);
         count++;
       }
     }
     if(count == 0) {
-      return new SoTRange.GeoDate(new GeoDate(Long.MIN_VALUE),
+      return new SoTRange.Time(new GeoDate(Long.MIN_VALUE),
                                   new GeoDate(Long.MAX_VALUE));
     } else {
-      return new SoTRange.GeoDate(new GeoDate(start), new GeoDate(end));
+      return new SoTRange.Time(new GeoDate(start), new GeoDate(end));
     }
   }
 
@@ -2888,10 +2881,10 @@ public class VMapModel implements Runnable, ChangeListener {
     long tend = Long.MIN_VALUE;
     long[] tar = val.getTime();
     int count = 0;
-    for(int i=0; i < tar.length; i++) {
-      if(!(tar[i] == Long.MAX_VALUE)) {
-        tstart = Math.min(tstart, tar[i]);
-        tend = Math.max(tend, tar[i]);
+    for (long aTar : tar) {
+      if (!(aTar == Long.MAX_VALUE)) {
+        tstart = Math.min(tstart, aTar);
+        tend = Math.max(tend, aTar);
         count++;
       }
     }
@@ -2907,10 +2900,10 @@ public class VMapModel implements Runnable, ChangeListener {
     double start = Double.POSITIVE_INFINITY;
     double end = Double.NEGATIVE_INFINITY;
     int count = 0;
-    for(int i = 0; i < array.length; i++) {
-      if(!Double.isNaN(array[i])) {
-        start = Math.min(start, array[i]);
-        end = Math.max(end, array[i]);
+    for (double anArray : array) {
+      if (!Double.isNaN(anArray)) {
+        start = Math.min(start, anArray);
+        end = Math.max(end, anArray);
         count++;
       }
     }

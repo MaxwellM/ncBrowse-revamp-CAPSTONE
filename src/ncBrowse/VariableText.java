@@ -55,7 +55,7 @@ public class VariableText extends VariableProcessThread {
     int[] index;
     boolean first = true;
     char[] array = null;
-    StringBuffer sbuf = new StringBuffer();
+    StringBuilder sbuf = new StringBuilder();
 
     Variable ncVar = ncFile_.findVariable(variable_);
 
@@ -222,7 +222,7 @@ public class VariableText extends VariableProcessThread {
     try {
       display_.setVisible(false);
       display_.dispose();
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 

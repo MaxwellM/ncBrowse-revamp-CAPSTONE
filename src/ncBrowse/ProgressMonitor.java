@@ -48,8 +48,7 @@ import java.beans.PropertyChangeListener;
  * @author James Gosling
  * @version 1.25 12/03/01
  */
-public class ProgressMonitor extends Object
-{
+public class ProgressMonitor {
     private ProgressMonitor root;
     private JDialog         dialog;
     private JOptionPane     pane;
@@ -176,15 +175,13 @@ public class ProgressMonitor extends Object
                 }
             });
 
-            addPropertyChangeListener(new PropertyChangeListener() {
-                public void propertyChange(PropertyChangeEvent event) {
-                    if(dialog.isVisible() &&
-                       event.getSource() == ProgressOptionPane.this &&
-                       (event.getPropertyName().equals(VALUE_PROPERTY) ||
-                        event.getPropertyName().equals(INPUT_VALUE_PROPERTY))){
-                        dialog.setVisible(false);
-                        dialog.dispose();
-                    }
+            addPropertyChangeListener(event -> {
+                if(dialog.isVisible() &&
+                   event.getSource() == ProgressOptionPane.this &&
+                   (event.getPropertyName().equals(VALUE_PROPERTY) ||
+                    event.getPropertyName().equals(INPUT_VALUE_PROPERTY))){
+                    dialog.setVisible(false);
+                    dialog.dispose();
                 }
             });
             return dialog;
@@ -225,7 +222,7 @@ public class ProgressMonitor extends Object
                 if (dT >= millisToDecideToPopup) {
                     int predictedCompletionTime;
                     if (nv > min) {
-                        predictedCompletionTime = (int)((long)dT *
+                        predictedCompletionTime = (int)(dT *
                                                         (max - min) /
                                                         (nv - min));
                     }

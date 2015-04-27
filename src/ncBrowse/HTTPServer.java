@@ -25,10 +25,10 @@ public class HTTPServer {
     }
   }
 
-  static PrintStream log = null;
+  static final PrintStream log = null;
 
   /* Where worker threads stand idle */
-  static Vector threads = new Vector();
+  static final Vector threads = new Vector();
 
   /* the web server's virtual root */
   static File root;
@@ -49,11 +49,7 @@ public class HTTPServer {
   }
 
   public static void main(String[] args) throws Exception {
-    HTTPHandler handler = new HTTPHandler(){
-      public void handle(URL url){
-        System.out.println("Got URL:" + url);
-      }
-    };
+    HTTPHandler handler = url -> System.out.println("Got URL:" + url);
     HTTPServer.start(handler);
   }
 
@@ -97,8 +93,8 @@ public class HTTPServer {
     theThread.start();
   }
 
-  public static interface HTTPHandler{
-    public void handle(URL url);
+  public interface HTTPHandler{
+    void handle(URL url);
   }
 
   static class Worker

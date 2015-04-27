@@ -1,18 +1,9 @@
 package ncBrowse.VisAD;
 
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
+import visad.VisADException;
+
 import javax.swing.*;
-import visad.*;
-import visad.java3d.DisplayImplJ3D;
 import java.rmi.RemoteException;
-import gov.noaa.pmel.sgt.dm.*;
-import gov.noaa.pmel.util.SoTRange;
-import gov.noaa.pmel.util.GeoDate;
-import ncBrowse.map.*;
-import gov.noaa.pmel.sgt.GridAttribute;
-import gov.noaa.pmel.util.Range2D;
-import visad.util.*;
 
 
 /**
@@ -27,9 +18,9 @@ import visad.util.*;
  */
 
 public interface VisADRenderer {
-	public void draw() throws VisADException, RemoteException;
-	public JFrame getDisplayWindow();
-	public boolean canDisplayLegend();
+	void draw() throws VisADException, RemoteException;
+	JFrame getDisplayWindow();
+	boolean canDisplayLegend();
 	
     /**
      * Change point of view of a 3D VisAD display,

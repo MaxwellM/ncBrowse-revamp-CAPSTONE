@@ -217,17 +217,19 @@ public class ConfigAdvancedPlotOptions extends JDialog implements ActionListener
 
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		
-		if (cmd.equals("cancel")) {
-			mClient.dialogCancelled(this);
-			this.dispose();
-		}
-		else if (cmd.equals("ok")) {
-			mClient.dialogDismissed(this);
-			this.dispose();
-		}
-		else if (cmd.equals("apply")) {
-			mClient.dialogApply(this);
+
+		switch (cmd) {
+			case "cancel":
+				mClient.dialogCancelled(this);
+				this.dispose();
+				break;
+			case "ok":
+				mClient.dialogDismissed(this);
+				this.dispose();
+				break;
+			case "apply":
+				mClient.dialogApply(this);
+				break;
 		}
 	}
 		
@@ -288,7 +290,7 @@ public class ConfigAdvancedPlotOptions extends JDialog implements ActionListener
 			scale = 0.25;
 		else {
 			try {
-				scale = Double.valueOf(fldText).doubleValue();
+				scale = Double.valueOf(fldText);
 			}
 			catch (NumberFormatException ex) {
 				scale = 0.25;
@@ -304,7 +306,7 @@ public class ConfigAdvancedPlotOptions extends JDialog implements ActionListener
 			scale = 1.00;
 		else {
 			try {
-				scale = Double.valueOf(fldText).doubleValue();
+				scale = Double.valueOf(fldText);
 			}
 			catch (NumberFormatException ex) {
 				scale = 1.00;
@@ -320,7 +322,7 @@ public class ConfigAdvancedPlotOptions extends JDialog implements ActionListener
 			scale = 1.00;
 		else {
 			try {
-				scale = Double.valueOf(fldText).doubleValue();
+				scale = Double.valueOf(fldText);
 			}
 			catch (NumberFormatException ex) {
 				scale = 1.00;
@@ -336,7 +338,7 @@ public class ConfigAdvancedPlotOptions extends JDialog implements ActionListener
 			scale = 1.00;
 		else {
 			try {
-				scale = Double.valueOf(fldText).doubleValue();
+				scale = Double.valueOf(fldText);
 			}
 			catch (NumberFormatException ex) {
 				scale = 1.00;

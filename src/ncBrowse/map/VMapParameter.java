@@ -3,22 +3,20 @@
  */
 package ncBrowse.map;
 
-import ncBrowse.NcFile;
-import ncBrowse.Debug;
-
-import java.util.Vector;
-import java.util.Enumeration;
-import java.io.IOException;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
+import gov.noaa.pmel.util.GeoDate;
 import gov.noaa.pmel.util.SoTRange;
 import gov.noaa.pmel.util.SoTValue;
-import gov.noaa.pmel.util.GeoDate;
-
+import ncBrowse.Debug;
+import ncBrowse.NcFile;
+import ucar.nc2.Attribute;
 import ucar.nc2.Dimension;
 import ucar.nc2.Variable;
-import ucar.nc2.Attribute;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Vector;
 
 /**
  * VMap parameter contains values that have a parametric relationship in a VMapModel.
@@ -47,18 +45,18 @@ public class VMapParameter implements Comparable {
    */
   private int group_;
   private int length_;
-  private Object element_;
+  private final Object element_;
   private Object values_;
   private SoTRange range_;
   private SoTRange fullRange_ = null;
-  private boolean dimension_;
+  private final boolean dimension_;
   private boolean time_;
   /**
    * @label ncFile_
    */
-  private NcFile ncFile_;
-  private Vector changeListeners_ = new Vector();
-  private ChangeEvent event_ = new ChangeEvent(this);
+  private final NcFile ncFile_;
+  private final Vector changeListeners_ = new Vector();
+  private final ChangeEvent event_ = new ChangeEvent(this);
 
   /**
    * VMapParameter constuctor.
@@ -170,8 +168,7 @@ public class VMapParameter implements Comparable {
    * @return true if single mode on
    */
   public boolean isSingle() {
-    if(length_ == 1) return true;
-    return single_;
+    return length_ == 1 || single_;
   }
 
   /**
@@ -236,7 +233,7 @@ public class VMapParameter implements Comparable {
       Variable ncVar = (Variable)element_;
       Object value = ncFile_.getArrayValue(ncVar, ind);
       if(value instanceof GeoDate) {
-        sValue = new SoTValue.GeoDate((GeoDate)value);
+        sValue = new SoTValue.Time((GeoDate)value);
       } else if(value instanceof Long) {
         sValue = new SoTValue.Long(((Long)value).longValue());
       } else if(value instanceof Integer) {
@@ -342,7 +339,7 @@ public class VMapParameter implements Comparable {
       Object start = ncFile_.getArrayValue(ncVar, 0);
       Object end = ncFile_.getArrayValue(ncVar, length_-1);
       if(start instanceof GeoDate) {
-        fullRange_ = new SoTRange.GeoDate((GeoDate)start, (GeoDate)end);
+        fullRange_ = new SoTRange.Time((GeoDate)start, (GeoDate)end);
       } else if(start instanceof Long) {
         fullRange_ = new SoTRange.Long(((Long)start).longValue(),
                                        ((Long)end).longValue());
@@ -372,14 +369,7 @@ public class VMapParameter implements Comparable {
   }
 
   public String toString() {
-    StringBuffer sbuf = new StringBuffer();
-    sbuf.append(getName()+" ");
-    sbuf.append("("+getUnits()+") ");
-    sbuf.append(range_);
-    sbuf.append(", range="+rangeAllowed_);
-    sbuf.append(", single="+single_);
-    sbuf.append(", group="+VMapModel.getTitle(group_));
-    return sbuf.toString();
+    return getName() + " " + "(" + getUnits() + ") " + range_ + ", range=" + rangeAllowed_ + ", single=" + single_ + ", group=" + VMapModel.getTitle(group_);
   }
 
   public void addChangeListener(ChangeListener l) {

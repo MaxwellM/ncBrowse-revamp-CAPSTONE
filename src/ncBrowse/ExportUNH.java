@@ -71,7 +71,7 @@ public class ExportUNH extends VariableProcessThread {
 
     if(ret_val == JFileChooser.APPROVE_OPTION) {
       outFile_ = fileChoose_.getSelectedFile();
-      filt = (FileFilter)fileChoose_.getFileFilter();
+      filt = fileChoose_.getFileFilter();
       if(filt instanceof SimpleFileFilter) {
         ext_ = ((SimpleFileFilter)filt).getExtension();
       } else {
@@ -94,7 +94,7 @@ public class ExportUNH extends VariableProcessThread {
   }
 
   private String makeSpaces(int len) {
-    StringBuffer sb = new StringBuffer();
+    StringBuilder sb = new StringBuilder();
     for(int i=0; i < len; i++) {
       sb.append(" ");
     }
@@ -222,7 +222,7 @@ public class ExportUNH extends VariableProcessThread {
 			      makeSpaces(COL - num.length()) + num + ") ");
       for(int col=shape[zIndex]-1; col >= 0; col--) {
 	index = col + row*shape[zIndex];
-	line.append((float)array[index] + " ");
+	line.append((float) array[index]).append(" ");
       }
       line.append("\n");
       ps.print(line.toString());

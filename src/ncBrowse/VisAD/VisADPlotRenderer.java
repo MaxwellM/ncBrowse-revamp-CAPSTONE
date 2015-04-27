@@ -3,27 +3,30 @@
  */
 package ncBrowse.VisAD;
 
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.*;
-import visad.*;
-import visad.java3d.DisplayImplJ3D;
+import com.visualtek.png.PNGEncoder;
+import ncBrowse.ConfigCustomOrientation;
+import ncBrowse.DialogClient;
+import ncBrowse.MenuBar3D;
+import ncBrowse.map.VMapModel;
+import ncBrowse.map.VMapModelEditor;
+import visad.DisplayEvent;
+import visad.DisplayImpl;
+import visad.DisplayListener;
+import visad.VisADException;
 import visad.java3d.ProjectionControlJ3D;
-import java.rmi.RemoteException;
-import gov.noaa.pmel.sgt.dm.*;
-import gov.noaa.pmel.util.SoTRange;
-import gov.noaa.pmel.util.GeoDate;
-import ncBrowse.map.*;
-import gov.noaa.pmel.sgt.GridAttribute;
-import gov.noaa.pmel.util.Range2D;
-import visad.util.*;
-import java.awt.event.*;
-import java.awt.*;
-import ncBrowse.*;
-import java.awt.print.*;
+
 import javax.swing.*;
-import com.visualtek.png.*;
-import java.io.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.rmi.RemoteException;
 
 
 /**
@@ -111,91 +114,93 @@ public abstract class VisADPlotRenderer implements ChangeListener, ActionListene
 			else if (object instanceof JCheckBoxMenuItem) {
 				JCheckBoxMenuItem cbmi = (JCheckBoxMenuItem)object;
 				mMenuBar.clearBG();
-				
-				if (cmd.equals("rotatex")) {
-					// rotate around the z axis
-					isRotatingX = !isRotatingX;
-					isRotatingY = false;
-					isRotatingZ = false;
-					isWobblingX = false;
-					isWobblingY = false;
-					isWobblingZ = false;
-					if (isRotatingX)
-						cbmi.setSelected(true);
-					else
-						mMenuBar.clearBG();
-				}
-				else  if (cmd.equals("rotatey")) {
-					// rotate around the z axis
-					isRotatingY = !isRotatingY;
-					isRotatingX = false;
-					isRotatingZ = false;
-					isWobblingX = false;
-					isWobblingY = false;
-					isWobblingZ = false;
-					if (isRotatingY)
-						cbmi.setSelected(true);
-					else
-						mMenuBar.clearBG();
-				}
-				else  if (cmd.equals("rotatez")) {
-					// rotate around the z axis
-					isRotatingZ = !isRotatingZ;
-					isRotatingY = false;
-					isRotatingX = false;
-					isWobblingX = false;
-					isWobblingY = false;
-					isWobblingZ = false;
-					if (isRotatingZ)
-						cbmi.setSelected(true);
-					else
-						mMenuBar.clearBG();
-				}
-				else  if (cmd.equals("wobblex")) {
-					// wobble around the z axis
-					wobbleCount = 10;
-					isRotatingX = false;
-					isRotatingY = false;
-					isRotatingZ = false;
-					isWobblingX = !isWobblingX;
-					isWobblingY = false;
-					isWobblingZ = false;
-					if (isWobblingX)
-						cbmi.setSelected(true);
-					else
-						mMenuBar.clearBG();
-				}
-				else  if (cmd.equals("wobbley")) {
-					// wobble around the z axis
-					wobbleCount = 10;
-					isRotatingX = false;
-					isRotatingY = false;
-					isRotatingZ = false;
-					isWobblingY = !isWobblingY;
-					isWobblingX = false;
-					isWobblingZ = false;
-					if (isWobblingY)
-						cbmi.setSelected(true);
-					else
-						mMenuBar.clearBG();
-				}
-				else  if (cmd.equals("wobblez")) {
-					// wobble around the z axis
-					wobbleCount = 10;
-					isRotatingX = false;
-					isRotatingY = false;
-					isRotatingZ = false;
-					isWobblingZ = !isWobblingZ;
-					isWobblingX = false;
-					isWobblingY = false;
-					if (isWobblingZ)
-						cbmi.setSelected(true);
-					else
-						mMenuBar.clearBG();
+
+				switch (cmd) {
+					case "rotatex":
+						// rotate around the z axis
+						isRotatingX = !isRotatingX;
+						isRotatingY = false;
+						isRotatingZ = false;
+						isWobblingX = false;
+						isWobblingY = false;
+						isWobblingZ = false;
+						if (isRotatingX)
+							cbmi.setSelected(true);
+						else
+							mMenuBar.clearBG();
+						break;
+					case "rotatey":
+						// rotate around the z axis
+						isRotatingY = !isRotatingY;
+						isRotatingX = false;
+						isRotatingZ = false;
+						isWobblingX = false;
+						isWobblingY = false;
+						isWobblingZ = false;
+						if (isRotatingY)
+							cbmi.setSelected(true);
+						else
+							mMenuBar.clearBG();
+						break;
+					case "rotatez":
+						// rotate around the z axis
+						isRotatingZ = !isRotatingZ;
+						isRotatingY = false;
+						isRotatingX = false;
+						isWobblingX = false;
+						isWobblingY = false;
+						isWobblingZ = false;
+						if (isRotatingZ)
+							cbmi.setSelected(true);
+						else
+							mMenuBar.clearBG();
+						break;
+					case "wobblex":
+						// wobble around the z axis
+						wobbleCount = 10;
+						isRotatingX = false;
+						isRotatingY = false;
+						isRotatingZ = false;
+						isWobblingX = !isWobblingX;
+						isWobblingY = false;
+						isWobblingZ = false;
+						if (isWobblingX)
+							cbmi.setSelected(true);
+						else
+							mMenuBar.clearBG();
+						break;
+					case "wobbley":
+						// wobble around the z axis
+						wobbleCount = 10;
+						isRotatingX = false;
+						isRotatingY = false;
+						isRotatingZ = false;
+						isWobblingY = !isWobblingY;
+						isWobblingX = false;
+						isWobblingZ = false;
+						if (isWobblingY)
+							cbmi.setSelected(true);
+						else
+							mMenuBar.clearBG();
+						break;
+					case "wobblez":
+						// wobble around the z axis
+						wobbleCount = 10;
+						isRotatingX = false;
+						isRotatingY = false;
+						isRotatingZ = false;
+						isWobblingZ = !isWobblingZ;
+						isWobblingX = false;
+						isWobblingY = false;
+						if (isWobblingZ)
+							cbmi.setSelected(true);
+						else
+							mMenuBar.clearBG();
+						break;
 				}
 			}
 		}
-		catch (Exception ex) {}
+		catch (Exception ignored) {}
 	}
 
 	public void displayChanged(DisplayEvent e) throws RemoteException, VisADException {
@@ -317,14 +322,7 @@ public abstract class VisADPlotRenderer implements ChangeListener, ActionListene
 	    	public void run() {
 		    	Image image = display.getImage(true);
 		    	
-		    	FilenameFilter filter = new FilenameFilter() {
-		    		public boolean accept(File dir, String name) {
-		    			if (name.endsWith("png"))
-		    				return true;
-		    			else
-		    				return false;
-		    		}
-		    	};
+		    	FilenameFilter filter = (dir, name) -> name.endsWith("png");
 		    	
 			    Frame fr = new Frame();
 				String directory = System.getProperty("user.dir");// + File.separator + "JOA_Support" + File.separator;
@@ -332,7 +330,7 @@ public abstract class VisADPlotRenderer implements ChangeListener, ActionListene
 			    f.setDirectory(directory);
 			    f.setFilenameFilter(filter);
 			    f.setFile("untitled.png");
-			    f.show();
+			    f.setVisible(true);
 			    directory = f.getDirectory();
 			    f.dispose();
 			    if (directory != null && f.getFile() != null) {

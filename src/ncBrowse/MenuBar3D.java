@@ -146,22 +146,22 @@ public class MenuBar3D {
 	
 	public void addJListeners() {
 	    // add the listeners
-	    mXFacePos.addActionListener((ActionListener)mThis);
-	    mXFaceNeg.addActionListener((ActionListener)mThis);
-	    mYFacePos.addActionListener((ActionListener)mThis);
-	    mYFaceNeg.addActionListener((ActionListener)mThis);
-	    mZFacePos.addActionListener((ActionListener)mThis);
-	    mZFaceNeg.addActionListener((ActionListener)mThis);
-	    mRotateX.addActionListener((ActionListener)mThis);
-	    mWobbleX.addActionListener((ActionListener)mThis);
-	    mRotateY.addActionListener((ActionListener)mThis);
-	    mWobbleY.addActionListener((ActionListener)mThis);
-	    mRotateZ.addActionListener((ActionListener)mThis);
-	    mWobbleZ.addActionListener((ActionListener)mThis);
-	    mCustom.addActionListener((ActionListener)mThis);
-	    mPrint.addActionListener((ActionListener)mThis);
-	    mSaveAs.addActionListener((ActionListener)mThis);
-	    mVariableMap.addActionListener((ActionListener)mThis);
+	    mXFacePos.addActionListener(mThis);
+	    mXFaceNeg.addActionListener(mThis);
+	    mYFacePos.addActionListener(mThis);
+	    mYFaceNeg.addActionListener(mThis);
+	    mZFacePos.addActionListener(mThis);
+	    mZFaceNeg.addActionListener(mThis);
+	    mRotateX.addActionListener(mThis);
+	    mWobbleX.addActionListener(mThis);
+	    mRotateY.addActionListener(mThis);
+	    mWobbleY.addActionListener(mThis);
+	    mRotateZ.addActionListener(mThis);
+	    mWobbleZ.addActionListener(mThis);
+	    mCustom.addActionListener(mThis);
+	    mPrint.addActionListener(mThis);
+	    mSaveAs.addActionListener(mThis);
+	    mVariableMap.addActionListener(mThis);
 	}
 	
 	public void addAWTListeners() {}

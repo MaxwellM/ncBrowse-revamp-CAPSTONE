@@ -31,7 +31,7 @@ public class VariableListDialog extends JDialog {
   FlowLayout flowLayout1 = new FlowLayout(FlowLayout.CENTER, 5,5);
 
   public VariableListDialog(Browser parent) {
-    super((Frame)parent, null, false);
+    super(parent, null, false);
     parent_ = parent;
     try {
       jbInit();
@@ -41,7 +41,7 @@ public class VariableListDialog extends JDialog {
     }
   }
 
-  void jbInit() throws Exception {
+  void jbInit() {
     setResizable(true);
     setTitle("Variable Selection");
     getContentPane().setLayout(borderLayout1);

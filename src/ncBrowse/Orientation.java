@@ -28,35 +28,59 @@ public class Orientation {
     static public Orientation fromString(String s) {
         Orientation o = BAD;
 
-        if(s.equals("NORTH") || s.equals("north"))    o = NORTH;
-        else if(s.equals("SOUTH") || s.equals("south"))    
-            o = SOUTH;
-        else if(s.equals("EAST")  || s.equals("east"))     
-            o = EAST;
-        else if(s.equals("WEST")  || s.equals("west"))     
-            o = WEST;
-        else if(s.equals("CENTER") || s.equals("center"))   
-            o = CENTER;
-        else if(s.equals("TOP")   || s.equals("top"))      
-            o = TOP;
-        else if(s.equals("LEFT")  || s.equals("left"))     
-            o = LEFT;
-        else if(s.equals("RIGHT")  || s.equals("right"))    
-            o = RIGHT;
-        else if(s.equals("BOTTOM") || s.equals("bottom"))   
-            o = BOTTOM;
-        else if(s.equals("VERTICAL") || s.equals("vertical")) 
-            o = VERTICAL;
-        else if(s.equals("HORIZONTAL") || 
-                s.equals("horizontal"))
-          o = HORIZONTAL;
+        switch (s) {
+            case "NORTH":
+            case "north":
+                o = NORTH;
+                break;
+            case "SOUTH":
+            case "south":
+                o = SOUTH;
+                break;
+            case "EAST":
+            case "east":
+                o = EAST;
+                break;
+            case "WEST":
+            case "west":
+                o = WEST;
+                break;
+            case "CENTER":
+            case "center":
+                o = CENTER;
+                break;
+            case "TOP":
+            case "top":
+                o = TOP;
+                break;
+            case "LEFT":
+            case "left":
+                o = LEFT;
+                break;
+            case "RIGHT":
+            case "right":
+                o = RIGHT;
+                break;
+            case "BOTTOM":
+            case "bottom":
+                o = BOTTOM;
+                break;
+            case "VERTICAL":
+            case "vertical":
+                o = VERTICAL;
+                break;
+            case "HORIZONTAL":
+            case "horizontal":
+                o = HORIZONTAL;
+                break;
+        }
 
         return o;
     }
     public String toString() {
-        String s = new String();
+        String s = "";
 
-        if(this == Orientation.NORTH) 
+        if(this == Orientation.NORTH)
             s = getClass().getName() + "=NORTH";
         else if(this == Orientation.SOUTH)
             s = getClass().getName() + "=SOUTH";

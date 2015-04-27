@@ -143,18 +143,24 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   private static void initLookAndFeel() {
     String lookAndFeel = null;
     if (LOOKANDFEEL != null) {
-      if (LOOKANDFEEL.equals("Metal")) {
-        lookAndFeel = UIManager.getCrossPlatformLookAndFeelClassName();
-      } else if (LOOKANDFEEL.equals("System")) {
-        lookAndFeel = UIManager.getSystemLookAndFeelClassName();
-      } else if (LOOKANDFEEL.equals("Motif")) {
-        lookAndFeel = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
-      } else if (LOOKANDFEEL.equals("GTK+")) { //new in 1.4.2
-        lookAndFeel = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
-      } else {
-        System.err.println("Unexpected value of LOOKANDFEEL specified: "
-            + LOOKANDFEEL);
-        lookAndFeel = UIManager.getCrossPlatformLookAndFeelClassName();
+      switch (LOOKANDFEEL) {
+        case "Metal":
+          lookAndFeel = UIManager.getCrossPlatformLookAndFeelClassName();
+          break;
+        case "System":
+          lookAndFeel = UIManager.getSystemLookAndFeelClassName();
+          break;
+        case "Motif":
+          lookAndFeel = "com.sun.java.swing.plaf.motif.MotifLookAndFeel";
+          break;
+        case "GTK+":  //new in 1.4.2
+          lookAndFeel = "com.sun.java.swing.plaf.gtk.GTKLookAndFeel";
+          break;
+        default:
+          System.err.println("Unexpected value of LOOKANDFEEL specified: "
+              + LOOKANDFEEL);
+          lookAndFeel = UIManager.getCrossPlatformLookAndFeelClassName();
+          break;
       }
 
       try {
@@ -223,7 +229,7 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     GraphicsEnvironment localGE = GraphicsEnvironment.getLocalGraphicsEnvironment();
     for (GraphicsDevice gd : localGE.getScreenDevices()) {
       for (GraphicsConfiguration graphicsConfiguration : gd.getConfigurations()) {
-        result.union(result, graphicsConfiguration.getBounds(), result);
+        Rectangle2D.union(result, graphicsConfiguration.getBounds(), result);
       }
     }
     int fullWidth = (int) result.getWidth();
@@ -928,8 +934,8 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
     openVariableWindows.add(VariableWindows.getVarWin8Frame());
 //    openVariableWindows.add(variableWindows.getVarWin7Frame());
 //    openVariableWindows.add(variableWindows.getVarWin8Frame());
-    for (int i = 0; i < openVariableWindows.size(); i++){
-      String name = openVariableWindows.get(i).getName();
+    for (JFrame openVariableWindow : openVariableWindows) {
+      String name = openVariableWindow.getName();
       System.out.println("openVariableWindows :" + name);
     }
     //ncFile_.getVariableWindowData();
@@ -1126,9 +1132,6 @@ public class Browser extends JFrame implements DialogClient, SelectionListener {
   public void setOPeNDAP(String path) {
     try{
       ncFile_ = new DODSNcFile(path);
-    } catch (dods.dap.DODSException e) {
-      System.out.println(e + ": new DODSNcFile");
-      return;
     } catch (IOException e) {
       System.out.println(e + ": new DODSNcFile");
       return;

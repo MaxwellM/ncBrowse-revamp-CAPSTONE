@@ -8,7 +8,6 @@ import ncBrowse.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.dnd.DnDConstants;
@@ -31,17 +30,17 @@ import java.util.Vector;
  */
 public class VariableMapDialog extends JDialog implements ButtonMaintainer {
   JPanel contentPane;
-  BorderLayout borderLayout1 = new BorderLayout();
-  JPanel sourcePanel = new JPanel();
-  JPanel buttonPanel = new JPanel();
-  FlowLayout flowLayout1 = new FlowLayout();
-  JButton doneButton = new JButton();
-  JButton applyButton = new JButton();
-  JButton clearButton = new JButton();
-  JButton quitButton = new JButton();
-  JButton helpButton = new JButton();
-  JScrollPane jScrollPane1 = new JScrollPane();
-  BorderLayout borderLayout2 = new BorderLayout();
+  final BorderLayout borderLayout1 = new BorderLayout();
+  final JPanel sourcePanel = new JPanel();
+  final JPanel buttonPanel = new JPanel();
+  final FlowLayout flowLayout1 = new FlowLayout();
+  final JButton doneButton = new JButton();
+  final JButton applyButton = new JButton();
+  final JButton clearButton = new JButton();
+  final JButton quitButton = new JButton();
+  final JButton helpButton = new JButton();
+  final JScrollPane jScrollPane1 = new JScrollPane();
+  final BorderLayout borderLayout2 = new BorderLayout();
   TwoDTargetPanel twoDPanel;
   ThreeDTargetPanel threeDPanel;
   static boolean is2D = true;
@@ -49,22 +48,22 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
   /**
    * @link aggregationByValue
    */
-  DnDTable sourceList = new DnDTable();
-  JPanel namePanel = new JPanel();
-  JTextField variableNameTF = new JTextField();
-  JLabel jLabel2 = new JLabel();
-  GridBagLayout gridBagLayout8 = new GridBagLayout();
+  final DnDTable sourceList = new DnDTable();
+  final JPanel namePanel = new JPanel();
+  final JTextField variableNameTF = new JTextField();
+  final JLabel jLabel2 = new JLabel();
+  final GridBagLayout gridBagLayout8 = new GridBagLayout();
   Border border1;
   Border border2;
   public Border border3;
-  JPanel jPanel1 = new JPanel();
-  JLabel jLabel1 = new JLabel();
-  GridBagLayout gridBagLayout9 = new GridBagLayout();
-  JPanel jPanel2 = new JPanel();
-  BorderLayout borderLayout3 = new BorderLayout();
-  JPanel jPanel3 = new JPanel();
-  JLabel jLabel3 = new JLabel();
-  GridBagLayout gridBagLayout10 = new GridBagLayout();
+  final JPanel jPanel1 = new JPanel();
+  final JLabel jLabel1 = new JLabel();
+  final GridBagLayout gridBagLayout9 = new GridBagLayout();
+  final JPanel jPanel2 = new JPanel();
+  final BorderLayout borderLayout3 = new BorderLayout();
+  final JPanel jPanel3 = new JPanel();
+  final JLabel jLabel3 = new JLabel();
+  final GridBagLayout gridBagLayout10 = new GridBagLayout();
 
   /**
    * @label currentMap_
@@ -73,14 +72,14 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
   private static VMapModel currentMap3D_ = null;
   private static VMapModel currentMap_ = null;
   private static NcTableModel model_ = null;
-  JPanel jPanel4 = new JPanel();
-  JCheckBox showDimsCB = new JCheckBox();
-  GridBagLayout gridBagLayout2 = new GridBagLayout();
-  JSplitPane jSplitPane1 = new JSplitPane();
+  final JPanel jPanel4 = new JPanel();
+  final JCheckBox showDimsCB = new JCheckBox();
+  final GridBagLayout gridBagLayout2 = new GridBagLayout();
+  final JSplitPane jSplitPane1 = new JSplitPane();
   GridBagLayout gridBagLayout1 = new GridBagLayout();
-  JLabel errorLabel = new JLabel();
-  DialogClient mClient;
-  private ResourceBundle b = ResourceBundle.getBundle(
+  final JLabel errorLabel = new JLabel();
+  final DialogClient mClient;
+  private final ResourceBundle b = ResourceBundle.getBundle(
       "ncBrowse.NcBrowseResources");
 
   public VariableMapDialog(Frame frame, String title, NcFile ncFile, boolean modal) {
@@ -228,20 +227,18 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     contentPane.add(upperContents, BorderLayout.CENTER);
     contentPane.add(errLabelCont, BorderLayout.SOUTH);
 
-    ChangeListener changeListener = new ChangeListener() {
-      public void stateChanged(ChangeEvent e) {
-        is2D = !is2D;
-        if(is2D) {
-          currentMap_ = currentMap2D_;
-        } else {
-          currentMap_ = currentMap3D_;
-        }
-        currentMap_.reset();
-        if(is2D) {
-          TargetMonitor.getInstance().reset();
-        } else {
-          TargetMonitor3D.getInstance().reset();
-        }
+    ChangeListener changeListener = e -> {
+      is2D = !is2D;
+      if(is2D) {
+        currentMap_ = currentMap2D_;
+      } else {
+        currentMap_ = currentMap3D_;
+      }
+      currentMap_.reset();
+      if(is2D) {
+        TargetMonitor.getInstance().reset();
+      } else {
+        TargetMonitor3D.getInstance().reset();
       }
     };
     everyThingPanel.addChangeListener(changeListener);
@@ -407,29 +404,29 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     JLabel jLabel3 = new JLabel();
     GridBagLayout gridBagLayout10 = new GridBagLayout();
     JPanel targetPanel = new JPanel();
-    JLabel xAxisLabel = new JLabel();
-    JLabel yAxisLabel = new JLabel();
-    JLabel colorLabel = new JLabel();
-    JLabel uLabel = new JLabel();
-    JLabel vLabel = new JLabel();
-    JLabel contLabel = new JLabel();
-    JLabel xAxisTitle = new JLabel();
-    JLabel yAxisTitle = new JLabel();
-    JLabel colorTitle = new JLabel();
-    JLabel uTitle = new JLabel();
-    JLabel vTitle = new JLabel();
-    JLabel contTitle = new JLabel();
-    JPanel xAxisPanel = new JPanel();
-    BorderLayout borderLayout4 = new BorderLayout();
-    JPanel yAxisPanel = new JPanel();
-    JPanel colorPanel = new JPanel();
-    JPanel uComponentPanel = new JPanel();
-    JPanel vComponentPanel = new JPanel();
-    JPanel contourPanel = new JPanel();
-    BorderLayout borderLayout5 = new BorderLayout();
-    BorderLayout borderLayout6 = new BorderLayout();
-    BorderLayout borderLayout7 = new BorderLayout();
-    BorderLayout borderLayout8 = new BorderLayout();
+    final JLabel xAxisLabel = new JLabel();
+    final JLabel yAxisLabel = new JLabel();
+    final JLabel colorLabel = new JLabel();
+    final JLabel uLabel = new JLabel();
+    final JLabel vLabel = new JLabel();
+    final JLabel contLabel = new JLabel();
+    final JLabel xAxisTitle = new JLabel();
+    final JLabel yAxisTitle = new JLabel();
+    final JLabel colorTitle = new JLabel();
+    final JLabel uTitle = new JLabel();
+    final JLabel vTitle = new JLabel();
+    final JLabel contTitle = new JLabel();
+    final JPanel xAxisPanel = new JPanel();
+    final BorderLayout borderLayout4 = new BorderLayout();
+    final JPanel yAxisPanel = new JPanel();
+    final JPanel colorPanel = new JPanel();
+    final JPanel uComponentPanel = new JPanel();
+    final JPanel vComponentPanel = new JPanel();
+    final JPanel contourPanel = new JPanel();
+    final BorderLayout borderLayout5 = new BorderLayout();
+    final BorderLayout borderLayout6 = new BorderLayout();
+    final BorderLayout borderLayout7 = new BorderLayout();
+    final BorderLayout borderLayout8 = new BorderLayout();
     BorderLayout borderLayout9 = new BorderLayout();
 
     public TwoDTargetPanel() {
@@ -467,7 +464,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
       contLabel.setForeground(Color.black);
       contLabel.setMaximumSize(new Dimension(0, 20));
       contLabel.setMinimumSize(new Dimension(0, 20));
-      contLabel.setPreferredSize(new Dimension(0, 20)); ;
+      contLabel.setPreferredSize(new Dimension(0, 20));
       contourPanel.setBackground(new Color(186, 217, 217));
       contourPanel.setBorder(BorderFactory.createLoweredBevelBorder());
       contourPanel.setLayout(borderLayout8);
@@ -487,7 +484,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
       uComponentPanel.setLayout(borderLayout6);
 
       // Color
-      colorPanel.setBackground(new Color(186, 217, 217)); ;
+      colorPanel.setBackground(new Color(186, 217, 217));
       colorPanel.setBorder(BorderFactory.createLoweredBevelBorder());
       colorPanel.setLayout(new BorderLayout());
       colorLabel.setDropTarget(new DropTarget(colorLabel, DnDConstants.ACTION_COPY_OR_MOVE, new LabelTarget(colorLabel, VMapModel.LINE_COLOR), true, ncfm));
@@ -499,7 +496,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
       colorTitle.setText(b.getString("kColorVariable"));
 
       // Y Axis
-      yAxisPanel.setBackground(new Color(186, 217, 217)); ;
+      yAxisPanel.setBackground(new Color(186, 217, 217));
       yAxisPanel.setBorder(BorderFactory.createLoweredBevelBorder());
       yAxisPanel.setLayout(borderLayout5);
       yAxisLabel.setDropTarget(new DropTarget(yAxisLabel, DnDConstants.ACTION_COPY_OR_MOVE, new LabelTarget(yAxisLabel, VMapModel.Y_AXIS), true, ncfm));
@@ -629,51 +626,51 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
     JLabel jLabel3 = new JLabel();
     GridBagLayout gridBagLayout10 = new GridBagLayout();
     JPanel targetPanel = new JPanel();
-    JLabel xAxisLabel = new JLabel();
-    JLabel yAxisLabel = new JLabel();
-    JLabel zAxisLabel = new JLabel();
-    JLabel zAxisColorLabel = new JLabel();
-    JLabel uLabel = new JLabel();
-    JLabel vLabel = new JLabel();
-    JLabel wLabel = new JLabel();
+    final JLabel xAxisLabel = new JLabel();
+    final JLabel yAxisLabel = new JLabel();
+    final JLabel zAxisLabel = new JLabel();
+    final JLabel zAxisColorLabel = new JLabel();
+    final JLabel uLabel = new JLabel();
+    final JLabel vLabel = new JLabel();
+    final JLabel wLabel = new JLabel();
     //JLabel contLabel = new JLabel();
-    JLabel surfLabel = new JLabel();
-    JLabel surfColorLabel = new JLabel();
-    JLabel volumeLabel = new JLabel();
-    JLabel xAxisTitle = new JLabel();
-    JLabel yAxisTitle = new JLabel();
-    JLabel zAxisTitle = new JLabel();
-    JLabel zAxisColorTitle = new JLabel();
-    JLabel uTitle = new JLabel();
-    JLabel vTitle = new JLabel();
-    JLabel wTitle = new JLabel();
+    final JLabel surfLabel = new JLabel();
+    final JLabel surfColorLabel = new JLabel();
+    final JLabel volumeLabel = new JLabel();
+    final JLabel xAxisTitle = new JLabel();
+    final JLabel yAxisTitle = new JLabel();
+    final JLabel zAxisTitle = new JLabel();
+    final JLabel zAxisColorTitle = new JLabel();
+    final JLabel uTitle = new JLabel();
+    final JLabel vTitle = new JLabel();
+    final JLabel wTitle = new JLabel();
     //JLabel contTitle = new JLabel();
-    JLabel surfTitle = new JLabel();
-    JLabel surfColorTitle = new JLabel();
-    JLabel volumeTitle = new JLabel();
-    JPanel xAxisPanel = new JPanel();
-    JPanel yAxisPanel = new JPanel();
-    JPanel zAxisPanel = new JPanel();
-    JPanel zAxisColorPanel = new JPanel();
-    JPanel uComponentPanel = new JPanel();
-    JPanel vComponentPanel = new JPanel();
-    JPanel wComponentPanel = new JPanel();
+    final JLabel surfTitle = new JLabel();
+    final JLabel surfColorTitle = new JLabel();
+    final JLabel volumeTitle = new JLabel();
+    final JPanel xAxisPanel = new JPanel();
+    final JPanel yAxisPanel = new JPanel();
+    final JPanel zAxisPanel = new JPanel();
+    final JPanel zAxisColorPanel = new JPanel();
+    final JPanel uComponentPanel = new JPanel();
+    final JPanel vComponentPanel = new JPanel();
+    final JPanel wComponentPanel = new JPanel();
     //JPanel contourPanel = new JPanel();
-    JPanel surfPanel = new JPanel();
-    JPanel surfColorPanel = new JPanel();
-    JPanel volumePanel = new JPanel();
-    BorderLayout borderLayout4 = new BorderLayout();
-    BorderLayout borderLayout5 = new BorderLayout();
-    BorderLayout borderLayout55 = new BorderLayout();
-    BorderLayout borderLayout66 = new BorderLayout();
-    BorderLayout borderLayout6 = new BorderLayout();
-    BorderLayout borderLayout7 = new BorderLayout();
+    final JPanel surfPanel = new JPanel();
+    final JPanel surfColorPanel = new JPanel();
+    final JPanel volumePanel = new JPanel();
+    final BorderLayout borderLayout4 = new BorderLayout();
+    final BorderLayout borderLayout5 = new BorderLayout();
+    final BorderLayout borderLayout55 = new BorderLayout();
+    final BorderLayout borderLayout66 = new BorderLayout();
+    final BorderLayout borderLayout6 = new BorderLayout();
+    final BorderLayout borderLayout7 = new BorderLayout();
     BorderLayout borderLayout8 = new BorderLayout();
     BorderLayout borderLayout9 = new BorderLayout();
-    BorderLayout borderLayout10 = new BorderLayout();
-    BorderLayout borderLayout11 = new BorderLayout();
-    BorderLayout borderLayout12 = new BorderLayout();
-    BorderLayout borderLayout13 = new BorderLayout();
+    final BorderLayout borderLayout10 = new BorderLayout();
+    final BorderLayout borderLayout11 = new BorderLayout();
+    final BorderLayout borderLayout12 = new BorderLayout();
+    final BorderLayout borderLayout13 = new BorderLayout();
 
     public ThreeDTargetPanel() {
       GridBagLayout gridBagLayout1 = new GridBagLayout();
@@ -1048,7 +1045,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
   }
 
   class VariableMapDialog_quitButton_actionAdapter implements ActionListener {
-    VariableMapDialog adaptee;
+    final VariableMapDialog adaptee;
 
     VariableMapDialog_quitButton_actionAdapter(VariableMapDialog adaptee) {
       this.adaptee = adaptee;
@@ -1060,7 +1057,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
   }
 
   class VariableMapDialog_helpButton_actionAdapter implements ActionListener {
-    VariableMapDialog adaptee;
+    final VariableMapDialog adaptee;
 
     VariableMapDialog_helpButton_actionAdapter(VariableMapDialog adaptee) {
       this.adaptee = adaptee;
@@ -1072,7 +1069,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
   }
 
   class VariableMapDialog_clearButton_actionAdapter implements ActionListener {
-    VariableMapDialog adaptee;
+    final VariableMapDialog adaptee;
 
     VariableMapDialog_clearButton_actionAdapter(VariableMapDialog adaptee) {
       this.adaptee = adaptee;
@@ -1084,7 +1081,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
   }
 
   class VariableMapDialog_applyButton_actionAdapter implements ActionListener {
-    VariableMapDialog adaptee;
+    final VariableMapDialog adaptee;
 
     VariableMapDialog_applyButton_actionAdapter(VariableMapDialog adaptee) {
       this.adaptee = adaptee;
@@ -1096,7 +1093,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
   }
 
   class VariableMapDialog_doneButton_actionAdapter implements ActionListener {
-    VariableMapDialog adaptee;
+    final VariableMapDialog adaptee;
 
     VariableMapDialog_doneButton_actionAdapter(VariableMapDialog adaptee) {
       this.adaptee = adaptee;
@@ -1108,7 +1105,7 @@ public class VariableMapDialog extends JDialog implements ButtonMaintainer {
   }
 
   class VariableMapDialog_showDimsCB_actionAdapter implements ActionListener {
-    VariableMapDialog adaptee;
+    final VariableMapDialog adaptee;
 
     VariableMapDialog_showDimsCB_actionAdapter(VariableMapDialog adaptee) {
       this.adaptee = adaptee;

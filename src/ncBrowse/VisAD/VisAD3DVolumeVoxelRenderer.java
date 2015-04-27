@@ -3,22 +3,24 @@
  */
 package ncBrowse.VisAD;
 
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.*;
-import visad.*;
-import visad.java3d.*;
-import java.rmi.RemoteException;
-import gov.noaa.pmel.sgt.dm.*;
-import gov.noaa.pmel.util.SoTRange;
+import gov.noaa.pmel.sgt.dm.SGTData;
+import gov.noaa.pmel.sgt.dm.SGTMetaData;
+import gov.noaa.pmel.sgt.dm.ThreeDGrid;
 import gov.noaa.pmel.util.GeoDate;
-import ncBrowse.map.*;
-import gov.noaa.pmel.sgt.GridAttribute;
-import gov.noaa.pmel.util.Range2D;
-import visad.util.*;
-import java.awt.event.*;
+import gov.noaa.pmel.util.SoTRange;
+import ncBrowse.Debug;
+import ncBrowse.MenuBar3D;
+import ncBrowse.NcFile;
+import ncBrowse.map.VMapModel;
+import visad.*;
+import visad.java3d.DisplayImplJ3D;
+import visad.util.SelectRangeWidget;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
 import java.awt.*;
-import ncBrowse.*;
+import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 /**
  * <pre>
@@ -101,7 +103,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
 							xMap.setRange(xmin, xmax);
 						xRangeMap.setRange(xmin, xmax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = valGrid.getTimeArray();
@@ -117,7 +119,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
 							xMap.setRange(xmin, xmax);
 						xRangeMap.setRange((float)xmin, (float)xmax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				
 				if (!valGrid.isYTime()) {
@@ -131,7 +133,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
 							yMap.setRange(ymin, ymax);
 						yRangeMap.setRange(ymin, ymax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = valGrid.getTimeArray();
@@ -145,7 +147,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
 							yMap.setRange(ymin, ymax);
 						yRangeMap.setRange(ymin, ymax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				
 				if (!valGrid.isZTime()) {
@@ -159,7 +161,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
 							zMap.setRange(zmin, zmax);
 						zRangeMap.setRange(zmin, zmax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = valGrid.getTimeArray();
@@ -173,7 +175,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
 							zMap.setRange(zmin, zmax);
 						zRangeMap.setRange(zmin, zmax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 			}
 			
@@ -229,7 +231,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
 				valRangeMap.setRange(vmin, vmax);
 				valMap.setRange(vmin, vmax);
 			}
-			catch (Exception ex) {}
+			catch (Exception ignored) {}
 		    try {
    				domain_set = new Linear3DSet(domain_tuple, ymin, ymax, ySize,
                                                xmin, xmax, xSize,
@@ -238,7 +240,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
     			vals_ff.setSamples(flat_samples, false);
     			data_ref.setData(vals_ff);
     		}
-    		catch (Exception ex) {} 
+    		catch (Exception ignored) {}
 		}
 	}
 
@@ -251,9 +253,9 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
  	SGTMetaData zMetaData = valGrid.getZMetaData();
  	SGTMetaData valMetaData = valGrid.getValMetaData();
  	
-    red = new RealType("RED", null, null);
-    green = new RealType("GREEN", null, null);
-    blue = new RealType("BLUE", null, null);
+    red = RealType.getRealType("RED", null, null);
+    green = RealType.getRealType("GREEN", null, null);
+    blue = RealType.getRealType("BLUE", null, null);
  	
  	// x axis
  	double[] xArray;
@@ -318,7 +320,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
     	else
     		typeName = yMetaData.getName();
 	    try {
-	    	Y = new RealType(typeName, null, null);
+	    	Y = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -340,7 +342,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
     	else
     		typeName = xMetaData.getName();
 	    try {
-	    	X = new RealType(typeName, null, null);
+	    	X = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -362,7 +364,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
     	else
     		typeName = zMetaData.getName();
 	    try {
-	    	Z = new RealType(typeName, null, null);
+	    	Z = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -388,7 +390,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
     	else
     		typeName = valMetaData.getName();
 	    try {
-	    	V = new RealType(typeName, null, null);
+	    	V = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -465,7 +467,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
     display.addDisplayListener(this);
     
     // Get display's graphics mode control and draw scales
-    GraphicsModeControl dispGMC = (GraphicsModeControl)display.getGraphicsModeControl();
+    GraphicsModeControl dispGMC = display.getGraphicsModeControl();
     dispGMC.setScaleEnable(true);
     dispGMC.setPointSize(40.0f);
 
@@ -534,7 +536,7 @@ public class VisAD3DVolumeVoxelRenderer extends VisADPlotRenderer {
     mFrame = new JFrame("3D " + s + " from " + name);
     
     // add the menu bar
-    mMenuBar = new MenuBar3D(mFrame, (ActionListener)this, false);
+    mMenuBar = new MenuBar3D(mFrame, this, false);
     JPanel cont = new JPanel();
     cont.setLayout(new BorderLayout(5, 5));
     cont.add("Center", display.getComponent());

@@ -48,7 +48,7 @@ import gov.noaa.pmel.sgt.dm.ThreeDGrid;
  * @version $Revision: 1.1 $, $Date: 2004/05/06 20:53:36 $
  */
   public class LThreeDGrid extends ThreeDGrid {
-    protected PropertyChangeSupport changes_ = new PropertyChangeSupport(this);
+    protected final PropertyChangeSupport changes_ = new PropertyChangeSupport(this);
     protected boolean inBatch_ = false;
     protected boolean changeMade_ = false;
 

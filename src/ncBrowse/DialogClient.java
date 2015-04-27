@@ -13,21 +13,21 @@ import javax.swing.*;
 public interface DialogClient {
 	// OK Button
     //abstract public void dialogDismissed(Frame d);
-    abstract public void dialogDismissed(JDialog d);
+  void dialogDismissed(JDialog d);
     
     // Cancel button
     //abstract public void dialogCancelled(Frame d);
-    abstract public void dialogCancelled(JDialog d);
+    void dialogCancelled(JDialog d);
     
     // something other than the OK button 
     //abstract public void dialogDismissedTwo(Frame d);
-    abstract public void dialogDismissedTwo(JDialog d);
+    void dialogDismissedTwo(JDialog d);
     
     // Apply button, OK w/o dismissing the dialog
     //abstract public void dialogApply(Frame d);
-    abstract public void dialogApply(JDialog d);
+    void dialogApply(JDialog d);
     
     // Apply button, OK w/o dismissing the dialog
     //abstract public void dialogApplyTwo(Object d);
-    abstract public void dialogApplyTwo(Object d);
+    void dialogApplyTwo(Object d);
 }

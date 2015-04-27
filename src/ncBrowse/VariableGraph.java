@@ -440,7 +440,7 @@ public class VariableGraph extends VariableProcessThread {
     try {
       display_.setVisible(false);
       display_.dispose();
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 

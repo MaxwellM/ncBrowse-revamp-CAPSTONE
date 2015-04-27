@@ -25,9 +25,9 @@ import ucar.nc2.Variable;
  */
 
 public class NcListModel implements ListModel {
-  Vector list_;
-  Vector dimOrVar_;
-  Vector listeners_;
+  final Vector list_;
+  final Vector dimOrVar_;
+  final Vector listeners_;
 
   public NcListModel() {
     list_ = new Vector();
@@ -43,7 +43,7 @@ public class NcListModel implements ListModel {
     listeners_ = new Vector();
     Enumeration dov = dimOrVar_.elements();
     while(dov.hasMoreElements()) {
-      obj = (Object)dov.nextElement();
+      obj = dov.nextElement();
       if(obj instanceof Dimension) {
         str = ((Dimension)obj).getName() + " (dim)";
       } else if(obj instanceof Variable) {

@@ -28,8 +28,8 @@ import ncBrowse.Debug;
  * @version $Revision: 1.12 $, $Date: 2004/05/17 22:49:34 $
  */
 public class LabelTarget implements DropTargetListener {
-  JLabel label_;
-  int type_;
+  final JLabel label_;
+  final int type_;
 
   public LabelTarget(JLabel tf, int type) {
     label_ = tf;
@@ -63,7 +63,7 @@ public class LabelTarget implements DropTargetListener {
 
         dtde.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
         if(transferable.isDataFlavorSupported(NcTransferable.NcIndexFlavor)) {  // redundent test
-          int index = ((Integer)transferable.getTransferData(NcTransferable.NcIndexFlavor)).intValue();
+          int index = (Integer) transferable.getTransferData(NcTransferable.NcIndexFlavor);
           VMapModel map = VariableMapDialog.getCurrentMap();
           Object obj = VariableMapDialog.getCurrentModel().getDimOrVarAt(index);
           map.setElement(obj, type_);
@@ -76,14 +76,9 @@ public class LabelTarget implements DropTargetListener {
         dtde.rejectDrop();
       }
     }
-    catch (IOException exception) {
+    catch (IOException | UnsupportedFlavorException exception) {
       exception.printStackTrace();
       System.err.println( "Exception" + exception.getMessage());
-      dtde.rejectDrop();
-    }
-    catch (UnsupportedFlavorException ufException ) {
-      ufException.printStackTrace();
-      System.err.println( "Exception" + ufException.getMessage());
       dtde.rejectDrop();
     }
   }

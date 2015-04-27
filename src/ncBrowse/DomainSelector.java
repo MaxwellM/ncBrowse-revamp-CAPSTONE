@@ -21,6 +21,7 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
+import java.util.Objects;
 
 /**
  * Provides an interface for setting the domain for extracting data
@@ -189,10 +190,10 @@ public class DomainSelector extends JFrame implements Runnable {
     Insets ins = getInsets();
     setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
     Component components[] = getContentPane().getComponents();
-    for (int i = 0; i < components.length; i++) {
-      Point p = components[i].getLocation();
+    for (Component component : components) {
+      Point p = component.getLocation();
       p.translate(ins.left, ins.top);
-      components[i].setLocation(p);
+      component.setLocation(p);
     }
     fComponentsAdjusted = true;
   }
@@ -261,9 +262,7 @@ public class DomainSelector extends JFrame implements Runnable {
     setTitle(variable_ + " from " + name + " (Domain Selector)");
     ncVar_ = ncFile_.findVariable(variable_);
     rank_ = ncVar_.getRank();
-    StringBuffer sbuf = new StringBuffer();
-    sbuf.append(ncVar_.toString());
-    infoText.setText(sbuf.toString());
+    infoText.setText(ncVar_.toString());
     //
     JPanel axes_ = makeAxesPanel();
     axesScrollPane.getViewport().add(axes_);
@@ -629,7 +628,7 @@ public class DomainSelector extends JFrame implements Runnable {
                            0, 0);
       panel.add(minGroupPanel, bag);
       if(noVar) {
-        minRange_[rows] = new Integer(0);
+        minRange_[rows] = 0;
       } else {
         minRange_[rows] = ncFile_.getArrayValue(var, 0);
       }
@@ -671,7 +670,7 @@ public class DomainSelector extends JFrame implements Runnable {
                            0, 0);
       panel.add(maxGroupPanel, bag);
       if(noVar) {
-        maxRange_[rows] = new Integer(len-1);
+        maxRange_[rows] = len - 1;
       } else {
         maxRange_[rows] = ncFile_.getArrayValue(var, len-1);
       }
@@ -748,9 +747,9 @@ public class DomainSelector extends JFrame implements Runnable {
     //
     if(isUNH_) {
       for(int i=0; i < rank_; i++) {
-        if(((Variable)dimOrVar_[i]).getName() == "time") {
+        if(Objects.equals(((Variable) dimOrVar_[i]).getName(), "time")) {
           xBox_[i].setSelected(true);
-        } else if(((Variable)dimOrVar_[i]).getName().indexOf("z") != -1) {
+        } else if(((Variable) dimOrVar_[i]).getName().contains("z")) {
           xBox_[i].setSelected(true);
         } else {
           xBox_[i].setSelected(false);
@@ -875,8 +874,8 @@ public class DomainSelector extends JFrame implements Runnable {
         minRange = ((Float)minRange_[i]).doubleValue();
         maxRange = ((Float)maxRange_[i]).doubleValue();
       } else if(minRange_[i] instanceof Double) {
-        minRange = ((Double)minRange_[i]).doubleValue();
-        maxRange = ((Double)maxRange_[i]).doubleValue();
+        minRange = (Double) minRange_[i];
+        maxRange = (Double) maxRange_[i];
       }
       sdd_.setRange(minRange, maxRange);
       sdd_.setStartValue(Double.parseDouble(min_[i].getText()));
@@ -982,7 +981,7 @@ public class DomainSelector extends JFrame implements Runnable {
     try {
       this.setVisible(false);
       this.dispose();
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 
@@ -1050,7 +1049,7 @@ public class DomainSelector extends JFrame implements Runnable {
         }
       } else {
         try {
-          Object[] adArgs = {new Integer(pwindex), subset};
+          Object[] adArgs = {pwindex, subset};
           addData.invoke(ncSupport, adArgs);
         } catch(Exception ex) {
           ex.printStackTrace();
@@ -1059,7 +1058,6 @@ public class DomainSelector extends JFrame implements Runnable {
     } catch (RankNotSupportedException e) {
         String s = e.toString();
       System.out.println(s);
-      return;
     }
 
   }
@@ -1139,10 +1137,10 @@ public class DomainSelector extends JFrame implements Runnable {
                                   yBox_[i].isSelected(),
                                   min, max);
         } else if(anArray instanceof long[]) {
-          long min = (long)Math.round((new Double(min_[i].getText())).doubleValue());
+          long min = Math.round((new Double(min_[i].getText())).doubleValue());
           long max;
           if(selAxis) {
-            max = (long)Math.round((new Double(max_[i].getText())).doubleValue());
+            max = Math.round((new Double(max_[i].getText())).doubleValue());
           } else {
             max = min;
           }
@@ -1193,12 +1191,12 @@ public class DomainSelector extends JFrame implements Runnable {
                                   revBox_[i].isSelected(),
                                   xBox_[i].isSelected(),
                                   yBox_[i].isSelected(),
-                                  (short)min, (short)max);
+              min, max);
         } else if(anArray instanceof float[]) {
-          float min = (new Float(min_[i].getText())).floatValue();
+          float min = new Float(min_[i].getText());
           float max;
           if(selAxis) {
-            max = (new Float(max_[i].getText())).floatValue();
+            max = new Float(max_[i].getText());
           } else {
             max = min;
           }
@@ -1209,10 +1207,10 @@ public class DomainSelector extends JFrame implements Runnable {
                                   yBox_[i].isSelected(),
                                   min, max);
         } else if(anArray instanceof double[]) {
-          double min = (new Double(min_[i].getText())).doubleValue();
+          double min = new Double(min_[i].getText());
           double max;
           if(selAxis) {
-            max = (new Double(max_[i].getText())).doubleValue();
+            max = new Double(max_[i].getText());
           } else {
             max = min;
           }
@@ -1234,11 +1232,11 @@ public class DomainSelector extends JFrame implements Runnable {
     if(Debug.DEBUG) {
       int[] origin = range.getOrigin();
       int[] shape = range.getShape();
-      StringBuffer org = new StringBuffer("Origin = [");
-      StringBuffer shp = new StringBuffer("Shape = [");
+      StringBuilder org = new StringBuilder("Origin = [");
+      StringBuilder shp = new StringBuilder("Shape = [");
       for(int i=0; i < origin.length; i++) {
-        org.append(origin[i] + ", ");
-        shp.append(shape[i] + ", ");
+        org.append(origin[i]).append(", ");
+        shp.append(shape[i]).append(", ");
       }
       org.setCharAt(org.length()-2, ']');
       shp.setCharAt(shp.length()-2, ']');
@@ -1345,10 +1343,10 @@ public class DomainSelector extends JFrame implements Runnable {
                                   false,
                                   min, max);
         } else if(anArray instanceof long[]) {
-          long min = (long)Math.round((new Double(min_[i].getText())).doubleValue());
+          long min = Math.round((new Double(min_[i].getText())).doubleValue());
           long max;
           if(selAxis) {
-            max = (long)Math.round((new Double(max_[i].getText())).doubleValue());
+            max = Math.round((new Double(max_[i].getText())).doubleValue());
           } else {
             max = min;
           }
@@ -1385,12 +1383,12 @@ public class DomainSelector extends JFrame implements Runnable {
                                   false,
                                   xBox_[i].isSelected(),
                                   false,
-                                  (short)min, (short)max);
+              min, max);
         } else if(anArray instanceof float[]) {
-          float min = (new Float(min_[i].getText())).floatValue();
+          float min = new Float(min_[i].getText());
           float max;
           if(selAxis) {
-            max = (new Float(max_[i].getText())).floatValue();
+            max = new Float(max_[i].getText());
           } else {
             max = min;
           }
@@ -1401,10 +1399,10 @@ public class DomainSelector extends JFrame implements Runnable {
                                   false,
                                   min, max);
         } else if(anArray instanceof double[]) {
-          double min = (new Double(min_[i].getText())).doubleValue();
+          double min = new Double(min_[i].getText());
           double max;
           if(selAxis) {
-            max = (new Double(max_[i].getText())).doubleValue();
+            max = new Double(max_[i].getText());
           } else {
             max = min;
           }
@@ -1426,11 +1424,11 @@ public class DomainSelector extends JFrame implements Runnable {
     if(Debug.DEBUG) {
       int[] origin = range.getOrigin();
       int[] shape = range.getShape();
-      StringBuffer org = new StringBuffer("Origin = [");
-      StringBuffer shp = new StringBuffer("Shape = [");
+      StringBuilder org = new StringBuilder("Origin = [");
+      StringBuilder shp = new StringBuilder("Shape = [");
       for(int i=0; i < origin.length; i++) {
-        org.append(origin[i] + ", ");
-        shp.append(shape[i] + ", ");
+        org.append(origin[i]).append(", ");
+        shp.append(shape[i]).append(", ");
       }
       org.setCharAt(org.length()-2, ']');
       shp.setCharAt(shp.length()-2, ']');
@@ -1521,10 +1519,10 @@ public class DomainSelector extends JFrame implements Runnable {
                                   false,
                                   min, max);
         } else if(anArray instanceof long[]) {
-          long min = (long)Math.round((new Double(min_[i].getText())).doubleValue());
+          long min = Math.round((new Double(min_[i].getText())).doubleValue());
           long max;
           if(selAxis) {
-            max = (long)Math.round((new Double(max_[i].getText())).doubleValue());
+            max = Math.round((new Double(max_[i].getText())).doubleValue());
           } else {
             max = min;
           }
@@ -1561,12 +1559,12 @@ public class DomainSelector extends JFrame implements Runnable {
                                   false,
                                   xBox_[i].isSelected(),
                                   false,
-                                  (short)min, (short)max);
+              min, max);
         } else if(anArray instanceof float[]) {
-          float min = (new Float(min_[i].getText())).floatValue();
+          float min = new Float(min_[i].getText());
           float max;
           if(selAxis) {
-            max = (new Float(max_[i].getText())).floatValue();
+            max = new Float(max_[i].getText());
           } else {
             max = min;
           }
@@ -1577,10 +1575,10 @@ public class DomainSelector extends JFrame implements Runnable {
                                   false,
                                   min, max);
         } else if(anArray instanceof double[]) {
-          double min = (new Double(min_[i].getText())).doubleValue();
+          double min = new Double(min_[i].getText());
           double max;
           if(selAxis) {
-            max = (new Double(max_[i].getText())).doubleValue();
+            max = new Double(max_[i].getText());
           } else {
             max = min;
           }
@@ -1602,11 +1600,11 @@ public class DomainSelector extends JFrame implements Runnable {
     if(Debug.DEBUG) {
       int[] origin = range.getOrigin();
       int[] shape = range.getShape();
-      StringBuffer org = new StringBuffer("Origin = [");
-      StringBuffer shp = new StringBuffer("Shape = [");
+      StringBuilder org = new StringBuilder("Origin = [");
+      StringBuilder shp = new StringBuilder("Shape = [");
       for(int i=0; i < origin.length; i++) {
-        org.append(origin[i] + ", ");
-        shp.append(shape[i] + ", ");
+        org.append(origin[i]).append(", ");
+        shp.append(shape[i]).append(", ");
       }
       org.setCharAt(org.length()-2, ']');
       shp.setCharAt(shp.length()-2, ']');

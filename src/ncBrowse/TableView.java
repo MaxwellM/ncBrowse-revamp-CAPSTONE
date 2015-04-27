@@ -50,7 +50,7 @@ public class TableView extends JFrame {
     }
   }
 
-  void jbInit() throws Exception {
+  void jbInit() {
     getContentPane().setLayout(borderLayout1);
     setSize(658,565);
     setVisible(false);
@@ -109,10 +109,10 @@ public class TableView extends JFrame {
     Insets ins = getInsets();
     setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
     Component components[] = getContentPane().getComponents();
-    for (int i = 0; i < components.length; i++) {
-      Point p = components[i].getLocation();
+    for (Component component : components) {
+      Point p = component.getLocation();
       p.translate(ins.left, ins.top);
-      components[i].setLocation(p);
+      component.setLocation(p);
     }
     fComponentsAdjusted = true;
   }
@@ -168,9 +168,9 @@ public class TableView extends JFrame {
 	values.addElement(att.getStringValue());
       } else {
 	if(att.getLength() > 1) {
-	  StringBuffer sbuf = new StringBuffer(80);
+	  StringBuilder sbuf = new StringBuilder(80);
 	  for(int i=0; i < att.getLength(); i++) {
-	    sbuf.append(att.getNumericValue(i).toString() + ", ");
+	    sbuf.append(att.getNumericValue(i).toString()).append(", ");
 	  }
 	  values.addElement(sbuf.toString());
 	} else {
@@ -217,7 +217,7 @@ public class TableView extends JFrame {
 	if(attr == null) {
 	  line.append("; No Units Available!");
 	} else {
-	  line.append(": (" + attr.getStringValue() + ")");
+	  line.append(": (").append(attr.getStringValue()).append(")");
 	}
       }
       values.addElement(line.toString());
@@ -240,7 +240,7 @@ public class TableView extends JFrame {
     return dimTable;
   }
   public String stripBlanks(String in) {
-    StringBuffer sbuf = new StringBuffer(in);
+    StringBuilder sbuf = new StringBuilder(in);
     int len;
     int i;
     len = sbuf.length();
@@ -307,7 +307,7 @@ public class TableView extends JFrame {
     try {
       this.setVisible(false);
       this.dispose();
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 }

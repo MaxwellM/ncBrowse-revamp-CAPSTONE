@@ -20,42 +20,42 @@ import java.util.List;
  */
 public interface NcFile {
 
-  public Iterator<Variable> getDimensionVariables();
-  public Iterator<Variable> getNonDimensionVariables();
+  Iterator<Variable> getDimensionVariables();
+  Iterator<Variable> getNonDimensionVariables();
 
-  public String findAttValueIgnoreCase(Variable v,
-                                       String attName,
-                                       String defaultValue);
-  public Dimension findDimension(String name);
-  public Attribute findGlobalAttribute(String name);
-  public Attribute findGlobalAttributeIgnoreCase(String name);
-  public Variable findVariable(String name);
+  String findAttValueIgnoreCase(Variable v,
+                                String attName,
+                                String defaultValue);
+  Dimension findDimension(String name);
+  Attribute findGlobalAttribute(String name);
+  Attribute findGlobalAttributeIgnoreCase(String name);
+  Variable findVariable(String name);
 //  public Iterator getDimensionIterator();
 //  public Iterator getGlobalAttributeIterator();
-  public String getPathName();
+String getPathName();
 //  public Iterator getVariableIterator();
-  public String toString();
-  public String toStringDebug();
-  public List<Variable> getVariables();
-  public List<Dimension> getDimensions();
-  public List<Attribute> getGlobalAttributes();
-  public void close() throws IOException;
+String toString();
+  String toStringDebug();
+  List<Variable> getVariables();
+  List<Dimension> getDimensions();
+  List<Attribute> getGlobalAttributes();
+  void close() throws IOException;
 
-  public boolean isFile();
-  public boolean isDODS();
-  public boolean isHttp();
+  boolean isFile();
+  boolean isDODS();
+  boolean isHttp();
 
-  public String getFileName();
+  String getFileName();
   //
   // time and array utility methods
   //
-  public boolean isVariableTime(Variable var);
-  public Object getArrayValue(Variable var, int index);
-  public Object getArray(Variable var, int[] origin, int[] shape);
-  public boolean is624();
-  public int[] getTime2();
-  public GeoDate getRefDate();
-  public int getIncrement();
-    public void getVariableWindowData();
-    public String NcDump();
+  boolean isVariableTime(Variable var);
+  Object getArrayValue(Variable var, int index);
+  Object getArray(Variable var, int[] origin, int[] shape);
+  boolean is624();
+  int[] getTime2();
+  GeoDate getRefDate();
+  int getIncrement();
+    void getVariableWindowData();
+    String NcDump();
 }

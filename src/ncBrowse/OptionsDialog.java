@@ -42,7 +42,7 @@ public class OptionsDialog extends JDialog {
     this(frame, null, false);
   }
 
-  void jbInit() throws Exception {
+  void jbInit() {
     panel1.setLayout(borderLayout1);
     tFormatField.setColumns(25);
     getContentPane().add(panel1);
@@ -133,7 +133,7 @@ public class OptionsDialog extends JDialog {
     try {
       // OptionsDialog Hide the OptionsDialog
       this.setVisible(false);
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 
@@ -143,7 +143,7 @@ public class OptionsDialog extends JDialog {
     try {
       // OptionsDialog Hide the OptionsDialog
       this.setVisible(false);
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 
@@ -159,7 +159,7 @@ public class OptionsDialog extends JDialog {
         TimeHelpDialog1.setLocation(x, y);
         TimeHelpDialog1.setVisible(true);
       }
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 }

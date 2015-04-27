@@ -74,17 +74,16 @@ public class LASSelectionDialog extends JDialog {
   }
 
   public void dispose(){
-    for (Iterator i = mFileList.iterator(); i.hasNext(); ){
+    for (Object aMFileList : mFileList) {
       try {
-        ( (LasFile) i.next()).delete();
-      }
-      catch (IOException ex) {
+        ((LasFile) aMFileList).delete();
+      } catch (IOException ignored) {
       }
     }
     super.dispose();
   }
 
-  void jbInit() throws Exception {
+  void jbInit() {
     panel1.setLayout(borderLayout1);
     jLabel1.setText("LAS URL:");
     goButton.setText("Go");
@@ -339,11 +338,7 @@ class LasTreeModel implements TreeModel {
   Map mVarCache = new HashMap();
   public LasTreeModel(String name) throws IOException {
     mHandler = LASHandler.getInstance(name);
-    Comparator c = new Comparator(){
-      public int compare(Object o1, Object o2){
-        return o1.toString().compareTo(o2.toString());
-      }
-    };
+    Comparator c = (o1, o2) -> o1.toString().compareTo(o2.toString());
     mDatasets = new TreeSet(c);
     mDatasets.addAll(mHandler.getDatasets());
   }
@@ -355,11 +350,7 @@ class LasTreeModel implements TreeModel {
   private Set getVariables(LASHandler.Dataset dset){
     Set vars = (Set) mVarCache.get(dset.getName());
     if (vars == null) {
-      Comparator c = new Comparator(){
-        public int compare(Object o1, Object o2){
-          return o1.toString().compareTo(o2.toString());
-        }
-      };
+      Comparator c = (o1, o2) -> o1.toString().compareTo(o2.toString());
       try {
         vars = new TreeSet(c);
         vars.addAll(dset.getVariables());
@@ -398,16 +389,15 @@ class LasTreeModel implements TreeModel {
   public int getIndexOfChild(Object parent, Object child) {
     int count = -1;
     if (parent instanceof LASHandler){
-      for (Iterator i = mDatasets.iterator(); i.hasNext(); ){
-        if (child.equals(i.next())){
+      for (Object mDataset : mDatasets) {
+        if (child.equals(mDataset)) {
           return ++count;
         }
       }
     }
     if (parent instanceof LASHandler.Dataset){
-      for (Iterator i = getVariables((LASHandler.Dataset)parent).iterator();
-           i.hasNext(); ){
-        if (child.equals(i.next())){
+      for (Object o : getVariables((LASHandler.Dataset) parent)) {
+        if (child.equals(o)) {
           return ++count;
         }
       }

@@ -3,14 +3,12 @@
  */
 package ncBrowse;
 
-import dods.dap.DODSException;
 import gov.noaa.pmel.util.GeoDate;
 import ucar.nc2.Attribute;
 import ucar.nc2.Variable;
 import ucar.nc2.dods.DODSNetcdfFile;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -29,14 +27,14 @@ public class DODSNcFile extends DODSNetcdfFile implements NcFile {
   private NcUtil util_;
 
   public DODSNcFile(String path)
-    throws IOException, DODSException, MalformedURLException {
+    throws IOException {
     super(path);
     util_ = new NcUtil(this);
     System.out.println("Instantiating DODSNcFile = " + path);
   }
 
   public Iterator<Variable> getDimensionVariables() {
-    Vector<Variable> varDim = new Vector<Variable>();
+    Vector<Variable> varDim = new Vector<>();
 //    Iterator di = getDimensionIterator();
 //    while(di.hasNext()) {
     for(ucar.nc2.Dimension dim: getDimensions()) {
@@ -51,27 +49,25 @@ public class DODSNcFile extends DODSNetcdfFile implements NcFile {
   public Iterator<Variable> getNonDimensionVariables() {
     boolean is624 = false;
     Attribute epic_code;
-    Vector<Variable> varDim = new Vector<Variable>();
+    Vector<Variable> varDim = new Vector<>();
 //    Iterator vi = getVariableIterator();
 //    while(vi.hasNext()) {
     for(Variable var: getVariables()) {
 //      Variable var = (Variable)vi.next();
       epic_code = var.findAttribute("epic_code");
-      if(epic_code != null) {
-        is624 = epic_code.getNumericValue().intValue() == 624;
-      } else {
-        is624 = false;
-      }
-      if(!is624) {
-        if(!var.isCoordinateVariable()) varDim.addElement(var);
+      is624 = (epic_code != null) && (epic_code.getNumericValue().intValue() == 624);
+      if (!is624) {
+        if (!var.isCoordinateVariable()) varDim.addElement(var);
       }
     }
     return varDim.iterator();
   }
 
-  public boolean isDODS() {return true;};
-  public boolean isFile() {return false;};
-  public boolean isHttp() {return false;};
+  public boolean isDODS() {return true;}
+
+  public boolean isFile() {return false;}
+
+  public boolean isHttp() {return false;}
 
   public String getFileName() {
     String path = getPathName();

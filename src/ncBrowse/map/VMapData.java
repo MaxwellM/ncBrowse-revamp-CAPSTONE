@@ -53,7 +53,7 @@ import gov.noaa.pmel.util.SoTRange;
  * @version $Revision: 1.1 $, $Date: 2004/05/06 20:53:36 $
  */
   public abstract class VMapData implements SGTData, Serializable {
-    protected PropertyChangeSupport changes_ = new PropertyChangeSupport(this);
+    protected final PropertyChangeSupport changes_ = new PropertyChangeSupport(this);
     protected boolean inBatch_ = false;
     protected boolean changeMade_ = false;
     protected String id_;

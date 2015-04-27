@@ -10,25 +10,26 @@ public class MaintenanceTimer extends Thread {
 	}
 	
 	public void startMaintainer() {
-		if (isAlive())
+		if (isAlive()) {
 			super.resume();
+		}
 		else
 			start();	
 	}
 	
 	public void endMaintainer() {
-		if (isAlive())
-			stop();	
+		if (isAlive()) {
+			stop();
+		}
 	}
 	
 	public void run() {
-		for (;;) {
+		while (true) {
 			mMaintainer.maintainButtons();
 			try {
 				Thread.sleep(mDelay);
 			}
-			catch (InterruptedException e) {
-				;
+			catch (InterruptedException ignored) {
 			}
 		}
 	}

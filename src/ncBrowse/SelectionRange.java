@@ -3,24 +3,21 @@
  */
 package ncBrowse;
 
-import java.util.Vector;
-import java.io.IOException;
-
-import ucar.nc2.Variable;
-import ucar.nc2.Attribute;
+import gov.noaa.pmel.sgt.dm.SGTData;
+import gov.noaa.pmel.sgt.dm.SGTGrid;
+import gov.noaa.pmel.sgt.dm.SGTLine;
+import gov.noaa.pmel.sgt.dm.SGTMetaData;
+import gov.noaa.pmel.util.GeoDate;
+import ncBrowse.map.VMapGrid;
+import ncBrowse.map.VMapLine;
 import ucar.ma2.Array;
 import ucar.ma2.DataType;
 import ucar.ma2.InvalidRangeException;
+import ucar.nc2.Attribute;
+import ucar.nc2.Variable;
 
-import gov.noaa.pmel.util.GeoDate;
-
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTLine;
-import gov.noaa.pmel.sgt.dm.SGTGrid;
-import gov.noaa.pmel.sgt.dm.SGTMetaData;
-
-import ncBrowse.map.VMapLine;
-import ncBrowse.map.VMapGrid;
+import java.io.IOException;
+import java.util.Vector;
 
 /**
  * Defines the selection of a netCDF variable.
@@ -102,8 +99,8 @@ public class SelectionRange {
                                 int min, int max) {
     dimOrVar_[count_] = dimOrVar;
     array_.addElement(array);
-    min_.addElement(new Integer(min));
-    max_.addElement(new Integer(max));
+    min_.addElement(min);
+    max_.addElement(max);
     reverseAxis_[count_] = rev;
     int[] tmp = (int[]) array;
     arrayIsReversed_[count_] = tmp[tmp.length - 1] < tmp[0];
@@ -130,8 +127,8 @@ public class SelectionRange {
                                 byte min, byte max) {
     dimOrVar_[count_] = dimOrVar;
     array_.addElement(array);
-    min_.addElement(new Byte(min));
-    max_.addElement(new Byte(max));
+    min_.addElement(min);
+    max_.addElement(max);
     reverseAxis_[count_] = rev;
     int[] tmp = (int[]) array;
     arrayIsReversed_[count_] = tmp[tmp.length - 1] < tmp[0];
@@ -158,8 +155,8 @@ public class SelectionRange {
                                 short min, short max) {
     dimOrVar_[count_] = dimOrVar;
     array_.addElement(array);
-    min_.addElement(new Short(min));
-    max_.addElement(new Short(max));
+    min_.addElement(min);
+    max_.addElement(max);
     reverseAxis_[count_] = rev;
     short[] tmp = (short[]) array;
     arrayIsReversed_[count_] = tmp[tmp.length - 1] < tmp[0];
@@ -186,8 +183,8 @@ public class SelectionRange {
                                 float min, float max) {
     dimOrVar_[count_] = dimOrVar;
     array_.addElement(array);
-    min_.addElement(new Float(min));
-    max_.addElement(new Float(max));
+    min_.addElement(min);
+    max_.addElement(max);
     reverseAxis_[count_] = rev;
     float[] tmp = (float[]) array;
     arrayIsReversed_[count_] = tmp[tmp.length - 1] < tmp[0];
@@ -214,8 +211,8 @@ public class SelectionRange {
                                 double min, double max) {
     dimOrVar_[count_] = dimOrVar;
     array_.addElement(array);
-    min_.addElement(new Double(min));
-    max_.addElement(new Double(max));
+    min_.addElement(min);
+    max_.addElement(max);
     reverseAxis_[count_] = rev;
     double[] tmp = (double[]) array;
     arrayIsReversed_[count_] = tmp[tmp.length - 1] < tmp[0];
@@ -308,10 +305,7 @@ public class SelectionRange {
    * @return true if dimension is time
    */
   public boolean isTime(int index) {
-    if(index >= 0 && index < min_.size()) {
-      return(min_.get(index) instanceof GeoDate);
-    }
-    return false;
+    return index >= 0 && index < min_.size() && (min_.get(index) instanceof GeoDate);
   }
 
   /**
@@ -418,15 +412,15 @@ public class SelectionRange {
         value[i] = val;
       } else {
         if(array instanceof long[]) {
-          value[i] = new Long(((long[]) array)[index]);
+          value[i] = ((long[]) array)[index];
         } else if(array instanceof int[]) {
-          value[i] = new Integer(((int[]) array)[index]);
+          value[i] = ((int[]) array)[index];
         } else if(array instanceof short[]) {
-          value[i] = new Short(((short[]) array)[index]);
+          value[i] = ((short[]) array)[index];
         } else if(array instanceof float[]) {
-          value[i] = new Float(((float[]) array)[index]);
+          value[i] = ((float[]) array)[index];
         } else if(array instanceof double[]) {
-          value[i] = new Double(((double[]) array)[index]);
+          value[i] = ((double[]) array)[index];
         }
       }
     }
@@ -442,7 +436,7 @@ public class SelectionRange {
         // values are long
         //
         long[] longArray = (long[]) array_.get(i);
-        long value = ((Long) val.get(i)).longValue();
+        long value = (Long) val.get(i);
         len = longArray.length;
         if(len == 1) {
           index[i] = 0;
@@ -488,7 +482,7 @@ public class SelectionRange {
         // values are int
         //
         int[] intArray = (int[]) array_.get(i);
-        int value = ((Integer) val.get(i)).intValue();
+        int value = (Integer) val.get(i);
         len = intArray.length;
         if(len == 1) {
           index[i] = 0;
@@ -534,7 +528,7 @@ public class SelectionRange {
         // values are short
         //
         short[] shortArray = (short[]) array_.get(i);
-        short value = ((Short) val.get(i)).shortValue();
+        short value = (Short) val.get(i);
         len = shortArray.length;
         if(len == 1) {
           index[i] = 0;
@@ -580,7 +574,7 @@ public class SelectionRange {
         // values are float
         //
         float[] floatArray = (float[]) array_.get(i);
-        float value = ((Float) val.get(i)).floatValue();
+        float value = (Float) val.get(i);
         len = floatArray.length;
         if(len == 1) {
           index[i] = 0;
@@ -626,7 +620,7 @@ public class SelectionRange {
         // values are double
         //
         double[] doubleArray = (double[]) array_.get(i);
-        double value = ((Double) val.get(i)).doubleValue();
+        double value = (Double) val.get(i);
         len = doubleArray.length;
         if(len == 1) {
           index[i] = 0;
@@ -884,24 +878,24 @@ public class SelectionRange {
     title.append(" [");
     for(int i = shape.length - 1; i >= 0; i--) {
       if(dimOrVar_[i] instanceof ucar.nc2.Dimension) {
-        title.append(((ucar.nc2.Dimension) dimOrVar_[i]).getName() + "=");
+        title.append(((ucar.nc2.Dimension) dimOrVar_[i]).getName()).append("=");
       } else {
-        title.append(((Variable) dimOrVar_[i]).getName() + "=");
+        title.append(((Variable) dimOrVar_[i]).getName()).append("=");
       }
       if(i == xIndex) {
         title.append("*, ");
       } else if(isTime_[i]) {
-        title.append(((GeoDate) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       } else if(min_.get(i) instanceof Long) {
-        title.append(((Long) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       } else if(min_.get(i) instanceof Integer) {
-        title.append(((Integer) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       } else if(min_.get(i) instanceof Short) {
-        title.append(((Short) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       } else if(min_.get(i) instanceof Float) {
-        title.append(((Float) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       } else if(min_.get(i) instanceof Double) {
-        title.append(((Double) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       }
     }
     title.setCharAt(title.length() - 2, ']');
@@ -1025,24 +1019,24 @@ public class SelectionRange {
     title.append(" [");
     for(int i = shape.length - 1; i >= 0; i--) {
       if(dimOrVar_[i] instanceof ucar.nc2.Dimension) {
-        title.append(((ucar.nc2.Dimension) dimOrVar_[i]).getName() + "=");
+        title.append(((ucar.nc2.Dimension) dimOrVar_[i]).getName()).append("=");
       } else {
-        title.append(((Variable) dimOrVar_[i]).getName() + "=");
+        title.append(((Variable) dimOrVar_[i]).getName()).append("=");
       }
       if(i == xIndex || i == yIndex) {
         title.append("*, ");
       } else if(isTime_[i]) {
-        title.append(((GeoDate) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       } else if(min_.get(i) instanceof Long) {
-        title.append(((Long) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       } else if(min_.get(i) instanceof Integer) {
-        title.append(((Integer) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       } else if(min_.get(i) instanceof Short) {
-        title.append(((Short) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       } else if(min_.get(i) instanceof Float) {
-        title.append(((Float) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       } else if(min_.get(i) instanceof Double) {
-        title.append(((Double) values[i]).toString() + ", ");
+        title.append(values[i].toString()).append(", ");
       }
     }
     title.setCharAt(title.length() - 2, ']');
@@ -1177,9 +1171,7 @@ public class SelectionRange {
       } else {
         marr = var.read(origin, shape);
       }
-    } catch(IOException ex) {
-      ex.printStackTrace();
-    } catch(InvalidRangeException ex) {
+    } catch(IOException | InvalidRangeException ex) {
       ex.printStackTrace();
     }
     //
@@ -1244,7 +1236,7 @@ public class SelectionRange {
       outArray = new double[array.length];
       if(defaultMissing) {
         for(int j = 0; j < array.length; j++) {
-          temp = (int) array[j];
+          temp = array[j];
           if(scale_offset) {
             outArray[j] = temp * scale + offset;
           } else {
@@ -1258,7 +1250,7 @@ public class SelectionRange {
         }
       } else {
         for(int j = 0; j < array.length; j++) {
-          temp = (int) array[j];
+          temp = array[j];
           if(temp == missing) {
             outArray[j] = Double.NaN;
           } else {

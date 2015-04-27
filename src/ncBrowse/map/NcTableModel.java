@@ -29,11 +29,11 @@ import java.util.List;
  */
 
 public class NcTableModel implements TableModel {
-  String[] colNames = {"Name","Description"};
-  Vector dimOrVar_;
-  Vector name_;
-  Vector desc_;
-  Vector listeners_;
+  final String[] colNames = {"Name","Description"};
+  final Vector dimOrVar_;
+  final Vector name_;
+  final Vector desc_;
+  final Vector listeners_;
   Vector indexMap_;
   boolean showAllDims_ = false;
   int rowCount_ = 0;
@@ -58,17 +58,17 @@ public class NcTableModel implements TableModel {
         desc_.add("(" + ncDim.getLength() + " points)");
 //        if((ncDim.getCoordinateVariable() == null) || showAllDims_) {
         if((ncFile_.findVariable(ncDim.getName()) == null) || showAllDims_) {
-          indexMap_.add(new Integer(count));
+          indexMap_.add(count);
           out++;
         }
       } else if(obj instanceof Variable) {
         Variable ncVar = (Variable)obj;
         List al = ncVar.getDimensions();
-        StringBuffer sbuf = new StringBuffer("[");
+        StringBuilder sbuf = new StringBuilder("[");
         if((al.size() == 1) && ((Dimension)al.get(0)).getName().equals(ncVar.getName())) {
           name_.add("<html><b>" + ncVar.getName() + "</b></html>");
           Dimension ncDim = (Dimension)al.get(0);
-          sbuf.append(ncDim.getName() + " (" + ncDim.getLength() + " points)");
+          sbuf.append(ncDim.getName()).append(" (").append(ncDim.getLength()).append(" points)");
         } else {
           name_.add(ncVar.getName());
           for(int i=0; i < al.size(); i++) {
@@ -80,7 +80,7 @@ public class NcTableModel implements TableModel {
         }
         sbuf.append("]");
         desc_.add(sbuf.toString());
-        indexMap_.add(new Integer(count));
+        indexMap_.add(count);
         out++;
       } else {
         name_.add("Bad Entry");
@@ -92,7 +92,7 @@ public class NcTableModel implements TableModel {
   }
 
   public Object getDimOrVarAt(int rowIndex) {
-    int index = ((Integer)indexMap_.elementAt(rowIndex)).intValue();
+    int index = (Integer) indexMap_.elementAt(rowIndex);
     return dimOrVar_.get(index);
   }
 
@@ -117,7 +117,7 @@ public class NcTableModel implements TableModel {
   }
 
   public Object getValueAt(int rowIndex, int columnIndex) {
-    int index = ((Integer)indexMap_.elementAt(rowIndex)).intValue();
+    int index = (Integer) indexMap_.elementAt(rowIndex);
     if(columnIndex == 0) {
       return name_.elementAt(index);
     } else {
@@ -130,7 +130,7 @@ public class NcTableModel implements TableModel {
   }
 
   public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-    int index = ((Integer)indexMap_.elementAt(rowIndex)).intValue();
+    int index = (Integer) indexMap_.elementAt(rowIndex);
     if(columnIndex == 0) {
       name_.setElementAt(aValue, index);
     } else {
@@ -162,11 +162,11 @@ public class NcTableModel implements TableModel {
           Dimension ncDim = (Dimension)obj;
 //          if((ncDim.getCoordinateVariable() == null) || showAllDims_) {
           if((ncFile_.findVariable(ncDim.getName()) == null) || showAllDims_) {
-            indexMap_.add(new Integer(count));
+            indexMap_.add(count);
             out++;
           }
         } else if(obj instanceof Variable) {
-          indexMap_.add(new Integer(count));
+          indexMap_.add(count);
           out++;
         }
         count++;

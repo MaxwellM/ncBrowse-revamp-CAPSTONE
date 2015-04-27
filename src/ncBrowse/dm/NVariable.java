@@ -3,21 +3,21 @@
  */
 package ncBrowse.dm;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Vector;
-import java.util.List;
-import java.util.Iterator;
-import gov.noaa.pmel.util.GeoDateArray;
 import gov.noaa.pmel.util.GeoDate;
+import gov.noaa.pmel.util.GeoDateArray;
 import gov.noaa.pmel.util.IllegalTimeValue;
-
-import ucar.nc2.Variable;
-import ucar.nc2.Attribute;
-import ucar.nc2.Dimension;
 import ucar.ma2.Array;
 import ucar.ma2.DataType;
 import ucar.ma2.InvalidRangeException;
+import ucar.nc2.Attribute;
+import ucar.nc2.Dimension;
+import ucar.nc2.Variable;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
+import java.util.stream.Collectors;
 
 /**
  * <p>Title: </p>
@@ -39,10 +39,8 @@ public class NVariable extends NcBVariable {
     testForTime();
     varAttr_ = new Vector();
 //    Iterator attrI = var_.getAttributeIterator();
-    for(Attribute attr: var_.getAttributes()) {
-//    while(attrI.hasNext()) {
-      varAttr_.add(new NAttribute(attr));
-    }
+    //    while(attrI.hasNext()) {
+    varAttr_.addAll(var_.getAttributes().stream().map(NAttribute::new).collect(Collectors.toList()));
     dims_ = new Vector();
     Iterator dimI = var_.getDimensions().iterator();
     while(dimI.hasNext()) {
@@ -154,9 +152,7 @@ public class NVariable extends NcBVariable {
       } else {
         marr = var_.read(origin, shape);
       }
-    } catch (IOException ex) {
-      ex.printStackTrace();
-    } catch (InvalidRangeException ex) {
+    } catch (IOException | InvalidRangeException ex) {
       ex.printStackTrace();
     }
     //
@@ -221,7 +217,7 @@ public class NVariable extends NcBVariable {
       outArray = new double[array.length];
       if(defaultMissing) {
         for(int j=0; j < array.length; j++) {
-          temp = (int)array[j];
+          temp = array[j];
           if(scale_offset) {
             outArray[j] = temp*scale + offset;
           } else {
@@ -235,7 +231,7 @@ public class NVariable extends NcBVariable {
         }
       } else {
         for(int j=0; j < array.length; j++) {
-          temp = (int)array[j];
+          temp = array[j];
           if(temp == missing) {
             outArray[j] = Double.NaN;
           } else {
@@ -437,7 +433,7 @@ public class NVariable extends NcBVariable {
     Attribute epic_code;
     attr = var_.findAttribute("units");
     if(attr != null) {
-      if(attr.getStringValue().indexOf("since") != -1) return true;
+      if(attr.getStringValue().contains("since")) return true;
     }
     epic_code = var_.findAttribute("epic_code");
     if(epic_code != null) {
@@ -478,29 +474,29 @@ public class NVariable extends NcBVariable {
         refDate = new GeoDate(ref, tFormat_.substring(0, len));
         setRefTime(refDate.getTime());
       } catch (IllegalTimeValue e) {
-        System.out.println(e);
+        System.out.println(e.toString());
         try {
           refDate = new GeoDate("1970-01-01 00:00:00",
                                 "yyyy-MM-dd HH:mm:ss");
           setRefTime(refDate.getTime());
-          } catch (IllegalTimeValue ee) {}
+          } catch (IllegalTimeValue ignored) {}
           System.out.println("   Setting default reference date: " +
                              refDate.toString());
       }
 
-      if(units.indexOf("second") != -1) {
+      if(units.contains("second")) {
         increment = GeoDate.SECONDS;
-      } else if(units.indexOf("min") != -1) {
+      } else if(units.contains("min")) {
         increment = GeoDate.MINUTES;
-      } else if(units.indexOf("hour") != -1) {
+      } else if(units.contains("hour")) {
         increment = GeoDate.HOURS;
-      } else if(units.indexOf("day") != -1) {
+      } else if(units.contains("day")) {
         increment = GeoDate.DAYS;
-      } else if(units.indexOf("month") != -1) {
+      } else if(units.contains("month")) {
         increment = GeoDate.MONTHS;
-      } else if(units.indexOf("year") != -1) {
+      } else if(units.contains("year")) {
         increment = GeoDate.YEARS;
-      } else if(units.indexOf("msec") != -1) {
+      } else if(units.contains("msec")) {
         increment = GeoDate.MSEC;
       } else {
         increment = GeoDate.SECONDS;
@@ -523,7 +519,7 @@ public class NVariable extends NcBVariable {
         time2 = (int[])arr.copyTo1DJavaArray();
         setTime2(time2);
       } catch (IOException e) {
-        System.out.println(e);
+        System.out.println(e.toString());
       }
     }
   }

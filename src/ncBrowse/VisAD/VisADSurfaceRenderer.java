@@ -3,23 +3,28 @@
  */
 package ncBrowse.VisAD;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.*;
-import visad.*;
-import visad.java3d.*;
-import java.rmi.RemoteException;
-//import gov.noaa.pmel.sgt.dm.*;
-import gov.noaa.pmel.util.SoTRange;
-import gov.noaa.pmel.util.GeoDate;
-import ncBrowse.map.*;
-import visad.util.*;
-import java.awt.event.*;
-import java.awt.*;
-import ncBrowse.*;
-
-import gov.noaa.pmel.sgt.dm.SGTGrid;
 import gov.noaa.pmel.sgt.dm.SGTData;
+import gov.noaa.pmel.sgt.dm.SGTGrid;
 import gov.noaa.pmel.sgt.dm.SGTMetaData;
+import gov.noaa.pmel.util.GeoDate;
+import gov.noaa.pmel.util.SoTRange;
+import ncBrowse.Debug;
+import ncBrowse.MenuBar3D;
+import ncBrowse.NcFile;
+import ncBrowse.map.VMapModel;
+import visad.*;
+import visad.java3d.DisplayImplJ3D;
+import visad.java3d.ProjectionControlJ3D;
+import visad.util.LabeledColorWidget;
+import visad.util.SelectRangeWidget;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+
+//import gov.noaa.pmel.sgt.dm.*;
 
 /**
  * <pre>
@@ -100,7 +105,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 				hasColor = true;
 			if (dobj[0] instanceof SGTGrid) {
 				if (!mGrid.isXTime()) {
-					SoTRange xR = ((SGTGrid)dobj[0]).getXRange();
+					SoTRange xR = dobj[0].getXRange();
 			        xmin = ((Number)xR.getStart().getObjectValue()).floatValue();
 			        xmax = ((Number)xR.getEnd().getObjectValue()).floatValue();
 			        try {
@@ -110,7 +115,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 							xMap.setRange(xmin, xmax);
 						xRangeMap.setRange(xmin, xmax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
@@ -126,11 +131,11 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 							xMap.setRange(xmin, xmax);
 						xRangeMap.setRange((float)xmin, (float)xmax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 
 				if (!mGrid.isYTime()) {
-					SoTRange yR = ((SGTGrid)dobj[0]).getYRange();
+					SoTRange yR = dobj[0].getYRange();
 			        ymin = ((Number)yR.getStart().getObjectValue()).floatValue();
 			        ymax = ((Number)yR.getEnd().getObjectValue()).floatValue();
 			        try {
@@ -140,7 +145,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 							yMap.setRange(ymin, ymax);
 						yRangeMap.setRange(ymin, ymax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
@@ -154,7 +159,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 							yMap.setRange(ymin, ymax);
 						yRangeMap.setRange(ymin, ymax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 			}
 
@@ -163,14 +168,14 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
  			int xSize;
  			int ySize;
 
- 			if (((SGTGrid)dobj[0]).isXTime()) {
+ 			if (dobj[0].isXTime()) {
 		 		GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
 		 		xSize = gda.length;
  			}
  			else
  				xSize = ((SGTGrid)dobj[0]).getXSize();
 
- 			if (((SGTGrid)dobj[0]).isYTime()) {
+ 			if (dobj[0].isYTime()) {
 		 		GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
 		 		ySize = gda.length;
  			}
@@ -337,7 +342,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
     	else
     		typeName = yMetaData.getName();
 	    try {
-	    	Y = new RealType(typeName, null, null);
+	    	Y =  RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -359,7 +364,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
     	else
     		typeName = xMetaData.getName();
 	    try {
-	    	X = new RealType(typeName, null, null);
+	    	X =  RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -382,7 +387,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
     	else
     		typeName = zMetaData.getName();
 	    try {
-	    	Z = new RealType(typeName, null, null);
+	    	Z = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -404,7 +409,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 	    	else
 	    		typeName = zColorMetaData.getName() + "_color";
 		    try {
-		    	ZColor = new RealType(typeName, null, null);
+		    	ZColor = RealType.getRealType(typeName, null, null);
 		    	break;
 		    }
 		    catch (Exception ex) {
@@ -426,7 +431,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 	    	else
 	    		typeName = zMetaData.getName() + "_color";
 		    try {
-		    	ZColor = new RealType(typeName, null, null);
+		    	ZColor = RealType.getRealType(typeName, null, null);
 		    	break;
 		    }
 		    catch (Exception ex) {
@@ -498,7 +503,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
     display.addDisplayListener(this);
 
     // Get display's graphics mode control and draw scales
-    GraphicsModeControl dispGMC = (GraphicsModeControl)display.getGraphicsModeControl();
+    GraphicsModeControl dispGMC = display.getGraphicsModeControl();
     dispGMC.setScaleEnable(true);
 
     // get the display 3D Projection control
@@ -595,7 +600,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
     mFrame = new JFrame("3D " + s + " from " + name);
 
     // add the menu bar
-    mMenuBar = new MenuBar3D(mFrame, (ActionListener)this, false);
+    mMenuBar = new MenuBar3D(mFrame, this, false);
     cont = new JPanel();
     cont.setLayout(new BorderLayout(5, 5));
     cont.add("Center", display.getComponent());
@@ -643,7 +648,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 
 		for(int i=0;i < tableLength;i++){
 			myColorTable[0][i]= (float) i / ((float)tableLength-1.0f); // red component
-			myColorTable[2][i]= (float) 1.0f - (float)i / ((float)tableLength-1.0f); // blue component
+			myColorTable[2][i]= 1.0f - (float)i / ((float)tableLength-1.0f); // blue component
 
 			if(i<(tableLength)/2){ // lower half of table
 				myColorTable[1][i]= 2.0f *(float) i / (tableLength-1); // green component

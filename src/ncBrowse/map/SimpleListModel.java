@@ -7,6 +7,7 @@ import javax.swing.event.ListDataListener;
 import javax.swing.event.ListDataEvent;
 import javax.swing.ListModel;
 
+import java.util.Collections;
 import java.util.Vector;
 import java.util.Enumeration;
 
@@ -22,8 +23,8 @@ import java.util.Enumeration;
  */
 
 public class SimpleListModel implements ListModel {
-  Vector list_;
-  Vector listeners_;
+  final Vector list_;
+  final Vector listeners_;
 
   public SimpleListModel() {
     list_ = new Vector();
@@ -32,9 +33,7 @@ public class SimpleListModel implements ListModel {
   public SimpleListModel(String[] strlist) {
     list_ = new Vector();
     listeners_ = new Vector();
-    for(int i=0; i < strlist.length; i++) {
-      list_.add(strlist[i]);
-    }
+    Collections.addAll(list_, strlist);
   }
 
   public int getSize() {

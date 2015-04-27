@@ -45,14 +45,14 @@ public class VMapGraph extends Thread implements ChangeListener {
   /**
    * @label ncFile_
    */
-  private NcFile ncFile_;
-  private Browser parent_;
+  private final NcFile ncFile_;
+  private final Browser parent_;
   private JFrame display_;
   private JPlotLayout layout_;
   private JPanel graphPane_;
   private JPanel keyPanel_;
   private JScrollPane keyPanePanel_;
-  private JPane keyPane_ = null;
+  private final JPane keyPane_ = null;
   private SymAction lSymAction_;
   private JMenuItem printMenuItem_;
   private JMenuItem mapMenuItem_;
@@ -260,7 +260,7 @@ public class VMapGraph extends Thread implements ChangeListener {
 			if(dobj instanceof SGTGrid) {
 				GridAttribute gAttr;
 				try {
-					gAttr = (GridAttribute)layout_.getAttribute((SGTData)dobj);
+					gAttr = (GridAttribute)layout_.getAttribute(dobj);
 					if(gAttr.isRaster()) {
 						Range2D vRange = ((SGTGrid)dobj).getZRange();
 						ColorMap cmap = gAttr.getColorMap();

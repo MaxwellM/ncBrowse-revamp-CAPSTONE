@@ -92,17 +92,19 @@ public class ConfigCustomOrientation extends JDialog implements ActionListener {
     
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		
-		if (cmd.equals("cancel")) {
-			mClient.dialogCancelled(this);
-			this.dispose();
-		}
-		else if (cmd.equals("ok")) {
-			mClient.dialogDismissed(this);
-			this.dispose();
-		}
-		else if (cmd.equals("apply")) {
-			mClient.dialogApply(this);
+
+		switch (cmd) {
+			case "cancel":
+				mClient.dialogCancelled(this);
+				this.dispose();
+				break;
+			case "ok":
+				mClient.dialogDismissed(this);
+				this.dispose();
+				break;
+			case "apply":
+				mClient.dialogApply(this);
+				break;
 		}
 	}
 	
@@ -113,7 +115,7 @@ public class ConfigCustomOrientation extends JDialog implements ActionListener {
 			azimuth = 0.0;
 		else {
 			try {
-				azimuth = Double.valueOf(fldText).doubleValue();
+				azimuth = Double.valueOf(fldText);
 			}
 			catch (NumberFormatException ex) {
 				azimuth = 0.0;
@@ -130,7 +132,7 @@ public class ConfigCustomOrientation extends JDialog implements ActionListener {
 			declination = 0.0;
 		else {
 			try {
-				declination = Double.valueOf(fldText).doubleValue();
+				declination = Double.valueOf(fldText);
 			}
 			catch (NumberFormatException ex) {
 				declination = 0.0;

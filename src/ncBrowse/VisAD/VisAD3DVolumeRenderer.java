@@ -3,22 +3,25 @@
  */
 package ncBrowse.VisAD;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.*;
-import visad.*;
-import visad.java3d.*;
-import java.rmi.RemoteException;
-import gov.noaa.pmel.util.SoTRange;
-import gov.noaa.pmel.util.GeoDate;
-import ncBrowse.map.*;
-import visad.util.*;
-import java.awt.event.*;
-import java.awt.*;
-import ncBrowse.*;
-
+import gov.noaa.pmel.sgt.dm.SGTData;
 import gov.noaa.pmel.sgt.dm.SGTMetaData;
 import gov.noaa.pmel.sgt.dm.ThreeDGrid;
-import gov.noaa.pmel.sgt.dm.SGTData;
+import gov.noaa.pmel.util.GeoDate;
+import gov.noaa.pmel.util.SoTRange;
+import ncBrowse.Debug;
+import ncBrowse.MenuBar3D;
+import ncBrowse.NcFile;
+import ncBrowse.map.VMapModel;
+import visad.*;
+import visad.java3d.DisplayImplJ3D;
+import visad.util.LabeledColorWidget;
+import visad.util.SelectRangeWidget;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 /**
  * <pre>
@@ -109,7 +112,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
 							xMap.setRange(xmin, xmax);
 						xRangeMap.setRange(xmin, xmax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = valGrid.getTimeArray();
@@ -125,7 +128,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
 							xMap.setRange(xmin, xmax);
 						xRangeMap.setRange((float)xmin, (float)xmax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 
 				if (!valGrid.isYTime()) {
@@ -139,7 +142,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
 							yMap.setRange(ymin, ymax);
 						yRangeMap.setRange(ymin, ymax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = valGrid.getTimeArray();
@@ -153,7 +156,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
 							yMap.setRange(ymin, ymax);
 						yRangeMap.setRange(ymin, ymax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 
 				if (!valGrid.isZTime()) {
@@ -167,7 +170,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
 							zMap.setRange(zmin, zmax);
 						zRangeMap.setRange(zmin, zmax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = valGrid.getTimeArray();
@@ -181,7 +184,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
 							zMap.setRange(zmin, zmax);
 						zRangeMap.setRange(zmin, zmax);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 			}
 
@@ -237,7 +240,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
 				valRangeMap.setRange(vmin, vmax);
 				valMap.setRange(vmin, vmax);
 			}
-			catch (Exception ex) {}
+			catch (Exception ignored) {}
 
 		    try {
    				domain_set = new Linear3DSet(domain_tuple, ymin, ymax, ySize,
@@ -387,7 +390,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
     	else
     		typeName = yMetaData.getName();
 	    try {
-	    	Y = new RealType(typeName, null, null);
+	    	Y = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -409,7 +412,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
     	else
     		typeName = xMetaData.getName();
 	    try {
-	    	X = new RealType(typeName, null, null);
+	    	X = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -431,7 +434,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
     	else
     		typeName = zMetaData.getName();
 	    try {
-	    	Z = new RealType(typeName, null, null);
+	    	Z = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -456,7 +459,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
     	else
     		typeName = valMetaData.getName();
 	    try {
-	    	V = new RealType(typeName, null, null);
+	    	V = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -547,7 +550,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
     display.addDisplayListener(this);
 
     // Get display's graphics mode control and draw scales
-    GraphicsModeControl dispGMC = (GraphicsModeControl)display.getGraphicsModeControl();
+    GraphicsModeControl dispGMC = display.getGraphicsModeControl();
     dispGMC.setScaleEnable(true);
 
     if (mPlotSpec.isRespectDataAspectRatio()) {
@@ -629,7 +632,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
     mFrame = new JFrame("3D " + s + " from " + name);
 
     // add the menu bar
-    mMenuBar = new MenuBar3D(mFrame, (ActionListener)this, false);
+    mMenuBar = new MenuBar3D(mFrame, this, false);
     cont = new JPanel();
     cont.setLayout(new BorderLayout(5, 5));
     cont.add("Center", display.getComponent());
@@ -673,7 +676,7 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
 
 		for(int i=0;i < tableLength;i++){
 			myColorTable[0][i]= (float) i / ((float)tableLength-1.0f); // red component
-			myColorTable[2][i]= (float) 1.0f - (float)i / ((float)tableLength-1.0f); // blue component
+			myColorTable[2][i]= 1.0f - (float)i / ((float)tableLength-1.0f); // blue component
 
 			if(i<(tableLength)/2){ // lower half of table
 				myColorTable[1][i]= 2.0f *(float) i / (tableLength-1); // green component
@@ -686,12 +689,12 @@ public class VisAD3DVolumeRenderer extends VisADPlotRenderer {
 			}
 		}
 		// make lower edge "sharp"; alpha values only
-		myColorTable[3][0]= (float) 1.0f; // alpha component
-		myColorTable[3][1]= (float) 1.0f; // alpha component
+		myColorTable[3][0]= 1.0f; // alpha component
+		myColorTable[3][1]= 1.0f; // alpha component
 
 		// make upper edge semi-transparent; alpha values only
-		myColorTable[3][13]= (float) 0.5f; // alpha component
-		myColorTable[3][14]= (float) 0.5f; // alpha component
+		myColorTable[3][13]= 0.5f; // alpha component
+		myColorTable[3][14]= 0.5f; // alpha component
 
 		return myColorTable;
 	}

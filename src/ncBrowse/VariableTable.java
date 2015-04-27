@@ -47,9 +47,9 @@ public class VariableTable extends JTable {
 
   private void makeVariableTable() {
     Attribute att = null;
-    Vector<String> names = new Vector<String>(10,10);
-    Vector<String> values = new Vector<String>(10,10);
-    Vector<String> dims = new Vector<String>(10,10);
+    Vector<String> names = new Vector<>(10, 10);
+    Vector<String> values = new Vector<>(10, 10);
+    Vector<String> dims = new Vector<>(10, 10);
 //      VariableIterator varIter = null;
     Iterator<Variable> varIter = null;
     if(type == NON_DIMENSION) {
@@ -61,7 +61,7 @@ public class VariableTable extends JTable {
       varIter = ncFile.getVariables().iterator();
     }
     while(varIter.hasNext()) {
-      Variable var = (Variable)varIter.next();
+      Variable var = varIter.next();
       StringBuffer sbuf = new StringBuffer();
       names.addElement(var.getName());
       att = var.findAttribute("long_name");
@@ -84,8 +84,8 @@ public class VariableTable extends JTable {
       Iterator<Dimension> di = var.getDimensions().iterator();
       int dimCount = 0;
       while(di.hasNext()) {
-	ucar.nc2.Dimension dim = (ucar.nc2.Dimension)di.next();
-	sbuf.append(dim.getName()+",");
+	ucar.nc2.Dimension dim = di.next();
+	sbuf.append(dim.getName()).append(",");
 	dimCount++;
       }
       if(dimCount <= 0) {
@@ -102,9 +102,9 @@ public class VariableTable extends JTable {
     Enumeration<String> edims = dims.elements();
     String[][] data = new String[names.size()][3];
     for(int i=0; i < names.size(); i++) {
-      data[i][0] = (String)enames.nextElement();
-      data[i][1] = (String)evalues.nextElement();
-      data[i][2] = (String)edims.nextElement();
+      data[i][0] = enames.nextElement();
+      data[i][1] = evalues.nextElement();
+      data[i][2] = edims.nextElement();
     }
     VarTableModel vtm = new VarTableModel(data, new String[] 
       {"Name", "Description", "Dimensions"});
@@ -119,7 +119,7 @@ public class VariableTable extends JTable {
     tc.setPreferredWidth(100);
   }
   public String stripBlanks(String in) {
-    StringBuffer sbuf = new StringBuffer(in);
+    StringBuilder sbuf = new StringBuilder(in);
     int len;
     int i;
     len = sbuf.length();

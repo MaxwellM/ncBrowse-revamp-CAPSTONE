@@ -28,33 +28,33 @@ import java.util.Collection;
  */
 
 public class MovieControl extends JFrame implements ActionListener {
-  BorderLayout borderLayout1 = new BorderLayout();
-  JPanel buttonPanel = new JPanel();
-  JButton doneButton = new JButton();
-  JPanel controlsPanel = new JPanel();
-  BorderLayout borderLayout2 = new BorderLayout();
-  JPanel titlePanel = new JPanel();
-  JLabel titleLabel = new JLabel();
-  JLabel paramLabel = new JLabel();
-  GridBagLayout gridBagLayout1 = new GridBagLayout();
-  JPanel jPanel1 = new JPanel();
-  JButton stepForwardButton = new JButton();
-  JButton runStopButton = new JButton();
-  JButton stepBackButton = new JButton();
-  JButton rewindButton = new JButton();
-  JPanel speedPanel = new JPanel();
-  JSlider speedSlider = new JSlider();
+  final BorderLayout borderLayout1 = new BorderLayout();
+  final JPanel buttonPanel = new JPanel();
+  final JButton doneButton = new JButton();
+  final JPanel controlsPanel = new JPanel();
+  final BorderLayout borderLayout2 = new BorderLayout();
+  final JPanel titlePanel = new JPanel();
+  final JLabel titleLabel = new JLabel();
+  final JLabel paramLabel = new JLabel();
+  final GridBagLayout gridBagLayout1 = new GridBagLayout();
+  final JPanel jPanel1 = new JPanel();
+  final JButton stepForwardButton = new JButton();
+  final JButton runStopButton = new JButton();
+  final JButton stepBackButton = new JButton();
+  final JButton rewindButton = new JButton();
+  final JPanel speedPanel = new JPanel();
+  final JSlider speedSlider = new JSlider();
 
-  ImageIcon rewindIcon_;
-  ImageIcon stepBackIcon_;
-  ImageIcon runIcon_;
-  ImageIcon stopIcon_;
-  ImageIcon stepForwardIcon_;
+  final ImageIcon rewindIcon_;
+  final ImageIcon stepBackIcon_;
+  final ImageIcon runIcon_;
+  final ImageIcon stopIcon_;
+  final ImageIcon stepForwardIcon_;
 
   protected ChangeEvent changeEvent = null;
-  protected EventListenerList listenerList = new EventListenerList();
+  protected final EventListenerList listenerList = new EventListenerList();
 
-  static Collection<MovieControl> movies = new ArrayList<MovieControl>();
+  static final Collection<MovieControl> movies = new ArrayList<>();
 
   boolean isStopped_ = true;
   Timer timer_ = null;
@@ -64,20 +64,20 @@ public class MovieControl extends JFrame implements ActionListener {
   int paramIndex_ = 0;
   int paramLen_ = 0;
 
-  static int SLIDER_MAX = 5000;
-  static int SLIDER_MIN = 100;
+  static final int SLIDER_MAX = 5000;
+  static final int SLIDER_MIN = 100;
 
-  JLabel jLabel1 = new JLabel();
-  JLabel jLabel2 = new JLabel();
-  JPanel framePanel = new JPanel();
-  JSlider frameSlider = new JSlider();
-  GridBagLayout gridBagLayout2 = new GridBagLayout();
+  final JLabel jLabel1 = new JLabel();
+  final JLabel jLabel2 = new JLabel();
+  final JPanel framePanel = new JPanel();
+  final JSlider frameSlider = new JSlider();
+  final GridBagLayout gridBagLayout2 = new GridBagLayout();
   Border border1;
   TitledBorder titledBorder1;
   Border border2;
   Border border3;
   TitledBorder titledBorder2;
-  boolean play_;
+  final boolean play_;
 
   public static MovieControl getInstance() {
 //    if(instance_ == null) {
@@ -117,7 +117,7 @@ public class MovieControl extends JFrame implements ActionListener {
 
   private void jbInit() throws Exception {
     //TESTING
-    SliderListener sl = new SliderListener(this);
+    //SliderListener sl = new SliderListener(this);
 
     border1 = new EtchedBorder(EtchedBorder.RAISED, Color.white, new Color(142, 142, 142));
     titledBorder1 = new TitledBorder(border1, "Current Frame");
@@ -153,7 +153,7 @@ public class MovieControl extends JFrame implements ActionListener {
     frameSlider.addChangeListener(new MovieControl_frameSlider_changeAdapter(this));
 
     //TESTING
-    speedSlider.addChangeListener(sl);
+    //speedSlider.addChangeListener(sl);
 
     framePanel.setLayout(gridBagLayout2);
     frameSlider.setValue(0);
@@ -402,7 +402,7 @@ public class MovieControl extends JFrame implements ActionListener {
 }
 
 class SliderListener implements ChangeListener {
-  MovieControl adaptee;
+  final MovieControl adaptee;
 
   SliderListener(MovieControl adaptee){
     this.adaptee = adaptee;
@@ -416,7 +416,7 @@ class SliderListener implements ChangeListener {
 
 
 class MovieControl_doneButton_actionAdapter implements ActionListener {
-  MovieControl adaptee;
+  final MovieControl adaptee;
 
   MovieControl_doneButton_actionAdapter(MovieControl adaptee) {
     this.adaptee = adaptee;
@@ -429,7 +429,7 @@ class MovieControl_doneButton_actionAdapter implements ActionListener {
 }
 
 class MovieControl_rewindButton_actionAdapter implements ActionListener {
-  MovieControl adaptee;
+  final MovieControl adaptee;
 
   MovieControl_rewindButton_actionAdapter(MovieControl adaptee) {
     this.adaptee = adaptee;
@@ -442,7 +442,7 @@ class MovieControl_rewindButton_actionAdapter implements ActionListener {
 }
 
 class MovieControl_stepBackButton_actionAdapter implements ActionListener {
-  MovieControl adaptee;
+  final MovieControl adaptee;
 
   MovieControl_stepBackButton_actionAdapter(MovieControl adaptee) {
     this.adaptee = adaptee;
@@ -454,7 +454,7 @@ class MovieControl_stepBackButton_actionAdapter implements ActionListener {
 }
 
 class MovieControl_runStopButton_actionAdapter implements ActionListener {
-  MovieControl adaptee;
+  final MovieControl adaptee;
 
   MovieControl_runStopButton_actionAdapter(MovieControl adaptee) {
     this.adaptee = adaptee;
@@ -466,7 +466,7 @@ class MovieControl_runStopButton_actionAdapter implements ActionListener {
 }
 
 class MovieControl_stepForwardButton_actionAdapter implements ActionListener {
-  MovieControl adaptee;
+  final MovieControl adaptee;
 
   MovieControl_stepForwardButton_actionAdapter(MovieControl adaptee) {
     this.adaptee = adaptee;
@@ -478,7 +478,7 @@ class MovieControl_stepForwardButton_actionAdapter implements ActionListener {
 }
 
 class MovieControl_speedSlider_inputMethodAdapter implements InputMethodListener {
-  MovieControl adaptee;
+  final MovieControl adaptee;
 
   MovieControl_speedSlider_inputMethodAdapter(MovieControl adaptee) {
     this.adaptee = adaptee;
@@ -492,7 +492,7 @@ class MovieControl_speedSlider_inputMethodAdapter implements InputMethodListener
 }
 
 class MovieControl_speedSlider_changeAdapter implements ChangeListener {
-  MovieControl adaptee;
+  final MovieControl adaptee;
 
   MovieControl_speedSlider_changeAdapter(MovieControl adaptee) {
     this.adaptee = adaptee;
@@ -506,7 +506,7 @@ class MovieControl_speedSlider_changeAdapter implements ChangeListener {
 }
 
 class MovieControl_frameSlider_changeAdapter implements ChangeListener {
-  MovieControl adaptee;
+  final MovieControl adaptee;
 
   MovieControl_frameSlider_changeAdapter(MovieControl adaptee) {
     this.adaptee = adaptee;

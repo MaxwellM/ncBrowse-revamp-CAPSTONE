@@ -34,7 +34,7 @@ public class TimeHelpDialog extends JDialog {
     this(parent, null, false);
   }
   
-  void jbInit() throws Exception {
+  void jbInit() {
                 
     setTitle("Time Format Syntax");
     getContentPane().setLayout(borderLayout1);
@@ -165,7 +165,7 @@ public class TimeHelpDialog extends JDialog {
     try {
       this.setVisible(false);
       this.dispose();
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 }

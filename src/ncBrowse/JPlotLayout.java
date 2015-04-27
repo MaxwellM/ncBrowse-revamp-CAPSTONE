@@ -273,7 +273,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
     try {
       var24 = new GeoDate("1992-11-01", "yyyy-MM-dd");
       var25 = new GeoDate("1993-02-20", "yyyy-MM-dd");
-    } catch (IllegalTimeValue var30) {
+    } catch (IllegalTimeValue ignored) {
     }
 
     Object var26;
@@ -536,7 +536,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
         var9.setRangeU(var29);
         var9.setLocationU(var30);
         var9.setTitle(var13);
-      } catch (AxisNotFoundException var46) {
+      } catch (AxisNotFoundException ignored) {
 
       }
 
@@ -695,7 +695,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
         try {
           var8 = var6.getXAxis(BOTTOM_AXIS);
           var9 = var6.getYAxis(LEFT_AXIS);
-        } catch (AxisNotFoundException var44) {
+        } catch (AxisNotFoundException ignored) {
 
         }
 
@@ -901,8 +901,8 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
           ((Time)var1).end = var2;
           ((Time)var1).start = var4;
         } else {
-          ((gov.noaa.pmel.util.SoTRange.GeoDate)var1).end = new GeoDate(var2);
-          ((gov.noaa.pmel.util.SoTRange.GeoDate)var1).start = new GeoDate(var4);
+          ((gov.noaa.pmel.util.SoTRange.Time)var1).end = (var2);
+          ((gov.noaa.pmel.util.SoTRange.Time)var1).start = (var4);
         }
       }
     } else {
@@ -1063,15 +1063,15 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
     LinearTransform var3 = (LinearTransform)var1.getYTransform();
     Range2D var4 = null;
     Range2D var5 = null;
-    TimeRange var6 = null;
+    SoTRange var6 = null;
     if(var2.isTime()) {
-      var6 = var2.getTimeRangeU();
+      var6 = var2.getSoTRangeU();
     } else {
       var4 = var2.getRangeU();
     }
 
     if(var3.isTime()) {
-      var6 = var3.getTimeRangeU();
+      var6 = var3.getSoTRangeU();
     } else {
       var5 = var3.getRangeU();
     }
@@ -1084,15 +1084,15 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
     SoTRange var3;
     Time var4;
     gov.noaa.pmel.util.SoTRange.Double var5;
-    gov.noaa.pmel.util.SoTRange.GeoDate var6;
+    gov.noaa.pmel.util.SoTRange.Time var6;
     if(var1.isXTime()) {
       var3 = var1.getXRange();
       if(var3 instanceof Time) {
         var4 = (Time)var3;
-        var2.setXRange(new TimeRange(var4.start, var4.end));
+        var2.setXRange(new SoTRange(var4.start, var4.end));
       } else {
-        var6 = (gov.noaa.pmel.util.SoTRange.GeoDate)var3;
-        var2.setXRange(new TimeRange(var6.start, var6.end));
+        var6 = (gov.noaa.pmel.util.SoTRange.Time)var3;
+        var2.setXRange(new SoTRange(var6.start, var6.end));
       }
     } else {
       var5 = (gov.noaa.pmel.util.SoTRange.Double)var1.getXRange();
@@ -1103,10 +1103,10 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
       var3 = var1.getYRange();
       if(var3 instanceof Time) {
         var4 = (Time)var3;
-        var2.setYRange(new TimeRange(var4.start, var4.end));
+        var2.setYRange(new SoTRange(var4.start, var4.end));
       } else {
-        var6 = (gov.noaa.pmel.util.SoTRange.GeoDate)var3;
-        var2.setYRange(new TimeRange(var6.start, var6.end));
+        var6 = (gov.noaa.pmel.util.SoTRange.Time)var3;
+        var2.setYRange(new SoTRange(var6.start, var6.end));
       }
     } else {
       var5 = (gov.noaa.pmel.util.SoTRange.Double)var1.getYRange();
@@ -1171,8 +1171,8 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
     this.updateCoastLine();
   }
 
-  void setXRange(TimeRange var1) {
-    Time var5 = new Time(var1);
+  void setXRange(SoTRange var1) {
+    Time var5 = (Time) var1;
     CartesianGraph var7 = (CartesianGraph)this.firstLayer_.getGraph();
     LinearTransform var8 = (LinearTransform)var7.getXTransform();
     var8.setRangeU(var5);
@@ -1190,7 +1190,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
       } else {
         this.setAllClipping(false);
       }
-    } catch (AxisNotFoundException var10) {
+    } catch (AxisNotFoundException ignored) {
 
     }
 
@@ -1224,13 +1224,13 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
       } else {
         this.setAllClipping(false);
       }
-    } catch (AxisNotFoundException var11) {
+    } catch (AxisNotFoundException ignored) {
     }
 
   }
 
-  void setYRange(TimeRange var1) {
-    Time var5 = new Time(var1);
+  void setYRange(SoTRange var1) {
+    Time var5 = (Time) (var1);
     CartesianGraph var7 = (CartesianGraph)this.firstLayer_.getGraph();
     LinearTransform var8 = (LinearTransform)var7.getYTransform();
     var8.setRangeU(var5);
@@ -1248,7 +1248,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
       } else {
         this.setAllClipping(false);
       }
-    } catch (AxisNotFoundException var10) {
+    } catch (AxisNotFoundException ignored) {
     }
 
   }
@@ -1292,7 +1292,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
       } else {
         this.setAllClipping(false);
       }
-    } catch (AxisNotFoundException var13) {
+    } catch (AxisNotFoundException ignored) {
     }
 
   }
@@ -1312,7 +1312,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
           }
         }
       }
-    } catch (LayerNotFoundException var4) {
+    } catch (LayerNotFoundException ignored) {
 
     }
 
@@ -1349,7 +1349,7 @@ public class JPlotLayout extends JGraphicLayout implements PropertyChangeListene
     try {
       var2 = this.getLayerFromDataId(var1);
       this.remove(var2);
-    } catch (LayerNotFoundException var5) {
+    } catch (LayerNotFoundException ignored) {
 
     }
 

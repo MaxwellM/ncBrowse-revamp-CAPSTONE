@@ -68,7 +68,7 @@ public class URLSelectionDialog extends JDialog {
   public URLSelectionDialog() {
     this(null, "", false);
   }
-  void jbInit() throws Exception {
+  void jbInit() {
     backImage_ = new ImageIcon(getClass().getResource("images/Back16.gif"));
     panel1.setLayout(borderLayout1);
     jLabel1.setText("Web URL:");

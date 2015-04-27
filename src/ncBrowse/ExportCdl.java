@@ -66,7 +66,7 @@ public class ExportCdl extends VariableProcessThread {
 
     if(ret_val == JFileChooser.APPROVE_OPTION) {
       outFile_ = fileChoose_.getSelectedFile();
-      filt = (FileFilter)fileChoose_.getFileFilter();
+      filt = fileChoose_.getFileFilter();
       if(filt instanceof SimpleFileFilter) {
         ext_ = ((SimpleFileFilter)filt).getExtension();
       } else {

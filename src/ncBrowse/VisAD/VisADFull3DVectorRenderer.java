@@ -3,24 +3,22 @@
  */
 package ncBrowse.VisAD;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.*;
-import visad.*;
-import visad.java3d.*;
-import java.rmi.RemoteException;
-import gov.noaa.pmel.util.SoTRange;
+import gov.noaa.pmel.sgt.dm.*;
 import gov.noaa.pmel.util.GeoDate;
-import ncBrowse.map.*;
-import visad.util.*;
-import java.awt.event.*;
-import java.awt.*;
-import ncBrowse.*;
+import gov.noaa.pmel.util.SoTRange;
+import ncBrowse.Debug;
+import ncBrowse.MenuBar3D;
+import ncBrowse.NcFile;
+import ncBrowse.map.VMapModel;
+import visad.*;
+import visad.java3d.DisplayImplJ3D;
+import visad.util.SelectRangeWidget;
 
-import gov.noaa.pmel.sgt.dm.SGTMetaData;
-import gov.noaa.pmel.sgt.dm.SGTGrid;
-import gov.noaa.pmel.sgt.dm.ThreeDGrid;
-import gov.noaa.pmel.sgt.dm.SGTFull3DVector;
-import gov.noaa.pmel.sgt.dm.SGTData;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 
 /**
  * <pre>
@@ -125,7 +123,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
 						xRangeMap.setRange(xmin, xmax);
 						//xMap.setRange(min, max);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = uGrid.getTimeArray();
@@ -142,7 +140,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
 						xRangeMap.setRange((float)xmin, (float)xmax);
 						//xMap.setRange((float)min,(float) max);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 
 				if (!uGrid.isYTime()) {
@@ -157,7 +155,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
 						yRangeMap.setRange(ymin, ymax);
 						//yMap.setRange(min, max);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = uGrid.getTimeArray();
@@ -172,7 +170,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
 						yRangeMap.setRange(ymin, ymax);
 						//yMap.setRange(min, max);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 
 				if (!uGrid.isZTime()) {
@@ -187,7 +185,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
 						zRangeMap.setRange(zmin, zmax);
 						//zMap.setRange(min, max);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 				else {
  					GeoDate[] gda = uGrid.getTimeArray();
@@ -202,7 +200,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
 						zRangeMap.setRange(zmin, zmax);
 						//zMap.setRange(min, max);
 					}
-					catch (Exception ex) {}
+					catch (Exception ignored) {}
 				}
 			}
 
@@ -315,7 +313,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
 			    float vScale = mPlotSpec.getVectorScale();
 				flow_controlU.setFlowScale(vScale);
 			}
-			catch (Exception ex) {}
+			catch (Exception ignored) {}
 		}
 	}
 
@@ -397,7 +395,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
     	else
     		typeName = yMetaData.getName();
 	    try {
-	    	Y = new RealType(typeName, null, null);
+	    	Y = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -419,7 +417,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
     	else
     		typeName = xMetaData.getName();
 	    try {
-	    	X = new RealType(typeName, null, null);
+	    	X = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -441,7 +439,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
     	else
     		typeName = zMetaData.getName();
 	    try {
-	    	Z = new RealType(typeName, null, null);
+	    	Z = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -466,7 +464,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
     	else
     		typeName = uMetaData.getName();
 	    try {
-	    	U = new RealType(typeName, null, null);
+	    	U = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -487,7 +485,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
     	else
     		typeName = vMetaData.getName();
 	    try {
-	    	V = new RealType(typeName, null, null);
+	    	V = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -508,7 +506,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
     	else
     		typeName = wMetaData.getName();
 	    try {
-	    	W = new RealType(typeName, null, null);
+	    	W = RealType.getRealType(typeName, null, null);
 	    	break;
 	    }
 	    catch (Exception ex) {
@@ -655,7 +653,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
     display.addDisplayListener(this);
 
     // Get display's graphics mode control and draw scales
-    GraphicsModeControl dispGMC = (GraphicsModeControl)  display.getGraphicsModeControl();
+    GraphicsModeControl dispGMC = display.getGraphicsModeControl();
     dispGMC.setScaleEnable(true);
 
     if (mPlotSpec.isRespectDataAspectRatio()) {
@@ -791,7 +789,7 @@ public class VisADFull3DVectorRenderer extends VisADPlotRenderer {
     //jframe.getContentPane().add(display.getComponent());
 
     // add the menu bar
-    mMenuBar = new MenuBar3D(mFrame, (ActionListener)this, false);
+    mMenuBar = new MenuBar3D(mFrame, this, false);
     JPanel cont = new JPanel();
     cont.setLayout(new BorderLayout(5, 5));
     cont.add("Center", display.getComponent());

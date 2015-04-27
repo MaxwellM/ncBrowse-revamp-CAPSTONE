@@ -41,8 +41,8 @@ import java.util.ResourceBundle;
  * @version $Revision: 1.28 $, $Date: 2004/05/14 21:19:32 $
  */
 public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeListener, DialogClient {
-  private NcFile ncFile_;
-  public Browser parent_;
+  private final NcFile ncFile_;
+  public final Browser parent_;
   private JFrame display_;
   private JPlotLayout layout_;
   private JPanel graphPane_;
@@ -77,7 +77,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   private Object[] maxRange_;
   private int[] rBoxGroup_;
   private boolean[] movieBtnsUsed;
-  public int win;
+  public final int win;
   public static int win2 = VariableWindows2.whatFrame();
 
   private static ArrayList instances = new ArrayList();
@@ -87,34 +87,34 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
    */
   private VMapParameter[] vParam_;
   private boolean[] isTime_;
-  private MyAction myAction_;
+  private final MyAction myAction_;
   private MyMouse myMouse_;
   private SelectDoubleDialog sdd_ = null;
   private SelectTimeDialog std_ = null;
-  private String tFormat_ = "yyyy-MM-dd HH:mm:ss";
+  private final String tFormat_ = "yyyy-MM-dd HH:mm:ss";
 
-  private ImageIcon movieIcon_;
-  private ImageIcon dots_;
+  private final ImageIcon movieIcon_;
+  private final ImageIcon dots_;
 
-  BorderLayout borderLayout1 = new BorderLayout();
-  JPanel jPanel1 = new JPanel();
-  JButton doneButton = new JButton();
-  JButton applyButton = new JButton();
-  JButton closeButton = new JButton();
-  JButton helpButton = new JButton();
-  JPanel infoPanel = new JPanel();
-  JScrollPane infoScrollPane = new JScrollPane();
-  BorderLayout borderLayout2 = new BorderLayout();
+  final BorderLayout borderLayout1 = new BorderLayout();
+  final JPanel jPanel1 = new JPanel();
+  final JButton doneButton = new JButton();
+  final JButton applyButton = new JButton();
+  final JButton closeButton = new JButton();
+  final JButton helpButton = new JButton();
+  final JPanel infoPanel = new JPanel();
+  final JScrollPane infoScrollPane = new JScrollPane();
+  final BorderLayout borderLayout2 = new BorderLayout();
   TitledBorder paramBorder;
-  JEditorPane infoText = new JEditorPane();
+  final JEditorPane infoText = new JEditorPane();
   TitledBorder axisBorder;
-  JPanel mainPanel = new JPanel();
-  JCheckBox revXAxisCB = new JCheckBox();
-  JPanel axesPanel = new JPanel();
-  JCheckBox revYAxisCB = new JCheckBox();
-  JCheckBox revZAxisCB = new JCheckBox();
-  BorderLayout borderLayout3 = new BorderLayout();
-  JScrollPane paramScrollPane = new JScrollPane();
+  final JPanel mainPanel = new JPanel();
+  final JCheckBox revXAxisCB = new JCheckBox();
+  final JPanel axesPanel = new JPanel();
+  final JCheckBox revYAxisCB = new JCheckBox();
+  final JCheckBox revZAxisCB = new JCheckBox();
+  final BorderLayout borderLayout3 = new BorderLayout();
+  final JScrollPane paramScrollPane = new JScrollPane();
   GridBagLayout gridBagLayout1 = new GridBagLayout();
   boolean is3D = false;
   private SGTData[] subset_ = null;
@@ -124,22 +124,22 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
   private boolean thisIsOpen = true;
   private int vPsize;
   private MaintenanceTimer mMaintain;
-  private VMapModelEditor mThis;
+  private final VMapModelEditor mThis;
   TitledBorder optionsBorder;
-  private ResourceBundle b = ResourceBundle.getBundle(
+  private final ResourceBundle b = ResourceBundle.getBundle(
       "ncBrowse.NcBrowseResources");
   private JRadioButton mNoLegend;
   private JRadioButton mCBOnlyLegend;
   private JCheckBox mLegend;
   private Swatch mBGColor;
   private Swatch mAxesColor;
-  private JButton mAdvancedButton = new JButton();
+  private final JButton mAdvancedButton = new JButton();
   private JLabel mLabel7;
   private JLabel mLabel8;
 
-  JButton openButton = new JButton();
-  JComboBox sendCBox = new JComboBox();
-  DefaultComboBoxModel sendCBoxModel = new DefaultComboBoxModel();
+  final JButton openButton = new JButton();
+  final JComboBox sendCBox = new JComboBox();
+  final DefaultComboBoxModel sendCBoxModel = new DefaultComboBoxModel();
 
   private static int epCount_ = 0;
 
@@ -482,7 +482,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
         if(dobj instanceof SGTGrid) {
           GridAttribute gAttr;
           try {
-            gAttr = (GridAttribute) layout_.getAttribute((SGTData) dobj);
+            gAttr = (GridAttribute) layout_.getAttribute(dobj);
             if(gAttr.isRaster()) {
               Range2D vRange = ((SGTGrid) dobj).getZRange();
               ColorMap cmap = gAttr.getColorMap();
@@ -572,14 +572,14 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
           } catch(IllegalTimeValue e) {
             e.printStackTrace();
           }
-          vParam_[i].setSoTRange(new SoTRange.GeoDate(start, end));
+          vParam_[i].setSoTRange(new SoTRange.Time(start, end));
         } else {
           SoTRange range = null;
           min = Double.parseDouble(min_[i].getText());
           max = Double.parseDouble(max_[i].getText());
           if(minRange_[i] instanceof Long) {
-            range = new SoTRange.Long((long) Math.round(min),
-                                      (long) Math.round(max));
+            range = new SoTRange.Long(Math.round(min),
+                Math.round(max));
           } else if(minRange_[i] instanceof Integer) {
             range = new SoTRange.Integer((int) Math.round(min),
                                          (int) Math.round(max));
@@ -618,14 +618,14 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
           } catch(IllegalTimeValue e) {
             e.printStackTrace();
           }
-          vParam_[i].setSoTRange(new SoTRange.GeoDate(start, end));
+          vParam_[i].setSoTRange(new SoTRange.Time(start, end));
         } else {
           SoTRange range = null;
           min = Double.parseDouble(min_[i].getText());
           max = Double.parseDouble(max_[i].getText());
           if(minRange_[i] instanceof Long) {
-            range = new SoTRange.Long((long) Math.round(min),
-                                      (long) Math.round(max));
+            range = new SoTRange.Long(Math.round(min),
+                Math.round(max));
           } else if(minRange_[i] instanceof Integer) {
             range = new SoTRange.Integer((int) Math.round(min),
                                          (int) Math.round(max));
@@ -920,7 +920,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
                              0, 0);
       panel.add(minGroupPanel, bag);
       if(vParam_[rows].isDimension()) {
-        minRange_[rows] = new Integer(0);
+        minRange_[rows] = 0;
       } else {
         minRange_[rows] = fullRange.getStartObject();
       }
@@ -960,7 +960,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
                              0, 0);
       panel.add(maxGroupPanel, bag);
       if(vParam_[rows].isDimension()) {
-        maxRange_[rows] = new Integer(vParam_[rows].getLength() - 1);
+        maxRange_[rows] = vParam_[rows].getLength() - 1;
       } else {
         maxRange_[rows] = fullRange.getEndObject();
       }
@@ -1020,7 +1020,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
     if(!model_.is3D()) {
       TargetMonitor tm = TargetMonitor.getInstance();
       //    VariableMap vMap = model_.getVariableMap();
-      StringBuffer sbuf = new StringBuffer("<html>");
+      StringBuilder sbuf = new StringBuilder("<html>");
       Object obj;
 
       for(int i = 0; i < VMapModel.ELEMENT_COUNT; i++) {
@@ -1028,7 +1028,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
           continue;
         }
         obj = model_.getElement(i);
-        sbuf.append(VMapModel.getTitle(i) + " --> ");
+        sbuf.append(VMapModel.getTitle(i)).append(" --> ");
         if(obj instanceof ucar.nc2.Dimension) {
           sbuf.append(tm.getDimensionLabel(i, model_, (ucar.nc2.Dimension) obj));
         } else {
@@ -1042,7 +1042,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
     } else {
       TargetMonitor3D tm = TargetMonitor3D.getInstance();
       //    VariableMap vMap = model_.getVariableMap();
-      StringBuffer sbuf = new StringBuffer("<html>");
+      StringBuilder sbuf = new StringBuilder("<html>");
       Object obj;
 
       for(int i = 0; i < VMapModel.ELEMENT_COUNT; i++) {
@@ -1050,7 +1050,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
           continue;
         }
         obj = model_.getElement(i);
-        sbuf.append(VMapModel.getTitle(i) + " --> ");
+        sbuf.append(VMapModel.getTitle(i)).append(" --> ");
         if(obj instanceof ucar.nc2.Dimension) {
           sbuf.append(tm.getDimensionLabel(i, model_, (ucar.nc2.Dimension) obj));
         } else {
@@ -1116,9 +1116,9 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
       if(std_ == null) {
         std_ = new SelectTimeDialog(this);
         std_.setModal(true);
-        std_.setRange(((SoTValue.GeoDate) vParam_[i].getSoTRange().getStart()).
+        std_.setRange(((SoTValue.Time) vParam_[i].getSoTRange().getStart()).
                       getValue(),
-                      ((SoTValue.GeoDate) vParam_[i].getSoTRange().getEnd()).
+                      ((SoTValue.Time) vParam_[i].getSoTRange().getEnd()).
                       getValue());
       }
       std_.setTwoHandles(twoHandles);
@@ -1168,8 +1168,8 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
         minRange = ((Float) minRange_[i]).doubleValue();
         maxRange = ((Float) maxRange_[i]).doubleValue();
       } else if(minRange_[i] instanceof Double) {
-        minRange = ((Double) minRange_[i]).doubleValue();
-        maxRange = ((Double) maxRange_[i]).doubleValue();
+        minRange = (Double) minRange_[i];
+        maxRange = (Double) maxRange_[i];
       }
       sdd_.setRange(minRange, maxRange);
       sdd_.setStartValue(Double.parseDouble(min_[i].getText()));
@@ -1755,7 +1755,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
     JClassTree ct = new JClassTree();
     ct.setModal(false);
     ct.setJPane(layout_);
-    ct.show();
+    ct.setVisible(true);
   }
 
   void printSizes() {
@@ -1812,7 +1812,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
       }
     } else {
       try {
-        Object[] adArgs = {new Integer(pwindex), subset};
+        Object[] adArgs = {pwindex, subset};
         addData.invoke(ncSupport, adArgs);
       } catch(Exception ex) {
         ex.printStackTrace();
@@ -1823,7 +1823,7 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
 
 class VMapModelEditor_closeButton_actionAdapter
     implements java.awt.event.ActionListener {
-  VMapModelEditor adaptee;
+  final VMapModelEditor adaptee;
 
   VMapModelEditor_closeButton_actionAdapter(VMapModelEditor adaptee) {
     this.adaptee = adaptee;
@@ -1835,7 +1835,7 @@ class VMapModelEditor_closeButton_actionAdapter
 }
 
 class VMapModelEditor_helpButton_actionAdapter implements ActionListener {
-  VMapModelEditor adaptee;
+  final VMapModelEditor adaptee;
 
   VMapModelEditor_helpButton_actionAdapter(VMapModelEditor adaptee) {
     this.adaptee = adaptee;
@@ -1848,7 +1848,7 @@ class VMapModelEditor_helpButton_actionAdapter implements ActionListener {
 
 class VMapModelEditor_applyButton_actionAdapter
     implements java.awt.event.ActionListener {
-  VMapModelEditor adaptee;
+  final VMapModelEditor adaptee;
 
   VMapModelEditor_applyButton_actionAdapter(VMapModelEditor adaptee) {
     this.adaptee = adaptee;
@@ -1860,7 +1860,7 @@ class VMapModelEditor_applyButton_actionAdapter
 }
 
 class VMapModelEditor_doneButton_actionAdapter implements ActionListener {
-  VMapModelEditor adaptee;
+  final VMapModelEditor adaptee;
 
   VMapModelEditor_doneButton_actionAdapter(VMapModelEditor adaptee) {
     this.adaptee = adaptee;
@@ -1872,7 +1872,7 @@ class VMapModelEditor_doneButton_actionAdapter implements ActionListener {
 }
 
 class VMapModelEditor_advButton_actionAdapter implements ActionListener {
-  VMapModelEditor adaptee;
+  final VMapModelEditor adaptee;
 
   VMapModelEditor_advButton_actionAdapter(VMapModelEditor adaptee) {
     this.adaptee = adaptee;
@@ -1884,7 +1884,7 @@ class VMapModelEditor_advButton_actionAdapter implements ActionListener {
 }
 
 class VMapModelEditor_openButton_actionAdapter implements ActionListener {
-  VMapModelEditor adaptee;
+  final VMapModelEditor adaptee;
 
   VMapModelEditor_openButton_actionAdapter(VMapModelEditor adaptee) {
     this.adaptee = adaptee;

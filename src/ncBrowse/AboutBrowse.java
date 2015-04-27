@@ -41,7 +41,7 @@ public class AboutBrowse extends JDialog {
     this(parentFrame, null, false);
   }
 
-  void jbInit() throws Exception {
+  void jbInit() {
 
     setResizable(false);
     setTitle("netCDF Browser");
@@ -275,7 +275,7 @@ public class AboutBrowse extends JDialog {
     try {
       // JAboutDialog Hide the JAboutDialog
       this.setVisible(false);
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 
@@ -291,7 +291,7 @@ public class AboutBrowse extends JDialog {
     try {
       // JAboutDialog Hide the JAboutDialog
       this.setVisible(false);
-    } catch (Exception e) {
+    } catch (Exception ignored) {
     }
   }
 }

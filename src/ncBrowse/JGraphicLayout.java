@@ -5,48 +5,22 @@
 
 package ncBrowse;
 
-import gov.noaa.pmel.sgt.Attribute;
-import gov.noaa.pmel.sgt.AxisTransform;
-import gov.noaa.pmel.sgt.CartesianGraph;
-import gov.noaa.pmel.sgt.DataNotFoundException;
-import gov.noaa.pmel.sgt.Graph;
-import gov.noaa.pmel.sgt.GridAttribute;
-import gov.noaa.pmel.sgt.JPane;
-import gov.noaa.pmel.sgt.Layer;
-import gov.noaa.pmel.sgt.LineAttribute;
-import gov.noaa.pmel.sgt.LineCartesianRenderer;
-import gov.noaa.pmel.sgt.Logo;
-import gov.noaa.pmel.sgt.PlainAxis;
-import gov.noaa.pmel.sgt.SGLabel;
-import gov.noaa.pmel.sgt.TimeAxis;
-import gov.noaa.pmel.sgt.dm.Collection;
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTGrid;
-import gov.noaa.pmel.sgt.dm.SGTLine;
-import gov.noaa.pmel.sgt.dm.SGTVector;
+import gov.noaa.pmel.sgt.*;
+import gov.noaa.pmel.sgt.dm.*;
 import gov.noaa.pmel.sgt.swing.prop.LogoDialog;
 import gov.noaa.pmel.sgt.swing.prop.SGLabelDialog;
 import gov.noaa.pmel.sgt.swing.prop.SpaceAxisDialog;
 import gov.noaa.pmel.sgt.swing.prop.TimeAxisDialog;
 import gov.noaa.pmel.util.Dimension2D;
-import gov.noaa.pmel.util.Domain;
 import gov.noaa.pmel.util.GeoDate;
 import gov.noaa.pmel.util.Range2D;
 import gov.noaa.pmel.util.SoTRange;
-import gov.noaa.pmel.util.TimeRange;
 import gov.noaa.pmel.util.SoTRange.Time;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Rectangle;
+
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.beans.PropertyVetoException;
-import java.beans.VetoableChangeListener;
-import java.beans.VetoableChangeSupport;
+import java.beans.*;
 import java.text.DecimalFormat;
 import java.util.Enumeration;
 import java.util.Hashtable;
@@ -93,7 +67,7 @@ public abstract class JGraphicLayout extends JPane {
   protected VetoableChangeSupport vetos_;
 
   public JGraphicLayout() {
-    this("", (Image)null, new Dimension(50, 50));
+    this("", null, new Dimension(50, 50));
   }
 
   public JGraphicLayout(String var1, Image var2) {
@@ -502,13 +476,13 @@ public abstract class JGraphicLayout extends JPane {
     }
   }
 
-  public TimeRange findTimeRange(SGTLine var1) {
+  public SoTRange findTimeRange(SGTLine var1) {
     long[] var2 = var1.getGeoDateArray().getTime();
     int var3 = var2.length;
-    return new TimeRange(var2[0], var2[var3 - 1]);
+    return new SoTRange(var2[0], var2[var3 - 1]);
   }
 
-  public TimeRange findTimeRange(SGTGrid var1, GridAttribute var2) {
+  public SoTRange findTimeRange(SGTGrid var1, GridAttribute var2) {
     long[] var3;
     if(!var2.isRaster() || !var1.isXTime() && !var1.isYTime()) {
       var3 = var1.getGeoDateArray().getTime();
@@ -528,7 +502,7 @@ public abstract class JGraphicLayout extends JPane {
     }
 
     int var5 = var3.length;
-    return new TimeRange(var3[0], var3[var5 - 1]);
+    return new SoTRange(var3[0], var3[var5 - 1]);
   }
 
   public void setClipping(boolean var1) {
@@ -552,13 +526,13 @@ public abstract class JGraphicLayout extends JPane {
       AxisTransform var5 = var4.getXTransform();
       AxisTransform var6 = var4.getYTransform();
       if(var5.isTime()) {
-        var1.setXRange(var5.getTimeRangeU());
+        var1.setXRange(var5.getSoTRangeU());
       } else {
         var1.setXRange(var5.getRangeU());
       }
 
       if(var6.isTime()) {
-        var1.setYRange(var6.getTimeRangeU());
+        var1.setYRange(var6.getSoTRangeU());
       } else {
         var1.setYRange(var6.getRangeU());
       }
@@ -601,7 +575,7 @@ public abstract class JGraphicLayout extends JPane {
           var6 = var16;
         }
 
-        var1.setXRange(new TimeRange(new GeoDate(var4), new GeoDate(var6)));
+        var1.setXRange(new SoTRange( (var4),  (var6)));
       }
 
       if(var13.isSpace()) {
@@ -623,7 +597,7 @@ public abstract class JGraphicLayout extends JPane {
           var6 = var16;
         }
 
-        var1.setYRange(new TimeRange(new GeoDate(var4), new GeoDate(var6)));
+        var1.setYRange(new SoTRange((var4),(var6)));
       }
     }
 
@@ -740,7 +714,7 @@ public abstract class JGraphicLayout extends JPane {
 
   void showProperties(Object var1) {
     if(var1 instanceof SGLabel) {
-      if(this.sg_props_ == (SGLabelDialog)null) {
+      if(this.sg_props_ == null) {
         this.sg_props_ = new SGLabelDialog();
       }
 
@@ -749,7 +723,7 @@ public abstract class JGraphicLayout extends JPane {
         this.sg_props_.setVisible(true);
       }
     } else if(var1 instanceof PlainAxis) {
-      if(this.pa_props_ == (SpaceAxisDialog)null) {
+      if(this.pa_props_ == null) {
         this.pa_props_ = new SpaceAxisDialog();
       }
 
@@ -758,7 +732,7 @@ public abstract class JGraphicLayout extends JPane {
         this.pa_props_.setVisible(true);
       }
     } else if(var1 instanceof TimeAxis) {
-      if(this.ta_props_ == (TimeAxisDialog)null) {
+      if(this.ta_props_ == null) {
         this.ta_props_ = new TimeAxisDialog();
       }
 
@@ -767,7 +741,7 @@ public abstract class JGraphicLayout extends JPane {
         this.ta_props_.setVisible(true);
       }
     } else if(var1 instanceof Logo) {
-      if(this.lo_props_ == (LogoDialog)null) {
+      if(this.lo_props_ == null) {
         this.lo_props_ = new LogoDialog();
       }
 
@@ -793,10 +767,10 @@ public abstract class JGraphicLayout extends JPane {
   protected void setAllClip(double var1, double var3, double var5, double var7) {
     Component[] var10 = this.getComponents();
 
-    for(int var11 = 0; var11 < var10.length; ++var11) {
-      if(var10[var11] instanceof Layer) {
-        Layer var9 = (Layer)var10[var11];
-        ((CartesianGraph)var9.getGraph()).setClip(var1, var3, var5, var7);
+    for (Component aVar10 : var10) {
+      if (aVar10 instanceof Layer) {
+        Layer var9 = (Layer) aVar10;
+        ((CartesianGraph) var9.getGraph()).setClip(var1, var3, var5, var7);
       }
     }
 
@@ -809,9 +783,9 @@ public abstract class JGraphicLayout extends JPane {
   protected void setAllClip(long var1, long var3, double var5, double var7) {
     Component[] var10 = this.getComponents();
 
-    for(int var11 = 0; var11 < var10.length; ++var11) {
-      Layer var9 = (Layer)var10[var11];
-      ((CartesianGraph)var9.getGraph()).setClip(var1, var3, var5, var7);
+    for (Component aVar10 : var10) {
+      Layer var9 = (Layer) aVar10;
+      ((CartesianGraph) var9.getGraph()).setClip(var1, var3, var5, var7);
     }
 
   }
@@ -819,10 +793,10 @@ public abstract class JGraphicLayout extends JPane {
   protected void setAllClipping(boolean var1) {
     Component[] var3 = this.getComponents();
 
-    for(int var4 = 0; var4 < var3.length; ++var4) {
-      if(var3[var4] instanceof Layer) {
-        Layer var2 = (Layer)var3[var4];
-        ((CartesianGraph)var2.getGraph()).setClipping(var1);
+    for (Component aVar3 : var3) {
+      if (aVar3 instanceof Layer) {
+        Layer var2 = (Layer) aVar3;
+        ((CartesianGraph) var2.getGraph()).setClipping(var1);
       }
     }
 

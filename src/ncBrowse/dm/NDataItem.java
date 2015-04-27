@@ -3,25 +3,19 @@
  */
 package ncBrowse.dm;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
-import java.net.URL;
+import dods.dap.DODSException;
+import ncBrowse.NcFile;
+import ucar.nc2.NetcdfFile;
+import ucar.nc2.dods.DODSNetcdfFile;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-
-import dods.dap.DODSException;
-
-import ucar.nc2.NetcdfFile;
-import ucar.nc2.dods.DODSNetcdfFile;
-import ucar.nc2.Dimension;
-import ucar.nc2.Variable;
-import ucar.nc2.Attribute;
-
-import ncBrowse.NcFile;
-import ncBrowse.LocalNcFile;
-import ncBrowse.DODSNcFile;
+import java.net.URL;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
+import java.util.stream.Collectors;
 
 /**
  * <p>Title: </p>
@@ -49,7 +43,7 @@ public class NDataItem extends NcBDataItem {
   public NDataItem(File file) throws IOException {
     dataItemType_ = NETCDF_FILE;
     file_ = file;
-    dataItem_ = new NetcdfFile(file.getAbsolutePath());
+    dataItem_ = NetcdfFile.open(file.getAbsolutePath());
     init();
   }
 
@@ -64,15 +58,19 @@ public class NDataItem extends NcBDataItem {
    */
   public NDataItem(URL url) throws IOException, DODSException {
     url_ = url;
-    if(url.getProtocol().equals("file")) {
-      dataItemType_ = NETCDF_FILE;
-      dataItem_ = new NetcdfFile(url.getPath());
-    } else if(url.getProtocol().equals("http")) {
-      dataItemType_ = NETCDF_HTTP;
-      dataItem_ = new NetcdfFile(url);
-    } else if(url.getProtocol().equals("dods")) {
-      dataItemType_ = NETCDF_DODS;
-      dataItem_ = new DODSNetcdfFile(url.toExternalForm());
+    switch (url.getProtocol()) {
+      case "file":
+        dataItemType_ = NETCDF_FILE;
+        dataItem_ = NetcdfFile.open(url.getPath());
+        break;
+      case "http":
+        dataItemType_ = NETCDF_HTTP;
+        dataItem_ = NetcdfFile.open(String.valueOf(url));
+        break;
+      case "dods":
+        dataItemType_ = NETCDF_DODS;
+        dataItem_ = new DODSNetcdfFile(url.toExternalForm());
+        break;
     }
     init();
   }
@@ -162,22 +160,16 @@ public class NDataItem extends NcBDataItem {
     dimension_ = new Vector();
 //    Iterator dimI = dataItem_.getDimensionIterator();
 //    while(dimI.hasNext()) {
-    for(Dimension dim: dataItem_.getDimensions()) {
-      dimension_.add(new NDimension(this, dim));
-    }
+    dimension_.addAll(dataItem_.getDimensions().stream().map(dim -> new NDimension(this, dim)).collect(Collectors.toList()));
     // setup Variables
     variable_ = new Vector();
 //    Iterator varI = dataItem_.getVariableIterator();
 //    while(varI.hasNext()) {
-    for(Variable var: dataItem_.getVariables()) {
-      variable_.add(new NVariable(this, var));
-    }
+    variable_.addAll(dataItem_.getVariables().stream().map(var -> new NVariable(this, var)).collect(Collectors.toList()));
     // setup global attributes
     globalAttribute_ = new Vector();
 //    Iterator attI = dataItem_.getGlobalAttributeIterator();
 //    while(attI.hasNext()) {
-    for(Attribute att: dataItem_.getGlobalAttributes()) {
-      globalAttribute_.add(new NAttribute(att));
-    }
+    globalAttribute_.addAll(dataItem_.getGlobalAttributes().stream().map(NAttribute::new).collect(Collectors.toList()));
   }
 }

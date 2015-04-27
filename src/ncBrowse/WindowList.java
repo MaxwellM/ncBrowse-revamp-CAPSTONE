@@ -23,7 +23,7 @@ import java.util.Enumeration;
  */
 public class WindowList extends Vector<Window> implements WindowListener {
   Browser browser_ = null;
-  Vector<JCheckBoxMenuItem> items_ = new Vector<JCheckBoxMenuItem>();
+  Vector<JCheckBoxMenuItem> items_ = new Vector<>();
 
   public WindowList() {
     super();

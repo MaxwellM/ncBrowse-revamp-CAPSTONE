@@ -120,10 +120,10 @@ public abstract class NcBVariable implements VarOrDim {
     double start = Double.POSITIVE_INFINITY;
     double end = Double.NEGATIVE_INFINITY;
     int count = 0;
-    for(int i=0; i < array.length; i++) {
-      if(!Double.isNaN(array[i])) {
-        start = Math.min(start, array[i]);
-        end = Math.max(end, array[i]);
+    for (double anArray : array) {
+      if (!Double.isNaN(anArray)) {
+        start = Math.min(start, anArray);
+        end = Math.max(end, anArray);
         count++;
       }
     }
@@ -140,9 +140,9 @@ public abstract class NcBVariable implements VarOrDim {
     long value;
     long[] val = array.getTime();
     int count = 0;
-    for(int i=0; i < val.length; i++) {
-      value = val[i];
-      if(!(val[i] == Long.MIN_VALUE)) {  // test for missing time
+    for (long aVal : val) {
+      value = aVal;
+      if (!(aVal == Long.MIN_VALUE)) {  // test for missing time
         start = Math.min(start, value);
         end = Math.max(end, value);
         count++;
@@ -158,15 +158,15 @@ public abstract class NcBVariable implements VarOrDim {
   protected Object getValue(Object array, Object val) {
     int index = getIndex(array, val);
     if(val instanceof Long) {
-      return new Long(((long[])array)[index]);
+      return ((long[]) array)[index];
     } else if(val instanceof Integer) {
-      return new Integer(((int[])array)[index]);
+      return ((int[]) array)[index];
     } else if(val instanceof Short) {
-      return new Short(((short[])array)[index]);
+      return ((short[]) array)[index];
     } else if(val instanceof Float) {
-      return new Float(((float[])array)[index]);
+      return ((float[]) array)[index];
     } else if(val instanceof Double) {
-      return new Double(((double[])array)[index]);
+      return ((double[]) array)[index];
     } else if(val instanceof GeoDate) {
       GeoDateArray tarray = createGeoDateArray(array);
       return tarray.getGeoDate(index);
@@ -183,7 +183,7 @@ public abstract class NcBVariable implements VarOrDim {
       // values are long
       //
       long[] longArray = (long[])array;
-      long value = ((Long)val).longValue();
+      long value = (Long) val;
       len = longArray.length;
       arrayIsReversed = longArray[len-1] < longArray[0];
       if(len == 1) {
@@ -230,7 +230,7 @@ public abstract class NcBVariable implements VarOrDim {
       // values are int
       //
       int[] intArray = (int[])array;
-      int value = ((Integer)val).intValue();
+      int value = (Integer) val;
       len = intArray.length;
       arrayIsReversed = intArray[len-1] < intArray[0];
       if(len == 1) {
@@ -277,7 +277,7 @@ public abstract class NcBVariable implements VarOrDim {
       // values are short
       //
       short[] shortArray = (short[])array;
-      short value = ((Short)val).shortValue();
+      short value = (Short) val;
       len = shortArray.length;
       arrayIsReversed = shortArray[len-1] < shortArray[0];
       if(len == 1) {
@@ -324,7 +324,7 @@ public abstract class NcBVariable implements VarOrDim {
       // values are float
       //
       float[] floatArray = (float[])array;
-      float value = ((Float)val).floatValue();
+      float value = (Float) val;
       len = floatArray.length;
       arrayIsReversed = floatArray[len-1] < floatArray[0];
       if(len == 1) {
@@ -371,7 +371,7 @@ public abstract class NcBVariable implements VarOrDim {
       // values are double
       //
       double[] doubleArray = (double[])array;
-      double value = ((Double)val).doubleValue();
+      double value = (Double) val;
       len = doubleArray.length;
       arrayIsReversed = doubleArray[len-1] < doubleArray[0];
       if(len == 1) {

@@ -45,9 +45,9 @@ public class NcFlavorMap3D implements FlavorMap {
   public Map getNativesForFlavors(DataFlavor[] flavors) {
     if(flavors == null) return mapFlavors_;
     HashMap map = new HashMap();
-    for(int i=0; i < flavors.length; i++) {
-      if(mapFlavors_.containsKey(flavors[i])) {
-        map.put(flavors[i],mapFlavors_.get(flavors[i]));
+    for (DataFlavor flavor : flavors) {
+      if (mapFlavors_.containsKey(flavor)) {
+        map.put(flavor, mapFlavors_.get(flavor));
       }
     }
     return map;
@@ -56,9 +56,9 @@ public class NcFlavorMap3D implements FlavorMap {
   public Map getFlavorsForNatives(String[] natives) {
     if(natives == null) return mapNatives_;
     HashMap map = new HashMap();
-    for(int i=0; i < natives.length; i++) {
-      if(mapNatives_.containsKey(natives[i])) {
-        map.put(natives[i],mapNatives_.get(natives[i]));
+    for (String aNative : natives) {
+      if (mapNatives_.containsKey(aNative)) {
+        map.put(aNative, mapNatives_.get(aNative));
       }
     }
     return map;

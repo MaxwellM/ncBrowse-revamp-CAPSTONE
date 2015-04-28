@@ -3,18 +3,20 @@
  */
 package ncBrowse.map;
 
-import gov.noaa.pmel.sgt.*;
-import gov.noaa.pmel.sgt.ColorMap;
-import gov.noaa.pmel.sgt.dm.*;
-import gov.noaa.pmel.sgt.swing.JClassTree;
 import gov.noaa.pmel.swing.JViewHTMLFrame;
 import gov.noaa.pmel.swing.SelectDoubleDialog;
-import gov.noaa.pmel.swing.SelectTimeDialog;
+import ncBrowse.SelectTimeDialog;
+//import gov.noaa.pmel.swing.SelectTimeDialog;
 import gov.noaa.pmel.swing.Swatch;
-import gov.noaa.pmel.util.*;
 import ncBrowse.*;
 import ncBrowse.Debug;
 import ncBrowse.VisAD.*;
+import ncBrowse.sgt.*;
+import ncBrowse.sgt.ColorMap;
+import ncBrowse.sgt.dm.*;
+import ncBrowse.sgt.geom.*;
+import ncBrowse.sgt.swing.JClassTree;
+import ncBrowse.sgt.swing.JPlotLayout;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -29,6 +31,12 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
+
+//import gov.noaa.pmel.sgt.*;
+//import gov.noaa.pmel.sgt.ColorMap;
+//import gov.noaa.pmel.sgt.dm.*;
+//import gov.noaa.pmel.sgt.swing.JClassTree;
+//import gov.noaa.pmel.util.*;
 
 /**
  * <pre>
@@ -577,10 +585,12 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
           SoTRange range = null;
           min = Double.parseDouble(min_[i].getText());
           max = Double.parseDouble(max_[i].getText());
-          if(minRange_[i] instanceof Long) {
-            range = new SoTRange.Long(Math.round(min),
-                Math.round(max));
-          } else if(minRange_[i] instanceof Integer) {
+          //TESTING
+//          if(minRange_[i] instanceof Long) {
+//            range = new SoTRange.Long(Math.round(min),
+//                Math.round(max));
+//          }
+          if(minRange_[i] instanceof Integer) {
             range = new SoTRange.Integer((int) Math.round(min),
                                          (int) Math.round(max));
           } else if(minRange_[i] instanceof Short) {
@@ -623,10 +633,13 @@ public class VMapModelEditor extends JFrame implements ButtonMaintainer, ChangeL
           SoTRange range = null;
           min = Double.parseDouble(min_[i].getText());
           max = Double.parseDouble(max_[i].getText());
-          if(minRange_[i] instanceof Long) {
-            range = new SoTRange.Long(Math.round(min),
-                Math.round(max));
-          } else if(minRange_[i] instanceof Integer) {
+          //TESTING
+//          if(minRange_[i] instanceof Long) {
+//            range = new SoTRange.Long(Math.round(min),
+//                Math.round(max));
+//          }
+
+          if(minRange_[i] instanceof Integer) {
             range = new SoTRange.Integer((int) Math.round(min),
                                          (int) Math.round(max));
           } else if(minRange_[i] instanceof Short) {

@@ -13,7 +13,8 @@
 package ncBrowse;
 
 import gov.noaa.pmel.nc2.station.StationDataset;
-import gov.noaa.pmel.util.GeoDate;
+import ncBrowse.sgt.geom.GeoDate;
+//import gov.noaa.pmel.util.GeoDate;
 import ucar.nc2.Attribute;
 import ucar.nc2.Dimension;
 import ucar.nc2.Variable;

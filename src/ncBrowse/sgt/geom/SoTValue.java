@@ -521,6 +521,79 @@ public abstract class SoTValue implements Serializable {
         }
     }
 
+//    public static class Long extends SoTValue {
+//        long value_;
+//
+//        public Long() {
+//        }
+//
+//        public Long(long var1) {
+//            this.value_ = var1;
+//        }
+//
+//        public SoTValue copy() {
+//            return new SoTValue.Long(this.value_);
+//        }
+//
+//        public long getValue() {
+//            return this.value_;
+//        }
+//
+//        public void setValue(long var1) {
+//            this.value_ = var1;
+//        }
+//
+//        public Object getObjectValue() {
+//            return new java.lang.Long(this.value_);
+//        }
+//
+//        public double getDouble() {
+//            return (double)this.value_;
+//        }
+//
+//        public boolean isTime() {
+//            return false;
+//        }
+//
+//        public boolean equals(SoTValue var1) {
+//            return var1.isTime()?false:this.value_ == ((SoTValue.Long)var1).getValue();
+//        }
+//
+//        public void add(SoTValue var1) {
+//            if(!var1.isTime()) {
+//                long var2 = ((Number)var1.getObjectValue()).longValue();
+//                this.value_ += var2;
+//            }
+//        }
+//
+//        public void subtract(SoTValue var1) {
+//            if(!var1.isTime()) {
+//                long var2 = ((Number)var1.getObjectValue()).longValue();
+//                this.value_ -= var2;
+//            }
+//        }
+//
+//        public boolean isNegative() {
+//            return this.value_ < 0L;
+//        }
+//
+//        public boolean isPositive() {
+//            return this.value_ > 0L;
+//        }
+//
+//        public long getLongTime() {
+//            throw new Error("Method not appropriate for SoTValue.Long");
+//        }
+//
+//        public ncBrowse.sgt.geom.GeoDate getGeoDate() {
+//            throw new Error("Method not appropriate for SoTValue.Long");
+//        }
+//
+//        public String toString() {
+//            return java.lang.Long.toString(this.value_);
+//        }
+//    }
+
     /**
      * This is an abstract class that cannot be instantiated directly.
      * Type-specific implementation subclasses are available for

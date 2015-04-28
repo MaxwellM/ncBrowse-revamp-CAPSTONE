@@ -3,15 +3,16 @@
  */
 package ncBrowse;
 
-import gov.noaa.pmel.sgt.AbstractPane;
-import gov.noaa.pmel.sgt.JPane;
-import gov.noaa.pmel.sgt.LineAttribute;
-import gov.noaa.pmel.sgt.LineCartesianRenderer;
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.swing.JClassTree;
-import gov.noaa.pmel.sgt.swing.prop.LineAttributeDialog;
-import gov.noaa.pmel.util.Dimension2D;
-import gov.noaa.pmel.util.Rectangle2D;
+import ncBrowse.sgt.AbstractPane;
+import ncBrowse.sgt.JPane;
+import ncBrowse.sgt.LineAttribute;
+import ncBrowse.sgt.LineCartesianRenderer;
+import ncBrowse.sgt.dm.SGTData;
+import ncBrowse.sgt.geom.Dimension2D;
+import ncBrowse.sgt.geom.Rectangle2D;
+import ncBrowse.sgt.swing.JClassTree;
+import ncBrowse.sgt.swing.JPlotLayout;
+import ncBrowse.sgt.swing.prop.LineAttributeDialog;
 import ucar.ma2.Array;
 import ucar.ma2.Index;
 import ucar.ma2.InvalidRangeException;
@@ -24,6 +25,16 @@ import java.awt.event.*;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.IOException;
+
+//import gov.noaa.pmel.sgt.AbstractPane;
+//import gov.noaa.pmel.sgt.JPane;
+//mport gov.noaa.pmel.sgt.LineAttribute;
+//import gov.noaa.pmel.sgt.LineCartesianRenderer;
+//import gov.noaa.pmel.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.swing.JClassTree;
+//import gov.noaa.pmel.sgt.swing.prop.LineAttributeDialog;
+//import gov.noaa.pmel.util.Dimension2D;
+//import gov.noaa.pmel.util.Rectangle2D;
 /**
  * Creates a <code>sgt</code> based graph of a netCDF variable.
  *

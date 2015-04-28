@@ -3,7 +3,8 @@
  */
 package ncBrowse;
 
-import gov.noaa.pmel.sgt.dm.SGTData;
+import ncBrowse.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.dm.SGTData;
 import ucar.ma2.InvalidRangeException;
 import ucar.nc2.Variable;
 

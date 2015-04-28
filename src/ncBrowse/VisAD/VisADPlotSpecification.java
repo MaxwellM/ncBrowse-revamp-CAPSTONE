@@ -3,20 +3,8 @@
  */
 package ncBrowse.VisAD;
 
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ChangeEvent;
-import javax.swing.*;
-import visad.*;
-import visad.java2d.DisplayImplJ2D;
-import java.rmi.RemoteException;
-import gov.noaa.pmel.sgt.dm.*;
-import gov.noaa.pmel.util.SoTRange;
-import gov.noaa.pmel.util.GeoDate;
-import ncBrowse.map.*;
-import gov.noaa.pmel.sgt.GridAttribute;
-import gov.noaa.pmel.util.Range2D;
-import visad.util.*;
-import ncBrowse.*;
+import visad.Data;
+
 import java.awt.*;
 
 /**

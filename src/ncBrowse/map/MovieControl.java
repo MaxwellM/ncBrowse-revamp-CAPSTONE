@@ -3,7 +3,8 @@
  */
 package ncBrowse.map;
 
-import gov.noaa.pmel.sgt.JPane;
+import ncBrowse.sgt.JPane;
+//import gov.noaa.pmel.sgt.JPane;
 import ncBrowse.Browser;
 
 import javax.swing.*;

@@ -3,15 +3,21 @@
  */
 package ncBrowse.map;
 
+import ncBrowse.sgt.SGLabel;
+import ncBrowse.sgt.dm.SGTData;
+import ncBrowse.sgt.dm.SGTMetaData;
+import ncBrowse.sgt.geom.Range2D;
+import ncBrowse.sgt.geom.SoTRange;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 
-import gov.noaa.pmel.sgt.SGLabel;
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTMetaData;
-import gov.noaa.pmel.util.Range2D;
-import gov.noaa.pmel.util.SoTRange;
+//import gov.noaa.pmel.sgt.SGLabel;
+//import gov.noaa.pmel.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.dm.SGTMetaData;
+//import gov.noaa.pmel.util.Range2D;
+//import gov.noaa.pmel.util.SoTRange;
 
 /**
  * Variable Map Model. Some definitions for variable mapping.

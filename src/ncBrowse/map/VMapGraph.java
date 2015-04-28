@@ -4,16 +4,23 @@
 /** another stupid change */
 package ncBrowse.map;
 
-import gov.noaa.pmel.sgt.*;
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTGrid;
-import gov.noaa.pmel.sgt.swing.JClassTree;
-import gov.noaa.pmel.sgt.swing.prop.LineAttributeDialog;
-import gov.noaa.pmel.sgt.swing.prop.VectorAttributeDialog;
-import gov.noaa.pmel.util.Range2D;
+import ncBrowse.sgt.*;
+//import gov.noaa.pmel.sgt.*;
+import ncBrowse.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.dm.SGTData;
+import ncBrowse.sgt.dm.SGTGrid;
+//import gov.noaa.pmel.sgt.dm.SGTGrid;
+import ncBrowse.sgt.swing.JClassTree;
+//import gov.noaa.pmel.sgt.swing.JClassTree;
+import ncBrowse.sgt.swing.prop.LineAttributeDialog;
+//import gov.noaa.pmel.sgt.swing.prop.LineAttributeDialog;
+import ncBrowse.sgt.swing.prop.VectorAttributeDialog;
+//import gov.noaa.pmel.sgt.swing.prop.VectorAttributeDialog;
+import ncBrowse.sgt.geom.Range2D;
+//import gov.noaa.pmel.util.Range2D;
 import ncBrowse.Browser;
 import ncBrowse.Debug;
-import ncBrowse.JPlotLayout;
+import ncBrowse.sgt.swing.JPlotLayout;
 import ncBrowse.NcFile;
 
 import javax.swing.*;

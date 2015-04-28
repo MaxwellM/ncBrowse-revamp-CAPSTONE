@@ -3,9 +3,12 @@
  */
 package ncBrowse.map;
 
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.SoTRange;
-import gov.noaa.pmel.util.SoTValue;
+import ncBrowse.sgt.geom.GeoDate;
+//import gov.noaa.pmel.util.GeoDate;
+import ncBrowse.sgt.geom.SoTRange;
+//import gov.noaa.pmel.util.SoTRange;
+import ncBrowse.sgt.geom.SoTValue;
+//import gov.noaa.pmel.util.SoTValue;
 import ncBrowse.Debug;
 import ncBrowse.NcFile;
 import ucar.nc2.Attribute;
@@ -234,9 +237,12 @@ public class VMapParameter implements Comparable {
       Object value = ncFile_.getArrayValue(ncVar, ind);
       if(value instanceof GeoDate) {
         sValue = new SoTValue.Time((GeoDate)value);
-      } else if(value instanceof Long) {
-        sValue = new SoTValue.Long(((Long)value).longValue());
-      } else if(value instanceof Integer) {
+      }
+      //TESTING
+//      else if(value instanceof Long) {
+//        sValue = new SoTValue.Long(((Long)value).longValue());
+//      }
+      else if(value instanceof Integer) {
         sValue = new SoTValue.Integer(((Integer)value).intValue());
       } else if(value instanceof Short) {
         sValue = new SoTValue.Short(((Short)value).shortValue());
@@ -340,10 +346,13 @@ public class VMapParameter implements Comparable {
       Object end = ncFile_.getArrayValue(ncVar, length_-1);
       if(start instanceof GeoDate) {
         fullRange_ = new SoTRange.Time((GeoDate)start, (GeoDate)end);
-      } else if(start instanceof Long) {
-        fullRange_ = new SoTRange.Long(((Long)start).longValue(),
-                                       ((Long)end).longValue());
-      } else if(start instanceof Integer) {
+      }
+      //Testing
+//      else if(start instanceof Long) {
+//        fullRange_ = new SoTRange.Long(((Long)start).longValue(),
+//                                       ((Long)end).longValue());
+//      }
+      else if(start instanceof Integer) {
         fullRange_ = new SoTRange.Integer(((Integer)start).intValue(),
                                           ((Integer)end).intValue());
       } else if(start instanceof Short) {

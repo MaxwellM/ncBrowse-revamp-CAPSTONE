@@ -3,8 +3,10 @@
  */
 package ncBrowse.dm;
 
+import ncBrowse.sgt.geom.GeoDateArray;
+
 import java.util.List;
-import gov.noaa.pmel.util.GeoDateArray;
+//import gov.noaa.pmel.util.GeoDateArray;
 
 /**
  * <p>Title: </p>

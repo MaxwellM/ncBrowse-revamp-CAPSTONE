@@ -3,15 +3,15 @@
  */
 package ncBrowse.VisAD;
 
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTMetaData;
-import gov.noaa.pmel.sgt.dm.ThreeDGrid;
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.SoTRange;
 import ncBrowse.Debug;
 import ncBrowse.MenuBar3D;
 import ncBrowse.NcFile;
 import ncBrowse.map.VMapModel;
+import ncBrowse.sgt.dm.SGTData;
+import ncBrowse.sgt.dm.SGTMetaData;
+import ncBrowse.sgt.dm.ThreeDGrid;
+import ncBrowse.sgt.geom.GeoDate;
+import ncBrowse.sgt.geom.SoTRange;
 import visad.*;
 import visad.java3d.DisplayImplJ3D;
 import visad.util.LabeledColorWidget;
@@ -20,8 +20,13 @@ import visad.util.SelectRangeWidget;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+
+//import gov.noaa.pmel.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.dm.SGTMetaData;
+//import gov.noaa.pmel.sgt.dm.ThreeDGrid;
+//import gov.noaa.pmel.util.GeoDate;
+//import gov.noaa.pmel.util.SoTRange;
 
 /**
  * <pre>

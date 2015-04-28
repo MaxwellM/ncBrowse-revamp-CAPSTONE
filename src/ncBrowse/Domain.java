@@ -5,8 +5,10 @@
 
 package ncBrowse;
 
-import gov.noaa.pmel.util.Range2D;
-import gov.noaa.pmel.util.SoTRange;
+import ncBrowse.sgt.geom.Range2D;
+//import gov.noaa.pmel.util.Range2D;
+import ncBrowse.sgt.geom.SoTRange;
+//import gov.noaa.pmel.util.SoTRange;
 
 import java.io.Serializable;
 

@@ -3,12 +3,18 @@
  */
 package ncBrowse.map;
 
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTMetaData;
-import gov.noaa.pmel.sgt.dm.SGTTuple;
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.GeoDateArray;
-import gov.noaa.pmel.util.Range2D;
+import ncBrowse.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.dm.SGTData;
+import ncBrowse.sgt.dm.SGTMetaData;
+//import gov.noaa.pmel.sgt.dm.SGTMetaData;
+import ncBrowse.sgt.dm.SGTTuple;
+//import gov.noaa.pmel.sgt.dm.SGTTuple;
+import ncBrowse.sgt.geom.GeoDate;
+//import gov.noaa.pmel.util.GeoDate;
+import ncBrowse.sgt.geom.GeoDateArray;
+//import gov.noaa.pmel.util.GeoDateArray;
+import ncBrowse.sgt.geom.Range2D;
+//import gov.noaa.pmel.util.Range2D;
 
 /**
  * Variable Tuple Data.

@@ -3,11 +3,16 @@
  */
 package ncBrowse.map;
 
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTLine;
-import gov.noaa.pmel.sgt.dm.SGTMetaData;
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.GeoDateArray;
+import ncBrowse.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.dm.SGTData;
+import ncBrowse.sgt.dm.SGTLine;
+//import gov.noaa.pmel.sgt.dm.SGTLine;
+import ncBrowse.sgt.dm.SGTMetaData;
+//import gov.noaa.pmel.sgt.dm.SGTMetaData;
+import ncBrowse.sgt.geom.GeoDate;
+//import gov.noaa.pmel.util.GeoDate;
+import ncBrowse.sgt.geom.GeoDateArray;
+//import gov.noaa.pmel.util.GeoDateArray;
 
 /**
  * <pre>
@@ -137,12 +142,18 @@ import gov.noaa.pmel.util.GeoDateArray;
       return tData_;
     }
 
-    public void setAssociatedData(double[] data) {
+
+  public SGTLine getAssociatedData() {
+    return null;
+  }
+
+  public void setAssociatedData(double[] data) {
       associatedData_ = data;
     }
-    public double[] getAssociatedData() {
-      return associatedData_;
-    }
+
+//    public double[] getAssociatedData() {
+//      return associatedData_;
+//    }
 
     public boolean hasAssociatedData() {
       return associatedData_ != null;

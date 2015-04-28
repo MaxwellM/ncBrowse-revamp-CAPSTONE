@@ -110,7 +110,7 @@ import java.awt.*;
  * @see ColorKey
  * @see SGLabel
  * @see LineKey
- * @see sgt.geom.GeoDate
+ * @see ncBrowse.sgt.geom.GeoDate
  **/
 public class Layer extends Component implements Cloneable, LayerControl {
     private String ident_;

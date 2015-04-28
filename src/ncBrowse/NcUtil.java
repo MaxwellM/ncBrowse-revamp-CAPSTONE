@@ -3,8 +3,10 @@
  */
 package ncBrowse;
 
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.IllegalTimeValue;
+import ncBrowse.sgt.geom.GeoDate;
+//import gov.noaa.pmel.util.GeoDate;
+import ncBrowse.sgt.geom.IllegalTimeValue;
+//import gov.noaa.pmel.util.IllegalTimeValue;
 import ucar.ma2.Array;
 import ucar.nc2.Attribute;
 import ucar.nc2.Variable;

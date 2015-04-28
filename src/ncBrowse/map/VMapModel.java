@@ -3,9 +3,12 @@
  */
 package ncBrowse.map;
 
-import gov.noaa.pmel.sgt.SGLabel;
-import gov.noaa.pmel.sgt.dm.*;
-import gov.noaa.pmel.util.*;
+import ncBrowse.sgt.SGLabel;
+//import gov.noaa.pmel.sgt.SGLabel;
+import ncBrowse.sgt.dm.*;
+//import gov.noaa.pmel.sgt.dm.*;
+import ncBrowse.sgt.geom.*;
+//import gov.noaa.pmel.util.*;
 import ncBrowse.Debug;
 import ncBrowse.NcFile;
 import ncBrowse.NcUtil;

@@ -3,13 +3,12 @@
  */
 package ncBrowse;
 
-import gov.noaa.pmel.sgt.dm.Collection;
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTLine;
 import gov.noaa.pmel.swing.SelectDoubleDialog;
-import gov.noaa.pmel.swing.SelectTimeDialog;
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.IllegalTimeValue;
+import ncBrowse.sgt.dm.Collection;
+import ncBrowse.sgt.dm.SGTData;
+import ncBrowse.sgt.dm.SGTLine;
+import ncBrowse.sgt.geom.GeoDate;
+import ncBrowse.sgt.geom.IllegalTimeValue;
 import ucar.ma2.Array;
 import ucar.nc2.Attribute;
 import ucar.nc2.Variable;
@@ -22,6 +21,13 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Iterator;
 import java.util.Objects;
+
+//import gov.noaa.pmel.sgt.dm.Collection;
+//mport gov.noaa.pmel.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.dm.SGTLine;
+//import gov.noaa.pmel.swing.SelectTimeDialog;
+//import gov.noaa.pmel.util.GeoDate;
+//import gov.noaa.pmel.util.IllegalTimeValue;
 
 /**
  * Provides an interface for setting the domain for extracting data

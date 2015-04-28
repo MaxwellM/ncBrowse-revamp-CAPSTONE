@@ -60,7 +60,7 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
          *
          * @param tstart first time
          * @param tend last time
-         * @param delta time increment
+         * @param tdelta time increment
          */
         public GeoDate(ncBrowse.sgt.geom.GeoDate tstart,
                        ncBrowse.sgt.geom.GeoDate tend,
@@ -1118,6 +1118,157 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
                 java.lang.Double.isNaN(end);
         }
     }
+
+//    public static class Long extends SoTRange {
+//        public long start;
+//        public long end;
+//        public long delta;
+//
+//        public Long() {
+//            this(9223372036854775807L, 9223372036854775807L, 9223372036854775807L);
+//        }
+//
+//        public Long(long var1, long var3) {
+//            this(var1, var3, 9223372036854775807L);
+//        }
+//
+//        public Long(long var1, long var3, long var5) {
+//            this.start = var1;
+//            this.end = var3;
+//            this.delta = var5;
+//        }
+//
+//        public Long(Range var1) {
+//            this.start = (long)var1.start;
+//            this.end = (long)var1.end;
+//            this.delta = 9223372036854775807L;
+//        }
+//
+//        public SoTValue getStart() {
+//            return new ncBrowse.sgt.geom.SoTValue.Long(this.start);
+//        }
+//
+//        public void setStart(SoTValue var1) {
+//            this.start = ((ncBrowse.sgt.geom.SoTValue.Long)var1).getValue();
+//        }
+//
+//        public SoTValue getEnd() {
+//            return new ncBrowse.sgt.geom.SoTValue.Long(this.end);
+//        }
+//
+//        public void setEnd(SoTValue var1) {
+//            this.end = ((ncBrowse.sgt.geom.SoTValue.Long)var1).getValue();
+//        }
+//
+//        public SoTValue getDelta() {
+//            return new ncBrowse.sgt.geom.SoTValue.Long(this.delta);
+//        }
+//
+//        public void setDelta(SoTValue var1) {
+//            this.delta = ((ncBrowse.sgt.geom.SoTValue.Long)var1).getValue();
+//        }
+//
+//        public Object getStartObject() {
+//            return new java.lang.Long(this.start);
+//        }
+//
+//        public Object getEndObject() {
+//            return new java.lang.Long(this.end);
+//        }
+//
+//        public Object getDeltaObject() {
+//            return new java.lang.Long(this.delta);
+//        }
+//
+//        public void add(SoTRange var1) {
+//            if(!var1.isTime()) {
+//                if(this.start <= this.end && ((SoTRange.Long)var1).start <= ((SoTRange.Long)var1).end) {
+//                    this.start = Math.min(this.start, ((SoTRange.Long)var1).start);
+//                    this.end = Math.max(this.end, ((SoTRange.Long)var1).end);
+//                } else {
+//                    this.start = Math.max(this.start, ((SoTRange.Long)var1).start);
+//                    this.end = Math.min(this.end, ((SoTRange.Long)var1).end);
+//                }
+//
+//            }
+//        }
+//
+//        public boolean equals(SoTRange var1) {
+//            if(var1.isTime()) {
+//                return false;
+//            } else {
+//                long var2 = ((SoTRange.Long)var1).start;
+//                long var4 = ((SoTRange.Long)var1).end;
+//                long var6 = ((SoTRange.Long)var1).delta;
+//                if(this.start != 9223372036854775807L && var2 != 9223372036854775807L) {
+//                    if(this.start == 9223372036854775807L || var2 == 9223372036854775807L) {
+//                        return false;
+//                    }
+//
+//                    if(this.start != var2) {
+//                        return false;
+//                    }
+//                }
+//
+//                if(this.end != 9223372036854775807L && var4 != 9223372036854775807L) {
+//                    if(this.end == 9223372036854775807L || var4 == 9223372036854775807L) {
+//                        return false;
+//                    }
+//
+//                    if(this.end != var4) {
+//                        return false;
+//                    }
+//                }
+//
+//                if(this.delta != 9223372036854775807L && var6 != 9223372036854775807L) {
+//                    if(this.delta == 9223372036854775807L || var6 == 9223372036854775807L) {
+//                        return false;
+//                    }
+//
+//                    if(this.delta != var6) {
+//                        return false;
+//                    }
+//                }
+//
+//                return true;
+//            }
+//        }
+//
+//        public boolean isTime() {
+//            return false;
+//        }
+//
+//        public void flipStartAndEnd() {
+//            long var1 = this.end;
+//            this.end = this.start;
+//            this.start = var1;
+//        }
+//
+//        public String toString() {
+//            StringBuffer var1 = new StringBuffer(50);
+//            var1.append("[").append(this.start).append(";").append(this.end);
+//            if(this.delta == 9223372036854775807L) {
+//                var1.append("]");
+//            } else {
+//                var1.append(";").append(this.delta).append("]");
+//            }
+//
+//            return var1.toString();
+//        }
+//
+//        public SoTRange copy() {
+//            try {
+//                return (SoTRange)this.clone();
+//            } catch (CloneNotSupportedException var2) {
+//                return null;
+//            }
+//        }
+//
+//        public boolean isStartOrEndMissing() {
+//            return this.start == 9223372036854775807L || this.end == 9223372036854775807L;
+//        }
+//    }
+
 
     /**
      * This is an abstract class that cannot be instantiated directly.

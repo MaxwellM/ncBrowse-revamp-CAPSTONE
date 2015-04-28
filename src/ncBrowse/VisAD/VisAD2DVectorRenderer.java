@@ -12,12 +12,18 @@
 
 package ncBrowse.VisAD;
 
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTGrid;
-import gov.noaa.pmel.sgt.dm.SGTMetaData;
-import gov.noaa.pmel.sgt.dm.SGTVector;
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.SoTRange;
+import ncBrowse.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.dm.SGTData;
+import ncBrowse.sgt.dm.SGTGrid;
+//import gov.noaa.pmel.sgt.dm.SGTGrid;
+import ncBrowse.sgt.dm.SGTMetaData;
+//import gov.noaa.pmel.sgt.dm.SGTMetaData;
+import ncBrowse.sgt.dm.SGTVector;
+//import gov.noaa.pmel.sgt.dm.SGTVector;
+import ncBrowse.sgt.geom.GeoDate;
+//import gov.noaa.pmel.util.GeoDate;
+import ncBrowse.sgt.geom.SoTRange;
+//import gov.noaa.pmel.util.SoTRange;
 import ncBrowse.Debug;
 import ncBrowse.NcFile;
 import ncBrowse.map.VMapModel;

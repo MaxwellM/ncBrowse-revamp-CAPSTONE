@@ -3,11 +3,15 @@
  */
 package ncBrowse.dm;
 
+import ncBrowse.sgt.geom.SoTRange;
+//import gov.noaa.pmel.util.SoTRange;
+import ncBrowse.sgt.geom.GeoDate;
+import ncBrowse.sgt.geom.GeoDateArray;
+
 import java.util.List;
 
-import gov.noaa.pmel.util.GeoDateArray;
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.SoTRange;
+//import gov.noaa.pmel.util.GeoDateArray;
+//import gov.noaa.pmel.util.GeoDate;
 /**
  * <p>Title: </p>
  * <p>Description: </p>

@@ -3,10 +3,14 @@
  */
 package ncBrowse.map;
 
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTMetaData;
-import gov.noaa.pmel.sgt.dm.SGTPoint;
-import gov.noaa.pmel.util.GeoDate;
+import ncBrowse.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.dm.SGTData;
+import ncBrowse.sgt.dm.SGTMetaData;
+//import gov.noaa.pmel.sgt.dm.SGTMetaData;
+import ncBrowse.sgt.dm.SGTPoint;
+//import gov.noaa.pmel.sgt.dm.SGTPoint;
+import ncBrowse.sgt.geom.GeoDate;
+//import gov.noaa.pmel.util.GeoDate;
 
 /**
  * Variable Point Data. 

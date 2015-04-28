@@ -3,15 +3,15 @@
  */
 package ncBrowse.VisAD;
 
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTGrid;
-import gov.noaa.pmel.sgt.dm.SGTMetaData;
-import gov.noaa.pmel.util.GeoDate;
-import gov.noaa.pmel.util.SoTRange;
 import ncBrowse.Debug;
 import ncBrowse.MenuBar3D;
 import ncBrowse.NcFile;
 import ncBrowse.map.VMapModel;
+import ncBrowse.sgt.dm.SGTData;
+import ncBrowse.sgt.dm.SGTGrid;
+import ncBrowse.sgt.dm.SGTMetaData;
+import ncBrowse.sgt.geom.GeoDate;
+import ncBrowse.sgt.geom.SoTRange;
 import visad.*;
 import visad.java3d.DisplayImplJ3D;
 import visad.java3d.ProjectionControlJ3D;
@@ -21,8 +21,13 @@ import visad.util.SelectRangeWidget;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+
+//import gov.noaa.pmel.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.dm.SGTGrid;
+//import gov.noaa.pmel.sgt.dm.SGTMetaData;
+//import gov.noaa.pmel.util.GeoDate;
+//import gov.noaa.pmel.util.SoTRange;
 
 //import gov.noaa.pmel.sgt.dm.*;
 
@@ -105,7 +110,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 				hasColor = true;
 			if (dobj[0] instanceof SGTGrid) {
 				if (!mGrid.isXTime()) {
-					SoTRange xR = dobj[0].getXRange();
+					ncBrowse.sgt.geom.SoTRange xR = dobj[0].getXRange();
 			        xmin = ((Number)xR.getStart().getObjectValue()).floatValue();
 			        xmax = ((Number)xR.getEnd().getObjectValue()).floatValue();
 			        try {
@@ -118,8 +123,8 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 					catch (Exception ignored) {}
 				}
 				else {
- 					GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
- 					SoTRange xR = ((VMapModel)obj).computeRange(gda);
+ 					ncBrowse.sgt.geom.GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
+					ncBrowse.sgt.geom.SoTRange xR = ((VMapModel)obj).computeRange(gda);
 			        double tmin = ((GeoDate)xR.getStart().getObjectValue()).getTime();
 			        double tmax = ((GeoDate)xR.getEnd().getObjectValue()).getTime();
 			        xmin = Math.min(tmin, tmax);
@@ -135,7 +140,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 				}
 
 				if (!mGrid.isYTime()) {
-					SoTRange yR = dobj[0].getYRange();
+					ncBrowse.sgt.geom.SoTRange yR = dobj[0].getYRange();
 			        ymin = ((Number)yR.getStart().getObjectValue()).floatValue();
 			        ymax = ((Number)yR.getEnd().getObjectValue()).floatValue();
 			        try {
@@ -148,7 +153,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
 					catch (Exception ignored) {}
 				}
 				else {
- 					GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
+ 					ncBrowse.sgt.geom.GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
  					SoTRange yR = ((VMapModel)obj).computeRange(gda);
 			        ymin = ((Number)yR.getStart().getObjectValue()).floatValue();
 			        ymax = ((Number)yR.getEnd().getObjectValue()).floatValue();
@@ -169,14 +174,14 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
  			int ySize;
 
  			if (dobj[0].isXTime()) {
-		 		GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
+		 		ncBrowse.sgt.geom.GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
 		 		xSize = gda.length;
  			}
  			else
  				xSize = ((SGTGrid)dobj[0]).getXSize();
 
  			if (dobj[0].isYTime()) {
-		 		GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
+		 		ncBrowse.sgt.geom.GeoDate[] gda = ((SGTGrid)dobj[0]).getTimeArray();
 		 		ySize = gda.length;
  			}
  			else {
@@ -313,7 +318,7 @@ public class VisADSurfaceRenderer extends VisADPlotRenderer {
  	}
  	else {
  		// is time
- 		GeoDate[] gda = mGrid.getTimeArray();
+ 		ncBrowse.sgt.geom.GeoDate[] gda = mGrid.getTimeArray();
  		xSize = gda.length;
  		xArray = new double[xSize];
  		for (int i=0; i<xSize; i++) {

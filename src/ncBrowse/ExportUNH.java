@@ -3,8 +3,10 @@
  */
 package ncBrowse;
 
-import gov.noaa.pmel.sgt.dm.SGTData;
-import gov.noaa.pmel.sgt.dm.SGTGrid;
+import ncBrowse.sgt.dm.SGTData;
+//import gov.noaa.pmel.sgt.dm.SGTData;
+import ncBrowse.sgt.dm.SGTGrid;
+//import gov.noaa.pmel.sgt.dm.SGTGrid;
 import ucar.nc2.Variable;
 
 import javax.swing.*;

@@ -3,10 +3,11 @@
  */
 package ncBrowse.map;
 
+import ncBrowse.sgt.dm.ThreeDGrid;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-
-import gov.noaa.pmel.sgt.dm.ThreeDGrid;
+//import gov.noaa.pmel.sgt.dm.ThreeDGrid;
 
 /**
  * Variable Map Model. Some definitions for variable mapping.

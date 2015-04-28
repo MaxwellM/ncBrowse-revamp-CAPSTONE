@@ -11,25 +11,15 @@
 package ncBrowse.sgt;
 
 import ncBrowse.sgt.geom.Debug;
-import ncBrowse.sgt.beans.Panel;
 
-import java.awt.Rectangle;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.AWTEvent;
-
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.SwingConstants;
 //import javax.swing.RepaintManager;
-import javax.swing.border.Border;
-import java.awt.print.*;
-import java.awt.Graphics2D;
-import java.awt.Color;
-import java.awt.geom.AffineTransform;
 
 /**
  * The <code>JPane</code> class is extended from
@@ -258,7 +248,7 @@ public class JPane extends javax.swing.JLayeredPane
         //
         this.enableEvents(AWTEvent.MOUSE_EVENT_MASK |
                           AWTEvent.MOUSE_MOTION_EVENT_MASK);
-        setDoubleBuffered(false);
+        setDoubleBuffered(true);
         //
         //    RepaintManager currentManager = RepaintManager.currentManager(this);
         //    currentManager.setDoubleBufferingEnabled(false);

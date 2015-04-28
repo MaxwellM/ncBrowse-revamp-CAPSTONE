@@ -107,9 +107,9 @@ public class JSlider2 extends JComponent
     public void setMinValue(double min) {
         minValue_ = Math.max(min, 0.0);
         if(minOld_ != minValue_) {
-            Double tempOld = new Double(minOld_);
+            Double tempOld = minOld_;
             minOld_ = minValue_;
-            changes.firePropertyChange("minValue", tempOld, new Double(minValue_));  
+            changes.firePropertyChange("minValue", tempOld, minValue_);
         }
         repaint();
     }
@@ -129,9 +129,9 @@ public class JSlider2 extends JComponent
     public void setMaxValue(double max) {
         maxValue_ = Math.min(max, 1.0);
         if(maxOld_ != maxValue_) {
-            Double tempOld = new Double(maxOld_);
+            Double tempOld = maxOld_;
             maxOld_ = maxValue_;
-            changes.firePropertyChange("maxValue", tempOld, new Double(maxValue_));  
+            changes.firePropertyChange("maxValue", tempOld, maxValue_);
         }
         repaint();
     }
@@ -472,14 +472,14 @@ public class JSlider2 extends JComponent
       
         if(forcePost || alwaysPost_) {
             if(minOld_ != minValue_) {
-                Double tempOld = new Double(minOld_);
+                Double tempOld = minOld_;
                 minOld_ = minValue_;
-                changes.firePropertyChange("minValue", tempOld, new Double(minValue_));
+                changes.firePropertyChange("minValue", tempOld, minValue_);
             }
             if(maxOld_ != maxValue_) {
-                Double tempOld = new Double(maxOld_);
+                Double tempOld = maxOld_;
                 maxOld_ = maxValue_;
-                changes.firePropertyChange("maxValue", tempOld, new Double(maxValue_));
+                changes.firePropertyChange("maxValue", tempOld, maxValue_);
             }
         }
         paint(getGraphics());

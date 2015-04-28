@@ -273,7 +273,7 @@ public class JPane extends javax.swing.JLayeredPane
      *
      **/
     public JPane() {
-        this(new String(""), new Dimension(50,50));
+        this("", new Dimension(50,50));
     }
     /**
      * Return the version of SGT.
@@ -537,7 +537,7 @@ public class JPane extends javax.swing.JLayeredPane
         return proxy_.getObjectsAt(pt.x, pt.y);
     }
     public Component getComponent() {
-        return (Component)this;
+        return this;
     }
 
     public Dimension getMaximumSize() {

@@ -22,7 +22,7 @@ public class IndexedColorMap {
         // initialize the indexed colormap
         mMinVal = mColorMap.getMinValue();
         mMaxVal = mColorMap.getMaxValue();
-        mParamName = new String(mColorMap.getParamName());
+        mParamName = mColorMap.getParamName();
                 
         double delta = (mMaxVal - mMinVal)/(double)mNumColors;
                 

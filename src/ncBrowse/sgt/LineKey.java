@@ -369,7 +369,7 @@ public class LineKey implements Cloneable,
         label.setMoveable(false);
         label.setSelectable(false);
         label_.addElement(label);
-        ((LineAttribute)line.getAttribute()).addPropertyChangeListener(this);
+        line.getAttribute().addPropertyChangeListener(this);
         modified("LineKey: addLineGraph()");
     }
     /**
@@ -538,7 +538,7 @@ public class LineKey implements Cloneable,
             label.setLocationP(new Point2D.Double(xloc, yp[row]));
             try {
                 label.draw(g);
-            } catch (SGException e) {}
+            } catch (SGException ignored) {}
             //
             col++;
             if(col >= columns_) {

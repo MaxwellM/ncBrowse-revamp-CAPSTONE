@@ -154,65 +154,33 @@ public class PanelModelCustomizer extends JComponent implements Customizer, Prop
         mainPanel.setLayout(borderLayout3);
         layoutPanel.setLayout(borderLayout4);
         leftPanel.setLayout(borderLayout7);
-        newPanelButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    newPanelButton_actionPerformed(e);
-                }
-            });
+        newPanelButton.addActionListener(this::newPanelButton_actionPerformed);
         toolPanel.setLayout(flowLayout1);
         toolPanel.setBorder(BorderFactory.createEtchedBorder());
         designPanel_.setLayout(null);
         alignBottomButton.setToolTipText("Align Bottom");
         alignBottomButton.setIcon(alignBottom_);
-        alignBottomButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    alignBottomButton_actionPerformed(e);
-                }
-            });
+        alignBottomButton.addActionListener(this::alignBottomButton_actionPerformed);
         alignLeftButton.setToolTipText("Align Left");
         alignLeftButton.setIcon(alignLeft_);
-        alignLeftButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    alignLeftButton_actionPerformed(e);
-                }
-            });
+        alignLeftButton.addActionListener(this::alignLeftButton_actionPerformed);
         alignTopButton.setToolTipText("Align Top");
         alignTopButton.setIcon(alignTop_);
-        alignTopButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    alignTopButton_actionPerformed(e);
-                }
-            });
+        alignTopButton.addActionListener(this::alignTopButton_actionPerformed);
         alignRightButton.setToolTipText("Align Right");
         alignRightButton.setIcon(alignRight_);
-        alignRightButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    alignRightButton_actionPerformed(e);
-                }
-            });
+        alignRightButton.addActionListener(this::alignRightButton_actionPerformed);
         newPanelButton.setToolTipText("New Panel");
         newPanelButton.setIcon(newPanel_);
         justVerticalButton.setToolTipText("Justify Vertically");
         justVerticalButton.setIcon(justifyVertical_);
-        justVerticalButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    justVerticalButton_actionPerformed(e);
-                }
-            });
+        justVerticalButton.addActionListener(this::justVerticalButton_actionPerformed);
         justHorizontalButton.setToolTipText("Justify Horizontally");
         justHorizontalButton.setIcon(justifyHorizontal_);
-        justHorizontalButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    justHorizontalButton_actionPerformed(e);
-                }
-            });
+        justHorizontalButton.addActionListener(this::justHorizontalButton_actionPerformed);
         removeButton.setToolTipText("Remove Panel");
         removeButton.setIcon(removePanel_);
-        removeButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    removeButton_actionPerformed(e);
-                }
-            });
+        removeButton.addActionListener(this::removeButton_actionPerformed);
         this.setPreferredSize(new Dimension(800, 600));
         propertyPanel.setBorder(propertyBorder);
         propertyPanel.setMinimumSize(new Dimension(240, 10));
@@ -221,47 +189,23 @@ public class PanelModelCustomizer extends JComponent implements Customizer, Prop
         propertyBorder.setTitle("Properties");
         newDataGroupButton.setToolTipText("New Data Group");
         newDataGroupButton.setIcon(newDataGroup_);
-        newDataGroupButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    newDataGroupButton_actionPerformed(e);
-                }
-            });
+        newDataGroupButton.addActionListener(this::newDataGroupButton_actionPerformed);
         newLabelButton.setToolTipText("New Label");
         newLabelButton.setIcon(newLabel_);
-        newLabelButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    newLabelButton_actionPerformed(e);
-                }
-            });
+        newLabelButton.addActionListener(this::newLabelButton_actionPerformed);
         newLegendButton.setToolTipText("New Legend");
         newLegendButton.setIcon(newLegend_);
-        newLegendButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    newLegendButton_actionPerformed(e);
-                }
-            });
+        newLegendButton.addActionListener(this::newLegendButton_actionPerformed);
         grayPanel.setBackground(Color.lightGray);
         grayPanel.setLayout(borderLayout6);
         expertCB.setText("Expert");
-        expertCB.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    expertCB_actionPerformed(e);
-                }
-            });
+        expertCB.addActionListener(this::expertCB_actionPerformed);
         jPanel1.setLayout(gridBagLayout2);
-        openPanelButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    openPanelButton_actionPerformed(e);
-                }
-            });
+        openPanelButton.addActionListener(this::openPanelButton_actionPerformed);
         openPanelButton.setEnabled(false);
         openPanelButton.setToolTipText("Open Panel");
         openPanelButton.setIcon(openPanel_);
-        saveAsPanelButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    saveAsPanelButton_actionPerformed(e);
-                }
-            });
+        saveAsPanelButton.addActionListener(this::saveAsPanelButton_actionPerformed);
         saveAsPanelButton.setToolTipText("Save Panel");
         saveAsPanelButton.setIcon(saveAsPanel_);
         this.add(messagePanel, BorderLayout.SOUTH);
@@ -375,56 +319,64 @@ public class PanelModelCustomizer extends JComponent implements Customizer, Prop
             setDefaultPanel();
             return;
         }
-        if(pName.equals("message")) {
-            message.setText((String)evt.getNewValue());
-        } else if(pName.equals("allUnselected")) {
-            setDefaultPanel();
-        } else if(pName.equals("panelSelected")) {
-            if(val instanceof PanelHolderDragBox) {
-                PanelHolderDragBox pdb = (PanelHolderDragBox)val;
-                if(pdb.isSelected()) {
-                    setPanelPropertyPanel(pdb.getPanelHolder());
-                } else {
-                    setDefaultPanel();
+        switch (pName) {
+            case "message":
+                message.setText((String) evt.getNewValue());
+                break;
+            case "allUnselected":
+                setDefaultPanel();
+                break;
+            case "panelSelected":
+                if (val instanceof PanelHolderDragBox) {
+                    PanelHolderDragBox pdb = (PanelHolderDragBox) val;
+                    if (pdb.isSelected()) {
+                        setPanelPropertyPanel(pdb.getPanelHolder());
+                    } else {
+                        setDefaultPanel();
+                    }
                 }
-            }
-        } else if(pName.equals("dataGroupSelected")) {
-            if(val instanceof DataGroupDragBox) {
-                DataGroupDragBox ag = (DataGroupDragBox)val;
-                if(ag.isSelected()) {
-                    setDataGroupPropertyPanel(ag.getDataGroup());
-                } else {
-                    setDefaultPanel();
+                break;
+            case "dataGroupSelected":
+                if (val instanceof DataGroupDragBox) {
+                    DataGroupDragBox ag = (DataGroupDragBox) val;
+                    if (ag.isSelected()) {
+                        setDataGroupPropertyPanel(ag.getDataGroup());
+                    } else {
+                        setDefaultPanel();
+                    }
                 }
-            }
-        } else if(pName.equals("axisSelected")) {
-            if(val instanceof AxisHolderDragBox) {
-                AxisHolderDragBox ah = (AxisHolderDragBox)val;
-                if(ah.isSelected()) {
-                    setAxisHolderPropertyPanel(ah.getAxisHolder());
-                } else {
-                    setDefaultPanel();
+                break;
+            case "axisSelected":
+                if (val instanceof AxisHolderDragBox) {
+                    AxisHolderDragBox ah = (AxisHolderDragBox) val;
+                    if (ah.isSelected()) {
+                        setAxisHolderPropertyPanel(ah.getAxisHolder());
+                    } else {
+                        setDefaultPanel();
+                    }
                 }
-            }
-        } else if(pName.equals("labelSelected")) {
-            if(val instanceof LabelDragBox) {
-                LabelDragBox ldb = (LabelDragBox)val;
-                if(ldb.isSelected()) {
-                    setLabelPropertyPanel(ldb.getLabel());
-                } else {
-                    setDefaultPanel();
+                break;
+            case "labelSelected":
+                if (val instanceof LabelDragBox) {
+                    LabelDragBox ldb = (LabelDragBox) val;
+                    if (ldb.isSelected()) {
+                        setLabelPropertyPanel(ldb.getLabel());
+                    } else {
+                        setDefaultPanel();
+                    }
                 }
-            }
-        } else if(pName.equals("legendSelected")) {
-            if(val instanceof LegendDragBox) {
-                LegendDragBox ldb = (LegendDragBox)val;
-                if(ldb.isSelected()) {
-                    setLegendPropertyPanel(ldb.getLegend());
-                } else {
-                    setDefaultPanel();
+                break;
+            case "legendSelected":
+                if (val instanceof LegendDragBox) {
+                    LegendDragBox ldb = (LegendDragBox) val;
+                    if (ldb.isSelected()) {
+                        setLegendPropertyPanel(ldb.getLegend());
+                    } else {
+                        setDefaultPanel();
+                    }
                 }
-            }
-        } else if(pName.equals("ancestor")) {
+                break;
+            case "ancestor":
             /*      if(Page.DEBUG) {
                     System.out.println("PanelModelCustomizer.propertyChange()");
                     System.out.println("           propertyName = " + evt.getPropertyName());
@@ -433,36 +385,36 @@ public class PanelModelCustomizer extends JComponent implements Customizer, Prop
                     System.out.println("               newValue = " + evt.getNewValue());
                     System.out.println("          propagationId = " + evt.getPropagationId());
                     } */
-            //      panelModel_.getPage().setBackground(panelModel_.getPageBackgroundColor());
-            //      panelModel_.getPage().setSize(panelModel_.getPageSize());
-            if(evt.getNewValue() == null) {
-                // clean up ChangeListeners
-                Iterator iter;
-                if(panelModel_ == null) return;
-                Iterator pIter = panelModel_.panelIterator();
-                while(pIter.hasNext()) {
-                    PanelHolder ph = (PanelHolder)pIter.next();
-                    iter = ph.labelIterator();
-                    while(iter.hasNext()) {
-                        Label label = (Label)iter.next();
-                        label.removeDesignChangeListeners();
+                //      panelModel_.getPage().setBackground(panelModel_.getPageBackgroundColor());
+                //      panelModel_.getPage().setSize(panelModel_.getPageSize());
+                if (evt.getNewValue() == null) {
+                    // clean up ChangeListeners
+                    Iterator iter;
+                    if (panelModel_ == null) return;
+                    Iterator pIter = panelModel_.panelIterator();
+                    while (pIter.hasNext()) {
+                        PanelHolder ph = (PanelHolder) pIter.next();
+                        iter = ph.labelIterator();
+                        while (iter.hasNext()) {
+                            Label label = (Label) iter.next();
+                            label.removeDesignChangeListeners();
+                        }
+                        iter = ph.legendIterator();
+                        while (iter.hasNext()) {
+                            Legend legend = (Legend) iter.next();
+                            legend.removeDesignChangeListeners();
+                        }
+                        iter = ph.dataGroupIterator();
+                        while (iter.hasNext()) {
+                            DataGroup dg = (DataGroup) iter.next();
+                            dg.getXAxisHolder().removeDesignChangeListeners();
+                            dg.getYAxisHolder().removeDesignChangeListeners();
+                            dg.removeDesignChangeListeners();
+                        }
+                        ph.removeDesignChangeListeners();
                     }
-                    iter = ph.legendIterator();
-                    while(iter.hasNext()) {
-                        Legend legend = (Legend)iter.next();
-                        legend.removeDesignChangeListeners();
-                    }
-                    iter = ph.dataGroupIterator();
-                    while(iter.hasNext()) {
-                        DataGroup dg = (DataGroup)iter.next();
-                        dg.getXAxisHolder().removeDesignChangeListeners();
-                        dg.getYAxisHolder().removeDesignChangeListeners();
-                        dg.removeDesignChangeListeners();
-                    }
-                    ph.removeDesignChangeListeners();
-                }
-                panelModel_.removeDesignChangeListeners();
-            } /* else {
+                    panelModel_.removeDesignChangeListeners();
+                } /* else {
                  System.out.println("change focus here?");
                  System.out.println("PanelModelCustomizer.isVisible() = " + isVisible());
                  if(newPanelButton.requestFocusInWindow()) {
@@ -475,6 +427,7 @@ public class PanelModelCustomizer extends JComponent implements Customizer, Prop
                  //        KeyboardFocusManager.getCurrentKeyboardFocusManager().focusNextComponent();
 
                  } */
+                break;
         }
     }
 
@@ -657,7 +610,6 @@ public class PanelModelCustomizer extends JComponent implements Customizer, Prop
             } catch (FileNotFoundException fnfe) {
                 JOptionPane.showMessageDialog(this, "Error creating file, rename and try again",
                                               "File Save Error", JOptionPane.ERROR_MESSAGE);
-                return;
             }
         }
     }

@@ -111,7 +111,7 @@ public class LineCartesianRenderer extends CartesianRenderer {
                     xout[nout] = xp[count];
                     yout[nout] = yp[count];
                 } else if (nout >= 0) {
-                    break line;
+                    break;
                 }
             }
             first = count + 1;

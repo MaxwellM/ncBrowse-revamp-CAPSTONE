@@ -152,8 +152,8 @@ public class PointAttributeDialog extends JDialog {
             tempString[6] = "SouthWest";
             tempString[7] = "West";
             tempString[8] = "NorthWest";
-            for(int i=0; i < tempString.length; i++) {
-                positionCBModel.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                positionCBModel.addElement(aTempString);
             }
         }
         markAttrPanel.setBounds(2,27,425,203);
@@ -187,10 +187,10 @@ public class PointAttributeDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -376,8 +376,8 @@ public class PointAttributeDialog extends JDialog {
     void updatePointAttribute() {
         if(pane_ != null) pane_.setBatch(true, "PointAttributeDialog");
         if(paneList_ != null) {
-            for(int i=0; i < paneList_.length; i++) {
-                paneList_[i].setBatch(true, "PointAttributeDialog");
+            for (JPane aPaneList_ : paneList_) {
+                aPaneList_.setBatch(true, "PointAttributeDialog");
             }
         }
         attr_.setBatch(true);
@@ -394,7 +394,7 @@ public class PointAttributeDialog extends JDialog {
         //
         // mark height
         //
-        attr_.setMarkHeightP(new Double(markHeightTextField.getText()).doubleValue());
+        attr_.setMarkHeightP(new Double(markHeightTextField.getText()));
         //
         // label attributes
         //
@@ -412,7 +412,7 @@ public class PointAttributeDialog extends JDialog {
         //
         // height
         //
-        attr_.setLabelHeightP(new Double(labelHeightTextField.getText()).doubleValue());
+        attr_.setLabelHeightP(new Double(labelHeightTextField.getText()));
         //
         // draw label?
         //
@@ -422,8 +422,8 @@ public class PointAttributeDialog extends JDialog {
         //
         if(pane_ != null) pane_.setBatch(false, "PointAttributeDialog");
         if(paneList_ != null) {
-            for(int i=0; i < paneList_.length; i++) {
-                paneList_[i].setBatch(false, "PointAttributeDialog");
+            for (JPane aPaneList_ : paneList_) {
+                aPaneList_.setBatch(false, "PointAttributeDialog");
             }
         }
     }

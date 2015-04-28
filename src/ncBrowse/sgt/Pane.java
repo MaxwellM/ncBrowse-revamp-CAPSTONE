@@ -115,7 +115,7 @@ import java.beans.PropertyChangeListener;
  * @author Donald Denbo
  * @version $Revision: 1.23 $, $Date: 2003/09/19 23:14:24 $
  * @since 1.0
- * @deprecated As of sgt 3.0, use {@link sgt.JPane JPane}.
+ * @deprecated As of sgt 3.0, use {@link ncBrowse.sgt.JPane JPane}.
  * @see Layer
  * @see Graph
  * @see java.awt.Graphics
@@ -161,7 +161,7 @@ public class Pane extends Container implements AbstractPane {
      *
      **/
     public Pane() {
-        this(new String(""), new Dimension(50,50));
+        this("", new Dimension(50,50));
     }
     /**
      * Return the version of SGT.
@@ -433,7 +433,7 @@ public class Pane extends Container implements AbstractPane {
         return proxy_.getObjectsAt(pt.x, pt.y);
     }
     public Component getComponent() {
-        return (Component)this;
+        return this;
     }
     public Dimension getMaximumSize() {
         return proxy_.getMaximumSize();

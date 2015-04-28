@@ -28,32 +28,32 @@ public interface Selectable {
      * 
      * @param sel true if selected, false if not.
      */
-    public void setSelected(boolean sel);
+    void setSelected(boolean sel);
     /**
      * Returns true if the object's selected property is set.
      * 
      * @return true if selected, false if not.
      */
-    public boolean isSelected();
+    boolean isSelected();
     /**
      * Gets the bounding rectangle in device
      * coordinates.
      *
      * @return bounding rectangle
      */
-    public Rectangle getBounds();
+    Rectangle getBounds();
     /**
      * Returns true if the current state is selectable.
      *
      * @return true if selectable
      */
-    public boolean isSelectable();
+    boolean isSelectable();
     /**
      * Set the Selectable property.
      *
      * @param select if true object is selectable
      */
-    public void setSelectable(boolean select);
+    void setSelectable(boolean select);
     /**
      * Change the selected objects bounding rectangle
      * in device coordinates.

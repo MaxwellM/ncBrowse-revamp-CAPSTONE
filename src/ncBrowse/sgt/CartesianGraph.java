@@ -20,6 +20,7 @@ import ncBrowse.sgt.geom.SoTRange;
 import ncBrowse.sgt.geom.SoTValue;
 import ncBrowse.sgt.geom.SoTPoint;
 
+import java.util.Objects;
 import java.util.Vector;
 import java.util.Enumeration;
 import java.awt.Graphics;
@@ -410,7 +411,7 @@ public class CartesianGraph extends Graph {
             Axis ax;
             for(Enumeration it = xAxis_.elements(); it.hasMoreElements();) {
                 ax = (Axis)it.nextElement();
-                if(ax.getId() == id) return ax;
+                if(Objects.equals(ax.getId(), id)) return ax;
             }
             throw new AxisNotFoundException();
         } else {
@@ -430,7 +431,7 @@ public class CartesianGraph extends Graph {
             Axis ax;
             for(Enumeration it = xAxis_.elements(); it.hasMoreElements();) {
                 ax = (Axis)it.nextElement();
-                if(ax.getId() == id) xAxis_.removeElement(ax);
+                if(Objects.equals(ax.getId(), id)) xAxis_.removeElement(ax);
             }
             throw new AxisNotFoundException();
         } else {
@@ -519,7 +520,7 @@ public class CartesianGraph extends Graph {
             Axis ax;
             for(Enumeration it = yAxis_.elements(); it.hasMoreElements();) {
                 ax = (Axis)it.nextElement();
-                if(ax.getId() == id) return ax;
+                if(Objects.equals(ax.getId(), id)) return ax;
             }
             throw new AxisNotFoundException();
         } else {
@@ -539,7 +540,7 @@ public class CartesianGraph extends Graph {
             Axis ax;
             for(Enumeration it = yAxis_.elements(); it.hasMoreElements();) {
                 ax = (Axis)it.nextElement();
-                if(ax.getId() == id) yAxis_.removeElement(ax);
+                if(Objects.equals(ax.getId(), id)) yAxis_.removeElement(ax);
             }
             throw new AxisNotFoundException();
         } else {
@@ -672,7 +673,7 @@ public class CartesianGraph extends Graph {
                 }
             }
         }
-        return (Object) null;
+        return null;
     }
     /**
      * Transform user X coordinate to physical coordinate.

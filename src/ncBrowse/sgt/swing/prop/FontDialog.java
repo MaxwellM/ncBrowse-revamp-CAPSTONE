@@ -111,10 +111,10 @@ public class FontDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -212,8 +212,8 @@ public class FontDialog extends JDialog {
     public int showDialog(Font font) {
         //    fontNames_ = Toolkit.getDefaultToolkit().getFontList();
         fontNames_ = GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
-        for(int i=0; i < fontNames_.length; i++) {
-            fontComboBox.addItem(fontNames_[i]);
+        for (String aFontNames_ : fontNames_) {
+            fontComboBox.addItem(aFontNames_);
         }
         setDefaultFont(font);
         result_ = CANCEL_RESPONSE;

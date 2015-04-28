@@ -237,10 +237,10 @@ public class Page extends JComponent implements PropertyChangeListener, Serializ
         setPrintScaleMode(panelModel.getPrintScaleMode());
         pane_.setBatch(true);
         Component[] comps = pane_.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Panel) {
-                Panel pnl = (Panel)comps[i];
-                if(!panelModel.hasPanelHolder(pnl.getName())) {
+        for (Component comp : comps) {
+            if (comp instanceof Panel) {
+                Panel pnl = (Panel) comp;
+                if (!panelModel.hasPanelHolder(pnl.getName())) {
                     pane_.remove(pnl);
                 }
             }
@@ -276,9 +276,9 @@ public class Page extends JComponent implements PropertyChangeListener, Serializ
      */
     public Panel findPanel(PanelHolder pHolder) {
         Component[] comps = pane_.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Panel) {
-                if(((Panel)comps[i]).getName().equals(pHolder.getId())) return (Panel)comps[i];
+        for (Component comp : comps) {
+            if (comp instanceof Panel) {
+                if (((Panel) comp).getName().equals(pHolder.getId())) return (Panel) comp;
             }
         }
         return null;
@@ -289,9 +289,9 @@ public class Page extends JComponent implements PropertyChangeListener, Serializ
 
         pane_.setBatch(true);
         Component[] comps = pane_.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Panel) {
-                Panel pnl = (Panel)comps[i];
+        for (Component comp : comps) {
+            if (comp instanceof Panel) {
+                Panel pnl = (Panel) comp;
                 pnl.resetZoom(event.getX(), event.getY());
             }
         }
@@ -304,9 +304,9 @@ public class Page extends JComponent implements PropertyChangeListener, Serializ
     public void resetZoom() {
         pane_.setBatch(true);
         Component[] comps = pane_.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Panel) {
-                Panel pnl = (Panel)comps[i];
+        for (Component comp : comps) {
+            if (comp instanceof Panel) {
+                Panel pnl = (Panel) comp;
                 pnl.resetZoom();
             }
         }
@@ -331,9 +331,9 @@ public class Page extends JComponent implements PropertyChangeListener, Serializ
 
         pane_.setBatch(true);
         Component[] comps = pane_.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Panel) {
-                Panel pnl = (Panel)comps[i];
+        for (Component comp : comps) {
+            if (comp instanceof Panel) {
+                Panel pnl = (Panel) comp;
                 pnl.zoomTo(zmStart, zm);
             }
         }
@@ -365,9 +365,9 @@ public class Page extends JComponent implements PropertyChangeListener, Serializ
         result = pane_.print(g, pf, pageIndex);
         if(result == PAGE_EXISTS && panelModel.isPrintBorders()) {
             Component[] comps = pane_.getComponents();
-            for(int i=0; i < comps.length; i++) {
-                if(comps[i] instanceof Panel) {
-                    Panel pnl = (Panel)comps[i];
+            for (Component comp : comps) {
+                if (comp instanceof Panel) {
+                    Panel pnl = (Panel) comp;
                     Rectangle r = pnl.getBounds();
                     Border bdr = pnl.getBorder();
                     bdr.paintBorder(pnl, g, r.x, r.y, r.width, r.height);

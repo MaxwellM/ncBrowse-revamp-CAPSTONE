@@ -43,11 +43,7 @@ public class TimePoint {
      * Test for equality.  Both x and t must be equal for equality.
      */
     public boolean equals(TimePoint tp) {
-        if(t != null && tp.t != null) {
-            return (x == tp.x && t.equals(tp.t));
-        } else {
-            return false;
-        }
+        return t != null && tp.t != null && (x == tp.x && t.equals(tp.t));
     }
     /**
      * Convert TimePoint to a default string
@@ -55,6 +51,6 @@ public class TimePoint {
      * @return string representation of the TimePoint.
      */
     public String toString() {
-        return new String("(" + x + ", " + t.toString() + ")");
+        return "(" + x + ", " + t.toString() + ")";
     }
 }

@@ -123,11 +123,10 @@ public class DataGroup implements Serializable, ChangeListener {
         try {
             BeanInfo info = Introspector.getBeanInfo(DataGroup.class);
             PropertyDescriptor[] descriptors = info.getPropertyDescriptors();
-            for(int i=0; i < descriptors.length; i++) {
-                PropertyDescriptor pd = descriptors[i];
-                if(pd.getName().equals("instantiated")) {
+            for (PropertyDescriptor pd : descriptors) {
+                if (pd.getName().equals("instantiated")) {
                     pd.setValue("transient", Boolean.TRUE);
-                } else if(pd.getName().equals("panelHolder")) {
+                } else if (pd.getName().equals("panelHolder")) {
                     pd.setValue("transient", Boolean.TRUE);
                 }
             }
@@ -252,7 +251,7 @@ public class DataGroup implements Serializable, ChangeListener {
      * @return margin
      */
     public Margin getMargin() {
-        return (Margin)margin.copy();
+        return margin.copy();
     }
     /**
      * Set the margin.  The margin is used to automatically place the axes in a
@@ -363,11 +362,7 @@ public class DataGroup implements Serializable, ChangeListener {
     public synchronized void removeDesignChangeListeners() {
         if(changeListeners != null) {
             Vector v = (Vector) changeListeners.clone();
-            Iterator iter = v.iterator();
-            while(iter.hasNext()) {
-                Object obj = iter.next();
-                if(obj instanceof DesignListener) changeListeners.removeElement(obj);
-            }
+            v.stream().filter(obj -> obj instanceof DesignListener).forEach(changeListeners::removeElement);
         }
     }
 

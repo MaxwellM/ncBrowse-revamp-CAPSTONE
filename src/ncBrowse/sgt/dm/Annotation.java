@@ -75,8 +75,7 @@ public class Annotation implements SGTData, PropertyChangeListener {
 
     public boolean remove(String id) {
         Annote ann = findAnnote(id);
-        if(ann == null) return false;
-        return remove(ann);
+        return ann != null && remove(ann);
     }
 
     public boolean remove(Annote ann) {

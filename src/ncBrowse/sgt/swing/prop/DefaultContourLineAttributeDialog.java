@@ -70,8 +70,8 @@ public class DefaultContourLineAttributeDialog extends JDialog {
             tempString[4] = "MARK";
             tempString[5] = "MARK & SOLID";
             tempString[6] = "STROKE";
-            for(int i=0; i < tempString.length; i++) {
-                lineStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                lineStyleCBM.addElement(aTempString);
             }
         }
         {
@@ -79,8 +79,8 @@ public class DefaultContourLineAttributeDialog extends JDialog {
             tempString[0] = "BUTT";
             tempString[1] = "ROUND";
             tempString[2] = "SQUARE";
-            for(int i=0; i < tempString.length; i++) {
-                capStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                capStyleCBM.addElement(aTempString);
             }
         }
         {
@@ -88,8 +88,8 @@ public class DefaultContourLineAttributeDialog extends JDialog {
             tempString[0] = "MITER";
             tempString[1] = "ROUND";
             tempString[2] = "BEVEL";
-            for(int i=0; i < tempString.length; i++) {
-                miterStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                miterStyleCBM.addElement(aTempString);
             }
         }
         titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white,new Color(142, 142, 142)),"Stroke Line Attributes");
@@ -258,10 +258,10 @@ public class DefaultContourLineAttributeDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -483,9 +483,9 @@ public class DefaultContourLineAttributeDialog extends JDialog {
         if(da == null) {
             return "null";
         }
-        StringBuffer sbuf = new StringBuffer("{");
-        for(int i=0; i < da.length; i++) {
-            sbuf.append(Float.toString(da[i]) + ", ");
+        StringBuilder sbuf = new StringBuilder("{");
+        for (float aDa : da) {
+            sbuf.append(Float.toString(aDa)).append(", ");
         }
         sbuf.setLength(sbuf.length()-2);
         sbuf.append("}");
@@ -504,7 +504,7 @@ public class DefaultContourLineAttributeDialog extends JDialog {
         int index = 0;
         float[] array = new float[token.countTokens()];
         while(token.hasMoreTokens()) {
-            array[index] = new Float(token.nextToken()).floatValue();
+            array[index] = new Float(token.nextToken());
             index++;
         }
         return array;
@@ -524,7 +524,7 @@ public class DefaultContourLineAttributeDialog extends JDialog {
         //
         // width
         //
-        attr_.setWidth(new Float(widthTextField.getText()).floatValue());
+        attr_.setWidth(new Float(widthTextField.getText()));
         //
         // dash array
         //
@@ -532,7 +532,7 @@ public class DefaultContourLineAttributeDialog extends JDialog {
         //
         // dash phase
         //
-        attr_.setDashPhase(new Float(dashPhaseTextField.getText()).floatValue());
+        attr_.setDashPhase(new Float(dashPhaseTextField.getText()));
         //
         // cap style
         //
@@ -544,7 +544,7 @@ public class DefaultContourLineAttributeDialog extends JDialog {
         //
         // miter limit
         //
-        attr_.setMiterLimit(new Float(miterLimitTextField.getText()).floatValue());
+        attr_.setMiterLimit(new Float(miterLimitTextField.getText()));
         //
         // Label attributes
         //
@@ -562,7 +562,7 @@ public class DefaultContourLineAttributeDialog extends JDialog {
         //
         // heightP
         //
-        attr_.setLabelHeightP(new Double(heightTextField.getText()).doubleValue());
+        attr_.setLabelHeightP(new Double(heightTextField.getText()));
         //
         // label format
         //
@@ -570,7 +570,7 @@ public class DefaultContourLineAttributeDialog extends JDialog {
         //
         // significant digits
         //
-        attr_.setSignificantDigits(Integer.valueOf(sigDigitsTextField.getText()).intValue());
+        attr_.setSignificantDigits(Integer.valueOf(sigDigitsTextField.getText()));
     }
     /**
      * Get the modified attribute.

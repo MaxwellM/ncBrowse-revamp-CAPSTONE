@@ -103,7 +103,7 @@ class HourDayAxis implements TimeAxisStyle {
                                    tRange.end.getGMTHours(), 0, 0, 0);
                 if(!time.equals(tRange.end)) time.increment(1.0f, GeoDate.HOURS);
             }
-        } catch (IllegalTimeValue e) {}
+        } catch (IllegalTimeValue ignored) {}
         return time;
     }
     public double getIncrementValue() {

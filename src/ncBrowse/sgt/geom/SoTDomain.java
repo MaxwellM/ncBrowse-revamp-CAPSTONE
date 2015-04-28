@@ -146,13 +146,7 @@ public class SoTDomain implements java.io.Serializable {
         return true;
     }
     public String toString() {
-        StringBuffer buf = new StringBuffer(100);
-        buf.append("x=");
-        buf.append(xRange_).append(",y=");
-        buf.append(yRange_);
-        buf.append(", xRev=").append(xReversed_);
-        buf.append(", yRev=").append(yReversed_);
-        return buf.toString();
+        return "x=" + xRange_ + ",y=" + yRange_ + ", xRev=" + xReversed_ + ", yRev=" + yReversed_;
     }
     /**
      * @since sgt 3.0

@@ -340,8 +340,7 @@ public class JSlider2Date extends Container implements Serializable {
 
     try {
       this.minValue_ = new GeoDate(var2, var1, var3, var4, var5, 0, 0);
-    } catch (IllegalTimeValue var7) {
-      ;
+    } catch (IllegalTimeValue ignored) {
     }
 
     return this.minValue_;
@@ -356,8 +355,7 @@ public class JSlider2Date extends Container implements Serializable {
 
     try {
       this.maxValue_ = new GeoDate(var2, var1, var3, var4, var5, 0, 0);
-    } catch (IllegalTimeValue var7) {
-      ;
+    } catch (IllegalTimeValue ignored) {
     }
 
     return this.maxValue_;
@@ -416,8 +414,7 @@ public class JSlider2Date extends Container implements Serializable {
 
     try {
       this.minValue_ = new GeoDate(var2, var1, var3, var4, var5, 0, 0);
-    } catch (IllegalTimeValue var7) {
-      ;
+    } catch (IllegalTimeValue ignored) {
     }
 
     if(this.minValue_.after(this.maxValue_)) {
@@ -436,8 +433,7 @@ public class JSlider2Date extends Container implements Serializable {
 
     try {
       this.maxValue_ = new GeoDate(var2, var1, var3, var4, var5, 0, 0);
-    } catch (IllegalTimeValue var7) {
-      ;
+    } catch (IllegalTimeValue ignored) {
     }
 
     if(this.maxValue_.before(this.minValue_)) {
@@ -549,8 +545,7 @@ public class JSlider2Date extends Container implements Serializable {
 
     try {
       this.minValue_ = new GeoDate(var2, var1, var3, var4, var5, 0, 0);
-    } catch (IllegalTimeValue var9) {
-      ;
+    } catch (IllegalTimeValue ignored) {
     }
 
     if(this.minValue_.after(this.maxValue_)) {
@@ -578,8 +573,7 @@ public class JSlider2Date extends Container implements Serializable {
 
     try {
       this.maxValue_ = new GeoDate(var2, var1, var3, var4, var5, 0, 0);
-    } catch (IllegalTimeValue var9) {
-      ;
+    } catch (IllegalTimeValue ignored) {
     }
 
     if(this.maxValue_.before(this.minValue_)) {
@@ -600,12 +594,12 @@ public class JSlider2Date extends Container implements Serializable {
   void slider_propertyChange(PropertyChangeEvent var1) {
     double var2;
     if(var1.getPropertyName().equals("minValue")) {
-      var2 = ((Double)var1.getNewValue()).doubleValue();
+      var2 = (Double) var1.getNewValue();
       this.minValue_ = new GeoDate(this.range_.start);
       this.minValue_.increment(var2 * this.scale_, 1);
       this.setStart(true);
     } else if(var1.getPropertyName().equals("maxValue")) {
-      var2 = ((Double)var1.getNewValue()).doubleValue();
+      var2 = (Double) var1.getNewValue();
       this.maxValue_ = new GeoDate(this.range_.start);
       this.maxValue_.increment(var2 * this.scale_, 1);
       this.setStop(true);
@@ -654,8 +648,7 @@ public class JSlider2Date extends Container implements Serializable {
       var6.setStartValue(var4);
       var6.setEndValue(var5);
       var6.setAlwaysPost(true);
-    } catch (IllegalTimeValue var8) {
-      ;
+    } catch (IllegalTimeValue ignored) {
     }
 
     JFrame var7 = new JFrame("JSlider2Date Test");

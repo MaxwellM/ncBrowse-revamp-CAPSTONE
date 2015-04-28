@@ -64,6 +64,7 @@ public class PaneBeanInfo extends SimpleBeanInfo {
     public BeanDescriptor getBeanDescriptor() {
         return new BeanDescriptor(beanClass);
     }
-
-    private final static Class beanClass = Pane.class;
+    //TESTING
+    //private final static Class beanClass = Pane.class;
+    private final static Class beanClass = JPane.class;
 }

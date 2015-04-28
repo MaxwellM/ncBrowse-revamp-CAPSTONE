@@ -68,19 +68,19 @@ class PanelHolderPropertyPanel extends PropertyPanel implements ActionListener, 
     }
 
     void resetFields() {
-        for(int i=0; i < comps_.length; i++) {
-            if(comps_[i] instanceof JTextField) {
-                ((JTextField)comps_[i]).removeActionListener(this);
-                ((JTextField)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JCheckBox) {
-                ((JCheckBox)comps_[i]).removeActionListener(this);
-                ((JCheckBox)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JComboBox) {
-                ((JComboBox)comps_[i]).removeActionListener(this);
-                ((JComboBox)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JButton) {
-                ((JButton)comps_[i]).removeActionListener(this);
-                ((JButton)comps_[i]).removeFocusListener(this);
+        for (JComponent aComps_ : comps_) {
+            if (aComps_ instanceof JTextField) {
+                ((JTextField) aComps_).removeActionListener(this);
+                ((JTextField) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JCheckBox) {
+                ((JCheckBox) aComps_).removeActionListener(this);
+                ((JCheckBox) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JComboBox) {
+                ((JComboBox) aComps_).removeActionListener(this);
+                ((JComboBox) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JButton) {
+                ((JButton) aComps_).removeActionListener(this);
+                ((JButton) aComps_).removeFocusListener(this);
             }
         }
     }
@@ -100,29 +100,35 @@ class PanelHolderPropertyPanel extends PropertyPanel implements ActionListener, 
     }
 
     private void processEvent(Object obj, String command) {
-        if(command.equals("Border")) {
-            BorderDialog bd = new BorderDialog(null, "Select Border", true);
-            bd.setBorder(pHolder_.getBorder());
-            bd.setVisible(true);
-            pHolder_.setBorder(bd.getBorder());
-        } else if(command.equals("Id")) {
-            String oldId = pHolder_.getId();
-            pHolder_.getPanelModel().getPanelList().remove(oldId);
-            pHolder_.setId(((JTextField)obj).getText());
-            pHolder_.getPanelModel().getPanelList().put(pHolder_.getId(), pHolder_);
-        } else if(command.equals("Visible")) {
-            pHolder_.setVisible(((JCheckBox)obj).isSelected());
-        } else if(command.equals("Background")) {
-            ColorDialog cd = new ColorDialog(getFrame(), "Select Axis Color", true);
-            cd.setColor(pHolder_.getBackground());
-            cd.setVisible(true);
-            Color newcolor = cd.getColor();
-            if(newcolor != null) {
-                pHolder_.setBackground(newcolor);
-                updateColor((JButton)obj, newcolor);
-            }
-        } else if(command.equals("Page Background")) {
-            pHolder_.setUsePageBackground(((JCheckBox)obj).isSelected());
+        switch (command) {
+            case "Border":
+                BorderDialog bd = new BorderDialog(null, "Select Border", true);
+                bd.setBorder(pHolder_.getBorder());
+                bd.setVisible(true);
+                pHolder_.setBorder(bd.getBorder());
+                break;
+            case "Id":
+                String oldId = pHolder_.getId();
+                pHolder_.getPanelModel().getPanelList().remove(oldId);
+                pHolder_.setId(((JTextField) obj).getText());
+                pHolder_.getPanelModel().getPanelList().put(pHolder_.getId(), pHolder_);
+                break;
+            case "Visible":
+                pHolder_.setVisible(((JCheckBox) obj).isSelected());
+                break;
+            case "Background":
+                ColorDialog cd = new ColorDialog(getFrame(), "Select Axis Color", true);
+                cd.setColor(pHolder_.getBackground());
+                cd.setVisible(true);
+                Color newcolor = cd.getColor();
+                if (newcolor != null) {
+                    pHolder_.setBackground(newcolor);
+                    updateColor((JButton) obj, newcolor);
+                }
+                break;
+            case "Page Background":
+                pHolder_.setUsePageBackground(((JCheckBox) obj).isSelected());
+                break;
         }
     }
 

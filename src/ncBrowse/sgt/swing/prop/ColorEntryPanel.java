@@ -67,11 +67,7 @@ public class ColorEntryPanel extends JComponent {
         blueTF.setColumns(3);
         alphaTF.setText("0");
         alphaTF.setColumns(3);
-        button.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    button_actionPerformed(e);
-                }
-            });
+        button.addActionListener(this::button_actionPerformed);
         button.setToolTipText("Edit color.");
         button.setActionCommand("...");
         add(redLabel);

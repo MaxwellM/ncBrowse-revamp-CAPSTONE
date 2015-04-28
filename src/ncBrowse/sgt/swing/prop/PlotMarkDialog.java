@@ -84,10 +84,10 @@ public class PlotMarkDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }

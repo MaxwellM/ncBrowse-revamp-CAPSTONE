@@ -62,7 +62,7 @@ public class Margin implements Cloneable, Serializable {
     public Margin copy() {
         try {
             return (Margin)clone();
-        } catch (CloneNotSupportedException ex) {
+        } catch (CloneNotSupportedException ignored) {
         }
         return null;
     }

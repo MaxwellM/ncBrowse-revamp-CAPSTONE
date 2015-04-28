@@ -151,7 +151,7 @@ public class SimpleGrid implements SGTGrid, Cartesian, Cloneable, Serializable {
         } catch (CloneNotSupportedException e) {
             newGrid = new SimpleGrid();
         }
-        return (SGTData)newGrid;
+        return newGrid;
     }
     public double[] getXArray() {
         return xloc_;
@@ -442,10 +442,10 @@ public class SimpleGrid implements SGTGrid, Cartesian, Cloneable, Serializable {
         long end = Long.MIN_VALUE;
         long[] tar = tarray.getTime();
         int count = 0;
-        for(int i=0; i < tar.length; i++) {
-            if(!(tar[i] == Long.MAX_VALUE)) {
-                start = Math.min(start, tar[i]);
-                end = Math.max(end, tar[i]);
+        for (long aTar : tar) {
+            if (!(aTar == Long.MAX_VALUE)) {
+                start = Math.min(start, aTar);
+                end = Math.max(end, aTar);
                 count++;
             }
         }
@@ -460,10 +460,10 @@ public class SimpleGrid implements SGTGrid, Cartesian, Cloneable, Serializable {
         double start = Double.POSITIVE_INFINITY;
         double end = Double.NEGATIVE_INFINITY;
         int count = 0;
-        for(int i=0; i < array.length; i++) {
-            if(!Double.isNaN(array[i])) {
-                start = Math.min(start, array[i]);
-                end = Math.max(end, array[i]);
+        for (double anArray : array) {
+            if (!Double.isNaN(anArray)) {
+                start = Math.min(start, anArray);
+                end = Math.max(end, anArray);
                 count++;
             }
         }

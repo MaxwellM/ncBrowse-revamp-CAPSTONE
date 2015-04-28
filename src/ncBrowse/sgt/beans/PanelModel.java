@@ -239,7 +239,7 @@ public class PanelModel implements Serializable, ChangeListener, ComponentListen
     public void setDpi(float dpi) {
         float saved = this.dpi;
         this.dpi = dpi;
-        if(saved != this.dpi) firePropertyChange("dpi", new Float(saved), new Float(this.dpi));
+        if(saved != this.dpi) firePropertyChange("dpi", saved, this.dpi);
     }
     /**
      * <code>ChangeListner</code> callback.
@@ -445,8 +445,8 @@ public class PanelModel implements Serializable, ChangeListener, ComponentListen
         boolean saved = this.printBorders;
         this.printBorders = printBorders;
         if(saved != this.printBorders)
-            firePropertyChange("printBorders", new Boolean(saved),
-                               new Boolean(this.printBorders));
+            firePropertyChange("printBorders", saved,
+                this.printBorders);
     }
     /**
      * Set the print  on white background property.  Default = true.
@@ -456,8 +456,8 @@ public class PanelModel implements Serializable, ChangeListener, ComponentListen
         boolean saved = this.printWhitePage;
         this.printWhitePage = printWhitePage;
         if(saved != this.printWhitePage)
-            firePropertyChange("printWhitePage", new Boolean(saved),
-                               new Boolean(this.printWhitePage));
+            firePropertyChange("printWhitePage", saved,
+                this.printWhitePage);
     }
     public void propertyChange(PropertyChangeEvent evt) {
         if(Page.DEBUG) System.out.println("PanelModel.propertyChange("+evt.getPropertyName()+")");
@@ -482,11 +482,7 @@ public class PanelModel implements Serializable, ChangeListener, ComponentListen
     public synchronized void removeDesignChangeListeners() {
         if(changeListeners != null) {
             Vector v = (Vector) changeListeners.clone();
-            Iterator iter = v.iterator();
-            while(iter.hasNext()) {
-                Object obj = iter.next();
-                if(obj instanceof DesignListener) changeListeners.removeElement(obj);
-            }
+            v.stream().filter(obj -> obj instanceof DesignListener).forEach(changeListeners::removeElement);
         }
     }
 

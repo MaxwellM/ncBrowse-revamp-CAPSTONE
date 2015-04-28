@@ -133,13 +133,7 @@ public class GeographicValue {
     // ---------------------------------------------
     //
     public String toString( ) {
-        StringBuffer str = new StringBuffer();
-        str.append( " ----------------------------: " 
-                    + " \n degrees: " + degrees 
-                    + " \n minutes: " + minutes
-                    + " \n seconds: " + seconds
-                    + " \n decimalValue: " + decimalValue);
-        return str.toString();
+        return (" ----------------------------: " + " \n degrees: ") + degrees + " \n minutes: " + minutes + " \n seconds: " + seconds + " \n decimalValue: " + decimalValue;
     }
 
     // ---------------------------------------------

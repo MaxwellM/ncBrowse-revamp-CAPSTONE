@@ -153,10 +153,10 @@ public class ContourLevelsDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -260,7 +260,7 @@ public class ContourLevelsDialog extends JDialog {
         for(int i=0; i < size; i++) {
             val = (Double)model_.getValueAt(i,0);
             attr = (ContourLineAttribute)model_.getValueAt(i,1);
-            cl.addLevel(val.doubleValue(), attr);
+            cl.addLevel(val, attr);
         }
         cl.setDefaultContourLineAttribute(conLevels_.getDefaultContourLineAttribute());
         conLevels_ = cl;
@@ -295,7 +295,7 @@ public class ContourLevelsDialog extends JDialog {
         model_ = new ConLevelTableModel();
         for(int i=0; i < size; i++) {
             try {
-                val = new Double(conLevels_.getLevel(i));
+                val = conLevels_.getLevel(i);
                 attr = conLevels_.getContourLineAttribute(i);
                 model_.add(val, attr);
             } catch (ContourLevelNotFoundException e) {
@@ -338,7 +338,7 @@ public class ContourLevelsDialog extends JDialog {
         int index = table_.getSelectedRow();
         if(index < 0) return;
         model_.insert(index,
-                      new Double(0.0),
+            0.0,
                       new ContourLineAttribute(ContourLineAttribute.SOLID));
     }
 
@@ -346,7 +346,7 @@ public class ContourLevelsDialog extends JDialog {
         int index = table_.getSelectedRow();
         if(index < 0) return;
         model_.insert(index + 1,
-                      new Double(0.0),
+            0.0,
                       new ContourLineAttribute(ContourLineAttribute.SOLID));
     }
 
@@ -415,7 +415,7 @@ public class ContourLevelsDialog extends JDialog {
                 for(i=0; i < size-1; i++) {
                     a = (Double)values.elementAt(index[i]);
                     b = (Double)values.elementAt(index[i+1]);
-                    if(a.doubleValue() > b.doubleValue()) {
+                    if(a > b) {
                         //        if(a.compareTo(b) > 0) {  // jdk1.2
                         temp = index[i];
                         index[i] = index[i+1];

@@ -246,7 +246,7 @@ abstract class PropertyPanel extends JComponent implements DesignListener {
     }
 
     protected String colorString(Color value) {
-        StringBuffer sbuf = new StringBuffer("[");
+        StringBuilder sbuf = new StringBuilder("[");
         sbuf.append(value.getRed()).append(", ");
         sbuf.append(value.getGreen()).append(", ");
         sbuf.append(value.getRed());
@@ -294,7 +294,7 @@ abstract class PropertyPanel extends JComponent implements DesignListener {
     }
 
     protected String format(Point val, boolean brackets) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         if(brackets) buf.append("[");
         buf.append(format(val.x)).append(", ");
         buf.append(format(val.y));
@@ -303,7 +303,7 @@ abstract class PropertyPanel extends JComponent implements DesignListener {
     }
 
     protected String format(Dimension val, boolean brackets) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         if(brackets) buf.append("[");
         buf.append(format(val.width)).append(", ");
         buf.append(format(val.height));
@@ -312,7 +312,7 @@ abstract class PropertyPanel extends JComponent implements DesignListener {
     }
 
     protected String format(Rectangle2D.Double val, boolean brackets) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         if(brackets) buf.append("[");
         buf.append(format(val.x)).append(", ");
         buf.append(format(val.y)).append(", ");
@@ -323,7 +323,7 @@ abstract class PropertyPanel extends JComponent implements DesignListener {
     }
 
     protected String format(Point2D.Double val, boolean brackets) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         if(brackets) buf.append("[");
         buf.append(format(val.x)).append(", ");
         buf.append(format(val.y));
@@ -332,7 +332,7 @@ abstract class PropertyPanel extends JComponent implements DesignListener {
     }
 
     protected String format(Range2D val, boolean brackets) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         if(brackets) buf.append("[");
         buf.append(format(val.start)).append(", ");
         buf.append(format(val.end)).append(", ");
@@ -342,7 +342,7 @@ abstract class PropertyPanel extends JComponent implements DesignListener {
     }
 
     protected String format(SoTRange.Double val, boolean brackets) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         if(brackets) buf.append("[");
         buf.append(format(val.start)).append(", ");
         buf.append(format(val.end)).append(", ");
@@ -352,7 +352,7 @@ abstract class PropertyPanel extends JComponent implements DesignListener {
     }
 
     protected String format(SoTRange.Time val, boolean brackets) {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         if(brackets) buf.append("[");
         buf.append(val.getStart().toString()).append(", ");
         buf.append(val.getEnd().toString()).append(", ");
@@ -363,7 +363,7 @@ abstract class PropertyPanel extends JComponent implements DesignListener {
 
     protected String format(SoTRange val, boolean brackets) {
         if(val instanceof SoTRange.Float) {
-            return format((SoTRange.Float)val, brackets);
+            return format(val, brackets);
         } else if(val instanceof SoTRange.Double) {
             return format((SoTRange.Double)val, brackets);
         } else if(val instanceof SoTRange.Time) {

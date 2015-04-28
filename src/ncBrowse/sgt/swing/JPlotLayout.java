@@ -24,6 +24,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
 import java.util.Enumeration;
+import java.util.Objects;
 
 /**
  * <code>JPlotLayout</code> creates a pre-defined graphics layout for
@@ -165,7 +166,7 @@ public class JPlotLayout extends JGraphicLayout
      * retained for backward compatability.
      *
      * @param isGrid if true data is grid
-     * @param isXtime if true x coordinate is time
+     * @param isXTime if true x coordinate is time
      * @param isYTime if true y coordinate is time
      * @param id identifier
      * @param img Logo image
@@ -208,7 +209,7 @@ public class JPlotLayout extends JGraphicLayout
      * method must be called to associated data with this object.
      *
      * @param type type of plot , POINT, GRID, LINE, or VECTOR
-     * @param isXtime if true x coordinate is time
+     * @param isXTime if true x coordinate is time
      * @param isYTime if true y coordinate is time
      * @param id identifier
      * @param img Logo image
@@ -440,7 +441,7 @@ public class JPlotLayout extends JGraphicLayout
         try {
             start = new GeoDate("1992-11-01", "yyyy-MM-dd");
             end = new GeoDate("1993-02-20", "yyyy-MM-dd");
-        } catch (IllegalTimeValue e) {}
+        } catch (IllegalTimeValue ignored) {}
         SoTRange xRange, yRange;
         if(isXTime_) {
             xRange = new SoTRange.Time(start.getTime(), end.getTime());
@@ -791,7 +792,7 @@ public class JPlotLayout extends JGraphicLayout
                 left.setRangeU(ynRange);
                 left.setLocationU(origin);
                 left.setTitle(ytitle);
-            } catch (AxisNotFoundException e) {}
+            } catch (AxisNotFoundException ignored) {}
             if(data_good) {
                 //
                 // transforms
@@ -954,7 +955,7 @@ public class JPlotLayout extends JGraphicLayout
                 try {
                     bottom = graph.getXAxis(BOTTOM_AXIS);
                     left = graph.getYAxis(LEFT_AXIS);
-                } catch (AxisNotFoundException e) {}
+                } catch (AxisNotFoundException ignored) {}
 
                 if(!inZoom_) {
                     //
@@ -1231,7 +1232,7 @@ public class JPlotLayout extends JGraphicLayout
         zmetaout.setModuloTime(zmetain.getModuloTime());
         out.setXMetaData(line.getXMetaData());
         out.setYMetaData(zmetaout);
-        return (SGTData)out;
+        return out;
     }
 
     public void resetZoom() {
@@ -1496,7 +1497,7 @@ public class JPlotLayout extends JGraphicLayout
             } else {
                 setAllClipping(false);
             }
-        } catch (AxisNotFoundException e) {}
+        } catch (AxisNotFoundException ignored) {}
     }
     /**
      * Reset the x range. This method is designed to provide
@@ -1543,7 +1544,7 @@ public class JPlotLayout extends JGraphicLayout
             } else {
                 setAllClipping(false);
             }
-        } catch (AxisNotFoundException e) {}
+        } catch (AxisNotFoundException ignored) {}
     }
     /**
      * Reset the y range. This method is designed to provide
@@ -1578,7 +1579,7 @@ public class JPlotLayout extends JGraphicLayout
             } else {
                 setAllClipping(false);
             }
-        } catch (AxisNotFoundException e) {}
+        } catch (AxisNotFoundException ignored) {}
     }
     /**
      * Reset the y range. This method is designed to provide
@@ -1654,7 +1655,7 @@ public class JPlotLayout extends JGraphicLayout
             } else {
                 setAllClipping(false);
             }
-        } catch (AxisNotFoundException e) {}
+        } catch (AxisNotFoundException ignored) {}
     }
     /**
      * Find a dataset from the data's id.
@@ -1669,13 +1670,13 @@ public class JPlotLayout extends JGraphicLayout
                 CartesianRenderer rend = ((CartesianGraph)ly.getGraph()).getRenderer();
                 if(rend != null) {
                     if(rend instanceof LineCartesianRenderer) {
-                        return (SGTData)((LineCartesianRenderer)rend).getLine();
+                        return ((LineCartesianRenderer)rend).getLine();
                     } else if(rend instanceof GridCartesianRenderer) {
-                        return (SGTData)((GridCartesianRenderer)rend).getGrid();
+                        return ((GridCartesianRenderer)rend).getGrid();
                     }
                 }
             }
-        } catch (LayerNotFoundException e) {}
+        } catch (LayerNotFoundException ignored) {}
         return null;
     }
     /**
@@ -1686,9 +1687,9 @@ public class JPlotLayout extends JGraphicLayout
      */
     public SGTData getData(CartesianRenderer rend) {
         if(rend instanceof LineCartesianRenderer) {
-            return (SGTData)((LineCartesianRenderer)rend).getLine();
+            return ((LineCartesianRenderer)rend).getLine();
         } else if(rend instanceof GridCartesianRenderer) {
-            return (SGTData)((GridCartesianRenderer)rend).getGrid();
+            return ((GridCartesianRenderer)rend).getGrid();
         }
         return null;
     }
@@ -1718,7 +1719,7 @@ public class JPlotLayout extends JGraphicLayout
         try {
             ly = getLayerFromDataId(data_id);
             remove(ly);
-        } catch (LayerNotFoundException e) {}
+        } catch (LayerNotFoundException ignored) {}
         for(Enumeration it=data_.elements(); it.hasMoreElements();) {
             dat = (SGTData)it.nextElement();
             if(dat.getId().equals(data_id)) {
@@ -1787,9 +1788,9 @@ public class JPlotLayout extends JGraphicLayout
         yMax_ = d.height - (ySize_ - yMax_);
         xSize_ = d.width;
         ySize_ = d.height;
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Layer) {
-                ((Layer)comps[i]).setSizeP(d);
+        for (Component comp : comps) {
+            if (comp instanceof Layer) {
+                ((Layer) comp).setSizeP(d);
             }
         }
         yt.setRangeP(new Range2D(yMin_, yMax_));
@@ -1997,7 +1998,7 @@ public class JPlotLayout extends JGraphicLayout
             System.out.println("                " + evt.getPropertyName());
         }
         if(evt.getSource() instanceof GridAttribute &&
-           evt.getPropertyName() == "style" && (plotType_ == GRID)) {
+            Objects.equals(evt.getPropertyName(), "style") && (plotType_ == GRID)) {
             // SGTGrid
             SGTGrid grid = (SGTGrid)data_.firstElement();
             try{

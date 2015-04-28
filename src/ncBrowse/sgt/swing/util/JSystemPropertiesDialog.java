@@ -29,11 +29,11 @@ public class JSystemPropertiesDialog extends javax.swing.JDialog {
     private JTable propTable;
 
     public JSystemPropertiesDialog(String sTitle)  {
-        this((Frame) null, sTitle, false);
+        this(null, sTitle, false);
     }
 
     public JSystemPropertiesDialog()  {
-        this((Frame)null, (String) null, false);
+        this(null, null, false);
     }
 
     public JSystemPropertiesDialog(Frame frame, String title) {
@@ -101,7 +101,7 @@ public class JSystemPropertiesDialog extends javax.swing.JDialog {
             Class cls = Class.forName("sgt.JPane");
             java.lang.reflect.Method meth = cls.getMethod("getVersion", NoParameters);
             ver = (String)meth.invoke(Static, NoArgs);
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         } finally {
             names.add("sgt.version");
             values.add(ver);
@@ -114,7 +114,7 @@ public class JSystemPropertiesDialog extends javax.swing.JDialog {
             String name = (String)e.nextElement();
             String value = prop.getProperty(name);
             int len = value.length();
-            if(value.indexOf(separator) != -1 && !name.equals("path.separator")) {
+            if(value.contains(separator) && !name.equals("path.separator")) {
                 int lastIndex = 0;
                 int count = 1;
                 int ind;
@@ -198,7 +198,7 @@ public class JSystemPropertiesDialog extends javax.swing.JDialog {
         try {
             // JSystemPropertiesDialog Hide the JSystemPropertiesDialog
             this.setVisible(false);
-        } catch (java.lang.Exception e) {
+        } catch (java.lang.Exception ignored) {
         }
     }
 

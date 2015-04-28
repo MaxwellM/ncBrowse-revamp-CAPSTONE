@@ -154,7 +154,7 @@ public
     public void setRange(Range2D range) {
         double min, max;
         range_ = range;
-        scale_ = (double)(range_.end - range_.start);
+        scale_ = range_.end - range_.start;
         slider_.setMinLabel(form_.format(range_.start));
         slider_.setMaxLabel(form_.format(range_.end));
     
@@ -200,7 +200,7 @@ public
      * @return minimum range value
      */
     public double getMinRange() {
-        return (double)range_.start;
+        return range_.start;
     }
     /**
      * Set the maximum for the range.
@@ -217,7 +217,7 @@ public
      * @return maximum range value
      */
     public double getMaxRange() {
-        return (double)range_.end;
+        return range_.end;
     }
     /**
      * Reset the slider handles
@@ -547,16 +547,16 @@ public
   
     void testMax() {
         if(oldMaxValue_ != maxValue_) {
-            Double tempOldValue = new Double(oldMaxValue_);
+            Double tempOldValue = oldMaxValue_;
             oldMaxValue_ = maxValue_;
-            changes.firePropertyChange("maxValue", tempOldValue, new Double(maxValue_)); 
+            changes.firePropertyChange("maxValue", tempOldValue, maxValue_);
         }
     }
     void testMin() {
         if(oldMinValue_ != minValue_) {
-            Double tempOldValue = new Double(oldMinValue_);
+            Double tempOldValue = oldMinValue_;
             oldMinValue_ = minValue_;
-            changes.firePropertyChange("minValue", tempOldValue, new Double(minValue_)); 
+            changes.firePropertyChange("minValue", tempOldValue, minValue_);
         }
     }
 

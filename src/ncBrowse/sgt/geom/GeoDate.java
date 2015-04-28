@@ -189,21 +189,21 @@ public class GeoDate extends java.util.Date implements java.io.Serializable {
         jd = (int)(365*jc + (0.25*jc));
         je = (int)((jb - jd)/30.6001);
 
-        day = (int)(jb - jd) - (int)(30.6001*je);
-        month = (int)(je - 1);
+        day = jb - jd - (int)(30.6001*je);
+        month = je - 1;
         if(month > 12) month -= 12;
-        year = (int)(jc - 4715);
+        year = jc - 4715;
         if(month > 2) --year;
         if(year <= 0) --year;
         ja = msec/1000;
-        hour = (int)(ja/3600);
-        minute = (int)((ja - hour*3600)/60);
+        hour = ja/3600;
+        minute = (ja - hour*3600)/60;
         second = (double)(msec - (hour*3600 + minute*60)*1000)/1000.0;
         sec = (int)second;
         msec = ((int)(second*1000.0))%1000;
         try{
             set(month, day, year, hour, minute, sec, msec);
-        } catch (IllegalTimeValue e) {}
+        } catch (IllegalTimeValue ignored) {}
     }
     /**
      * Change value of <code>GeoDate</code> from values.

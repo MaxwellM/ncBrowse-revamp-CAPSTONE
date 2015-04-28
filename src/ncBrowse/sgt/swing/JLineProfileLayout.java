@@ -288,7 +288,7 @@ public class JLineProfileLayout extends JGraphicLayout {
         boolean data_good = true;
         double save;
         //
-        if(data_.size() == 0) setBaseUnit(Units.getBaseUnit(((SGTLine)datum).getXMetaData()));
+        if(data_.size() == 0) setBaseUnit(Units.getBaseUnit(datum.getXMetaData()));
         datum = Units.convertToBaseUnit(datum, getBaseUnit(), Units.X_AXIS);
         //
         if(data_.size() == 0) {
@@ -300,7 +300,7 @@ public class JLineProfileLayout extends JGraphicLayout {
             data = (SGTData)data_.firstElement();
             xRange = findRange((SGTLine)data, X_AXIS);
             yRange = findRange((SGTLine)data, Y_AXIS);
-            zUp_ = ((SGTLine)data).getYMetaData().isReversed();
+            zUp_ = data.getYMetaData().isReversed();
 
             if(Double.isNaN(xRange.start) || Double.isNaN(yRange.start)) data_good = false;
 
@@ -317,8 +317,8 @@ public class JLineProfileLayout extends JGraphicLayout {
                 origin = new Point2D.Double(xnRange.start, ynRange.start);
             }
             //
-            xLabel =  " (" + ((SGTLine)data).getXMetaData().getUnits() + ")";
-            yLabel =  " (" + ((SGTLine)data).getYMetaData().getUnits() + ")";
+            xLabel =  " (" + data.getXMetaData().getUnits() + ")";
+            yLabel =  " (" + data.getYMetaData().getUnits() + ")";
             //
             // attach information to pane and descendents
             //
@@ -354,7 +354,7 @@ public class JLineProfileLayout extends JGraphicLayout {
                 ytitle.setFont(tfont);
                 ytitle.setHeightP(titleHeight_);
                 yleft.setTitle(ytitle);
-            } catch (AxisNotFoundException e) {}
+            } catch (AxisNotFoundException ignored) {}
             if(data_good) {
                 //
                 // transforms
@@ -400,7 +400,7 @@ public class JLineProfileLayout extends JGraphicLayout {
             // more than one data set...
             // add new layer
             //
-            if(((SGTLine)datum).getYMetaData().isReversed() != zUp_) {
+            if(datum.getYMetaData().isReversed() != zUp_) {
                 //        System.out.println("New datum has reversed ZUp!");
                 SGTData modified = flipZ(datum);
                 datum = modified;
@@ -424,7 +424,7 @@ public class JLineProfileLayout extends JGraphicLayout {
                 try {
                     xbot = (PlainAxis)graph.getXAxis("Bottom Axis");
                     yleft = (PlainAxis)graph.getYAxis("Left Axis");
-                } catch (AxisNotFoundException e) {}
+                } catch (AxisNotFoundException ignored) {}
 
                 if(!inZoom_) {
                     //
@@ -438,7 +438,7 @@ public class JLineProfileLayout extends JGraphicLayout {
                         data = (SGTData)e.nextElement();
                         xRange = findRange((SGTLine)data, X_AXIS);
                         yRange = findRange((SGTLine)data, Y_AXIS);
-                        if(!((SGTLine)data).getYMetaData().isReversed()) {
+                        if(!data.getYMetaData().isReversed()) {
                             save = yRange.start;
                             yRange.start = yRange.end;
                             yRange.end = save;
@@ -457,7 +457,7 @@ public class JLineProfileLayout extends JGraphicLayout {
                                 data_good = true;
                                 xTotalRange.start = Math.min(xTotalRange.start, xRange.start);
                                 xTotalRange.end = Math.max(xTotalRange.end, xRange.end);
-                                if(!((SGTLine)data).getYMetaData().isReversed()) {
+                                if(!data.getYMetaData().isReversed()) {
                                     yTotalRange.start = Math.max(yTotalRange.start, yRange.start);
                                     yTotalRange.end = Math.min(yTotalRange.end, yRange.end);
                                 } else {
@@ -521,7 +521,7 @@ public class JLineProfileLayout extends JGraphicLayout {
                 // add to lineKey
                 //
                 if(descrip == null) {
-                    xLabel = ((SGTLine)datum).getXMetaData().getName();
+                    xLabel = datum.getXMetaData().getName();
                     lineTitle = new SGLabel("line title", xLabel, new Point2D.Double(0.0, 0.0));
                 } else {
                     lineTitle = new SGLabel("line title", descrip, new Point2D.Double(0.0, 0.0));
@@ -562,7 +562,7 @@ public class JLineProfileLayout extends JGraphicLayout {
         zmetaout.setModuloTime(zmetain.getModuloTime());
         out.setXMetaData(line.getXMetaData());
         out.setYMetaData(zmetaout);
-        return (SGTData)out;
+        return out;
     }
     /**
      * Clear the current zoom.
@@ -586,7 +586,7 @@ public class JLineProfileLayout extends JGraphicLayout {
             data = (SGTData)e.nextElement();
             xRange = findRange((SGTLine)data, X_AXIS);
             yRange = findRange((SGTLine)data, Y_AXIS);
-            if(!((SGTLine)data).getYMetaData().isReversed()) {
+            if(!data.getYMetaData().isReversed()) {
                 save = yRange.start;
                 yRange.start = yRange.end;
                 yRange.end = save;
@@ -605,7 +605,7 @@ public class JLineProfileLayout extends JGraphicLayout {
                     data_good = true;
                     xTotalRange.start = Math.min(xTotalRange.start, xRange.start);
                     xTotalRange.end = Math.max(xTotalRange.end, xRange.end);
-                    if(!((SGTLine)data).getYMetaData().isReversed()) {
+                    if(!data.getYMetaData().isReversed()) {
                         yTotalRange.start = Math.max(yTotalRange.start, yRange.start);
                         yTotalRange.end = Math.min(yTotalRange.end, yRange.end);
                     } else {
@@ -712,7 +712,7 @@ public class JLineProfileLayout extends JGraphicLayout {
             } else {
                 setAllClipping(false);
             }
-        } catch (AxisNotFoundException e) {}
+        } catch (AxisNotFoundException ignored) {}
     }
     /**
      * Reset the y range. This method is designed to provide
@@ -741,7 +741,7 @@ public class JLineProfileLayout extends JGraphicLayout {
         LinearTransform yt = (LinearTransform)graph.getYTransform();
         if(testZUp && data_.size() > 0) {
             grid = (SGTData)data_.elements().nextElement();
-            if(!((SGTLine)grid).getYMetaData().isReversed()) {
+            if(!grid.getYMetaData().isReversed()) {
                 save = rnge.end;
                 rnge.end = rnge.start;
                 rnge.start = save;
@@ -770,25 +770,25 @@ public class JLineProfileLayout extends JGraphicLayout {
             } else {
                 setAllClipping(false);
             }
-        } catch (AxisNotFoundException e) {}
+        } catch (AxisNotFoundException ignored) {}
     }
     private void setAllClip(JPane pane, double xmin, double xmax, double ymin, double ymax) {
         Layer ly;
         Component[] comps = pane.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Layer) {
-                ly = (Layer)comps[i];
-                ((CartesianGraph)ly.getGraph()).setClip(xmin, xmax, ymin, ymax);
+        for (Component comp : comps) {
+            if (comp instanceof Layer) {
+                ly = (Layer) comp;
+                ((CartesianGraph) ly.getGraph()).setClip(xmin, xmax, ymin, ymax);
             }
         }
     }
     private void setAllClipping(JPane pane, boolean clip) {
         Layer ly;
         Component[] comps = pane.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Layer) {
-                ly = (Layer)comps[i];
-                ((CartesianGraph)ly.getGraph()).setClipping(clip);
+        for (Component comp : comps) {
+            if (comp instanceof Layer) {
+                ly = (Layer) comp;
+                ((CartesianGraph) ly.getGraph()).setClipping(clip);
             }
         }
     }
@@ -809,7 +809,7 @@ public class JLineProfileLayout extends JGraphicLayout {
         try {
             ly = getLayerFromDataId(data_id);
             remove(ly);
-        } catch (LayerNotFoundException e) {}
+        } catch (LayerNotFoundException ignored) {}
         for(Enumeration it=data_.elements(); it.hasMoreElements();) {
             dat = (SGTData)it.nextElement();
             if(dat.getId().equals(data_id)) {
@@ -853,9 +853,9 @@ public class JLineProfileLayout extends JGraphicLayout {
         yMax_ = d.height - (ySize_ - yMax_);
         xSize_ = d.width;
         ySize_ = d.height;
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Layer) {
-                ((Layer)comps[i]).setSizeP(d);
+        for (Component comp : comps) {
+            if (comp instanceof Layer) {
+                ((Layer) comp).setSizeP(d);
             }
         }
         yt.setRangeP(new Range2D(yMin_, yMax_));

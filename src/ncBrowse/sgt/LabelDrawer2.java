@@ -96,7 +96,7 @@ public class LabelDrawer2 implements LabelDrawer, Cloneable {
     public void draw(Graphics g) throws LayerNotFoundException  {
         int xs, ys;
         if((label_.length() <= 0) || !visible_ || g == null) return;
-        if(layer_ == (Layer) null) throw new LayerNotFoundException();
+        if(layer_ == null) throw new LayerNotFoundException();
         //
         // set label heigth in physical units
         //

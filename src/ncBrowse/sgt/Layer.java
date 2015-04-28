@@ -19,6 +19,7 @@ import ncBrowse.sgt.geom.Dimension2D;
 import ncBrowse.sgt.geom.Rectangle2D;
 import ncBrowse.sgt.geom.Debug;
 
+import java.util.Objects;
 import java.util.Vector;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -294,7 +295,7 @@ public class Layer extends Component implements Cloneable, LayerControl {
      * @return physical x coordinate
      */
     public double getXDtoP(int xd) {
-        return (double)(xd - xoff2_)/ax_;
+        return (xd - xoff2_) /ax_;
     }
     /**
      * Transform device units to physical for the y direction.
@@ -304,7 +305,7 @@ public class Layer extends Component implements Cloneable, LayerControl {
      * @return physical y coordinate
      */
     public double getYDtoP(int yd) {
-        return (double)(yoff2_ - yd)/ay_;
+        return (yoff2_ - yd) /ay_;
     }
     /**
      * Create a <code>Layer</code> object.
@@ -365,7 +366,7 @@ public class Layer extends Component implements Cloneable, LayerControl {
         //
         // copy Graph
         //
-        if(graph_ != (Graph) null) {
+        if(graph_ != null) {
             Graph newGraph = graph_.copy();
             newLayer.setGraph(newGraph);
         }
@@ -401,7 +402,7 @@ public class Layer extends Component implements Cloneable, LayerControl {
         //
         // draw Graph
         //
-        if(graph_ != (Graph) null) graph_.draw(g);
+        if(graph_ != null) graph_.draw(g);
         //
         // draw children
         //
@@ -412,7 +413,7 @@ public class Layer extends Component implements Cloneable, LayerControl {
                 if(!(child instanceof Draggable)) {
                     try {
                         child.draw(g);
-                    } catch(LayerNotFoundException e) {
+                    } catch(LayerNotFoundException ignored) {
                     }
                 }
             }
@@ -431,7 +432,7 @@ public class Layer extends Component implements Cloneable, LayerControl {
                 if(child instanceof Draggable) {
                     try {
                         child.draw(g);
-                    } catch(LayerNotFoundException e) {
+                    } catch(LayerNotFoundException ignored) {
                     }
                 }
             }
@@ -589,7 +590,7 @@ public class Layer extends Component implements Cloneable, LayerControl {
             LayerChild child;
             for(Enumeration it = children_.elements(); it.hasMoreElements();) {
                 child = (LayerChild)it.nextElement();
-                if(child.getId() == labid) return child;
+                if(Objects.equals(child.getId(), labid)) return child;
             }
             throw new ChildNotFoundException();
         } else {
@@ -772,7 +773,7 @@ public class Layer extends Component implements Cloneable, LayerControl {
             obj = graph_.getObjectAt(pt);
             if(obj != null) return obj;
         }
-        return (Object) null;
+        return null;
     }
 
     /**

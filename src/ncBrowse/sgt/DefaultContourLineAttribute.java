@@ -94,7 +94,7 @@ public class DefaultContourLineAttribute extends LineAttribute {
      */
     public void setLabelEnabled(boolean sle) {
         if(labelEnabled_ != sle) {
-            Boolean tempOld = new Boolean(labelEnabled_);
+            Boolean tempOld = labelEnabled_;
             labelEnabled_ = sle;
             changes_.firePropertyChange("labelEnabled",
                                         tempOld,
@@ -144,11 +144,11 @@ public class DefaultContourLineAttribute extends LineAttribute {
      */
     public void setLabelHeightP(double height) {
         if(labelHeightP_ != height) {
-            Double tempOld = new Double(labelHeightP_);
+            Double tempOld = labelHeightP_;
             labelHeightP_ = height;
             changes_.firePropertyChange("labelHeightP",
                                         tempOld,
-                                        new Double(labelHeightP_));
+                labelHeightP_);
         }
     }
     /**
@@ -194,7 +194,7 @@ public class DefaultContourLineAttribute extends LineAttribute {
      */
     public void setSignificantDigits(int sig) {
         if(sigDigits_ != sig) {
-            Integer tempOld = new Integer(sigDigits_);
+            Integer tempOld = sigDigits_;
             sigDigits_ = sig;
             changes_.firePropertyChange("significantDigits",
                                         tempOld,
@@ -238,11 +238,7 @@ public class DefaultContourLineAttribute extends LineAttribute {
      * returns <code>true</code>.
      */
     public boolean isAutoLabel() {
-        if(attr_ != null) {
-            return attr_.isAutoLabel();
-        } else {
-            return true;
-        }
+        return attr_ == null || attr_.isAutoLabel();
     }
     /**
      * Get dash array. Use associated

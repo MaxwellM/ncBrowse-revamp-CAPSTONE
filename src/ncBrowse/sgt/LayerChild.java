@@ -29,49 +29,49 @@ public interface LayerChild extends Selectable {
      * @param g Graphics context
      * @exception LayerNotFoundException No layer is associated with the <code>LayerChild</code>.
      */
-    public void draw(Graphics g) throws LayerNotFoundException ;
+    void draw(Graphics g) throws LayerNotFoundException ;
 
     /**
      * Get the associated <code>Layer</code>.
      * 
      * @return Associated layer
      */
-    public Layer getLayer();
+    Layer getLayer();
 
     /**
      * Associate a <code>Layer</code> with the <code>LayerChild</code>.
      * 
      * @param l Parent layer.
      */
-    public void setLayer(Layer l);
+    void setLayer(Layer l);
 
     /**
      * Get the identifier.
      * 
      * @return <code>LayerChild</code> identification.
      */
-    public String getId();
+    String getId();
 
     /**
      * Set the identifier.
      * 
      * @param id <code>LayerChild</code> identification.
      */
-    public void setId(String id);
+    void setId(String id);
 
     /**
      * Create a copy of the <code>LayerChild</code>.
      * 
      * @return A copy of the <code>LayerChild</code>.
      */
-    public LayerChild copy();
+    LayerChild copy();
 
     /**
      * Return a string that represents the <code>LayerChild</code>.
      * 
      * @return Stringified <code>LayerChild</code> representation.
      */
-    public String toString();
+    String toString();
 
     /**
      * Check if <code>LayerChild</code> is visible.
@@ -79,7 +79,7 @@ public interface LayerChild extends Selectable {
      * @since 2.0
      * @return true if visible
      */
-    public boolean isVisible();
+    boolean isVisible();
 
     /**
      * Set visibility for a <code>LayerChild</code>.
@@ -87,15 +87,15 @@ public interface LayerChild extends Selectable {
      * @since 2.0
      * @param visible visible if true
      */
-    public void setVisible(boolean visible);
+    void setVisible(boolean visible);
     /**
      * Get <code>AbstractPane</code> of the <code>LayerChild</code>.
      * @since 2.0
      */
-    public AbstractPane getPane();
+    AbstractPane getPane();
     /**
      * Used by sgt internally.
      * @since 2.0
      */
-    public void modified(String mess);
+    void modified(String mess);
 }

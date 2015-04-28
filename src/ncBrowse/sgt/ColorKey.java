@@ -184,7 +184,7 @@ public class ColorKey implements Cloneable, DataKey,
         } catch (CloneNotSupportedException e) {
             newKey = new ColorKey();
         }
-        return (LayerChild)newKey;
+        return newKey;
     }
     /**
      * Sets the <code>selected</code> property.
@@ -292,7 +292,7 @@ public class ColorKey implements Cloneable, DataKey,
         throws IllegalArgumentException {
         if(!(rend instanceof GridCartesianRenderer))
             throw new IllegalArgumentException("Renderer is not a GridCartesianRenderer");
-        GridAttribute ga = (GridAttribute)((GridCartesianRenderer)rend).getAttribute();
+        GridAttribute ga = (GridAttribute) rend.getAttribute();
         ColorMap cm = ga.getColorMap();
         setColorMap(cm);
         setTitle(label);

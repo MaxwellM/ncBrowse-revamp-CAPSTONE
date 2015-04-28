@@ -67,7 +67,7 @@ public class Collection extends Vector implements SGTData, Cloneable {
     public SGTData copy() {
         Collection newCollection;
         newCollection = (Collection)clone();
-        return (SGTData)newCollection;
+        return newCollection;
     }
     /**
      * Get the title.

@@ -69,16 +69,16 @@ public class VectorAttributeDialog extends JDialog {
             tempString[0] = "NO_HEAD";
             tempString[1] = "HEAD";
             tempString[2] = "SCALED_HEAD";
-            for(int i=0; i < tempString.length; i++) {
-                vectorStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                vectorStyleCBM.addElement(aTempString);
             }
         }
         {
             String[] tempString = new String[2];
             tempString[0] = "NO_MARK";
             tempString[1] = "MARK";
-            for(int i=0; i < tempString.length; i++) {
-                originStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                originStyleCBM.addElement(aTempString);
             }
         }
         {
@@ -86,8 +86,8 @@ public class VectorAttributeDialog extends JDialog {
             tempString[0] = "BUTT";
             tempString[1] = "ROUND";
             tempString[2] = "SQUARE";
-            for(int i=0; i < tempString.length; i++) {
-                capStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                capStyleCBM.addElement(aTempString);
             }
         }
         {
@@ -95,8 +95,8 @@ public class VectorAttributeDialog extends JDialog {
             tempString[0] = "MITER";
             tempString[1] = "ROUND";
             tempString[2] = "BEVEL";
-            for(int i=0; i < tempString.length; i++) {
-                miterStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                miterStyleCBM.addElement(aTempString);
             }
         }
         getContentPane().setLayout(new BorderLayout(0,0));
@@ -266,10 +266,10 @@ public class VectorAttributeDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -482,8 +482,8 @@ public class VectorAttributeDialog extends JDialog {
 
     void updateVectorAttribute() {
         if(paneList_ != null) {
-            for(int i=0; i < paneList_.length; i++) {
-                paneList_[i].setBatch(true, "VectorAttributeDialog");
+            for (JPane aPaneList_ : paneList_) {
+                aPaneList_.setBatch(true, "VectorAttributeDialog");
             }
         }
         attr_.setBatch(true);
@@ -546,14 +546,14 @@ public class VectorAttributeDialog extends JDialog {
         //
         // mark height
         //
-        attr_.setMarkHeightP(new Double(markHeightTextField.getText()).doubleValue());
+        attr_.setMarkHeightP(new Double(markHeightTextField.getText()));
         //
         // stroke attributes
         //
         //
         // width
         //
-        attr_.setWidth(new Float(widthTextField.getText()).floatValue());
+        attr_.setWidth(new Float(widthTextField.getText()));
         //
         // cap style
         //
@@ -565,13 +565,13 @@ public class VectorAttributeDialog extends JDialog {
         //
         // miter limit
         //
-        attr_.setMiterLimit(new Float(miterLimitTextField.getText()).floatValue());
+        attr_.setMiterLimit(new Float(miterLimitTextField.getText()));
 
         attr_.setBatch(false);
         //
         if(paneList_ != null) {
-            for(int i=0; i < paneList_.length; i++) {
-                paneList_[i].setBatch(false, "VectorAttributeDialog");
+            for (JPane aPaneList_ : paneList_) {
+                aPaneList_.setBatch(false, "VectorAttributeDialog");
             }
         }
     }

@@ -33,7 +33,7 @@ public interface Transform extends Serializable {
      * @param p2 maximum value, physical coordinates
      * @see LinearTransform
      **/
-    public void setRangeP(double p1,double p2);
+    void setRangeP(double p1, double p2);
     /**
      * Set physical coordinate range.
      *
@@ -41,14 +41,14 @@ public interface Transform extends Serializable {
      * @see Range2D
      * @see LinearTransform
      **/
-    public void setRangeP(Range2D prange);
+    void setRangeP(Range2D prange);
     /**
      * Get the physical coordinate range.
      *
      * @return physcial coordinate range
      * @see Range2D
      **/
-    public Range2D getRangeP();
+    Range2D getRangeP();
     /**
      * Set the user coordinate range for double values.
      *
@@ -56,7 +56,7 @@ public interface Transform extends Serializable {
      * @param u2 maximum value, user coordinates
      * @see LinearTransform
      **/
-    public void setRangeU(double u1,double u2);
+    void setRangeU(double u1, double u2);
     /**
      * Set the user coordinate range for double values.
      *
@@ -64,37 +64,37 @@ public interface Transform extends Serializable {
      * @see Range2D
      * @see LinearTransform
      **/
-    public void setRangeU(Range2D urange);
+    void setRangeU(Range2D urange);
     /**
      * Get the user coordinate range for double values.
      *
      * @return user range
      * @see Range2D
      **/
-    public Range2D getRangeU();
+    Range2D getRangeU();
     /**
      * Transform from user to physical coordinates.
      *
      * @param u user value
      * @return physical value
      */
-    abstract double getTransP(double u);
+    double getTransP(double u);
     /**
      * Transform from physical to user coordinates.
      *
      * @param p physical value
      * @return user value
      */
-    abstract double getTransU(double p);
+    double getTransU(double p);
     /**
      * Add listener for changes to transform properties.
      * @since 2.0
      */
-    public void addPropertyChangeListener(PropertyChangeListener listener);
+    void addPropertyChangeListener(PropertyChangeListener listener);
     /**
      * Remove listener.
      * @since 2.0
      */
-    public void removePropertyChangeListener(PropertyChangeListener listener);
+    void removePropertyChangeListener(PropertyChangeListener listener);
 }
 

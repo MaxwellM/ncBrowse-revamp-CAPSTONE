@@ -193,19 +193,19 @@ public class PlotLayerHints implements Map, Cloneable {
     }
 
     public boolean containsKey(Object key) {
-        return hintmap.containsKey((String)key);
+        return hintmap.containsKey(key);
     }
 
     public boolean containsValue(Object value) {
-        return hintmap.containsValue((String)value);
+        return hintmap.containsValue(value);
     }
 
     public Object get(Object key) {
-        return hintmap.get((String)key);
+        return hintmap.get(key);
     }
 
     public Object put(Object key, Object value) {
-        return hintmap.put((String) key, (String)value);
+        return hintmap.put(key, value);
     }
 
     public void add(PlotLayerHints hints) {
@@ -217,7 +217,7 @@ public class PlotLayerHints implements Map, Cloneable {
     }
 
     public Object remove(Object key) {
-        return hintmap.remove((String)key);
+        return hintmap.remove(key);
     }
 
     public void putAll(Map m) {
@@ -225,9 +225,8 @@ public class PlotLayerHints implements Map, Cloneable {
             hintmap.putAll(((PlotLayerHints)m).hintmap);
         } else {
             // Funnel each key/value pair though our method
-            Iterator iter = m.entrySet().iterator();
-            while(iter.hasNext()) {
-                Map.Entry entry = (Map.Entry) iter.next();
+            for (Object o : m.entrySet()) {
+                Entry entry = (Entry) o;
                 put(entry.getKey(), entry.getValue());
             }
         }

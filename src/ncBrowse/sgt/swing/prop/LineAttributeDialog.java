@@ -71,8 +71,8 @@ public class LineAttributeDialog extends JDialog {
             tempString[4] = "MARK";
             tempString[5] = "MARK & SOLID";
             tempString[6] = "STROKE";
-            for(int i=0; i < tempString.length; i++) {
-                lineStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                lineStyleCBM.addElement(aTempString);
             }
         }
         {
@@ -80,8 +80,8 @@ public class LineAttributeDialog extends JDialog {
             tempString[0] = "BUTT";
             tempString[1] = "ROUND";
             tempString[2] = "SQUARE";
-            for(int i=0; i < tempString.length; i++) {
-                capStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                capStyleCBM.addElement(aTempString);
             }
         }
         {
@@ -89,8 +89,8 @@ public class LineAttributeDialog extends JDialog {
             tempString[0] = "MITER";
             tempString[1] = "ROUND";
             tempString[2] = "BEVEL";
-            for(int i=0; i < tempString.length; i++) {
-                miterStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                miterStyleCBM.addElement(aTempString);
             }
         }
         strokeBorder = new TitledBorder("");
@@ -232,10 +232,10 @@ public class LineAttributeDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -404,9 +404,9 @@ public class LineAttributeDialog extends JDialog {
         if(da == null) {
             return "null";
         }
-        StringBuffer sbuf = new StringBuffer("{");
-        for(int i=0; i < da.length; i++) {
-            sbuf.append(Float.toString(da[i]) + ", ");
+        StringBuilder sbuf = new StringBuilder("{");
+        for (float aDa : da) {
+            sbuf.append(Float.toString(aDa)).append(", ");
         }
         sbuf.setLength(sbuf.length()-2);
         sbuf.append("}");
@@ -424,7 +424,7 @@ public class LineAttributeDialog extends JDialog {
         int index = 0;
         float[] array = new float[token.countTokens()];
         while(token.hasMoreTokens()) {
-            array[index] = new Float(token.nextToken()).floatValue();
+            array[index] = new Float(token.nextToken());
             index++;
         }
         return array;
@@ -432,8 +432,8 @@ public class LineAttributeDialog extends JDialog {
 
     void updateLineAttribute() {
         if(paneList_ != null) {
-            for(int i=0; i < paneList_.length; i++) {
-                paneList_[i].setBatch(true, "LineAttributeDialog");
+            for (JPane aPaneList_ : paneList_) {
+                aPaneList_.setBatch(true, "LineAttributeDialog");
             }
         }
         attr_.setBatch(true);
@@ -452,14 +452,14 @@ public class LineAttributeDialog extends JDialog {
         //
         // mark height
         //
-        attr_.setMarkHeightP(new Double(markHeightTextField.getText()).doubleValue());
+        attr_.setMarkHeightP(new Double(markHeightTextField.getText()));
         //
         // stroke attributes
         //
         //
         // width
         //
-        attr_.setWidth(new Float(widthTextField.getText()).floatValue());
+        attr_.setWidth(new Float(widthTextField.getText()));
         //
         // dash array
         //
@@ -467,7 +467,7 @@ public class LineAttributeDialog extends JDialog {
         //
         // dash phase
         //
-        attr_.setDashPhase(new Float(dashPhaseTextField.getText()).floatValue());
+        attr_.setDashPhase(new Float(dashPhaseTextField.getText()));
         //
         // cap style
         //
@@ -479,13 +479,13 @@ public class LineAttributeDialog extends JDialog {
         //
         // miter limit
         //
-        attr_.setMiterLimit(new Float(miterLimitTextField.getText()).floatValue());
+        attr_.setMiterLimit(new Float(miterLimitTextField.getText()));
 
         attr_.setBatch(false);
         //
         if(paneList_ != null) {
-            for(int i=0; i < paneList_.length; i++) {
-                paneList_[i].setBatch(false, "LineAttributeDialog");
+            for (JPane aPaneList_ : paneList_) {
+                aPaneList_.setBatch(false, "LineAttributeDialog");
             }
         }
     }

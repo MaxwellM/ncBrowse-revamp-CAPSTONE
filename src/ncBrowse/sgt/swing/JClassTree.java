@@ -10,51 +10,23 @@
 
 package ncBrowse.sgt.swing;
 
+import ncBrowse.sgt.*;
+import ncBrowse.sgt.beans.DataGroupLayer;
+import ncBrowse.sgt.beans.Panel;
+import ncBrowse.sgt.geom.Debug;
+import ncBrowse.sgt.swing.prop.*;
+
 import javax.swing.*;
-import javax.swing.tree.*;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreePath;
 import java.awt.*;
-import java.awt.event.MouseListener;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.InputEvent;
+import java.awt.event.MouseListener;
 import java.util.Enumeration;
 import java.util.List;
-
-import ncBrowse.sgt.geom.Debug;
-
-import ncBrowse.sgt.JPane;
-import ncBrowse.sgt.Layer;
-import ncBrowse.sgt.LayerChild;
-import ncBrowse.sgt.SGLabel;
-import ncBrowse.sgt.Graph;
-import ncBrowse.sgt.CartesianGraph;
-import ncBrowse.sgt.CartesianRenderer;
-import ncBrowse.sgt.PointCartesianRenderer;
-import ncBrowse.sgt.LineCartesianRenderer;
-import ncBrowse.sgt.GridCartesianRenderer;
-import ncBrowse.sgt.VectorCartesianRenderer;
-import ncBrowse.sgt.Axis;
-import ncBrowse.sgt.SpaceAxis;
-import ncBrowse.sgt.PlainAxis;
-import ncBrowse.sgt.TimeAxis;
-import ncBrowse.sgt.Transform;
-import ncBrowse.sgt.PointAttribute;
-import ncBrowse.sgt.LineAttribute;
-import ncBrowse.sgt.GridAttribute;
-import ncBrowse.sgt.VectorAttribute;
-import ncBrowse.sgt.Logo;
-
-import ncBrowse.sgt.beans.Panel;
-import ncBrowse.sgt.beans.DataGroupLayer;
-
-import ncBrowse.sgt.swing.prop.LineAttributeDialog;
-import ncBrowse.sgt.swing.prop.GridAttributeDialog;
-import ncBrowse.sgt.swing.prop.SGLabelDialog;
-import ncBrowse.sgt.swing.prop.TimeAxisDialog;
-import ncBrowse.sgt.swing.prop.SpaceAxisDialog;
-import ncBrowse.sgt.swing.prop.PointAttributeDialog;
-import ncBrowse.sgt.swing.prop.LogoDialog;
-import ncBrowse.sgt.swing.prop.VectorAttributeDialog;
 
 /**
  * <code>JClassTree</code> displays the <code>sgt</code> object tree
@@ -210,12 +182,11 @@ public class JClassTree extends javax.swing.JDialog {
         // Adjust components according to the insets
         setSize(in.left + in.right + d.width, in.top + in.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++)
-            {
-                Point p = components[i].getLocation();
-                p.translate(in.left, in.top);
-                components[i].setLocation(p);
-            }
+        for (Component component : components) {
+            Point p = component.getLocation();
+            p.translate(in.left, in.top);
+            component.setLocation(p);
+        }
         fComponentsAdjusted = true;
     }
 
@@ -305,58 +276,58 @@ public class JClassTree extends javax.swing.JDialog {
         treeView_.setModel(treeModel);
         //
         Component[] comps = pane_.getComponents();
-        for(int il=0; il < comps.length; il++) {
-            if(comps[il] instanceof DataGroupLayer) {
-                ly = (Layer)comps[il];
+        for (Component comp : comps) {
+            if (comp instanceof DataGroupLayer) {
+                ly = (Layer) comp;
                 dataGroupNode = new DefaultMutableTreeNode(ly);
                 treeModel.insertNodeInto(dataGroupNode,
-                                         paneNode,
-                                         treeModel.getChildCount(paneNode));
-                List lyList = ((DataGroupLayer)ly).getLayerList();
-                for(int i=1; i < lyList.size(); i++) {
-                    ly = (Layer)lyList.get(i);
+                    paneNode,
+                    treeModel.getChildCount(paneNode));
+                List lyList = ((DataGroupLayer) ly).getLayerList();
+                for (int i = 1; i < lyList.size(); i++) {
+                    ly = (Layer) lyList.get(i);
                     layerNode = new DefaultMutableTreeNode(ly);
                     treeModel.insertNodeInto(layerNode,
-                                             dataGroupNode,
-                                             treeModel.getChildCount(dataGroupNode));
+                        dataGroupNode,
+                        treeModel.getChildCount(dataGroupNode));
                     expandLayer(ly, dataGroupNode, treeModel);
                 }
-            } else if(comps[il] instanceof Layer) {
-                ly = (Layer)comps[il];
+            } else if (comp instanceof Layer) {
+                ly = (Layer) comp;
                 layerNode = new DefaultMutableTreeNode(ly);
                 treeModel.insertNodeInto(layerNode,
-                                         paneNode,
-                                         treeModel.getChildCount(paneNode));
+                    paneNode,
+                    treeModel.getChildCount(paneNode));
                 expandLayer(ly, layerNode, treeModel);
-            } else if(comps[il] instanceof Panel) {
-                panelNode = new DefaultMutableTreeNode(comps[il]);
+            } else if (comp instanceof Panel) {
+                panelNode = new DefaultMutableTreeNode(comp);
                 treeModel.insertNodeInto(panelNode,
-                                         paneNode,
-                                         treeModel.getChildCount(paneNode));
-                Component[] pcomps = ((Panel)comps[il]).getComponents();
-                for(int pl=0; pl < pcomps.length; pl++) {
-                    if(pcomps[pl] instanceof DataGroupLayer) {
-                        ly = (Layer)pcomps[pl];
+                    paneNode,
+                    treeModel.getChildCount(paneNode));
+                Component[] pcomps = ((Panel) comp).getComponents();
+                for (Component pcomp : pcomps) {
+                    if (pcomp instanceof DataGroupLayer) {
+                        ly = (Layer) pcomp;
                         dataGroupNode = new DefaultMutableTreeNode(ly);
                         treeModel.insertNodeInto(dataGroupNode,
-                                                 paneNode,
-                                                 treeModel.getChildCount(paneNode));
+                            paneNode,
+                            treeModel.getChildCount(paneNode));
                         expandLayer(ly, dataGroupNode, treeModel);
-                        List lyList = ((DataGroupLayer)ly).getLayerList();
-                        for(int i=1; i < lyList.size(); i++) {
-                            ly = (Layer)lyList.get(i);
+                        List lyList = ((DataGroupLayer) ly).getLayerList();
+                        for (int i = 1; i < lyList.size(); i++) {
+                            ly = (Layer) lyList.get(i);
                             layerNode = new DefaultMutableTreeNode(ly);
                             treeModel.insertNodeInto(layerNode,
-                                                     dataGroupNode,
-                                                     treeModel.getChildCount(dataGroupNode));
+                                dataGroupNode,
+                                treeModel.getChildCount(dataGroupNode));
                             expandLayer(ly, layerNode, treeModel);
                         }
-                    } else if(pcomps[pl] instanceof Layer) {
-                        ly = (Layer)pcomps[pl];
+                    } else if (pcomp instanceof Layer) {
+                        ly = (Layer) pcomp;
                         layerNode = new DefaultMutableTreeNode(ly);
                         treeModel.insertNodeInto(layerNode,
-                                                 panelNode,
-                                                 treeModel.getChildCount(panelNode));
+                            panelNode,
+                            treeModel.getChildCount(panelNode));
                         expandLayer(ly, layerNode, treeModel);
                     }
                 }
@@ -364,9 +335,9 @@ public class JClassTree extends javax.swing.JDialog {
                 continue;
             }
 
-            int row=0;
-            while(row < treeView_.getRowCount()) {
-                if(treeView_.isCollapsed(row)) {
+            int row = 0;
+            while (row < treeView_.getRowCount()) {
+                if (treeView_.isCollapsed(row)) {
                     treeView_.expandRow(row);
                 }
                 row++;
@@ -417,7 +388,7 @@ public class JClassTree extends javax.swing.JDialog {
                                      treeModel.getChildCount(layerNode));
             rend = ((CartesianGraph)graph).getRenderer();
             if(rend instanceof LineCartesianRenderer) {
-                attr = (LineAttribute)((LineCartesianRenderer)rend).getAttribute();
+                attr = (LineAttribute) rend.getAttribute();
                 if(attr != null) {
                     className = attr.getClass().getName();
                     name = className.substring(className.lastIndexOf(".")+1);
@@ -427,7 +398,7 @@ public class JClassTree extends javax.swing.JDialog {
                                              treeModel.getChildCount(graphNode));
                 }
             } else if(rend instanceof VectorCartesianRenderer) {
-                vattr = (VectorAttribute)((VectorCartesianRenderer)rend).getAttribute();
+                vattr = (VectorAttribute) rend.getAttribute();
                 if(vattr != null) {
                     className = vattr.getClass().getName();
                     name = className.substring(className.lastIndexOf(".")+1);
@@ -437,7 +408,7 @@ public class JClassTree extends javax.swing.JDialog {
                                              treeModel.getChildCount(graphNode));
                 }
             } else if(rend instanceof GridCartesianRenderer) {
-                gattr = (GridAttribute)((GridCartesianRenderer)rend).getAttribute();
+                gattr = (GridAttribute) rend.getAttribute();
                 if(gattr != null) {
                     className = gattr.getClass().getName();
                     name = className.substring(className.lastIndexOf(".")+1);
@@ -447,7 +418,7 @@ public class JClassTree extends javax.swing.JDialog {
                                              treeModel.getChildCount(graphNode));
                 }
             } else if(rend instanceof PointCartesianRenderer) {
-                pattr = (PointAttribute)((PointCartesianRenderer)rend).getAttribute();
+                pattr = (PointAttribute) rend.getAttribute();
                 if(pattr != null) {
                     className = pattr.getClass().getName();
                     name = className.substring(className.lastIndexOf(".")+1);
@@ -515,7 +486,7 @@ public class JClassTree extends javax.swing.JDialog {
 
     void showProperties(Object obj) {
         if(obj instanceof SGLabel) {
-            if(sg_ == (SGLabelDialog) null) {
+            if(sg_ == null) {
                 //
                 // create the SGLabel  dialog
                 //
@@ -535,7 +506,7 @@ public class JClassTree extends javax.swing.JDialog {
             if(!lg_.isShowing())
                 lg_.setVisible(true);
         } else if(obj instanceof PlainAxis) {
-            if(pa_ == (SpaceAxisDialog) null) {
+            if(pa_ == null) {
                 //
                 // create the PlainAxis  dialog
                 //
@@ -543,9 +514,9 @@ public class JClassTree extends javax.swing.JDialog {
             }
             pa_.setSpaceAxis((PlainAxis) obj, pane_);
             if(!pa_.isShowing())
-                pa_.show();
+                pa_.setVisible(true);
         } else if(obj instanceof TimeAxis) {
-            if(ta_ == (TimeAxisDialog) null) {
+            if(ta_ == null) {
                 //
                 // create the TimeAxis  dialog
                 //
@@ -553,9 +524,9 @@ public class JClassTree extends javax.swing.JDialog {
             }
             ta_.setTimeAxis((TimeAxis) obj, pane_);
             if(!ta_.isShowing())
-                ta_.show();
+                ta_.setVisible(true);
         } else if(obj instanceof LineAttribute) {
-            if(la_ == (LineAttributeDialog) null) {
+            if(la_ == null) {
                 //
                 // create the LineAttr  dialog
                 //
@@ -566,7 +537,7 @@ public class JClassTree extends javax.swing.JDialog {
             if(!la_.isShowing())
                 la_.setVisible(true);
         } else if(obj instanceof VectorAttribute) {
-            if(va_ == (VectorAttributeDialog) null) {
+            if(va_ == null) {
                 //
                 // create the LineAttr  dialog
                 //
@@ -597,12 +568,12 @@ public class JClassTree extends javax.swing.JDialog {
                     ga_.setVisible(true);
             }
         } else if (obj instanceof PointAttribute) {
-            if(pta_ == (PointAttributeDialog) null) {
+            if(pta_ == null) {
                 pta_ = new PointAttributeDialog();
             }
             pta_.setPointAttribute((PointAttribute) obj, pane_);
             if(!pta_.isShowing())
-                pta_.show();
+                pta_.setVisible(true);
         }
     }
     private Frame getFrame() {

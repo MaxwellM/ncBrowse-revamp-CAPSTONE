@@ -83,9 +83,8 @@ class PanelHolderDragBox extends DragBox implements ChangeListener {
     public void setSelected(boolean sel) {
         super.setSelected(sel);
         if(!selected_) {
-            Iterator iter = dragBox_.iterator();
-            while(iter.hasNext()) {
-                ((DragBox)iter.next()).setSelected(sel);
+            for (Object aDragBox_ : dragBox_) {
+                ((DragBox) aDragBox_).setSelected(sel);
             }
         }
     }
@@ -93,9 +92,8 @@ class PanelHolderDragBox extends DragBox implements ChangeListener {
     public void update(String message) {
         //    if(Page.DEBUG) System.out.println("PanelDragBox.update(" + message + ")");
         computeHandles();
-        Iterator iter = dragBox_.iterator();
-        while(iter.hasNext()) {
-            ((DragBox)iter.next()).update(message);
+        for (Object aDragBox_ : dragBox_) {
+            ((DragBox) aDragBox_).update(message);
         }
     }
 
@@ -113,16 +111,14 @@ class PanelHolderDragBox extends DragBox implements ChangeListener {
         g.setColor(color_);
         if(pHolder_.isVisible()) g.drawRect(bounds.x, bounds.y, bounds.width-1, bounds.height-1);
         if(selected_) {
-            for(int i=0; i < handles_.length; i++) {
-                Rectangle r = handles_[i];
-                g.fillRect(r.x, r.y, r.width-1, r.height-1);
+            for (Rectangle r : handles_) {
+                g.fillRect(r.x, r.y, r.width - 1, r.height - 1);
             }
         }
 
         if(pHolder_.isVisible()) {
-            Iterator iter = dragBox_.iterator();
-            while(iter.hasNext()) {
-                ((DragBox)iter.next()).draw(g);
+            for (Object aDragBox_ : dragBox_) {
+                ((DragBox) aDragBox_).draw(g);
             }
         }
 

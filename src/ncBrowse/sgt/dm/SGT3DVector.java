@@ -65,7 +65,7 @@ public class SGT3DVector extends SGTVector {
         } catch (CloneNotSupportedException e) {
             newSGTVector = new SGT3DVector(this.uComp_, this.vComp_, this.wComp_);
         }
-        return (SGTData)newSGTVector;
+        return newSGTVector;
     }
     /**
      * Get the W component.

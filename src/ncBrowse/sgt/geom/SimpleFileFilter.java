@@ -32,8 +32,8 @@ public class SimpleFileFilter extends FileFilter {
     }
   
     public boolean hasExtension(String ext) {
-        for(int i=0; i < extensions.length; i++) {
-            if(extensions[i].equals(ext)) return true;
+        for (String extension : extensions) {
+            if (extension.equals(ext)) return true;
         }
         return false;
     }

@@ -39,28 +39,28 @@ public interface TimeAxisStyle {
      * @param time current date
      * @return minor time value
      */
-    public int getMinorValue(GeoDate time);
+    int getMinorValue(GeoDate time);
     /**
      * Get the major time value for labeling.
      *
      * @param time current date
      * @return major time value
      */
-    public int getMajorValue(GeoDate time);
+    int getMajorValue(GeoDate time);
     /**
      * Determines if there is enough room in <code>delta</code> time
      * for another major label.
      *
      * @return true if enough room exists
      */
-    public boolean isRoomForMajorLabel(GeoDate delta);
+    boolean isRoomForMajorLabel(GeoDate delta);
     /**
      * Determines if <code>time</code> is the start of a
      * minor interval.
      *
      * @return true if start of minor interval
      */
-    public boolean isStartOfMinor(GeoDate time);
+    boolean isStartOfMinor(GeoDate time);
     /**
      * Get the default minor label format. The default minor labels are
      * "mm", "HH", "dd", "MMM", and "yy" for <code>MINUTE_HOUR</code>,
@@ -69,7 +69,7 @@ public interface TimeAxisStyle {
      *
      * @return minor label format
      */
-    public String getDefaultMinorLabelFormat();
+    String getDefaultMinorLabelFormat();
     /**
      * Get the default major label format. The default major labels are
      * "yyyy-MM-dd HH", "yyyy-MM-dd", "yyyy-MM", "yyyy", and "yyyy" for
@@ -79,26 +79,26 @@ public interface TimeAxisStyle {
      *
      * @return major label format
      */
-    public String getDefaultMajorLabelFormat();
+    String getDefaultMajorLabelFormat();
     /**
      * Get the default minor label interval.
      *
      * @return minor label interval
      */
-    public int getDefaultMinorLabelInterval();
+    int getDefaultMinorLabelInterval();
     /**
      * Get the default major label interval.
      *
      * @return major label interval
      */
-    public int getDefaultMajorLabelInterval();
+    int getDefaultMajorLabelInterval();
     /**
      * Get the default number of small tics between
      * each minor tic.
      *
      * @return number of small tics
      */
-    public int getDefaultNumSmallTics();
+    int getDefaultNumSmallTics();
     /**
      * Returns a beginning time rounded to the nearest minor
      * increment. For example, for <code>DAY_MONTH</code>
@@ -108,14 +108,14 @@ public interface TimeAxisStyle {
      *
      * @param tRange time range of the axis
      */
-    public GeoDate getStartTime(TimeRange trange);
+    GeoDate getStartTime(TimeRange trange);
     /**
      * Get the increment value for the minor labeling. The value
      * is 1.0 for all styles.
      *
      * @return increment value
      */
-    public double getIncrementValue();
+    double getIncrementValue();
     /**
      * Get the increment units for the minor labeling. The value is
      * <code>GeoDate.MINUTES</code>, <code>GeoDate.HOURS</code>,
@@ -127,7 +127,7 @@ public interface TimeAxisStyle {
      * @return increment units
      * @see GeoDate
      */
-    public int getIncrementUnits();
+    int getIncrementUnits();
     /**
      * Determine the minor label interval from the time
      * extent of the axis. For example, if <code>delta</code> is greater
@@ -137,7 +137,7 @@ public interface TimeAxisStyle {
      *
      * @param delta time extent
      */
-    public void computeDefaults(GeoDate delta);
+    void computeDefaults(GeoDate delta);
     /**
      * Determines the location of the minor time label. Positions
      * the label between the tic marks for <code>DAY_MONTH</code>,
@@ -148,7 +148,7 @@ public interface TimeAxisStyle {
      * @param prev previous tic location
      * @param now current tic location
      */
-    public double computeLocation(double prev,double now);
+    double computeLocation(double prev, double now);
 
-    public String toString();
+    String toString();
 }

@@ -35,7 +35,7 @@ public class MapGraph extends Graph implements Cloneable {
         } catch (CloneNotSupportedException e) {
             newGraph = new MapGraph();
         }
-        return (Graph)newGraph;
+        return newGraph;
     }
     void draw(Graphics g) {
         throw new MethodNotImplementedError();

@@ -244,8 +244,8 @@ public class RulerDialog extends JDialog {
             tempString[0] = "LEFT";
             tempString[1] = "CENTER";
             tempString[2] = "RIGHT";
-            for(int i=0; i < tempString.length; i++) {
-                horizCBModel.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                horizCBModel.addElement(aTempString);
             }
         }
         {
@@ -253,8 +253,8 @@ public class RulerDialog extends JDialog {
             tempString[0] = "TOP";
             tempString[1] = "MIDDLE";
             tempString[2] = "BOTTOM";
-            for(int i=0; i < tempString.length; i++) {
-                vertCBModel.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                vertCBModel.addElement(aTempString);
             }
         }
         {
@@ -262,8 +262,8 @@ public class RulerDialog extends JDialog {
             tempString[0] = "POSITIVE_SIDE";
             tempString[1] = "NEGATIVE_SIDE";
             tempString[2] = "NO_LABEL";
-            for(int i=0; i < tempString.length; i++) {
-                positionCBModel.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                positionCBModel.addElement(aTempString);
             }
         }
         {
@@ -271,8 +271,8 @@ public class RulerDialog extends JDialog {
             tempString[0] = "POSITIVE_SIDE";
             tempString[1] = "NEGATIVE_SIDE";
             tempString[2] = "BOTH_SIDES";
-            for(int i=0; i < tempString.length; i++) {
-                ticPositionCBModel.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                ticPositionCBModel.addElement(aTempString);
             }
         }
         positionComboBox.setSelectedIndex(1);
@@ -307,10 +307,10 @@ public class RulerDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -604,19 +604,19 @@ public class RulerDialog extends JDialog {
         scale_.setLabelColor(textColorPanel.getColor());
         if(labelFont_ != null) scale_.setLabelFont(labelFont_);
 
-        scale_.setLabelHeightP(Double.valueOf(heightTextField.getText()).doubleValue());
+        scale_.setLabelHeightP(Double.valueOf(heightTextField.getText()));
         scale_.setLabelPosition(positionComboBox.getSelectedIndex());
         //
         // range
         //
-        double min = Double.valueOf(minUserTextField.getText()).doubleValue();
-        double max = Double.valueOf(maxUserTextField.getText()).doubleValue();
-        double inc = Double.valueOf(incUserTextField.getText()).doubleValue();
+        double min = Double.valueOf(minUserTextField.getText());
+        double max = Double.valueOf(maxUserTextField.getText());
+        double inc = Double.valueOf(incUserTextField.getText());
         scale_.setRangeU(new Range2D(min, max, inc));
-        double x = Double.valueOf(xPhysicalTextField.getText()).doubleValue();
-        double y = Double.valueOf(yPhysicalTextField.getText()).doubleValue();
-        double width = Double.valueOf(widthPhysicalTextField.getText()).doubleValue();
-        double height = Double.valueOf(heightPhysicalTextField.getText()).doubleValue();
+        double x = Double.valueOf(xPhysicalTextField.getText());
+        double y = Double.valueOf(yPhysicalTextField.getText());
+        double width = Double.valueOf(widthPhysicalTextField.getText());
+        double height = Double.valueOf(heightPhysicalTextField.getText());
         scale_.setBoundsP(new Rectangle2D.Double(x, y, width, height));
         //    sa_.setRangeP(new Range2D(min, max));
         //    if(originIsGeoDate_) {
@@ -635,8 +635,8 @@ public class RulerDialog extends JDialog {
         //
         // tics
         //
-        scale_.setLargeTicHeightP(Double.valueOf(largeTicTextField.getText()).doubleValue());
-        scale_.setSmallTicHeightP(Double.valueOf(smallTicTextField.getText()).doubleValue());
+        scale_.setLargeTicHeightP(Double.valueOf(largeTicTextField.getText()));
+        scale_.setSmallTicHeightP(Double.valueOf(smallTicTextField.getText()));
         scale_.setNumberSmallTics(Integer.parseInt(numSmallTicsTextField.getText()));
         scale_.setTicPosition(ticPositionComboBox.getSelectedIndex());
 

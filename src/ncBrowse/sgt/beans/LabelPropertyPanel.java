@@ -135,115 +135,133 @@ class LabelPropertyPanel extends PropertyPanel implements ActionListener, Change
     }
 
     private void processEvent(Object obj, String command) {
-        if(command.equals("Id")) {
-            String oldId = label_.getId();
-            label_.getPanelHolder().getLabels().remove(oldId);
-            label_.setId(((JTextField)obj).getText());
-            label_.getPanelHolder().getLabels().put(label_.getId(), label_);
-        } else if(command.equals("Justification")) {
-            String str = (String)((JComboBox)obj).getSelectedItem();
-            int item = -1;
-            if(str.equals("Left")) {
-                item = SGLabel.LEFT;
-            } else if(str.equals("Center")) {
-                item = SGLabel.CENTER;
-            } else if(str.equals("Right")) {
-                item = SGLabel.RIGHT;
-            }
-            label_.setJustification(item);
-        } else if(command.equals("Text")) {
-            label_.setText(((JTextField)obj).getText());
-        } else if(command.equals("Location")) {
-            label_.setLocationP(parsePoint2D(((JTextField)obj).getText()));
-        } else if(command.equals("Height")) {
-            label_.setHeightP(Float.parseFloat(((JTextField)obj).getText()));
-        } else if(command.equals("Width")) {
-            label_.setWidthP(Float.parseFloat(((JTextField)obj).getText()));
-        } else if(command.equals("Visible")) {
-            label_.setVisible(((JCheckBox)obj).isSelected());
-        } else if(command.equals("Color")) {
-            ColorDialog cd = new ColorDialog(getFrame(), "Select Label Color", true);
-            cd.setColor(label_.getColor());
-            cd.setVisible(true);
-            Color newcolor = cd.getColor();
-            if(newcolor != null) label_.setColor(newcolor);
-        } else if(command.equals("Font")) {
-            FontDialog fd = new FontDialog("Label Font");
-            int result = fd.showDialog(label_.getFont());
-            if(result == fd.OK_RESPONSE) {
-                label_.setFont(fd.getFont());
-            }
-        } else if(command.equals("Orientation")) {
-            int old = label_.getOrientation();
-            String str = (String)((JComboBox)obj).getSelectedItem();
-            int item = -1;
-            if(str.equals("Horizontal")) {
-                item = SGLabel.HORIZONTAL;
-            } else if(str.equals("Vertical")) {
-                item = SGLabel.VERTICAL;
-            }
-            label_.setOrientation(item);
-            /**
-             * if orientation has changed redefine DragBox.
-             */
-            if(old != item) {
-                Point2D.Double loc = label_.getLocationP();
-                double w = label_.getWidthP();
-                double h = label_.getHeightP();
-                double x;
-                double y;
-                label_.setWidthP(label_.getHeightP());
-                label_.setHeightP(w);
-                switch(label_.getJustification()) {
-                case SGLabel.CENTER:
-                    if(item == SGLabel.VERTICAL) {
-                        x = loc.x + w*0.5 - h;
-                        y = loc.y - w*0.5;
-                    } else {
-                        x = loc.x - h*0.5 + w;
-                        y = loc.y + h*0.5;
-                    }
-                    break;
-                default:
-                case SGLabel.LEFT:
-                    if(item == SGLabel.VERTICAL) {
-                        x = loc.x - h;
-                        y = loc.y;
-                    } else {
-                        x = loc.x + w;
-                        y = loc.y;
-                    }
-                    break;
-                case SGLabel.RIGHT:
-                    if(item == SGLabel.VERTICAL) {
-                        x = loc.x + w - h;
-                        y = loc.y - w;
-                    } else {
-                        x = loc.x - h + w;
-                        y = loc.y + h;
-                    }
+        switch (command) {
+            case "Id":
+                String oldId = label_.getId();
+                label_.getPanelHolder().getLabels().remove(oldId);
+                label_.setId(((JTextField) obj).getText());
+                label_.getPanelHolder().getLabels().put(label_.getId(), label_);
+                break;
+            case "Justification": {
+                String str = (String) ((JComboBox) obj).getSelectedItem();
+                int item = -1;
+                switch (str) {
+                    case "Left":
+                        item = SGLabel.LEFT;
+                        break;
+                    case "Center":
+                        item = SGLabel.CENTER;
+                        break;
+                    case "Right":
+                        item = SGLabel.RIGHT;
+                        break;
                 }
-                label_.setLocationP(new Point2D.Double(x,y));
+                label_.setJustification(item);
+                break;
             }
-        } else if(command.equals("Selectable")) {
-            label_.setSelectable(((JCheckBox)obj).isSelected());
+            case "Text":
+                label_.setText(((JTextField) obj).getText());
+                break;
+            case "Location":
+                label_.setLocationP(parsePoint2D(((JTextField) obj).getText()));
+                break;
+            case "Height":
+                label_.setHeightP(Float.parseFloat(((JTextField) obj).getText()));
+                break;
+            case "Width":
+                label_.setWidthP(Float.parseFloat(((JTextField) obj).getText()));
+                break;
+            case "Visible":
+                label_.setVisible(((JCheckBox) obj).isSelected());
+                break;
+            case "Color":
+                ColorDialog cd = new ColorDialog(getFrame(), "Select Label Color", true);
+                cd.setColor(label_.getColor());
+                cd.setVisible(true);
+                Color newcolor = cd.getColor();
+                if (newcolor != null) label_.setColor(newcolor);
+                break;
+            case "Font":
+                FontDialog fd = new FontDialog("Label Font");
+                int result = fd.showDialog(label_.getFont());
+                if (result == fd.OK_RESPONSE) {
+                    label_.setFont(fd.getFont());
+                }
+                break;
+            case "Orientation": {
+                int old = label_.getOrientation();
+                String str = (String) ((JComboBox) obj).getSelectedItem();
+                int item = -1;
+                if (str.equals("Horizontal")) {
+                    item = SGLabel.HORIZONTAL;
+                } else if (str.equals("Vertical")) {
+                    item = SGLabel.VERTICAL;
+                }
+                label_.setOrientation(item);
+                /**
+                 * if orientation has changed redefine DragBox.
+                 */
+                if (old != item) {
+                    Point2D.Double loc = label_.getLocationP();
+                    double w = label_.getWidthP();
+                    double h = label_.getHeightP();
+                    double x;
+                    double y;
+                    label_.setWidthP(label_.getHeightP());
+                    label_.setHeightP(w);
+                    switch (label_.getJustification()) {
+                        case SGLabel.CENTER:
+                            if (item == SGLabel.VERTICAL) {
+                                x = loc.x + w * 0.5 - h;
+                                y = loc.y - w * 0.5;
+                            } else {
+                                x = loc.x - h * 0.5 + w;
+                                y = loc.y + h * 0.5;
+                            }
+                            break;
+                        default:
+                        case SGLabel.LEFT:
+                            if (item == SGLabel.VERTICAL) {
+                                x = loc.x - h;
+                                y = loc.y;
+                            } else {
+                                x = loc.x + w;
+                                y = loc.y;
+                            }
+                            break;
+                        case SGLabel.RIGHT:
+                            if (item == SGLabel.VERTICAL) {
+                                x = loc.x + w - h;
+                                y = loc.y - w;
+                            } else {
+                                x = loc.x - h + w;
+                                y = loc.y + h;
+                            }
+                    }
+                    label_.setLocationP(new Point2D.Double(x, y));
+                }
+                break;
+            }
+            case "Selectable":
+                label_.setSelectable(((JCheckBox) obj).isSelected());
+                break;
         }
     }
 
     void resetFields() {
-        for(int i=0; i < comps_.length; i++) {
-            if(comps_[i] instanceof JTextField) {
-                ((JTextField)comps_[i]).removeActionListener(this);
-                ((JTextField)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JCheckBox) {
-                ((JCheckBox)comps_[i]).removeActionListener(this);
-                ((JCheckBox)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JComboBox) {
-                ((JComboBox)comps_[i]).removeActionListener(this);
-                ((JComboBox)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JButton) {
-                ((JButton)comps_[i]).removeActionListener(this);
-                ((JButton)comps_[i]).removeFocusListener(this);
+        for (JComponent aComps_ : comps_) {
+            if (aComps_ instanceof JTextField) {
+                ((JTextField) aComps_).removeActionListener(this);
+                ((JTextField) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JCheckBox) {
+                ((JCheckBox) aComps_).removeActionListener(this);
+                ((JCheckBox) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JComboBox) {
+                ((JComboBox) aComps_).removeActionListener(this);
+                ((JComboBox) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JButton) {
+                ((JButton) aComps_).removeActionListener(this);
+                ((JButton) aComps_).removeFocusListener(this);
             }
         }
     }

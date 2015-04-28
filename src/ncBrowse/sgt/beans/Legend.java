@@ -91,11 +91,10 @@ public class Legend implements Serializable {
         try {
             BeanInfo info = Introspector.getBeanInfo(Legend.class);
             PropertyDescriptor[] descriptors = info.getPropertyDescriptors();
-            for(int i=0; i < descriptors.length; i++) {
-                PropertyDescriptor pd = descriptors[i];
-                if(pd.getName().equals("instantiated")) {
+            for (PropertyDescriptor pd : descriptors) {
+                if (pd.getName().equals("instantiated")) {
                     pd.setValue("transient", Boolean.TRUE);
-                } else if(pd.getName().equals("panelHolder")) {
+                } else if (pd.getName().equals("panelHolder")) {
                     pd.setValue("transient", Boolean.TRUE);
                 }
             }
@@ -240,11 +239,7 @@ public class Legend implements Serializable {
     public synchronized void removeDesignChangeListeners() {
         if(changeListeners != null) {
             Vector v = (Vector) changeListeners.clone();
-            Iterator iter = v.iterator();
-            while(iter.hasNext()) {
-                Object obj = iter.next();
-                if(obj instanceof DesignListener) changeListeners.removeElement(obj);
-            }
+            v.stream().filter(obj -> obj instanceof DesignListener).forEach(changeListeners::removeElement);
         }
     }
     /**

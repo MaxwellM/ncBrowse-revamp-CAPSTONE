@@ -112,7 +112,7 @@ class MinuteHourAxis implements TimeAxisStyle {
                                    tRange.end.getGMTMinutes(), 0, 0);
                 if(!time.equals(tRange.end)) time.increment(1.0, GeoDate.MINUTES);
             }
-        } catch (IllegalTimeValue e) {}
+        } catch (IllegalTimeValue ignored) {}
         return time;
     }
     public double getIncrementValue() {

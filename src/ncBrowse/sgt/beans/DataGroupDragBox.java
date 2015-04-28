@@ -92,9 +92,8 @@ class DataGroupDragBox extends DragBox implements ChangeListener {
               g.drawString(dg_.getId(), xBoundsD_.x + 5, yString); */
 
         if(selected_) {
-            for(int i=0; i < handles_.length; i++) {
-                Rectangle r = handles_[i];
-                g.fillRect(r.x, r.y, r.width-1, r.height-1);
+            for (Rectangle r : handles_) {
+                g.fillRect(r.x, r.y, r.width - 1, r.height - 1);
             }
         }
 

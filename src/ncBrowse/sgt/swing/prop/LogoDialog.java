@@ -118,8 +118,8 @@ public class LogoDialog extends JDialog implements PropertyChangeListener {
             tempString[0] = "LEFT";
             tempString[1] = "CENTER";
             tempString[2] = "RIGHT";
-            for(int i=0; i < tempString.length; i++) {
-                horizCBModel.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                horizCBModel.addElement(aTempString);
             }
         }
         {
@@ -127,8 +127,8 @@ public class LogoDialog extends JDialog implements PropertyChangeListener {
             tempString[0] = "TOP";
             tempString[1] = "MIDDLE";
             tempString[2] = "BOTTOM";
-            for(int i=0; i < tempString.length; i++) {
-                vertCBModel.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                vertCBModel.addElement(aTempString);
             }
         }
         vertComboBox.setSelectedIndex(2);
@@ -157,10 +157,10 @@ public class LogoDialog extends JDialog implements PropertyChangeListener {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -336,8 +336,8 @@ public class LogoDialog extends JDialog implements PropertyChangeListener {
         //
         // Location
         //
-        double x = Double.valueOf(xPosTextField.getText()).doubleValue();
-        double y = Double.valueOf(yPosTextField.getText()).doubleValue();
+        double x = Double.valueOf(xPosTextField.getText());
+        double y = Double.valueOf(yPosTextField.getText());
         Point2D.Double locp = new Point2D.Double(x, y);
         logo_.setLocationP(locp);
         //

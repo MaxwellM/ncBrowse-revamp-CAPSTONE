@@ -69,8 +69,8 @@ public class ContourLineAttributeDialog extends JDialog {
             tempString[4] = "MARK";
             tempString[5] = "MARK & SOLID";
             tempString[6] = "STROKE";
-            for(int i=0; i < tempString.length; i++) {
-                lineStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                lineStyleCBM.addElement(aTempString);
             }
         }
         {
@@ -78,8 +78,8 @@ public class ContourLineAttributeDialog extends JDialog {
             tempString[0] = "BUTT";
             tempString[1] = "ROUND";
             tempString[2] = "SQUARE";
-            for(int i=0; i < tempString.length; i++) {
-                capStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                capStyleCBM.addElement(aTempString);
             }
         }
         {
@@ -87,8 +87,8 @@ public class ContourLineAttributeDialog extends JDialog {
             tempString[0] = "MITER";
             tempString[1] = "ROUND";
             tempString[2] = "BEVEL";
-            for(int i=0; i < tempString.length; i++) {
-                miterStyleCBM.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                miterStyleCBM.addElement(aTempString);
             }
         }
         titledBorder1 = new TitledBorder(BorderFactory.createEtchedBorder(Color.white,new Color(142, 142, 142)),"Stroke Line Attributes");
@@ -368,10 +368,10 @@ public class ContourLineAttributeDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -540,40 +540,55 @@ public class ContourLineAttributeDialog extends JDialog {
     private void useDefault(String action) {
         boolean enable;
         boolean stroke = lineStyleComboBox.getSelectedIndex() == LineAttribute.STROKE;
-        if(action.equals("color")) {
-            enable = !colorUseDefault.isSelected();
-            lineColorPanel.setEnabled(enable);
-        } else if(action.equals("style")) {
-            lineStyleComboBox.setEnabled(!styleUseDefault.isSelected());
-        } else if(action.equals("width")) {
-            widthTextField.setEnabled(!widthUseDefault.isSelected() && stroke);
-        } else if(action.equals("dashArray")) {
-            enable = !dashArrayUseDefault.isSelected() && stroke;
-            dashArrayTextField.setEnabled(enable);
-            arrayEditor.setEnabled(enable);
-        } else if(action.equals("dashPhase")) {
-            dashPhaseTextField.setEnabled(!dashPhaseUseDefault.isSelected() && stroke);
-        } else if(action.equals("capStyle")) {
-            capStyleComboBox.setEnabled(!capStyleUseDefault.isSelected() && stroke);
-        } else if(action.equals("miterStyle")) {
-            miterStyleComboBox.setEnabled(!miterStyleUseDefault.isSelected() && stroke);
-        } else if(action.equals("miterLimit")) {
-            miterLimitTextField.setEnabled(!miterLimitUseDefault.isSelected() && stroke);
-        } else if(action.equals("labelColor")) {
-            enable = !labelColorUseDefault.isSelected();
-            textColorPanel.setEnabled(enable);
-        } else if(action.equals("labelFont")) {
-            enable = !labelFontUseDefault.isSelected();
-            fontLabel.setEnabled(enable);
-            fontEditor.setEnabled(enable);
-        } else if(action.equals("heightP")) {
-            heightTextField.setEnabled(!heightPUseDefault.isSelected());
-        } else if(action.equals("labelFormat")) {
-            labelFormatTextField.setEnabled(!labelFormatUseDefault.isSelected());
-        } else if(action.equals("labelEnabled")) {
-            labelEnabledCheckBox.setEnabled(!labelEnabledUseDefault.isSelected());
-        } else {
-            System.out.println("Action " + action + " not found.");
+        switch (action) {
+            case "color":
+                enable = !colorUseDefault.isSelected();
+                lineColorPanel.setEnabled(enable);
+                break;
+            case "style":
+                lineStyleComboBox.setEnabled(!styleUseDefault.isSelected());
+                break;
+            case "width":
+                widthTextField.setEnabled(!widthUseDefault.isSelected() && stroke);
+                break;
+            case "dashArray":
+                enable = !dashArrayUseDefault.isSelected() && stroke;
+                dashArrayTextField.setEnabled(enable);
+                arrayEditor.setEnabled(enable);
+                break;
+            case "dashPhase":
+                dashPhaseTextField.setEnabled(!dashPhaseUseDefault.isSelected() && stroke);
+                break;
+            case "capStyle":
+                capStyleComboBox.setEnabled(!capStyleUseDefault.isSelected() && stroke);
+                break;
+            case "miterStyle":
+                miterStyleComboBox.setEnabled(!miterStyleUseDefault.isSelected() && stroke);
+                break;
+            case "miterLimit":
+                miterLimitTextField.setEnabled(!miterLimitUseDefault.isSelected() && stroke);
+                break;
+            case "labelColor":
+                enable = !labelColorUseDefault.isSelected();
+                textColorPanel.setEnabled(enable);
+                break;
+            case "labelFont":
+                enable = !labelFontUseDefault.isSelected();
+                fontLabel.setEnabled(enable);
+                fontEditor.setEnabled(enable);
+                break;
+            case "heightP":
+                heightTextField.setEnabled(!heightPUseDefault.isSelected());
+                break;
+            case "labelFormat":
+                labelFormatTextField.setEnabled(!labelFormatUseDefault.isSelected());
+                break;
+            case "labelEnabled":
+                labelEnabledCheckBox.setEnabled(!labelEnabledUseDefault.isSelected());
+                break;
+            default:
+                System.out.println("Action " + action + " not found.");
+                break;
         }
     }
 
@@ -723,9 +738,9 @@ public class ContourLineAttributeDialog extends JDialog {
         if(da == null) {
             return "null";
         }
-        StringBuffer sbuf = new StringBuffer("{");
-        for(int i=0; i < da.length; i++) {
-            sbuf.append(Float.toString(da[i]) + ", ");
+        StringBuilder sbuf = new StringBuilder("{");
+        for (float aDa : da) {
+            sbuf.append(Float.toString(aDa)).append(", ");
         }
         sbuf.setLength(sbuf.length()-2);
         sbuf.append("}");
@@ -744,7 +759,7 @@ public class ContourLineAttributeDialog extends JDialog {
         int index = 0;
         float[] array = new float[token.countTokens()];
         while(token.hasMoreTokens()) {
-            array[index] = new Float(token.nextToken()).floatValue();
+            array[index] = new Float(token.nextToken());
             index++;
         }
         return array;
@@ -766,7 +781,7 @@ public class ContourLineAttributeDialog extends JDialog {
         //
         // width
         //
-        attr_.setWidth(new Float(widthTextField.getText()).floatValue());
+        attr_.setWidth(Float.parseFloat(widthTextField.getText()));
         attr_.setWidthOverridden(!widthUseDefault.isSelected());
         //
         // dash array
@@ -776,7 +791,7 @@ public class ContourLineAttributeDialog extends JDialog {
         //
         // dash phase
         //
-        attr_.setDashPhase(new Float(dashPhaseTextField.getText()).floatValue());
+        attr_.setDashPhase(Float.parseFloat(dashPhaseTextField.getText()));
         attr_.setDashPhaseOverridden(!dashPhaseUseDefault.isSelected());
         //
         // cap style
@@ -791,7 +806,7 @@ public class ContourLineAttributeDialog extends JDialog {
         //
         // miter limit
         //
-        attr_.setMiterLimit(new Float(miterLimitTextField.getText()).floatValue());
+        attr_.setMiterLimit(Float.parseFloat(miterLimitTextField.getText()));
         attr_.setMiterLimitOverridden(!miterLimitUseDefault.isSelected());
         //
         // Label attributes
@@ -808,7 +823,7 @@ public class ContourLineAttributeDialog extends JDialog {
         //
         // heightP
         //
-        attr_.setLabelHeightP(new Double(heightTextField.getText()).doubleValue());
+        attr_.setLabelHeightP(new Double(heightTextField.getText()));
         attr_.setLabelHeightPOverridden(!heightPUseDefault.isSelected());
         //
         // autoLabel

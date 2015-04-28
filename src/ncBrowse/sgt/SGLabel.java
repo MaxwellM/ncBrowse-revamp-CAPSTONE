@@ -90,9 +90,8 @@ public class SGLabel implements Cloneable, LayerChild, Moveable, Serializable {
         try {
             BeanInfo info = Introspector.getBeanInfo(SGLabel.class);
             PropertyDescriptor[] descriptors = info.getPropertyDescriptors();
-            for(int i=0; i < descriptors.length; i++) {
-                PropertyDescriptor pd = descriptors[i];
-                if(pd.getName().equals("layer")) {
+            for (PropertyDescriptor pd : descriptors) {
+                if (pd.getName().equals("layer")) {
                     pd.setValue("transient", Boolean.TRUE);
                 }
             }

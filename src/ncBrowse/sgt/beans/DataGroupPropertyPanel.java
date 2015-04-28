@@ -94,45 +94,51 @@ class DataGroupPropertyPanel extends PropertyPanel
     }
 
     void resetFields() {
-        for(int i=0; i < comps_.length; i++) {
-            if(comps_[i] instanceof JTextField) {
-                ((JTextField)comps_[i]).removeActionListener(this);
-                ((JTextField)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JCheckBox) {
-                ((JCheckBox)comps_[i]).removeActionListener(this);
-                ((JCheckBox)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JComboBox) {
-                ((JComboBox)comps_[i]).removeActionListener(this);
-                ((JComboBox)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JButton) {
-                ((JButton)comps_[i]).removeActionListener(this);
-                ((JButton)comps_[i]).removeFocusListener(this);
+        for (JComponent aComps_ : comps_) {
+            if (aComps_ instanceof JTextField) {
+                ((JTextField) aComps_).removeActionListener(this);
+                ((JTextField) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JCheckBox) {
+                ((JCheckBox) aComps_).removeActionListener(this);
+                ((JCheckBox) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JComboBox) {
+                ((JComboBox) aComps_).removeActionListener(this);
+                ((JComboBox) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JButton) {
+                ((JButton) aComps_).removeActionListener(this);
+                ((JButton) aComps_).removeFocusListener(this);
             }
         }
     }
 
     private void setFieldsEnabled() {
-        ((JTextField)comps_[zUserRange]).setEnabled(!((JCheckBox)comps_[zAutoScale]).isSelected());
-        ((JTextField)comps_[zAutoLevels]).setEnabled(((JCheckBox)comps_[zAutoScale]).isSelected());
+        comps_[zUserRange].setEnabled(!((JCheckBox) comps_[zAutoScale]).isSelected());
+        comps_[zAutoLevels].setEnabled(((JCheckBox) comps_[zAutoScale]).isSelected());
     }
 
     private void processEvent(Object obj, String command) {
         String str = null;
         SoTRange range = null;
-        if(command.equals("Id")) {
-            String oldId = dataGroup_.getId();
-            dataGroup_.getPanelHolder().getDataGroups().remove(oldId);
-            dataGroup_.setId(((JTextField)obj).getText());
-            dataGroup_.getPanelHolder().getDataGroups().put(dataGroup_.getId(), dataGroup_);
-        } else if(command.equals("Zoomable")) {
-            dataGroup_.setZoomable(((JCheckBox)obj).isSelected());
-        } else if(command.equals("Z AutoScale")) {
-            dataGroup_.setZAutoScale(((JCheckBox)obj).isSelected());
-        } else if(command.equals("Z Auto Levels")) {
-            dataGroup_.setNumberAutoContourLevels(Integer.parseInt(((JTextField)obj).getText()));
-        } else if(command.equals("Z User Range")) {
-            range = parseRange(((JTextField)obj).getText(), false);
-            if(range != null) dataGroup_.setZRangeU(range);
+        switch (command) {
+            case "Id":
+                String oldId = dataGroup_.getId();
+                dataGroup_.getPanelHolder().getDataGroups().remove(oldId);
+                dataGroup_.setId(((JTextField) obj).getText());
+                dataGroup_.getPanelHolder().getDataGroups().put(dataGroup_.getId(), dataGroup_);
+                break;
+            case "Zoomable":
+                dataGroup_.setZoomable(((JCheckBox) obj).isSelected());
+                break;
+            case "Z AutoScale":
+                dataGroup_.setZAutoScale(((JCheckBox) obj).isSelected());
+                break;
+            case "Z Auto Levels":
+                dataGroup_.setNumberAutoContourLevels(Integer.parseInt(((JTextField) obj).getText()));
+                break;
+            case "Z User Range":
+                range = parseRange(((JTextField) obj).getText(), false);
+                if (range != null) dataGroup_.setZRangeU(range);
+                break;
         }
     }
 

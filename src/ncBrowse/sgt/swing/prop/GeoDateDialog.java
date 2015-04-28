@@ -11,17 +11,22 @@ package ncBrowse.sgt.swing.prop;
 
 import ncBrowse.sgt.geom.GeoDate;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.border.*;
 import javax.swing.*;
-import java.io.*;
-import java.net.*;
-import java.util.*;
-import java.text.*;
-import javax.swing.event.ListSelectionListener;
-import java.beans.PropertyChangeSupport;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 /**
  * <code>GeoDateDialog</code> is a calendar, plus optionally, time, chooser 
@@ -314,7 +319,7 @@ public class GeoDateDialog extends JDialog
         softwareDayOfMonthClick( initialDate );
 
         minList.setSelectedIndex( (cal.get(MINUTE)/5));
-        hourText.setText( new String(String.valueOf(cal.get(HOUR_OF_DAY))));
+        hourText.setText(String.valueOf(cal.get(HOUR_OF_DAY)));
         monthList.setSelectedIndex( cal.get( MONTH));
 
     }
@@ -521,9 +526,9 @@ public class GeoDateDialog extends JDialog
         computeFields( cal );
         int date = cal.get( DATE );
         int idx = 0;
-        for (int i = 0; i < calButtons.length; i++) {
-            if (calButtons[i].getText().equals( daysOfMonth[ date-1 ])) {
-                calButtons[i].doClick(); 
+        for (JToggleButton calButton : calButtons) {
+            if (calButton.getText().equals(daysOfMonth[date - 1])) {
+                calButton.doClick();
             }
         }
     }  
@@ -597,7 +602,7 @@ public class GeoDateDialog extends JDialog
         monthList.addItemListener( this );
         monthList.setAlignmentY( 0.5f );
 
-        yearText = new JTextField( new String( String.valueOf(cal.get( YEAR))));
+        yearText = new JTextField(String.valueOf(cal.get(YEAR)));
         yearText.setBackground(calBackground);
         yearText.addActionListener( this );
         yearText.setFont( regularFont );
@@ -642,14 +647,14 @@ public class GeoDateDialog extends JDialog
         cal.setTime( newDate );
         computeFields( cal );
         int m = cal.get( MONTH );
-        Integer yr = new Integer( cal.get( YEAR));
+        Integer yr = cal.get(YEAR);
 
         monthList.setVisible(false );
         monthList.setSelectedIndex( m);
         monthList.setVisible( true);
 
         int yr1 = Integer.parseInt( yearText.getText().trim());
-        if (yr.intValue() != yr1) {
+        if (yr != yr1) {
             yearText.setText( yr.toString() );
         }
     }
@@ -805,7 +810,7 @@ public class GeoDateDialog extends JDialog
                 hourText.setText( (new Integer(prevHr)).toString() );
             }
             updateDateLabel();
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
         }
     }
     //----------------------------------------------------------------
@@ -831,7 +836,7 @@ public class GeoDateDialog extends JDialog
                 updateGUIAfterLiquidDateChange();
             }
             updateDateLabel();
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException ignored) {
         }
     }
     //----------------------------------------------------------------
@@ -897,7 +902,7 @@ public class GeoDateDialog extends JDialog
     void lowerBoundMsg() {
         if (TRACE) System.out.println( "lowerBoundMsg entered");
         JOptionPane.showMessageDialog(this, 
-                                      (new String("Lower bound restricted to " + composeTimeLabel( getEarliestDateAllowed()))),
+                                      ("Lower bound restricted to " + composeTimeLabel(getEarliestDateAllowed())),
                                       "Calendar Bounds Exception",
                                       JOptionPane.WARNING_MESSAGE);
     }
@@ -906,7 +911,7 @@ public class GeoDateDialog extends JDialog
     void upperBoundMsg() {
         if (TRACE) System.out.println( "upperBoundMsg entered");
         JOptionPane.showMessageDialog(this, 
-                                      (new String("Upper bound restricted to " + composeTimeLabel( getLatestDateAllowed()))),
+                                      ("Upper bound restricted to " + composeTimeLabel(getLatestDateAllowed())),
                                       "Calendar Bounds Exception",
                                       JOptionPane.WARNING_MESSAGE);
     }
@@ -1081,7 +1086,7 @@ public class GeoDateDialog extends JDialog
                 }
                 hourText.setText( (new Integer(hr)).toString() );
                 handleHourChange();
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException ignored) {
             }
         }
         else if (source == addHourButn) {
@@ -1097,7 +1102,7 @@ public class GeoDateDialog extends JDialog
                 }
                 hourText.setText( (new Integer(hr)).toString() );
                 handleHourChange();
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException ignored) {
             }
         }
         else if (source == subMinButn) {
@@ -1121,7 +1126,7 @@ public class GeoDateDialog extends JDialog
                 minList.setSelectedIndex( min/5 );
                 minList.setVisible(true);
                 updateDateLabel();
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException ignored) {
             }
         }
         else if (source == addMinButn) {
@@ -1145,7 +1150,7 @@ public class GeoDateDialog extends JDialog
                 minList.setSelectedIndex( min/5 );
                 minList.setVisible(true);
                 updateDateLabel();
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException ignored) {
             }
         }
         else if (source == monthList) {
@@ -1228,14 +1233,12 @@ public class GeoDateDialog extends JDialog
         System.out.println("Result = " + result);
         System.out.println("Date = " + dtg.getGeoDate().toString());
 
-        dtg.addPropertyChangeListener( new PropertyChangeListener() {
-                public void propertyChange( java.beans.PropertyChangeEvent event) {
-                    if (event.getPropertyName().equals("FormattedDateTime")) {
-                        System.out.println(" MAIN Property Change, old value: " + 
-                                           (String) event.getOldValue() + " new value: " +
-                                           (String) event.getNewValue());
-                    }
-                }
-            });
+        dtg.addPropertyChangeListener(event -> {
+            if (event.getPropertyName().equals("FormattedDateTime")) {
+                System.out.println(" MAIN Property Change, old value: " +
+                                   (String) event.getOldValue() + " new value: " +
+                                   (String) event.getNewValue());
+            }
+        });
     }
 }

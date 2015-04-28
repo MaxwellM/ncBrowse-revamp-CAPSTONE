@@ -54,9 +54,8 @@ class LabelDragBox extends DragBox implements ChangeListener {
         g.setColor(color_);
         if(label_.isVisible()) g.drawRect(bounds.x, bounds.y, bounds.width-1, bounds.height-1);
         if(selected_) {
-            for(int i=0; i < handles_.length; i++) {
-                Rectangle r = handles_[i];
-                g.fillRect(r.x, r.y, r.width-1, r.height-1);
+            for (Rectangle r : handles_) {
+                g.fillRect(r.x, r.y, r.width - 1, r.height - 1);
             }
         }
         g.setColor(saved);

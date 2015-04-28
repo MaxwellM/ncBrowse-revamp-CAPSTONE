@@ -35,26 +35,26 @@ public interface SGTImage extends SGTData {
     /**
      * Get the X coordinate edges.
      */
-    public double[] getXEdges();
+    double[] getXEdges();
     /**
      * Get the Y coordinate edges.
      */
-    public double[] getYEdges();
+    double[] getYEdges();
     /**
      * Get the image.
      */
-    public Image getImage();
+    Image getImage();
     /**
      * Get the X coordinate SGTMetaData.
      */
-    public SGTMetaData getXMetaData();
+    SGTMetaData getXMetaData();
     /**
      * Get the Y coordinate SGTMetaData.
      */
-    public SGTMetaData getYMetaData();
+    SGTMetaData getYMetaData();
     /**
      * Get the pixel SGTMetaData.
      */
-    public SGTMetaData getZMetaData();
+    SGTMetaData getZMetaData();
 }
 

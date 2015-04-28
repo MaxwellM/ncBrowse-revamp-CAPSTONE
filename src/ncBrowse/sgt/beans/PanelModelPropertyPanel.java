@@ -170,64 +170,87 @@ class PanelModelPropertyPanel extends PropertyPanel implements PropertyChangeLis
     private void processEvent(Object obj, String command) {
         String str;
         int item = -1;
-        if(command.equals("Page Size")) {
-            Dimension size = parseDimension(((JTextField)obj).getText());
-            pModel_.setPageSize(size);
-            if(pModel_.getPage() != null) pModel_.getPage().setSize(size);
-        } else if(command.equals("Page Color")) {
-            ColorDialog cd = new ColorDialog(getFrame(), "Select Axis Color", true);
-            cd.setColor(pModel_.getPageBackgroundColor());
-            cd.setVisible(true);
-            Color newcolor = cd.getColor();
-            if(newcolor != null) {
-                pModel_.setPageBackgroundColor(newcolor);
-                updateColor((JButton)obj, newcolor);
-            }
-        } else if(command.equals("Print Borders")) {
-            pModel_.setPrintBorders(((JCheckBox)obj).isSelected());
-        } else if(command.equals("Print HAlign")) {
-            str = (String)((JComboBox)obj).getSelectedItem();
-            item = -1;
-            if(str.equals("Left")) {
-                item = AbstractPane.LEFT;
-            } else if(str.equals("Center")) {
-                item = AbstractPane.CENTER;
-            } else if(str.equals("Right")) {
-                item = AbstractPane.RIGHT;
-            } else if(str.equals("Specified Location")) {
-                item = AbstractPane.SPECIFIED_LOCATION;
-            }
-            pModel_.setPrintHAlign(item);
-        } else if(command.equals("Print Origin")) {
-            Point pt = parsePoint(((JTextField)obj).getText());
-            if(pt != null) pModel_.setPrintOrigin(pt);
+        switch (command) {
+            case "Page Size":
+                Dimension size = parseDimension(((JTextField) obj).getText());
+                pModel_.setPageSize(size);
+                if (pModel_.getPage() != null) pModel_.getPage().setSize(size);
+                break;
+            case "Page Color":
+                ColorDialog cd = new ColorDialog(getFrame(), "Select Axis Color", true);
+                cd.setColor(pModel_.getPageBackgroundColor());
+                cd.setVisible(true);
+                Color newcolor = cd.getColor();
+                if (newcolor != null) {
+                    pModel_.setPageBackgroundColor(newcolor);
+                    updateColor((JButton) obj, newcolor);
+                }
+                break;
+            case "Print Borders":
+                pModel_.setPrintBorders(((JCheckBox) obj).isSelected());
+                break;
+            case "Print HAlign":
+                str = (String) ((JComboBox) obj).getSelectedItem();
+                item = -1;
+                switch (str) {
+                    case "Left":
+                        item = AbstractPane.LEFT;
+                        break;
+                    case "Center":
+                        item = AbstractPane.CENTER;
+                        break;
+                    case "Right":
+                        item = AbstractPane.RIGHT;
+                        break;
+                    case "Specified Location":
+                        item = AbstractPane.SPECIFIED_LOCATION;
+                        break;
+                }
+                pModel_.setPrintHAlign(item);
+                break;
+            case "Print Origin":
+                Point pt = parsePoint(((JTextField) obj).getText());
+                if (pt != null) pModel_.setPrintOrigin(pt);
 
-        } else if(command.equals("Print Scale Mode")) {
-            str = (String)((JComboBox)obj).getSelectedItem();
-            item = -1;
-            if(str.equals("Default")) {
-                item = AbstractPane.DEFAULT_SCALE;
-            } else if(str.equals("To Fit")) {
-                item = AbstractPane.TO_FIT;
-            } else if(str.equals("Shrink To Fit")) {
-                item = AbstractPane.SHRINK_TO_FIT;
-            }
-            pModel_.setPrintScaleMode(item);
-        } else if(command.equals("Print VAlign")) {
-            str = (String)((JComboBox)obj).getSelectedItem();
-            item = -1;
-            if(str.equals("Top")) {
-                item = AbstractPane.TOP;
-            } else if(str.equals("Middle")) {
-                item = AbstractPane.MIDDLE;
-            } else if(str.equals("Bottom")) {
-                item = AbstractPane.BOTTOM;
-            } else if(str.equals("Specified Location")) {
-                item = AbstractPane.SPECIFIED_LOCATION;
-            }
-            pModel_.setPrintVAlign(item);
-        } else if(command.equals("Print White")) {
-            pModel_.setPrintWhitePage(((JCheckBox)obj).isSelected());
+                break;
+            case "Print Scale Mode":
+                str = (String) ((JComboBox) obj).getSelectedItem();
+                item = -1;
+                switch (str) {
+                    case "Default":
+                        item = AbstractPane.DEFAULT_SCALE;
+                        break;
+                    case "To Fit":
+                        item = AbstractPane.TO_FIT;
+                        break;
+                    case "Shrink To Fit":
+                        item = AbstractPane.SHRINK_TO_FIT;
+                        break;
+                }
+                pModel_.setPrintScaleMode(item);
+                break;
+            case "Print VAlign":
+                str = (String) ((JComboBox) obj).getSelectedItem();
+                item = -1;
+                switch (str) {
+                    case "Top":
+                        item = AbstractPane.TOP;
+                        break;
+                    case "Middle":
+                        item = AbstractPane.MIDDLE;
+                        break;
+                    case "Bottom":
+                        item = AbstractPane.BOTTOM;
+                        break;
+                    case "Specified Location":
+                        item = AbstractPane.SPECIFIED_LOCATION;
+                        break;
+                }
+                pModel_.setPrintVAlign(item);
+                break;
+            case "Print White":
+                pModel_.setPrintWhitePage(((JCheckBox) obj).isSelected());
+                break;
         }
     }
 

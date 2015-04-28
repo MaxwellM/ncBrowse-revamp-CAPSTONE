@@ -90,47 +90,23 @@ public class PanelModelEditor extends JFrame {
 
     private void jbInit() throws Exception {
         okButton.setText("OK");
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    okButton_actionPerformed(e);
-                }
-            });
+        okButton.addActionListener(this::okButton_actionPerformed);
         pmcPanel.setLayout(borderLayout1);
         fileMenu.setText("File");
         openFileMI.setActionCommand("Open");
         openFileMI.setText("Open...");
-        openFileMI.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    openFileMI_actionPerformed(e);
-                }
-            });
+        openFileMI.addActionListener(this::openFileMI_actionPerformed);
         saveFileMI.setActionCommand("Save");
         saveFileMI.setText("Save");
-        saveFileMI.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    saveFileMI_actionPerformed(e);
-                }
-            });
+        saveFileMI.addActionListener(this::saveFileMI_actionPerformed);
         exitFileMI.setText("Exit");
-        exitFileMI.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    exitFileMI_actionPerformed(e);
-                }
-            });
+        exitFileMI.addActionListener(this::exitFileMI_actionPerformed);
         saveAsFileMI.setActionCommand("SaveAs");
         saveAsFileMI.setText("Save As...");
-        saveAsFileMI.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    saveAsFileMI_actionPerformed(e);
-                }
-            });
+        saveAsFileMI.addActionListener(this::saveAsFileMI_actionPerformed);
         if(isApp_)this.setJMenuBar(menuBar);
         newFileMI.setText("New");
-        newFileMI.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    newFileMI_actionPerformed(e);
-                }
-            });
+        newFileMI.addActionListener(this::newFileMI_actionPerformed);
         this.getContentPane().add(pmcPanel, BorderLayout.CENTER);
         if(!isApp_) this.getContentPane().add(buttonPanel,  BorderLayout.SOUTH);
         buttonPanel.add(okButton, null);
@@ -271,7 +247,6 @@ public class PanelModelEditor extends JFrame {
             } catch (FileNotFoundException fnfe) {
                 JOptionPane.showMessageDialog(this, "Error creating file, rename and try again",
                                               "File Save Error", JOptionPane.ERROR_MESSAGE);
-                return;
             }
         }
     }
@@ -284,7 +259,6 @@ public class PanelModelEditor extends JFrame {
         } catch (FileNotFoundException fnfe) {
             JOptionPane.showMessageDialog(this, "Error creating file, rename and try again",
                                           "File Save Error", JOptionPane.ERROR_MESSAGE);
-            return;
         }
     }
 

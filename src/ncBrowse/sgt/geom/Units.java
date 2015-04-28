@@ -111,10 +111,10 @@ class Temperature implements java.io.Serializable {
         switch(comp) {
         default:
         case Units.X_AXIS:
-            meta = ((SGTLine)grid).getXMetaData();
+            meta = grid.getXMetaData();
             break;
         case Units.Y_AXIS:
-            meta = ((SGTLine)grid).getYMetaData();
+            meta = grid.getYMetaData();
             break;
         case Units.Z_AXIS:
             meta = ((SGTGrid)grid).getZMetaData();
@@ -162,7 +162,7 @@ class Temperature implements java.io.Serializable {
         if(grid instanceof SGTLine) {
             boolean simpleLine = grid instanceof SimpleLine;
             if(simpleLine) {
-                new_grid = (SGTLine)grid.copy();
+                new_grid = grid.copy();
             }
             Class[] classArgs = new Class[3];
             Object[] constructArgs = new Object[3];
@@ -174,7 +174,7 @@ class Temperature implements java.io.Serializable {
                 if(simpleLine) {
                     ((SimpleLine)new_grid).setXArray(new_values);
                 } else {
-                    if(((SGTLine)grid).isYTime()) {
+                    if(grid.isYTime()) {
                         try {
                             classArgs[0] = Class.forName(doubleArrayName);
                             classArgs[1] = Class.forName(timeArrayName);
@@ -182,7 +182,7 @@ class Temperature implements java.io.Serializable {
                             gridConstruct = gridClass.getConstructor(classArgs);
                             constructArgs[0] = new_values;
                             constructArgs[1] = ((SGTLine)grid).getTimeArray();
-                            constructArgs[2] = ((SGTLine)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Temperature conversion: " + e);
@@ -195,13 +195,13 @@ class Temperature implements java.io.Serializable {
                             gridConstruct = gridClass.getConstructor(classArgs);
                             constructArgs[0] = new_values;
                             constructArgs[1] = ((SGTLine)grid).getYArray();
-                            constructArgs[2] = ((SGTLine)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Temperature conversion: " + e);
                         }
                     }
-                    ((SimpleLine)new_grid).setYMetaData(((SGTLine)grid).getYMetaData());
+                    ((SimpleLine)new_grid).setYMetaData(grid.getYMetaData());
                 }
                 ((SimpleLine)new_grid).setXMetaData(newMeta);
                 break;
@@ -209,7 +209,7 @@ class Temperature implements java.io.Serializable {
                 if(simpleLine) {
                     ((SimpleLine)new_grid).setYArray(new_values);
                 } else {
-                    if(((SGTLine)grid).isXTime()) {
+                    if(grid.isXTime()) {
                         try {
                             classArgs[0] = Class.forName(timeArrayName);
                             classArgs[1] = Class.forName(doubleArrayName);
@@ -217,7 +217,7 @@ class Temperature implements java.io.Serializable {
                             gridConstruct = gridClass.getConstructor(classArgs);
                             constructArgs[0] = ((SGTLine)grid).getTimeArray();
                             constructArgs[1] = new_values;
-                            constructArgs[2] = ((SGTLine)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Temperature conversion: " + e);
@@ -230,20 +230,20 @@ class Temperature implements java.io.Serializable {
                             gridConstruct = gridClass.getConstructor(classArgs);
                             constructArgs[0] = ((SGTLine)grid).getXArray();
                             constructArgs[1] = new_values;
-                            constructArgs[2] = ((SGTLine)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Temperature conversion: " + e);
                         }
                     }
-                    ((SimpleLine)new_grid).setXMetaData(((SGTLine)grid).getXMetaData());
+                    ((SimpleLine)new_grid).setXMetaData(grid.getXMetaData());
                 }
                 ((SimpleLine)new_grid).setYMetaData(newMeta);
             }
         } else if(grid instanceof SGTGrid) {
             boolean simpleGrid = grid instanceof SimpleGrid;
             if(simpleGrid) {
-                new_grid = (SGTGrid)grid.copy();
+                new_grid = grid.copy();
             }
             Class[] classArgs = new Class[4];
             Object[] constructArgs = new Object[4];
@@ -255,7 +255,7 @@ class Temperature implements java.io.Serializable {
                 if(simpleGrid) {
                     ((SimpleGrid)new_grid).setXArray(new_values);
                 } else {
-                    if(((SGTGrid)grid).isYTime()) {
+                    if(grid.isYTime()) {
                         try {
                             classArgs[0] = Class.forName(doubleArrayName);
                             classArgs[1] = Class.forName(doubleArrayName);
@@ -265,7 +265,7 @@ class Temperature implements java.io.Serializable {
                             constructArgs[0] = ((SGTGrid)grid).getZArray();
                             constructArgs[1] = new_values;
                             constructArgs[2] = ((SGTGrid)grid).getTimeArray();
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Temperature conversion: " + e);
@@ -280,13 +280,13 @@ class Temperature implements java.io.Serializable {
                             constructArgs[0] = ((SGTGrid)grid).getZArray();
                             constructArgs[1] = new_values;
                             constructArgs[2] = ((SGTGrid)grid).getYArray();
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Temperature conversion: " + e);
                         }
                     }
-                    ((SimpleGrid)new_grid).setYMetaData(((SGTGrid)grid).getYMetaData());
+                    ((SimpleGrid)new_grid).setYMetaData(grid.getYMetaData());
                     ((SimpleGrid)new_grid).setZMetaData(((SGTGrid)grid).getZMetaData());
                 }
                 ((SimpleGrid)new_grid).setXMetaData(newMeta);
@@ -295,7 +295,7 @@ class Temperature implements java.io.Serializable {
                 if(simpleGrid) {
                     ((SimpleGrid)new_grid).setYArray(new_values);
                 } else {
-                    if(((SGTGrid)grid).isXTime()) {
+                    if(grid.isXTime()) {
                         try {
                             classArgs[0] = Class.forName(doubleArrayName);
                             classArgs[1] = Class.forName(timeArrayName);
@@ -305,7 +305,7 @@ class Temperature implements java.io.Serializable {
                             constructArgs[0] = ((SGTGrid)grid).getZArray();
                             constructArgs[1] = ((SGTGrid)grid).getTimeArray();
                             constructArgs[2] = new_values;
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Temperature conversion: " + e);
@@ -320,13 +320,13 @@ class Temperature implements java.io.Serializable {
                             constructArgs[0] = ((SGTGrid)grid).getZArray();
                             constructArgs[1] = ((SGTGrid)grid).getXArray();
                             constructArgs[2] = new_values;
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Temperature conversion: " + e);
                         }
                     }
-                    ((SimpleGrid)new_grid).setXMetaData(((SGTGrid)grid).getXMetaData());
+                    ((SimpleGrid)new_grid).setXMetaData(grid.getXMetaData());
                     ((SimpleGrid)new_grid).setZMetaData(((SGTGrid)grid).getZMetaData());
                 }
                 ((SimpleGrid)new_grid).setYMetaData(newMeta);
@@ -335,7 +335,7 @@ class Temperature implements java.io.Serializable {
                 if(simpleGrid) {
                     ((SimpleGrid)new_grid).setZArray(new_values);
                 } else {
-                    if(((SGTGrid)grid).isXTime()) {
+                    if(grid.isXTime()) {
                         try {
                             classArgs[0] = Class.forName(doubleArrayName);
                             classArgs[1] = Class.forName(timeArrayName);
@@ -345,12 +345,12 @@ class Temperature implements java.io.Serializable {
                             constructArgs[0] = new_values;
                             constructArgs[1] = ((SGTGrid)grid).getTimeArray();
                             constructArgs[2] = ((SGTGrid)grid).getYArray();
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Temperature conversion: " + e);
                         }
-                    } else if(((SGTGrid)grid).isYTime()) {
+                    } else if(grid.isYTime()) {
                         try {
                             classArgs[0] = Class.forName(doubleArrayName);
                             classArgs[1] = Class.forName(doubleArrayName);
@@ -360,7 +360,7 @@ class Temperature implements java.io.Serializable {
                             constructArgs[0] = new_values;
                             constructArgs[1] = ((SGTGrid)grid).getXArray();
                             constructArgs[2] = ((SGTGrid)grid).getTimeArray();
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Temperature conversion: " + e);
@@ -375,14 +375,14 @@ class Temperature implements java.io.Serializable {
                             constructArgs[0] = new_values;
                             constructArgs[1] = ((SGTGrid)grid).getXArray();
                             constructArgs[2] = ((SGTGrid)grid).getYArray();
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Temperature conversion: " + e);
                         }
                     }
-                    ((SimpleGrid)new_grid).setXMetaData(((SGTGrid)grid).getXMetaData());
-                    ((SimpleGrid)new_grid).setYMetaData(((SGTGrid)grid).getYMetaData());
+                    ((SimpleGrid)new_grid).setXMetaData(grid.getXMetaData());
+                    ((SimpleGrid)new_grid).setYMetaData(grid.getYMetaData());
                 }
                 ((SimpleGrid)new_grid).setZMetaData(newMeta);
             }
@@ -450,10 +450,10 @@ class Velocity implements java.io.Serializable {
         switch(comp) {
         default:
         case Units.X_AXIS:
-            meta = ((SGTLine)grid).getXMetaData();
+            meta = grid.getXMetaData();
             break;
         case Units.Y_AXIS:
-            meta = ((SGTLine)grid).getYMetaData();
+            meta = grid.getYMetaData();
             break;
         case Units.Z_AXIS:
             meta = ((SGTGrid)grid).getZMetaData();
@@ -504,7 +504,7 @@ class Velocity implements java.io.Serializable {
         if(grid instanceof SGTLine) {
             boolean simpleLine = grid instanceof SimpleLine;
             if(simpleLine) {
-                new_grid = (SGTLine)grid.copy();
+                new_grid = grid.copy();
             }
             Class[] classArgs = new Class[3];
             Object[] constructArgs = new Object[3];
@@ -516,7 +516,7 @@ class Velocity implements java.io.Serializable {
                 if(simpleLine) {
                     ((SimpleLine)new_grid).setXArray(new_values);
                 } else {
-                    if(((SGTLine)grid).isYTime()) {
+                    if(grid.isYTime()) {
                         try {
                             classArgs[0] = Class.forName(doubleArrayName);
                             classArgs[1] = Class.forName(timeArrayName);
@@ -524,7 +524,7 @@ class Velocity implements java.io.Serializable {
                             gridConstruct = gridClass.getConstructor(classArgs);
                             constructArgs[0] = new_values;
                             constructArgs[1] = ((SGTLine)grid).getTimeArray();
-                            constructArgs[2] = ((SGTLine)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Velocity conversion: " + e);
@@ -540,7 +540,7 @@ class Velocity implements java.io.Serializable {
                             gridConstruct = gridClass.getConstructor(classArgs);
                             constructArgs[0] = new_values;
                             constructArgs[1] = ((SGTLine)grid).getYArray();
-                            constructArgs[2] = ((SGTLine)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Velocity conversion: " + e);
@@ -549,7 +549,7 @@ class Velocity implements java.io.Serializable {
                         //                                      ((SGTLine)grid).getYArray(), 
                         //                                      ((SGTLine)grid).getTitle());
                     }
-                    ((SimpleLine)new_grid).setYMetaData(((SGTLine)grid).getYMetaData());
+                    ((SimpleLine)new_grid).setYMetaData(grid.getYMetaData());
                 }
                 ((SimpleLine)new_grid).setXMetaData(newMeta);
                 break;
@@ -557,7 +557,7 @@ class Velocity implements java.io.Serializable {
                 if(simpleLine) {
                     ((SimpleLine)new_grid).setYArray(new_values);
                 } else {
-                    if(((SGTLine)grid).isXTime()) {
+                    if(grid.isXTime()) {
                         try {
                             classArgs[0] = Class.forName(timeArrayName);
                             classArgs[1] = Class.forName(doubleArrayName);
@@ -565,7 +565,7 @@ class Velocity implements java.io.Serializable {
                             gridConstruct = gridClass.getConstructor(classArgs);
                             constructArgs[0] = ((SGTLine)grid).getTimeArray();
                             constructArgs[1] = new_values;
-                            constructArgs[2] = ((SGTLine)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Velocity conversion: " + e);
@@ -581,7 +581,7 @@ class Velocity implements java.io.Serializable {
                             gridConstruct = gridClass.getConstructor(classArgs);
                             constructArgs[0] = ((SGTLine)grid).getXArray();
                             constructArgs[1] = new_values;
-                            constructArgs[2] = ((SGTLine)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Velocity conversion: " + e);
@@ -590,14 +590,14 @@ class Velocity implements java.io.Serializable {
                         //                                        new_values,
                         //                                        ((SGTLine)grid).getTitle());
                     }
-                    ((SimpleLine)new_grid).setXMetaData(((SGTLine)grid).getXMetaData());
+                    ((SimpleLine)new_grid).setXMetaData(grid.getXMetaData());
                 }
                 ((SimpleLine)new_grid).setYMetaData(newMeta);
             }
         } else if(grid instanceof SGTGrid) {
             boolean simpleGrid = grid instanceof SimpleGrid;
             if(simpleGrid) {
-                new_grid = (SGTGrid)grid.copy();
+                new_grid = grid.copy();
             }
             Class[] classArgs = new Class[4];
             Object[] constructArgs = new Object[4];
@@ -609,7 +609,7 @@ class Velocity implements java.io.Serializable {
                 if(simpleGrid) {
                     ((SimpleGrid)new_grid).setXArray(new_values);
                 } else {
-                    if(((SGTGrid)grid).isYTime()) {
+                    if(grid.isYTime()) {
                         try {
                             classArgs[0] = Class.forName(doubleArrayName);
                             classArgs[1] = Class.forName(doubleArrayName);
@@ -619,7 +619,7 @@ class Velocity implements java.io.Serializable {
                             constructArgs[0] = ((SGTGrid)grid).getZArray();
                             constructArgs[1] = new_values;
                             constructArgs[2] = ((SGTGrid)grid).getTimeArray();
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Velocity conversion: " + e);
@@ -638,7 +638,7 @@ class Velocity implements java.io.Serializable {
                             constructArgs[0] = ((SGTGrid)grid).getZArray();
                             constructArgs[1] = new_values;
                             constructArgs[2] = ((SGTGrid)grid).getYArray();
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Velocity conversion: " + e);
@@ -648,7 +648,7 @@ class Velocity implements java.io.Serializable {
                         //                                      ((SGTGrid)grid).getYArray(), 
                         //                                      ((SGTGrid)grid).getTitle());
                     }
-                    ((SimpleGrid)new_grid).setYMetaData(((SGTGrid)grid).getYMetaData());
+                    ((SimpleGrid)new_grid).setYMetaData(grid.getYMetaData());
                     ((SimpleGrid)new_grid).setZMetaData(((SGTGrid)grid).getZMetaData());
                 }
                 ((SimpleGrid)new_grid).setXMetaData(newMeta);
@@ -657,7 +657,7 @@ class Velocity implements java.io.Serializable {
                 if(simpleGrid) {
                     ((SimpleGrid)new_grid).setYArray(new_values);
                 } else {
-                    if(((SGTGrid)grid).isXTime()) {
+                    if(grid.isXTime()) {
                         try {
                             classArgs[0] = Class.forName(doubleArrayName);
                             classArgs[1] = Class.forName(timeArrayName);
@@ -667,7 +667,7 @@ class Velocity implements java.io.Serializable {
                             constructArgs[0] = ((SGTGrid)grid).getZArray();
                             constructArgs[1] = ((SGTGrid)grid).getTimeArray();
                             constructArgs[2] = new_values;
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Velocity conversion: " + e);
@@ -686,7 +686,7 @@ class Velocity implements java.io.Serializable {
                             constructArgs[0] = ((SGTGrid)grid).getZArray();
                             constructArgs[1] = ((SGTGrid)grid).getXArray();
                             constructArgs[2] = new_values;
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Velocity conversion: " + e);
@@ -696,7 +696,7 @@ class Velocity implements java.io.Serializable {
                         //                                        new_values,
                         //                                        ((SGTGrid)grid).getTitle());
                     }
-                    ((SimpleGrid)new_grid).setXMetaData(((SGTGrid)grid).getXMetaData());
+                    ((SimpleGrid)new_grid).setXMetaData(grid.getXMetaData());
                     ((SimpleGrid)new_grid).setZMetaData(((SGTGrid)grid).getZMetaData());
                 }
                 ((SimpleGrid)new_grid).setYMetaData(newMeta);
@@ -705,7 +705,7 @@ class Velocity implements java.io.Serializable {
                 if(simpleGrid) {
                     ((SimpleGrid)new_grid).setZArray(new_values);
                 } else {
-                    if(((SGTGrid)grid).isXTime()) {
+                    if(grid.isXTime()) {
                         try {
                             classArgs[0] = Class.forName(doubleArrayName);
                             classArgs[1] = Class.forName(timeArrayName);
@@ -715,7 +715,7 @@ class Velocity implements java.io.Serializable {
                             constructArgs[0] = new_values;
                             constructArgs[1] = ((SGTGrid)grid).getTimeArray();
                             constructArgs[2] = ((SGTGrid)grid).getYArray();
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Velocity conversion: " + e);
@@ -724,7 +724,7 @@ class Velocity implements java.io.Serializable {
                         //                                        ((SGTGrid)grid).getTimeArray(),
                         //                                        ((SGTGrid)grid).getYArray(),
                         //                                        ((SGTGrid)grid).getTitle());
-                    } else if(((SGTGrid)grid).isYTime()) {
+                    } else if(grid.isYTime()) {
                         try {
                             classArgs[0] = Class.forName(doubleArrayName);
                             classArgs[1] = Class.forName(doubleArrayName);
@@ -734,7 +734,7 @@ class Velocity implements java.io.Serializable {
                             constructArgs[0] = new_values;
                             constructArgs[1] = ((SGTGrid)grid).getXArray();
                             constructArgs[2] = ((SGTGrid)grid).getTimeArray();
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Velocity conversion: " + e);
@@ -753,7 +753,7 @@ class Velocity implements java.io.Serializable {
                             constructArgs[0] = new_values;
                             constructArgs[1] = ((SGTGrid)grid).getXArray();
                             constructArgs[2] = ((SGTGrid)grid).getYArray();
-                            constructArgs[2] = ((SGTGrid)grid).getTitle();
+                            constructArgs[2] = grid.getTitle();
                             new_grid = (SGTData)gridConstruct.newInstance(constructArgs);
                         } catch (java.lang.Exception e) {
                             System.out.println("Velocity conversion: " + e);
@@ -763,8 +763,8 @@ class Velocity implements java.io.Serializable {
                         //                                        ((SGTGrid)grid).getYArray(),
                         //                                        ((SGTGrid)grid).getTitle());
                     }
-                    ((SimpleGrid)new_grid).setXMetaData(((SGTGrid)grid).getXMetaData());
-                    ((SimpleGrid)new_grid).setYMetaData(((SGTGrid)grid).getYMetaData());
+                    ((SimpleGrid)new_grid).setXMetaData(grid.getXMetaData());
+                    ((SimpleGrid)new_grid).setYMetaData(grid.getYMetaData());
                 }
                 ((SimpleGrid)new_grid).setZMetaData(newMeta);
             }

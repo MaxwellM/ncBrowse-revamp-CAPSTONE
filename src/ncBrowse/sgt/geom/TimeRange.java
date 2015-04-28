@@ -92,7 +92,7 @@ public class TimeRange implements java.io.Serializable {
         return true;
     }
     public String toString() {
-        StringBuffer buf = new StringBuffer(50);
+        StringBuilder buf = new StringBuilder(50);
         buf.append("[").append(start).append(";").append(end);
         if(delta == null) {
             buf.append("]");

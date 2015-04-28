@@ -38,34 +38,34 @@ public interface SGT3DGrid extends SGTData {
     /**
      * Returns true if the Z coordinate is Time.
      */
-    public boolean isZTime();
+    boolean isZTime();
 
     /**
      * Get the length of Z value array.
      */
-    public int getZSize();
+    int getZSize();
     /**
      * Get the range of measured values on this 3D grid.
      */
-    public Range2D getValRange();
+    Range2D getValRange();
     /**
      * Get the array of temporal values.
      */
     /**
      * Get the Value SGTMetaData.
      */
-    public SGTMetaData getValMetaData();
+    SGTMetaData getValMetaData();
     /**
      * Z edges available?
      */
-    public boolean hasZEdges();
+    boolean hasZEdges();
     /**
      * Get the Y coordinate edges. The YEdge length will
      * be one greater than the YArray length.
      */
-    public double[] getZEdges();
+    double[] getZEdges();
     /**
      * Get the range of Y coordinate edges.
      */
-    public SoTRange getZEdgesRange();
+    SoTRange getZEdgesRange();
 }

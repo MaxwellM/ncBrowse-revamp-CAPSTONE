@@ -13,6 +13,7 @@ package ncBrowse.sgt;
 import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Objects;
 
 /**
  * Sets the rendering style for line data.
@@ -148,7 +149,7 @@ public class LineAttribute implements Attribute, Cloneable {
     public boolean equals(Object obj) {
         if(obj == null || !(obj instanceof LineAttribute)) return false;
         LineAttribute attr = (LineAttribute)obj;
-        if((id_ != attr.getId()) ||
+        if((!Objects.equals(id_, attr.getId())) ||
            (!color_.equals(attr.getColor())) ||
            (style_ != attr.getStyle())) return false;
         if(style_ == MARK || style_ == MARK_LINE) {
@@ -183,11 +184,11 @@ public class LineAttribute implements Attribute, Cloneable {
      **/
     public void setMarkHeightP(double markh) {
         if(markHeightP_ != markh) {
-            Double tempOld = new Double(markHeightP_);
+            Double tempOld = markHeightP_;
             markHeightP_ = markh;
             firePropertyChange("markHeightP",
                                tempOld,
-                               new Double(markHeightP_));
+                markHeightP_);
         }
     }
     /**
@@ -206,11 +207,11 @@ public class LineAttribute implements Attribute, Cloneable {
      **/
     public void setStyle(int st) {
         if(style_ != st) {
-            Integer tempOld = new Integer(style_);
+            Integer tempOld = style_;
             style_ = st;
             firePropertyChange("style",
                                tempOld,
-                               new Integer(style_));
+                style_);
         }
     }
     /**
@@ -236,11 +237,11 @@ public class LineAttribute implements Attribute, Cloneable {
      **/
     public void setWidth(float t) {
         if(width_ != t) {
-            Float tempOld = new Float(width_);
+            Float tempOld = width_;
             width_ = t;
             firePropertyChange("width",
                                tempOld,
-                               new Float(width_));
+                width_);
         }
     }
     /**
@@ -283,11 +284,11 @@ public class LineAttribute implements Attribute, Cloneable {
      */
     public void setDashPhase(float phase) {
         if(dashPhase_ != phase) {
-            Float tempOld = new Float(dashPhase_);
+            Float tempOld = dashPhase_;
             dashPhase_ = phase;
             firePropertyChange("dashPhase",
                                tempOld,
-                               new Float(dashPhase_));
+                dashPhase_);
         }
     }
     /**
@@ -329,13 +330,13 @@ public class LineAttribute implements Attribute, Cloneable {
      **/
     public void setMark(int mark) {
         if(mark_ != mark) {
-            Integer tempOld = new Integer(mark_);
+            Integer tempOld = mark_;
             if(mark <= 0) mark = 1;
             if(mark > 51) mark = 51;
             mark_ = mark;
             firePropertyChange("mark",
                                tempOld,
-                               new Integer(mark_));
+                mark_);
         }
     }
     /**
@@ -354,11 +355,11 @@ public class LineAttribute implements Attribute, Cloneable {
      */
     public void setCapStyle(int style) {
         if(cap_style_ != style) {
-            Integer tempOld = new Integer(cap_style_);
+            Integer tempOld = cap_style_;
             cap_style_ = style;
             firePropertyChange("capStyle",
                                tempOld,
-                               new Integer(cap_style_));
+                cap_style_);
         }
     }
     /**
@@ -374,11 +375,11 @@ public class LineAttribute implements Attribute, Cloneable {
      * <BR><B>Property Change:</B> <code>miterStyle</code>.   */
     public void setMiterStyle(int style) {
         if(miter_style_ != style) {
-            Integer tempOld = new Integer(miter_style_);
+            Integer tempOld = miter_style_;
             miter_style_ = style;
             firePropertyChange("miterStyle",
                                tempOld,
-                               new Integer(miter_style_));
+                miter_style_);
         }
     }
     /**
@@ -393,11 +394,11 @@ public class LineAttribute implements Attribute, Cloneable {
      */
     public void setMiterLimit(float limit) {
         if(miter_limit_ != limit) {
-            Float tempOld = new Float(miter_limit_);
+            Float tempOld = miter_limit_;
             miter_limit_ = limit;
             firePropertyChange("miterLimit",
                                tempOld,
-                               new Float(miter_limit_));
+                miter_limit_);
         }
     }
     /**

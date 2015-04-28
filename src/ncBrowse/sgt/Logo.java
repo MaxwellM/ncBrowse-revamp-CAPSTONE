@@ -307,7 +307,7 @@ public class Logo implements Cloneable, LayerChild, Moveable {
                     if(mt.isErrorAny())
                         System.err.println("Logo: Error loading image");
                 }
-                catch (InterruptedException ie) { }
+                catch (InterruptedException ignored) { }
                 System.out.println("MediaTracker: " + mt.checkAll());
             }
         }

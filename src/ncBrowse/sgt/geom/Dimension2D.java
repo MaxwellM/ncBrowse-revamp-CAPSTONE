@@ -59,13 +59,8 @@ public class Dimension2D
         return getClass().getName() + "[width=" + width + ",height=" + height +
             "]";
     }
-    public boolean equals(Object that){
-        if (this == that)
-            return true;
-        else if (that instanceof java.awt.geom.Dimension2D)
-            return this.equals( (java.awt.geom.Dimension2D)that);
-        else
-            return false;
+    public boolean equals(Object that) {
+        return this == that || that instanceof java.awt.geom.Dimension2D && this.equals((java.awt.geom.Dimension2D) that);
     }
     public boolean equals(java.awt.geom.Dimension2D d) {
         return (this.width == d.getWidth() && this.height == d.getHeight());

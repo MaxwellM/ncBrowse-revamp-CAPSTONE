@@ -174,7 +174,7 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
         }
 
         public String toString() {
-            StringBuffer buf = new StringBuffer(50);
+            StringBuilder buf = new StringBuilder(50);
             buf.append("[").append(start).append(";").append(end);
             if(delta == null) {
                 buf.append("]");
@@ -311,13 +311,13 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
             delta = ((SoTValue.Time)value).getValue();
         }
         public Object getStartObject() {
-            return new java.lang.Long(start);
+            return start;
         }
         public Object getEndObject() {
-            return new java.lang.Long(end);
+            return end;
         }
         public Object getDeltaObject() {
-            return new java.lang.Long(delta);
+            return delta;
         }
         /**
          * Adds the <code>SoTRange</code> object to this
@@ -383,7 +383,7 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
             start = save;
         }
         public String toString() {
-            StringBuffer buf = new StringBuffer(50);
+            StringBuilder buf = new StringBuilder(50);
             buf.append("[").append(start).append(";").append(end);
             if(delta == java.lang.Long.MAX_VALUE) {
                 buf.append("]");
@@ -488,13 +488,13 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
             delta = ((SoTValue.Integer)value).getValue();
         }
         public Object getStartObject() {
-            return new java.lang.Integer(start);
+            return start;
         }
         public Object getEndObject() {
-            return new java.lang.Integer(end);
+            return end;
         }
         public Object getDeltaObject() {
-            return new java.lang.Integer(delta);
+            return delta;
         }
         /**
          * Adds the <code>SoTRange</code> object to this
@@ -560,7 +560,7 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
             start = save;
         }
         public String toString() {
-            StringBuffer buf = new StringBuffer(50);
+            StringBuilder buf = new StringBuilder(50);
             buf.append("[").append(start).append(";").append(end);
             if(delta == java.lang.Integer.MAX_VALUE) {
                 buf.append("]");
@@ -665,13 +665,13 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
             delta = ((SoTValue.Short)value).getValue();
         }
         public Object getStartObject() {
-            return new java.lang.Short(start);
+            return start;
         }
         public Object getEndObject() {
-            return new java.lang.Short(end);
+            return end;
         }
         public Object getDeltaObject() {
-            return new java.lang.Short(delta);
+            return delta;
         }
         /**
          * Adds the <code>SoTRange</code> object to this
@@ -737,7 +737,7 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
             start = save;
         }
         public String toString() {
-            StringBuffer buf = new StringBuffer(50);
+            StringBuilder buf = new StringBuilder(50);
             buf.append("[").append(start).append(";").append(end);
             if(delta == java.lang.Short.MAX_VALUE) {
                 buf.append("]");
@@ -842,13 +842,13 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
             delta = ((SoTValue.Float)value).getValue();
         }
         public Object getStartObject() {
-            return new java.lang.Float(start);
+            return start;
         }
         public Object getEndObject() {
-            return new java.lang.Float(end);
+            return end;
         }
         public Object getDeltaObject() {
-            return new java.lang.Float(delta);
+            return delta;
         }
         /**
          * Adds the <code>SoTRange</code> object to this
@@ -914,7 +914,7 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
             start = save;
         }
         public String toString() {
-            StringBuffer buf = new StringBuffer(50);
+            StringBuilder buf = new StringBuilder(50);
             buf.append("[").append(start).append(";").append(end);
             if(java.lang.Float.isNaN(delta)) {
                 buf.append("]");
@@ -1019,13 +1019,13 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
             delta = ((SoTValue.Double)value).getValue();
         }
         public Object getStartObject() {
-            return new java.lang.Double(start);
+            return start;
         }
         public Object getEndObject() {
-            return new java.lang.Double(end);
+            return end;
         }
         public Object getDeltaObject() {
-            return new java.lang.Double(delta);
+            return delta;
         }
         /**
          * Adds the <code>SoTRange</code> object to this
@@ -1091,7 +1091,7 @@ public abstract class SoTRange implements java.io.Serializable, Cloneable {
             start = save;
         }
         public String toString() {
-            StringBuffer buf = new StringBuffer(50);
+            StringBuilder buf = new StringBuilder(50);
             buf.append("[").append(start).append(";").append(end);
             if(java.lang.Double.isNaN(delta)) {
                 buf.append("]");

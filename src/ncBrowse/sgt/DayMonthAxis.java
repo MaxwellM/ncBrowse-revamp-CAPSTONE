@@ -98,7 +98,7 @@ class DayMonthAxis implements TimeAxisStyle {
                                    tRange.end.getGMTYear(), 0, 0, 0, 0);
                 if(!time.equals(tRange.end)) time.increment(1.0, GeoDate.DAYS);
             }
-        } catch (IllegalTimeValue e) {}
+        } catch (IllegalTimeValue ignored) {}
         return time;
     }
     public double getIncrementValue() {

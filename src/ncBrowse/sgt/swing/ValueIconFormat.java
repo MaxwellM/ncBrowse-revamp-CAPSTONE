@@ -60,7 +60,7 @@ public class ValueIconFormat {
      * @since 3.0
      */
     public String format(SoTPoint pt) {
-        StringBuffer sbuf = new StringBuffer("(");
+        StringBuilder sbuf = new StringBuilder("(");
         if(pt.isXTime()) {
             sbuf.append(pt.getX().getGeoDate().toString(tfrm_));
         } else {

@@ -577,10 +577,10 @@ public class GridCartesianRenderer extends CartesianRenderer {
         double zmin = Double.POSITIVE_INFINITY;
         double zmax = Double.NEGATIVE_INFINITY;
         double[] array = grid_.getZArray();
-        for(int i=0; i < array.length; i++) {
-            if(!Double.isNaN(array[i])) {
-                zmin = Math.min(zmin, array[i]);
-                zmax = Math.max(zmax, array[i]);
+        for (double anArray : array) {
+            if (!Double.isNaN(anArray)) {
+                zmin = Math.min(zmin, anArray);
+                zmax = Math.max(zmax, anArray);
             }
         }
         range = Graph.computeRange(zmin, zmax, levels);

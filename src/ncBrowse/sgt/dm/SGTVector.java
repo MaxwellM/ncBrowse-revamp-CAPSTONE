@@ -69,7 +69,7 @@ public class SGTVector implements SGTData, Cloneable, Serializable {
         } catch (CloneNotSupportedException e) {
             newSGTVector = new SGTVector(this.uComp_, this.vComp_);
         }
-        return (SGTData)newSGTVector;
+        return newSGTVector;
     }
     /**
      * Get the U component.

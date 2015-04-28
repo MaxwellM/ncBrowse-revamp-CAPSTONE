@@ -58,7 +58,7 @@ public abstract class Point2D implements Serializable, Cloneable {
             }
         }
         public String toString() {
-            return new String("(" + x + ", " + y + ")");
+            return "(" + x + ", " + y + ")";
         }
         /**
          * Make a copy of the <code>Rectangle2D</code>.
@@ -110,7 +110,7 @@ public abstract class Point2D implements Serializable, Cloneable {
             }
         }
         public String toString() {
-            return new String("(" + x + ", " + y + ")");
+            return "(" + x + ", " + y + ")";
         }
         /**
          * Make a copy of the <code>Rectangle2D</code>.

@@ -129,23 +129,23 @@ public class TimeAxis extends Axis implements Cloneable{
         }
         if(days > 1000.0) {
             if(!(txt_ instanceof YearDecadeAxis)) {
-                newStyle = (TimeAxisStyle)new YearDecadeAxis();
+                newStyle = new YearDecadeAxis();
             }
         } else if(days > 91.0) {
             if(!(txt_ instanceof MonthYearAxis)) {
-                newStyle = (TimeAxisStyle)new MonthYearAxis();
+                newStyle = new MonthYearAxis();
             }
         } else if(days > 5.0) {
             if(!(txt_ instanceof DayMonthAxis)) {
-                newStyle = (TimeAxisStyle)new DayMonthAxis();
+                newStyle = new DayMonthAxis();
             }
         } else if((days > 0.1666667)) {                      // 6 hours
             if(!(txt_ instanceof HourDayAxis)) {
-                newStyle = (TimeAxisStyle)new HourDayAxis();
+                newStyle = new HourDayAxis();
             }
         } else {
             if(!(txt_ instanceof MinuteHourAxis)) {
-                newStyle = (TimeAxisStyle)new MinuteHourAxis();
+                newStyle = new MinuteHourAxis();
             }
         }
         if(newStyle != null) {
@@ -264,7 +264,7 @@ public class TimeAxis extends Axis implements Cloneable{
         label.setLayer(graph_.getLayer());
         try {
             label.draw(g);
-        } catch (LayerNotFoundException e) {}
+        } catch (LayerNotFoundException ignored) {}
         g.setColor(saved);
     }
     protected void drawMajorLabel(Graphics g,double val,GeoDate time) {
@@ -286,7 +286,7 @@ public class TimeAxis extends Axis implements Cloneable{
         label.setLayer(graph_.getLayer());
         try {
             label.draw(g);
-        } catch (LayerNotFoundException e) {}
+        } catch (LayerNotFoundException ignored) {}
         g.setColor(saved);
     }
     //
@@ -310,15 +310,15 @@ public class TimeAxis extends Axis implements Cloneable{
         axisStyle_ = style;
         //
         if(axisStyle_ == AUTO || axisStyle_ == MONTH_YEAR) {
-            txt_ = (TimeAxisStyle)new MonthYearAxis();
+            txt_ = new MonthYearAxis();
         } else if(axisStyle_ == YEAR_DECADE) {
-            txt_ = (TimeAxisStyle)new YearDecadeAxis();
+            txt_ = new YearDecadeAxis();
         } else if(axisStyle_ == DAY_MONTH) {
-            txt_ = (TimeAxisStyle)new DayMonthAxis();
+            txt_ = new DayMonthAxis();
         } else if(axisStyle_ == HOUR_DAY) {
-            txt_ = (TimeAxisStyle)new HourDayAxis();
+            txt_ = new HourDayAxis();
         } else {
-            txt_ = (TimeAxisStyle)new MinuteHourAxis();
+            txt_ = new MinuteHourAxis();
         }
         minorLabelFormat_ = txt_.getDefaultMinorLabelFormat();
         majorLabelFormat_ = txt_.getDefaultMajorLabelFormat();

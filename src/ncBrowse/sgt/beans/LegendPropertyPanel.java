@@ -212,95 +212,127 @@ class LegendPropertyPanel extends PropertyPanel implements ActionListener, Chang
     }
 
     void resetFields() {
-        for(int i=0; i < comps_.length; i++) {
-            if(comps_[i] instanceof JTextField) {
-                ((JTextField)comps_[i]).removeActionListener(this);
-                ((JTextField)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JCheckBox) {
-                ((JCheckBox)comps_[i]).removeActionListener(this);
-                ((JCheckBox)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JComboBox) {
-                ((JComboBox)comps_[i]).removeActionListener(this);
-                ((JComboBox)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JButton) {
-                ((JButton)comps_[i]).removeActionListener(this);
-                ((JButton)comps_[i]).removeFocusListener(this);
+        for (JComponent aComps_ : comps_) {
+            if (aComps_ instanceof JTextField) {
+                ((JTextField) aComps_).removeActionListener(this);
+                ((JTextField) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JCheckBox) {
+                ((JCheckBox) aComps_).removeActionListener(this);
+                ((JCheckBox) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JComboBox) {
+                ((JComboBox) aComps_).removeActionListener(this);
+                ((JComboBox) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JButton) {
+                ((JButton) aComps_).removeActionListener(this);
+                ((JButton) aComps_).removeFocusListener(this);
             }
         }
     }
     private void processEvent(Object obj, String command) {
-        if(command.equals("Height")) {
-            legend_.setHeightP(Float.parseFloat(((JTextField)obj).getText()));
-        } else if(command.equals("Id")) {
-            String oldId = legend_.getId();
-            legend_.getPanelHolder().getLegends().remove(oldId);
-            legend_.setId(((JTextField)obj).getText());
-            legend_.getPanelHolder().getLegends().put(legend_.getId(), legend_);
-        } else if(command.equals("Key Label HeightP")) {
-            legend_.setKeyLabelHeightP(Double.parseDouble(((JTextField)obj).getText()));
-        } else if(command.equals("Border")) {
-            String str = (String)((JComboBox)obj).getSelectedItem();
-            int item = -1;
-            if(str.equals("Plain Line")) {
-                item = Legend.PLAIN_LINE;
-            } else if(str.equals("Raised")) {
-                item = Legend.RAISED;
-            } else if(str.equals("No Border")) {
-                item = Legend.NO_BORDER;
+        switch (command) {
+            case "Height":
+                legend_.setHeightP(Float.parseFloat(((JTextField) obj).getText()));
+                break;
+            case "Id":
+                String oldId = legend_.getId();
+                legend_.getPanelHolder().getLegends().remove(oldId);
+                legend_.setId(((JTextField) obj).getText());
+                legend_.getPanelHolder().getLegends().put(legend_.getId(), legend_);
+                break;
+            case "Key Label HeightP":
+                legend_.setKeyLabelHeightP(Double.parseDouble(((JTextField) obj).getText()));
+                break;
+            case "Border": {
+                String str = (String) ((JComboBox) obj).getSelectedItem();
+                int item = -1;
+                switch (str) {
+                    case "Plain Line":
+                        item = Legend.PLAIN_LINE;
+                        break;
+                    case "Raised":
+                        item = Legend.RAISED;
+                        break;
+                    case "No Border":
+                        item = Legend.NO_BORDER;
+                        break;
+                }
+                legend_.setBorderStyle(item);
+                break;
             }
-            legend_.setBorderStyle(item);
-        } else if(command.equals("Columns")) {
-            legend_.setColumns(Integer.parseInt(((JTextField)obj).getText()));
-        } else if(command.equals("Line Length")) {
-            legend_.setLineLength(Double.parseDouble(((JTextField)obj).getText()));
-        } else if(command.equals("Location")) {
-            legend_.setLocationP(parsePoint2D(((JTextField)obj).getText()));
-        } else if(command.equals("Type")) {
-            String str = (String)((JComboBox)obj).getSelectedItem();
-            int item = -1;
-            if(str.equals("Line")) {
-                item = Legend.LINE;
-            } else if(str.equals("Color")) {
-                item = Legend.COLOR;
-            } else if(str.equals("Vector")) {
-                item = Legend.VECTOR;
-            } else if(str.equals("Point")) {
-                item = Legend.POINT;
+            case "Columns":
+                legend_.setColumns(Integer.parseInt(((JTextField) obj).getText()));
+                break;
+            case "Line Length":
+                legend_.setLineLength(Double.parseDouble(((JTextField) obj).getText()));
+                break;
+            case "Location":
+                legend_.setLocationP(parsePoint2D(((JTextField) obj).getText()));
+                break;
+            case "Type": {
+                String str = (String) ((JComboBox) obj).getSelectedItem();
+                int item = -1;
+                switch (str) {
+                    case "Line":
+                        item = Legend.LINE;
+                        break;
+                    case "Color":
+                        item = Legend.COLOR;
+                        break;
+                    case "Vector":
+                        item = Legend.VECTOR;
+                        break;
+                    case "Point":
+                        item = Legend.POINT;
+                        break;
+                }
+                legend_.setType(item);
+                reset();
+                break;
             }
-            legend_.setType(item);
-            reset();
-        } else if(command.equals("Scale Color")) {
-            ColorDialog cd = new ColorDialog(getFrame(), "Select Axis Color", true);
-            cd.setColor(legend_.getScaleColor());
-            cd.setVisible(true);
-            Color newcolor = cd.getColor();
-            if(newcolor != null) legend_.setScaleColor(newcolor);
-        } else if(command.equals("Scale Label Font")) {
-            FontDialog fd = new FontDialog("Label Font");
-            int result = fd.showDialog(legend_.getScaleLabelFont());
-            if(result == fd.OK_RESPONSE) {
-                legend_.setScaleLabelFont(fd.getFont());
-            }
-        } else if(command.equals("Scale Label Format")) {
-            legend_.setScaleLabelFormat(((JTextField)obj).getText());
-        } else if(command.equals("Scale Label HeightP")) {
-            legend_.setScaleLabelHeightP(Double.parseDouble(((JTextField)obj).getText()));
-        } else if(command.equals("Scale Label Interval")) {
-            legend_.setScaleLabelInterval(Integer.parseInt(((JTextField)obj).getText()));
-        } else if(command.equals("Scale Large Tic HeightP")) {
-            legend_.setScaleLargeTicHeightP(Double.parseDouble(((JTextField)obj).getText()));
-        } else if(command.equals("Scale Num Small Tics")) {
-            legend_.setScaleNumberSmallTics(Integer.parseInt(((JTextField)obj).getText()));
-        } else if(command.equals("Scale Significant Digits")) {
-            legend_.setScaleSignificantDigits(Integer.parseInt(((JTextField)obj).getText()));
-        } else if(command.equals("Scale Small Tic HeightP")) {
-            legend_.setScaleSmallTicHeightP(Integer.parseInt(((JTextField)obj).getText()));
-        } else if(command.equals("Scale Visible")) {
-            legend_.setScaleVisible(((JCheckBox)obj).isSelected());
-        } else if(command.equals("Visible")) {
-            legend_.setVisible(((JCheckBox)obj).isSelected());
-        } else if(command.equals("Width")) {
-            legend_.setWidthP(Float.parseFloat(((JTextField)obj).getText()));
+            case "Scale Color":
+                ColorDialog cd = new ColorDialog(getFrame(), "Select Axis Color", true);
+                cd.setColor(legend_.getScaleColor());
+                cd.setVisible(true);
+                Color newcolor = cd.getColor();
+                if (newcolor != null) legend_.setScaleColor(newcolor);
+                break;
+            case "Scale Label Font":
+                FontDialog fd = new FontDialog("Label Font");
+                int result = fd.showDialog(legend_.getScaleLabelFont());
+                if (result == fd.OK_RESPONSE) {
+                    legend_.setScaleLabelFont(fd.getFont());
+                }
+                break;
+            case "Scale Label Format":
+                legend_.setScaleLabelFormat(((JTextField) obj).getText());
+                break;
+            case "Scale Label HeightP":
+                legend_.setScaleLabelHeightP(Double.parseDouble(((JTextField) obj).getText()));
+                break;
+            case "Scale Label Interval":
+                legend_.setScaleLabelInterval(Integer.parseInt(((JTextField) obj).getText()));
+                break;
+            case "Scale Large Tic HeightP":
+                legend_.setScaleLargeTicHeightP(Double.parseDouble(((JTextField) obj).getText()));
+                break;
+            case "Scale Num Small Tics":
+                legend_.setScaleNumberSmallTics(Integer.parseInt(((JTextField) obj).getText()));
+                break;
+            case "Scale Significant Digits":
+                legend_.setScaleSignificantDigits(Integer.parseInt(((JTextField) obj).getText()));
+                break;
+            case "Scale Small Tic HeightP":
+                legend_.setScaleSmallTicHeightP(Integer.parseInt(((JTextField) obj).getText()));
+                break;
+            case "Scale Visible":
+                legend_.setScaleVisible(((JCheckBox) obj).isSelected());
+                break;
+            case "Visible":
+                legend_.setVisible(((JCheckBox) obj).isSelected());
+                break;
+            case "Width":
+                legend_.setWidthP(Float.parseFloat(((JTextField) obj).getText()));
+                break;
         }
     }
 

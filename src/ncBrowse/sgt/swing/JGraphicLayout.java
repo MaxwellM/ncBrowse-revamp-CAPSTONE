@@ -375,8 +375,8 @@ public abstract class JGraphicLayout extends JPane {
         }
         for(i=0; i < num; i++) {
             if(!Double.isNaN(values[i])) {
-                amin = (double)values[i];
-                amax = (double)values[i];
+                amin = values[i];
+                amax = values[i];
                 good = true;
                 first = i+1;
                 break;
@@ -387,8 +387,8 @@ public abstract class JGraphicLayout extends JPane {
         } else {
             for(i=first; i < num; i++) {
                 if(!Double.isNaN(values[i])) {
-                    amin = Math.min(amin, (double)values[i]);
-                    amax = Math.max(amax, (double)values[i]);
+                    amin = Math.min(amin, values[i]);
+                    amax = Math.max(amax, values[i]);
                 }
             }
         }
@@ -444,8 +444,8 @@ public abstract class JGraphicLayout extends JPane {
         }
         for(i=0; i < num; i++) {
             if(!Double.isNaN(veclen[i])) {
-                amin = (double)veclen[i];
-                amax = (double)veclen[i];
+                amin = veclen[i];
+                amax = veclen[i];
                 good = true;
                 first = i+1;
                 break;
@@ -456,8 +456,8 @@ public abstract class JGraphicLayout extends JPane {
         } else {
             for(i=first; i < num; i++) {
                 if(!Double.isNaN(veclen[i])) {
-                    amin = Math.min(amin, (double)veclen[i]);
-                    amax = Math.max(amax, (double)veclen[i]);
+                    amin = Math.min(amin, veclen[i]);
+                    amax = Math.max(amax, veclen[i]);
                 }
             }
         }
@@ -544,8 +544,8 @@ public abstract class JGraphicLayout extends JPane {
         }
         for(i=0; i < num; i++) {
             if(!Double.isNaN(values[i])) {
-                amin = (double)values[i];
-                amax = (double)values[i];
+                amin = values[i];
+                amax = values[i];
                 good = true;
                 first = i+1;
                 break;
@@ -556,8 +556,8 @@ public abstract class JGraphicLayout extends JPane {
         } else {
             for(i=first; i < num; i++) {
                 if(!Double.isNaN(values[i])) {
-                    amin = Math.min(amin, (double)values[i]);
-                    amax = Math.max(amax, (double)values[i]);
+                    amin = Math.min(amin, values[i]);
+                    amax = Math.max(amax, values[i]);
                 }
             }
         }
@@ -627,8 +627,8 @@ public abstract class JGraphicLayout extends JPane {
         }
         for(i=0; i < num; i++) {
             if(!Double.isNaN(values[i])) {
-                amin = (double)values[i];
-                amax = (double)values[i];
+                amin = values[i];
+                amax = values[i];
                 good = true;
                 first = i+1;
                 break;
@@ -639,8 +639,8 @@ public abstract class JGraphicLayout extends JPane {
         } else {
             for(i=first; i < num; i++) {
                 if(!Double.isNaN(values[i])) {
-                    amin = Math.min(amin, (double)values[i]);
-                    amax = Math.max(amax, (double)values[i]);
+                    amin = Math.min(amin, values[i]);
+                    amax = Math.max(amax, values[i]);
                 }
             }
         }
@@ -955,7 +955,7 @@ public abstract class JGraphicLayout extends JPane {
      */
     void showProperties(Object obj) {
         if(obj instanceof SGLabel) {
-            if(sg_props_ == (SGLabelDialog) null) {
+            if(sg_props_ == null) {
                 //
                 // create the SGLabelDialog
                 //
@@ -963,9 +963,9 @@ public abstract class JGraphicLayout extends JPane {
             }
             sg_props_.setSGLabel((SGLabel) obj, this);
             if(!sg_props_.isShowing())
-                sg_props_.show();
+                sg_props_.setVisible(true);
         } else if(obj instanceof PlainAxis) {
-            if(pa_props_ == (SpaceAxisDialog) null) {
+            if(pa_props_ == null) {
                 //
                 // create the PlainAxis dialog
                 //
@@ -973,9 +973,9 @@ public abstract class JGraphicLayout extends JPane {
             }
             pa_props_.setSpaceAxis((PlainAxis) obj, this);
             if(!pa_props_.isShowing())
-                pa_props_.show();
+                pa_props_.setVisible(true);
         } else if(obj instanceof TimeAxis) {
-            if(ta_props_ == (TimeAxisDialog) null) {
+            if(ta_props_ == null) {
                 //
                 // create the TimeAxis Dialog
                 //
@@ -983,9 +983,9 @@ public abstract class JGraphicLayout extends JPane {
             }
             ta_props_.setTimeAxis((TimeAxis) obj, this);
             if(!ta_props_.isShowing())
-                ta_props_.show();
+                ta_props_.setVisible(true);
         } else if (obj instanceof Logo) {
-            if(lo_props_ == (LogoDialog) null) {
+            if(lo_props_ == null) {
                 //
                 // create the LogoProperties dialog
                 //
@@ -993,7 +993,7 @@ public abstract class JGraphicLayout extends JPane {
             }
             lo_props_.setLogo((Logo) obj, this);
             if(!lo_props_.isShowing())
-                lo_props_.show();
+                lo_props_.setVisible(true);
         }
     }
 
@@ -1036,10 +1036,10 @@ public abstract class JGraphicLayout extends JPane {
     protected void setAllClip(double xmin, double xmax, double ymin, double ymax) {
         Layer ly;
         Component[] comps = getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Layer) {
-                ly = (Layer)comps[i];
-                ((CartesianGraph)ly.getGraph()).setClip(xmin, xmax, ymin, ymax);
+        for (Component comp : comps) {
+            if (comp instanceof Layer) {
+                ly = (Layer) comp;
+                ((CartesianGraph) ly.getGraph()).setClip(xmin, xmax, ymin, ymax);
             }
         }
     }
@@ -1065,9 +1065,9 @@ public abstract class JGraphicLayout extends JPane {
         //    System.out.println("setAllClip(" + tmin + ", " + tmax + ", " + min + ", " + max + ")");
         Layer ly;
         Component[] comps = getComponents();
-        for(int i=0; i < comps.length; i++) {
-            ly = (Layer)comps[i];
-            ((CartesianGraph)ly.getGraph()).setClip(tmin, tmax, min, max);
+        for (Component comp : comps) {
+            ly = (Layer) comp;
+            ((CartesianGraph) ly.getGraph()).setClip(tmin, tmax, min, max);
         }
     }
     /**
@@ -1076,10 +1076,10 @@ public abstract class JGraphicLayout extends JPane {
     protected void setAllClipping(boolean clip) {
         Layer ly;
         Component[] comps = getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Layer) {
-                ly = (Layer)comps[i];
-                ((CartesianGraph)ly.getGraph()).setClipping(clip);
+        for (Component comp : comps) {
+            if (comp instanceof Layer) {
+                ly = (Layer) comp;
+                ((CartesianGraph) ly.getGraph()).setClipping(clip);
             }
         }
     }

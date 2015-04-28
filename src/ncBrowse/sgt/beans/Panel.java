@@ -138,9 +138,8 @@ public class Panel extends JComponent implements LayerControl  {
         // remove deleted labels from layer
         // note cant remove from an Iterator!
         LayerChild[] children = labelLayer_.getChildren();
-        for(int i=0; i < children.length; i++) {
-            LayerChild child = children[i];
-            if(!pHolder_.hasLabel(child.getId())) {
+        for (LayerChild child : children) {
+            if (!pHolder_.hasLabel(child.getId())) {
                 labelLayer_.removeChild(child);
             }
         }
@@ -281,11 +280,11 @@ public class Panel extends JComponent implements LayerControl  {
         Iterator dgIter = pHolder_.dataGroupIterator();
         // remove delete DataGroups from panel/pane
         Component[] comps = getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Layer) {
-                Layer ly = (Layer)comps[i];
-                if(ly != labelLayer_ && ly != legendLayer_) {
-                    if(!pHolder_.hasDataGroup(ly.getId())) {
+        for (Component comp : comps) {
+            if (comp instanceof Layer) {
+                Layer ly = (Layer) comp;
+                if (ly != labelLayer_ && ly != legendLayer_) {
+                    if (!pHolder_.hasDataGroup(ly.getId())) {
                         this.remove(ly);
                     }
                 }
@@ -327,10 +326,9 @@ public class Panel extends JComponent implements LayerControl  {
         if(obj != null) return obj;
         obj = legendLayer_.getObjectAt(x, y, check);
         if(obj != null) return obj;
-        Iterator iter = dataGroupLayerList_.values().iterator();
-        while(iter.hasNext()) {
-            obj = ((DataGroupLayer)iter.next()).getObjectAt(x, y, check);
-            if(obj != null) return obj;
+        for (Object o : dataGroupLayerList_.values()) {
+            obj = ((DataGroupLayer) o).getObjectAt(x, y, check);
+            if (obj != null) return obj;
         }
         return obj;
     }
@@ -342,9 +340,8 @@ public class Panel extends JComponent implements LayerControl  {
      * @param rect zoom rectangle
      */
     void zoomTo(Point start, Rectangle rect) {
-        Iterator iter = dataGroupLayerList_.values().iterator();
-        while(iter.hasNext()) {
-            ((DataGroupLayer)iter.next()).zoomTo(start, rect);
+        for (Object o : dataGroupLayerList_.values()) {
+            ((DataGroupLayer) o).zoomTo(start, rect);
         }
     }
 
@@ -355,9 +352,8 @@ public class Panel extends JComponent implements LayerControl  {
      * @param y y device coordinate
      */
     void resetZoom(int x, int y) {
-        Iterator iter = dataGroupLayerList_.values().iterator();
-        while(iter.hasNext()) {
-            ((DataGroupLayer)iter.next()).resetZoom(x, y);
+        for (Object o : dataGroupLayerList_.values()) {
+            ((DataGroupLayer) o).resetZoom(x, y);
         }
     }
 
@@ -365,9 +361,8 @@ public class Panel extends JComponent implements LayerControl  {
      * Reset the zoom for all <code>DataGroupLayer</code>s in this <code>Panel</code>.
      */
     public void resetZoom() {
-        Iterator iter = dataGroupLayerList_.values().iterator();
-        while(iter.hasNext()) {
-            ((DataGroupLayer)iter.next()).resetZoom();
+        for (Object o : dataGroupLayerList_.values()) {
+            ((DataGroupLayer) o).resetZoom();
         }
     }
     /**
@@ -375,9 +370,8 @@ public class Panel extends JComponent implements LayerControl  {
      * @param clip if true clip data to bounds.
      */
     public void setClipping(boolean clip) {
-        Iterator iter = dataGroupLayerList_.values().iterator();
-        while(iter.hasNext()) {
-            ((DataGroupLayer)iter.next()).setClipping(clip);
+        for (Object o : dataGroupLayerList_.values()) {
+            ((DataGroupLayer) o).setClipping(clip);
         }
     }
 
@@ -389,9 +383,8 @@ public class Panel extends JComponent implements LayerControl  {
     public boolean hasLayer(String id) {
         if(id.equals(labelLayer_.getId())) return true;
         if(id.equals(legendLayer_.getId())) return true;
-        Iterator iter = dataGroupLayerList_.values().iterator();
-        while(iter.hasNext()) {
-            if(id.equals(((DataGroupLayer)iter.next()).getId())) return true;
+        for (Object o : dataGroupLayerList_.values()) {
+            if (id.equals(((DataGroupLayer) o).getId())) return true;
         }
         return false;
     }
@@ -405,10 +398,9 @@ public class Panel extends JComponent implements LayerControl  {
     public Layer getLayer(String id) {
         if(id.equals(labelLayer_.getId())) return labelLayer_;
         if(id.equals(legendLayer_.getId())) return legendLayer_;
-        Iterator iter = dataGroupLayerList_.values().iterator();
-        while(iter.hasNext()) {
-            DataGroupLayer dgl = (DataGroupLayer)iter.next();
-            if(id.equals(dgl.getId())) return dgl;
+        for (Object o : dataGroupLayerList_.values()) {
+            DataGroupLayer dgl = (DataGroupLayer) o;
+            if (id.equals(dgl.getId())) return dgl;
         }
         return null;
     }
@@ -420,10 +412,9 @@ public class Panel extends JComponent implements LayerControl  {
      * @return true if data is in Panel
      */
     public boolean isDataInPanel(String id) {
-        Iterator iter = dataGroupLayerList_.values().iterator();
-        while(iter.hasNext()) {
-            DataGroupLayer dgl = (DataGroupLayer)iter.next();
-            if(dgl.isDataInLayer(id)) return true;
+        for (Object o : dataGroupLayerList_.values()) {
+            DataGroupLayer dgl = (DataGroupLayer) o;
+            if (dgl.isDataInLayer(id)) return true;
         }
         return false;
     }
@@ -435,10 +426,9 @@ public class Panel extends JComponent implements LayerControl  {
      * @return Layer
      */
     public Layer getLayerFromDataId(String id) {
-        Iterator iter = dataGroupLayerList_.values().iterator();
-        while(iter.hasNext()) {
-            DataGroupLayer dgl = (DataGroupLayer)iter.next();
-            if(dgl.isDataInLayer(id)) return dgl;
+        for (Object o : dataGroupLayerList_.values()) {
+            DataGroupLayer dgl = (DataGroupLayer) o;
+            if (dgl.isDataInLayer(id)) return dgl;
         }
         return null;
     }
@@ -461,22 +451,21 @@ public class Panel extends JComponent implements LayerControl  {
 
         obj = labelLayer_.getObjectsAt(x, y, check);
         if(obj != null) {
-            for(int i=0; i < obj.length; i++) {
-                obList.addElement(obj[i]);
+            for (Object anObj : obj) {
+                obList.addElement(anObj);
             }
         }
         obj = legendLayer_.getObjectsAt(x, y, check);
         if(obj != null) {
-            for(int i=0; i < obj.length; i++) {
-                obList.addElement(obj[i]);
+            for (Object anObj : obj) {
+                obList.addElement(anObj);
             }
         }
-        Iterator iter = dataGroupLayerList_.values().iterator();
-        while(iter.hasNext()) {
-            obj = ((DataGroupLayer)iter.next()).getObjectsAt(x, y, check);
-            if(obj != null) {
-                for(int i=0; i < obj.length; i++) {
-                    obList.addElement(obj[i]);
+        for (Object o : dataGroupLayerList_.values()) {
+            obj = ((DataGroupLayer) o).getObjectsAt(x, y, check);
+            if (obj != null) {
+                for (Object anObj : obj) {
+                    obList.addElement(anObj);
                 }
             }
         }
@@ -524,18 +513,18 @@ public class Panel extends JComponent implements LayerControl  {
             g.setColor(saved);
         }
         Component[] comps = this.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof LayerControl) {
-                ((LayerControl)comps[i]).draw(g);
+        for (Component comp : comps) {
+            if (comp instanceof LayerControl) {
+                ((LayerControl) comp).draw(g);
             }
         }
     }
 
     public void drawDraggableItems(Graphics g) throws PaneNotFoundException {
         Component[] comps = this.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof LayerControl) {
-                ((LayerControl)comps[i]).drawDraggableItems(g);
+        for (Component comp : comps) {
+            if (comp instanceof LayerControl) {
+                ((LayerControl) comp).drawDraggableItems(g);
             }
         }
     }

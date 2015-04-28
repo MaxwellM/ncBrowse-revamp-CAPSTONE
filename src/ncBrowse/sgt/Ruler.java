@@ -220,7 +220,7 @@ public class Ruler implements Cloneable, LayerChild {
         } catch (CloneNotSupportedException e) {
             newRuler = new Ruler();
         }
-        return (LayerChild)newRuler;
+        return newRuler;
     }
     public void setSelected(boolean sel) {
         selected_ = sel;
@@ -581,7 +581,7 @@ public class Ruler implements Cloneable, LayerChild {
                 label.setColor(labelColor_);
                 try {
                     label.draw(g);
-                } catch (LayerNotFoundException e) {}
+                } catch (LayerNotFoundException ignored) {}
                 x = x + uRange_.delta*labelInterval_;
             }
             if(title_ != null) {
@@ -593,7 +593,7 @@ public class Ruler implements Cloneable, LayerChild {
                 title_.setOrientation(SGLabel.HORIZONTAL);
                 try {
                     title_.draw(g);
-                } catch (LayerNotFoundException e) {}
+                } catch (LayerNotFoundException ignored) {}
             }
         } else {                               // orientation is vertical
             sTrans = new LinearTransform(pBounds_.y, pBounds_.y + pBounds_.height,
@@ -658,7 +658,7 @@ public class Ruler implements Cloneable, LayerChild {
                 label.setLayer(layer_);
                 try {
                     label.draw(g);
-                } catch (LayerNotFoundException e) {}
+                } catch (LayerNotFoundException ignored) {}
                 y = y + uRange_.delta*labelInterval_;
             }
             if(title_ != null) {
@@ -670,7 +670,7 @@ public class Ruler implements Cloneable, LayerChild {
                 title_.setOrientation(SGLabel.VERTICAL);
                 try {
                     title_.draw(g);
-                } catch (LayerNotFoundException e) {}
+                } catch (LayerNotFoundException ignored) {}
             }
         }
     }

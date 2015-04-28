@@ -135,9 +135,8 @@ public class AxisHolder implements Serializable {
         try {
             BeanInfo info = Introspector.getBeanInfo(AxisHolder.class);
             PropertyDescriptor[] descriptors = info.getPropertyDescriptors();
-            for(int i=0; i < descriptors.length; i++) {
-                PropertyDescriptor pd = descriptors[i];
-                if(pd.getName().equals("dataGroup")) {
+            for (PropertyDescriptor pd : descriptors) {
+                if (pd.getName().equals("dataGroup")) {
                     pd.setValue("transient", Boolean.TRUE);
                 }
             }
@@ -240,11 +239,7 @@ public class AxisHolder implements Serializable {
     public synchronized void removeDesignChangeListeners() {
         if(changeListeners != null) {
             Vector v = (Vector) changeListeners.clone();
-            Iterator iter = v.iterator();
-            while(iter.hasNext()) {
-                Object obj = iter.next();
-                if(obj instanceof DesignListener) changeListeners.removeElement(obj);
-            }
+            v.stream().filter(obj -> obj instanceof DesignListener).forEach(changeListeners::removeElement);
         }
     }
 

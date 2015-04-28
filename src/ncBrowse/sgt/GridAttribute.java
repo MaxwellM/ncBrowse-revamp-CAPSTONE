@@ -140,11 +140,11 @@ public class GridAttribute implements Attribute,
      **/
     public void setStyle(int st) {
         if(style_ != st) {
-            Integer tempOld = new Integer(style_);
+            Integer tempOld = style_;
             style_ = st;
             firePropertyChange("style",
                                tempOld,
-                               new Integer(style_));
+                style_);
         }
     }
     /**
@@ -199,7 +199,6 @@ public class GridAttribute implements Attribute,
      */
     public void setColorMap(ColorMap cmap) {
         if(cmap_ == null && cmap == null) {
-            return;
         } else {
             if(cmap_ != null) cmap_.removePropertyChangeListener(this);
             if(cmap_ == null || !cmap_.equals(cmap)) {

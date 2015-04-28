@@ -67,7 +67,7 @@ public class PointCollection extends Collection {
     public SGTData copy() {
         PointCollection newCollection;
         newCollection = (PointCollection)clone();
-        return (SGTData)newCollection;
+        return newCollection;
     }
     public SoTRange getXRange() {
         computeRange();

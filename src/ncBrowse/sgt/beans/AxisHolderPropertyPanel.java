@@ -10,41 +10,26 @@
 
 package ncBrowse.sgt.beans;
 
-import java.awt.Color;
-import java.awt.Font;
+import ncBrowse.sgt.Axis;
+import ncBrowse.sgt.TimeAxis;
+import ncBrowse.sgt.geom.GeoDate;
+import ncBrowse.sgt.geom.IllegalTimeValue;
+import ncBrowse.sgt.geom.Rectangle2D;
+import ncBrowse.sgt.geom.SoTRange;
+import ncBrowse.sgt.swing.prop.ColorDialog;
+import ncBrowse.sgt.swing.prop.FontDialog;
+import ncBrowse.sgt.swing.prop.SGLabelDialog;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import javax.swing.JComponent;
-import javax.swing.JTextField;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.Icon;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
-import java.util.Vector;
 import java.util.Iterator;
-import java.util.StringTokenizer;
-
-import ncBrowse.sgt.geom.SoTRange;
-import ncBrowse.sgt.geom.SoTPoint;
-import ncBrowse.sgt.geom.Rectangle2D;
-import ncBrowse.sgt.geom.Point2D;
-import ncBrowse.sgt.geom.GeoDate;
-import ncBrowse.sgt.geom.IllegalTimeValue;
-
-import ncBrowse.sgt.Axis;
-import ncBrowse.sgt.TimeAxis;
-import ncBrowse.sgt.SGLabel;
-import ncBrowse.sgt.swing.ColorSwatchIcon;
-import ncBrowse.sgt.swing.prop.SGLabelDialog;
-import ncBrowse.sgt.swing.prop.FontDialog;
-import ncBrowse.sgt.swing.prop.ColorDialog;
+import java.util.Vector;
 
 /**
  * @author Donald Denbo
@@ -385,19 +370,19 @@ class AxisHolderPropertyPanel extends PropertyPanel
     }
 
     void resetFields() {
-        for(int i=0; i < comps_.length; i++) {
-            if(comps_[i] instanceof JTextField) {
-                ((JTextField)comps_[i]).removeActionListener(this);
-                ((JTextField)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JCheckBox) {
-                ((JCheckBox)comps_[i]).removeActionListener(this);
-                ((JCheckBox)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JComboBox) {
-                ((JComboBox)comps_[i]).removeActionListener(this);
-                ((JComboBox)comps_[i]).removeFocusListener(this);
-            } else if(comps_[i] instanceof JButton) {
-                ((JButton)comps_[i]).removeActionListener(this);
-                ((JButton)comps_[i]).removeFocusListener(this);
+        for (JComponent aComps_ : comps_) {
+            if (aComps_ instanceof JTextField) {
+                ((JTextField) aComps_).removeActionListener(this);
+                ((JTextField) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JCheckBox) {
+                ((JCheckBox) aComps_).removeActionListener(this);
+                ((JCheckBox) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JComboBox) {
+                ((JComboBox) aComps_).removeActionListener(this);
+                ((JComboBox) aComps_).removeFocusListener(this);
+            } else if (aComps_ instanceof JButton) {
+                ((JButton) aComps_).removeActionListener(this);
+                ((JButton) aComps_).removeFocusListener(this);
             }
         }
     }
@@ -413,7 +398,7 @@ class AxisHolderPropertyPanel extends PropertyPanel
     }
 
     private void setFieldsEnabled() {
-        ((JTextField)comps_[userRange]).setEnabled(!((JCheckBox)comps_[autoScale]).isSelected());
+        comps_[userRange].setEnabled(!((JCheckBox) comps_[autoScale]).isSelected());
         //    ((JButton)comps_[title]).setEnabled(!((JCheckBox)comps_[titleAuto]).isSelected());
     }
 
@@ -422,185 +407,243 @@ class AxisHolderPropertyPanel extends PropertyPanel
         int item = -1;
         String str = null;
         SoTRange range = null;
-        if(command.equals("AutoScale")) {
-            axHolder_.setAutoRange(((JCheckBox)obj).isSelected());
-        } else if(command.equals("AxisColor")) {
-            ColorDialog cd = new ColorDialog(getFrame(), "Select Axis Color", true);
-            cd.setColor(axHolder_.getAxisColor());
-            cd.setVisible(true);
-            Color newcolor = cd.getColor();
-            if(newcolor != null) axHolder_.setAxisColor(newcolor);
-        } else if(command.equals("Axis Position")) {
-            str = (String)((JComboBox)obj).getSelectedItem();
-            item = -1;
-            if(str.equals("Bottom")) {
-                item = DataGroup.BOTTOM;
-            } else if(str.equals("Top")) {
-                item = DataGroup.TOP;
-            } else if(str.equals("Left")) {
-                item = DataGroup.LEFT;
-            } else if(str.equals("Right")) {
-                item = DataGroup.RIGHT;
-            } else if(str.equals("Manual")) {
-                item = DataGroup.MANUAL;
+        switch (command) {
+            case "AutoScale":
+                axHolder_.setAutoRange(((JCheckBox) obj).isSelected());
+                break;
+            case "AxisColor": {
+                ColorDialog cd = new ColorDialog(getFrame(), "Select Axis Color", true);
+                cd.setColor(axHolder_.getAxisColor());
+                cd.setVisible(true);
+                Color newcolor = cd.getColor();
+                if (newcolor != null) axHolder_.setAxisColor(newcolor);
+                break;
             }
-            axHolder_.setAxisPosition(item);
-        } else if(command.equals("Axis Location")) {
-            /** @todo SoTPoint axisLocation */
-        } else if(command.equals("AxisType")) {
-            str = (String)((JComboBox)obj).getSelectedItem();
-            axHolder_.setAxisType(axis(str));
-            if(str.equals("PlainAxis") || str.equals("TimeAxis")) {
-                axHolder_.setTransformType(DataGroup.LINEAR);
-            } else if(str.equals("LogAxis")) {
-                axHolder_.setTransformType(DataGroup.LOG);
-            }
-            if(str.equals("TimeAxis") && !axHolder_.getUserRange().isTime()) {
-                try {
-                    range = new SoTRange.Time(new GeoDate("2000-01-01 00:00", format_),
-                                              new GeoDate("2001-01-01 00:00", format_),
-                                              new GeoDate(172800000));
-                } catch (IllegalTimeValue itv) {
-                    itv.printStackTrace();
+            case "Axis Position":
+                str = (String) ((JComboBox) obj).getSelectedItem();
+                item = -1;
+                switch (str) {
+                    case "Bottom":
+                        item = DataGroup.BOTTOM;
+                        break;
+                    case "Top":
+                        item = DataGroup.TOP;
+                        break;
+                    case "Left":
+                        item = DataGroup.LEFT;
+                        break;
+                    case "Right":
+                        item = DataGroup.RIGHT;
+                        break;
+                    case "Manual":
+                        item = DataGroup.MANUAL;
+                        break;
                 }
-                axHolder_.setUserRange(range);
+                axHolder_.setAxisPosition(item);
+                break;
+            case "Axis Location":
+                /** @todo SoTPoint axisLocation */
+                break;
+            case "AxisType":
+                str = (String) ((JComboBox) obj).getSelectedItem();
+                axHolder_.setAxisType(axis(str));
+                if (str.equals("PlainAxis") || str.equals("TimeAxis")) {
+                    axHolder_.setTransformType(DataGroup.LINEAR);
+                } else if (str.equals("LogAxis")) {
+                    axHolder_.setTransformType(DataGroup.LOG);
+                }
+                if (str.equals("TimeAxis") && !axHolder_.getUserRange().isTime()) {
+                    try {
+                        range = new SoTRange.Time(new GeoDate("2000-01-01 00:00", format_),
+                            new GeoDate("2001-01-01 00:00", format_),
+                            new GeoDate(172800000));
+                    } catch (IllegalTimeValue itv) {
+                        itv.printStackTrace();
+                    }
+                    axHolder_.setUserRange(range);
+                }
+                break;
+            case "Bounds":
+                Rectangle2D bounds = parseBounds(((JTextField) obj).getText());
+                if (bounds != null) axHolder_.setBoundsP(bounds);
+                break;
+            case "Label Color": {
+                ColorDialog cd = new ColorDialog(getFrame(), "Select Label Color", true);
+                cd.setColor(axHolder_.getAxisColor());
+                cd.setVisible(true);
+                Color newcolor = cd.getColor();
+                if (newcolor != null) axHolder_.setLabelColor(newcolor);
+                break;
             }
-        } else if(command.equals("Bounds")) {
-            Rectangle2D bounds = parseBounds(((JTextField)obj).getText());
-            if(bounds != null) axHolder_.setBoundsP(bounds);
-        } else if(command.equals("Label Color")) {
-            ColorDialog cd = new ColorDialog(getFrame(), "Select Label Color", true);
-            cd.setColor(axHolder_.getAxisColor());
-            cd.setVisible(true);
-            Color newcolor = cd.getColor();
-            if(newcolor != null) axHolder_.setLabelColor(newcolor);
-        } else if(command.equals("Label Font")) {
-            FontDialog fd = new FontDialog("Label Font");
-            int result = fd.showDialog(axHolder_.getLabelFont());
-            if(result == fd.OK_RESPONSE) {
-                axHolder_.setLabelFont(fd.getFont());
-            }
-        } else if(command.equals("Label Format")) {
-            axHolder_.setLabelFormat(((JTextField)obj).getText());
-        } else if(command.equals("Label Height")) {
-            axHolder_.setLabelHeightP(Double.parseDouble(((JTextField)obj).getText()));
-        } else if(command.equals("Label Interval")) {
-            axHolder_.setLabelInterval(Integer.parseInt(((JTextField)obj).getText()));
-        } else if(command.equals("Label Position")) {
-            str = (String)((JComboBox)obj).getSelectedItem();
-            item = -1;
-            if(str.equals("Auto")) {
-                item = Axis.AUTO;
-            } else if(str.equals("Negative Side")) {
-                item = Axis.NEGATIVE_SIDE;
-            } else if(str.equals("Positive Side")) {
-                item = Axis.POSITIVE_SIDE;
-            } else if(str.equals("No Label")) {
-                item = Axis.NO_LABEL;
-            }
-            axHolder_.setLabelPosition(item);
-        } else if(command.equals("Label SignificantDigits")) {
-            axHolder_.setLabelSignificantDigits(Integer.parseInt(((JTextField)obj).getText()));
-        } else if(command.equals("Large TicHeight")) {
-            axHolder_.setLargeTicHeightP(Double.parseDouble(((JTextField)obj).getText()));
-        } else if(command.equals("Location At Origin")) {
-            axHolder_.setLocationAtOrigin(((JCheckBox)obj).isSelected());
-        } else if(command.equals("Major Format")) {
-            axHolder_.setMajorFormat(((JTextField)obj).getText());
-        } else if(command.equals("Major Interval")) {
-            axHolder_.setMajorInterval(Integer.parseInt(((JTextField)obj).getText()));
-        } else if(command.equals("Minor Format")) {
-            axHolder_.setMinorFormat(((JTextField)obj).getText());
-        } else if(command.equals("Minor Interval")) {
-            axHolder_.setMinorInterval(Integer.parseInt(((JTextField)obj).getText()));
-        } else if(command.equals("Num Small Tics")) {
-            axHolder_.setNumSmallTics(Integer.parseInt(((JTextField)obj).getText()));
-        } else if(command.equals("OriginP")) {
-            axHolder_.setAxisOriginP(parsePoint2D(((JTextField)obj).getText()));
-        } else if(command.equals("Selectable")) {
-            axHolder_.setSelectable(((JCheckBox)obj).isSelected());
-        } else if(command.equals("Small TicHeight")) {
-            axHolder_.setSmallTicHeightP(Double.parseDouble(((JTextField)obj).getText()));
-        } else if(command.equals("Tic Position")) {
-            str = (String)((JComboBox)obj).getSelectedItem();
-            item = -1;
-            if(str.equals("Auto")) {
-                item = Axis.AUTO;
-            } else if(str.equals("Negative Side")) {
-                item = Axis.NEGATIVE_SIDE;
-            } else if(str.equals("Positive Side")) {
-                item = Axis.POSITIVE_SIDE;
-            } else if(str.equals("Both Sides")) {
-                item = Axis.BOTH_SIDES;
-            }
-            axHolder_.setTicPosition(item);
-        } else if(command.equals("Time AxisStyle")) {
-            str = (String)((JComboBox)obj).getSelectedItem();
-            item = -1;
-            if(str.equals("Auto")) {
-                item = TimeAxis.AUTO;
-            } else if(str.equals("Day-Month")) {
-                item = TimeAxis.DAY_MONTH;
-            } else if(str.equals("Hour-Day")) {
-                item = TimeAxis.HOUR_DAY;
-            } else if(str.equals("Minute-Hour")) {
-                item = TimeAxis.MINUTE_HOUR;
-            } else if(str.equals("Month-Year")) {
-                item = TimeAxis.MONTH_YEAR;
-            } else if(str.equals("Year-Decade")) {
-                item = TimeAxis.YEAR_DECADE;
-            }
-            axHolder_.setTimeAxisStyle(item);
-        } else if(command.equals("Title Auto")) {
-            axHolder_.setTitleAuto(((JCheckBox)obj).isSelected());
-        } else if(command.equals("Title")) {
-            SGLabelDialog sgd = new SGLabelDialog("Axis Title");
-            sgd.setSGLabel(axHolder_.getTitle());
-            sgd.setModal(true);
-            sgd.setVisible(true);
-            axHolder_.fireStateChanged();
-        } else if(command.equals("Transform Type")) {
-            str = (String)((JComboBox)obj).getSelectedItem();
-            int trans = transform(str);
-            if(trans == DataGroup.REFERENCE) {
-                axHolder_.setTransformGroup(str.substring(5));
-            }
-            axHolder_.setTransformType(trans);
-            if(trans == DataGroup.REFERENCE &&  circularReference(DataGroup.X_DIR, str.substring(5))) {
-                JOptionPane.showMessageDialog(this, "Creates a circular reference in DataGroup transform",
-                                              "Error Selecting Transform", JOptionPane.ERROR_MESSAGE);
-                axHolder_.setTransformType(-1);
-                axHolder_.setTransformGroup(null);
-                ((JComboBox)obj).setSelectedIndex(-1);
-                return;
-            }
-        } else if(command.equals("User Range")) {
-            range = parseRange(((JTextField)obj).getText(), axHolder_.isTime());
-            if(range != null) axHolder_.setUserRange(range);
-        } else if(command.equals("Visible")) {
-            axHolder_.setVisible(((JCheckBox)obj).isSelected());
+            case "Label Font":
+                FontDialog fd = new FontDialog("Label Font");
+                int result = fd.showDialog(axHolder_.getLabelFont());
+                if (result == fd.OK_RESPONSE) {
+                    axHolder_.setLabelFont(fd.getFont());
+                }
+                break;
+            case "Label Format":
+                axHolder_.setLabelFormat(((JTextField) obj).getText());
+                break;
+            case "Label Height":
+                axHolder_.setLabelHeightP(Double.parseDouble(((JTextField) obj).getText()));
+                break;
+            case "Label Interval":
+                axHolder_.setLabelInterval(Integer.parseInt(((JTextField) obj).getText()));
+                break;
+            case "Label Position":
+                str = (String) ((JComboBox) obj).getSelectedItem();
+                item = -1;
+                switch (str) {
+                    case "Auto":
+                        item = Axis.AUTO;
+                        break;
+                    case "Negative Side":
+                        item = Axis.NEGATIVE_SIDE;
+                        break;
+                    case "Positive Side":
+                        item = Axis.POSITIVE_SIDE;
+                        break;
+                    case "No Label":
+                        item = Axis.NO_LABEL;
+                        break;
+                }
+                axHolder_.setLabelPosition(item);
+                break;
+            case "Label SignificantDigits":
+                axHolder_.setLabelSignificantDigits(Integer.parseInt(((JTextField) obj).getText()));
+                break;
+            case "Large TicHeight":
+                axHolder_.setLargeTicHeightP(Double.parseDouble(((JTextField) obj).getText()));
+                break;
+            case "Location At Origin":
+                axHolder_.setLocationAtOrigin(((JCheckBox) obj).isSelected());
+                break;
+            case "Major Format":
+                axHolder_.setMajorFormat(((JTextField) obj).getText());
+                break;
+            case "Major Interval":
+                axHolder_.setMajorInterval(Integer.parseInt(((JTextField) obj).getText()));
+                break;
+            case "Minor Format":
+                axHolder_.setMinorFormat(((JTextField) obj).getText());
+                break;
+            case "Minor Interval":
+                axHolder_.setMinorInterval(Integer.parseInt(((JTextField) obj).getText()));
+                break;
+            case "Num Small Tics":
+                axHolder_.setNumSmallTics(Integer.parseInt(((JTextField) obj).getText()));
+                break;
+            case "OriginP":
+                axHolder_.setAxisOriginP(parsePoint2D(((JTextField) obj).getText()));
+                break;
+            case "Selectable":
+                axHolder_.setSelectable(((JCheckBox) obj).isSelected());
+                break;
+            case "Small TicHeight":
+                axHolder_.setSmallTicHeightP(Double.parseDouble(((JTextField) obj).getText()));
+                break;
+            case "Tic Position":
+                str = (String) ((JComboBox) obj).getSelectedItem();
+                item = -1;
+                switch (str) {
+                    case "Auto":
+                        item = Axis.AUTO;
+                        break;
+                    case "Negative Side":
+                        item = Axis.NEGATIVE_SIDE;
+                        break;
+                    case "Positive Side":
+                        item = Axis.POSITIVE_SIDE;
+                        break;
+                    case "Both Sides":
+                        item = Axis.BOTH_SIDES;
+                        break;
+                }
+                axHolder_.setTicPosition(item);
+                break;
+            case "Time AxisStyle":
+                str = (String) ((JComboBox) obj).getSelectedItem();
+                item = -1;
+                switch (str) {
+                    case "Auto":
+                        item = TimeAxis.AUTO;
+                        break;
+                    case "Day-Month":
+                        item = TimeAxis.DAY_MONTH;
+                        break;
+                    case "Hour-Day":
+                        item = TimeAxis.HOUR_DAY;
+                        break;
+                    case "Minute-Hour":
+                        item = TimeAxis.MINUTE_HOUR;
+                        break;
+                    case "Month-Year":
+                        item = TimeAxis.MONTH_YEAR;
+                        break;
+                    case "Year-Decade":
+                        item = TimeAxis.YEAR_DECADE;
+                        break;
+                }
+                axHolder_.setTimeAxisStyle(item);
+                break;
+            case "Title Auto":
+                axHolder_.setTitleAuto(((JCheckBox) obj).isSelected());
+                break;
+            case "Title":
+                SGLabelDialog sgd = new SGLabelDialog("Axis Title");
+                sgd.setSGLabel(axHolder_.getTitle());
+                sgd.setModal(true);
+                sgd.setVisible(true);
+                axHolder_.fireStateChanged();
+                break;
+            case "Transform Type":
+                str = (String) ((JComboBox) obj).getSelectedItem();
+                int trans = transform(str);
+                if (trans == DataGroup.REFERENCE) {
+                    axHolder_.setTransformGroup(str.substring(5));
+                }
+                axHolder_.setTransformType(trans);
+                if (trans == DataGroup.REFERENCE && circularReference(DataGroup.X_DIR, str.substring(5))) {
+                    JOptionPane.showMessageDialog(this, "Creates a circular reference in DataGroup transform",
+                        "Error Selecting Transform", JOptionPane.ERROR_MESSAGE);
+                    axHolder_.setTransformType(-1);
+                    axHolder_.setTransformGroup(null);
+                    ((JComboBox) obj).setSelectedIndex(-1);
+                    return;
+                }
+                break;
+            case "User Range":
+                range = parseRange(((JTextField) obj).getText(), axHolder_.isTime());
+                if (range != null) axHolder_.setUserRange(range);
+                break;
+            case "Visible":
+                axHolder_.setVisible(((JCheckBox) obj).isSelected());
+                break;
         }
         update();
     }
 
     private int axis(String value) {
-        if(value.equals("PlainAxis")) {
-            return DataGroup.PLAIN;
-        } else if(value.equals("TimeAxis")) {
-            return DataGroup.TIME;
-        } else if(value.equals("LogAxis")) {
-            return DataGroup.LOG;
+        switch (value) {
+            case "PlainAxis":
+                return DataGroup.PLAIN;
+            case "TimeAxis":
+                return DataGroup.TIME;
+            case "LogAxis":
+                return DataGroup.LOG;
         }
         return -1;
     }
 
     private int transform(String value) {
-        if(value.equals("LinearTransform")) {
-            return DataGroup.LINEAR;
-        } else if(value.equals("LogTransform")) {
-            return DataGroup.LOG;
-        } else {
-            return DataGroup.REFERENCE;
+        switch (value) {
+            case "LinearTransform":
+                return DataGroup.LINEAR;
+            case "LogTransform":
+                return DataGroup.LOG;
+            default:
+                return DataGroup.REFERENCE;
         }
     }
 

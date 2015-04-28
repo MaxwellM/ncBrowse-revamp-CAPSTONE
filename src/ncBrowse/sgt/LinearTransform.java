@@ -121,7 +121,7 @@ public class LinearTransform extends AxisTransform implements Cloneable {
         } catch (CloneNotSupportedException e) {
             newTransform = new LinearTransform();
         }
-        return (AxisTransform)newTransform;
+        return newTransform;
     }
     //
     /**
@@ -131,12 +131,12 @@ public class LinearTransform extends AxisTransform implements Cloneable {
      * @return user value
      */
     public double getTransP(GeoDate t) {
-        return (double)(at_*t.getTime() + bt_);
+        return at_*t.getTime() + bt_;
     }
     public double getTransP(SoTValue v) {
         if(v.isTime()) {
             long t = v.getLongTime();
-            return (double)at_*t + bt_;
+            return at_ *t + bt_;
         } else {
             double u = ((SoTValue.Double)v).getValue();
             return a_*u + b_;
@@ -149,7 +149,7 @@ public class LinearTransform extends AxisTransform implements Cloneable {
      * @since 3.0
      */
     public double getTransP(long t) {
-        return (double)at_*t + bt_;
+        return at_ *t + bt_;
     }
     /**
      * Transform from physical to user coordinates.

@@ -153,10 +153,10 @@ public class NewLevelsDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -283,13 +283,13 @@ public class NewLevelsDialog extends JDialog {
         double min;
         double max;
         if(rangeComputed_) {
-            min = (new Double(minCompTextField.getText())).doubleValue();
-            max = (new Double(maxCompTextField.getText())).doubleValue();
+            min = new Double(minCompTextField.getText());
+            max = new Double(maxCompTextField.getText());
         } else {
-            min = (new Double(minTextField.getText())).doubleValue();
-            max = (new Double(maxTextField.getText())).doubleValue();
+            min = new Double(minTextField.getText());
+            max = new Double(maxTextField.getText());
         }
-        double delta = (new Double(spacingTextField.getText())).doubleValue();
+        double delta = new Double(spacingTextField.getText());
         Range2D range = new Range2D(min, max, delta);
         return range;
     }
@@ -307,10 +307,10 @@ public class NewLevelsDialog extends JDialog {
             zmin = Double.MAX_VALUE;
             zmax = -Double.MAX_VALUE;
             double[] z = grid_.getZArray();
-            for(int i=0; i < z.length; i++) {
-                if(Double.isNaN(z[i])) continue;
-                zmin = Math.min(zmin, z[i]);
-                zmax = Math.max(zmax, z[i]);
+            for (double aZ : z) {
+                if (Double.isNaN(aZ)) continue;
+                zmin = Math.min(zmin, aZ);
+                zmax = Math.max(zmax, aZ);
             }
         }
         minTextField.setText(Double.toString(zmin));
@@ -322,14 +322,14 @@ public class NewLevelsDialog extends JDialog {
 
     private void updateLevSpac() {
         int levels;
-        double delta = (new Double(maxTextField.getText())).doubleValue() -
-            (new Double(minTextField.getText())).doubleValue();
+        double delta = new Double(maxTextField.getText()) -
+            new Double(minTextField.getText());
         double spacing;
         if(useSpacing_) {
-            levels = (int)(delta/(new Double(spacingTextField.getText())).doubleValue());
+            levels = (int)(delta/ new Double(spacingTextField.getText()));
             nlevelsTextField.setText(Integer.toString(levels));
         } else {
-            spacing = delta/(new Integer(nlevelsTextField.getText())).intValue();
+            spacing = delta/ new Integer(nlevelsTextField.getText());
             spacingTextField.setText(Double.toString(spacing));
         }
     }
@@ -361,8 +361,8 @@ public class NewLevelsDialog extends JDialog {
         rangeComputed_ = true;
         minCompTextField.setEnabled(true);
         maxCompTextField.setEnabled(true);
-        double min = (new Double(minTextField.getText())).doubleValue();
-        double max = (new Double(maxTextField.getText())).doubleValue();
+        double min = new Double(minTextField.getText());
+        double max = new Double(maxTextField.getText());
         Range2D range = new Range2D(min,max);
         int levels = Integer.parseInt(nlevelsTextField.getText());
         Range2D newRange = Graph.computeRange(range, levels);

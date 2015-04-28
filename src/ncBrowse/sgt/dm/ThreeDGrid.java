@@ -200,7 +200,7 @@ public class ThreeDGrid implements SGT3DGrid, Cartesian, Cloneable, Serializable
         } catch (CloneNotSupportedException e) {
             newGrid = new ThreeDGrid();
         }
-        return (SGTData)newGrid;
+        return newGrid;
     }
   
     public double[] getXArray() {
@@ -547,9 +547,9 @@ public class ThreeDGrid implements SGT3DGrid, Cartesian, Cloneable, Serializable
         long end = Long.MIN_VALUE;
         long value;
         int count = 0;
-        for(int i=0; i < tarray.length; i++) {
-            if(!(tarray[i] == null || tarray[i].isMissing())) {
-                value = tarray[i].getTime();
+        for (GeoDate aTarray : tarray) {
+            if (!(aTarray == null || aTarray.isMissing())) {
+                value = aTarray.getTime();
                 start = Math.min(start, value);
                 end = Math.max(end, value);
                 count++;
@@ -566,10 +566,10 @@ public class ThreeDGrid implements SGT3DGrid, Cartesian, Cloneable, Serializable
         double start = Double.POSITIVE_INFINITY;
         double end = Double.NEGATIVE_INFINITY;
         int count = 0;
-        for(int i=0; i < array.length; i++) {
-            if(!Double.isNaN(array[i])) {
-                start = Math.min(start, array[i]);
-                end = Math.max(end, array[i]);
+        for (double anArray : array) {
+            if (!Double.isNaN(anArray)) {
+                start = Math.min(start, anArray);
+                end = Math.max(end, anArray);
                 count++;
             }
         }

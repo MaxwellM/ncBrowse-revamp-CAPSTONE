@@ -366,7 +366,7 @@ public class PointCollectionKey implements Cloneable,
         label.setMoveable(false);
         label.setSelectable(false);
         label_.addElement(label);
-        ((PointAttribute)points.getAttribute()).addPropertyChangeListener(this);
+        points.getAttribute().addPropertyChangeListener(this);
         modified("PointCollectionKey: addPointGraph()");
     }
     /**
@@ -519,7 +519,7 @@ public class PointCollectionKey implements Cloneable,
             label.setLocationP(new Point2D.Double(xloc, yp[row]));
             try {
                 label.draw(g);
-            } catch (SGException e) {}
+            } catch (SGException ignored) {}
             //
             col++;
             if(col >= columns_) {

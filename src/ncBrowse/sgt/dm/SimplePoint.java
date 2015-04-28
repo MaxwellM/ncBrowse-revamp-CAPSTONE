@@ -108,7 +108,7 @@ public class SimplePoint implements SGTPoint, Cartesian, Cloneable, Serializable
         } catch (CloneNotSupportedException e) {
             newPoint = new SimplePoint();
         }
-        return (SGTData)newPoint;
+        return newPoint;
     }
     /**
      * Get the X coordinate.
@@ -164,8 +164,8 @@ public class SimplePoint implements SGTPoint, Cartesian, Cloneable, Serializable
         long old = tloc_;
         tloc_ = t;
         changes_.firePropertyChange("dataModified",
-                                    new Long(old),
-                                    new Long(tloc_));
+            old,
+            tloc_);
     }
     /**
      * Is the X coordinate Time?
@@ -231,8 +231,8 @@ public class SimplePoint implements SGTPoint, Cartesian, Cloneable, Serializable
         double old = xloc_;
         xloc_ = xloc;
         changes_.firePropertyChange("dataModified",
-                                    new Double(old),
-                                    new Double(xloc_));
+            old,
+            xloc_);
     }
     /**
      * Set the Y coordinate.
@@ -242,8 +242,8 @@ public class SimplePoint implements SGTPoint, Cartesian, Cloneable, Serializable
         double old = yloc_;
         yloc_ = yloc;
         changes_.firePropertyChange("dataModified",
-                                    new Double(old),
-                                    new Double(yloc_));
+            old,
+            yloc_);
     }
     /**
      * The the associated value and basic metadata.
@@ -259,8 +259,8 @@ public class SimplePoint implements SGTPoint, Cartesian, Cloneable, Serializable
         valueMetaData_ = new SGTMetaData(name, units);
         hasValue_ = true;
         changes_.firePropertyChange("associatedDataModified",
-                                    new Double(old),
-                                    new Double(value_));
+            old,
+            value_);
     }
     /**
      * Set the <code>SGTMetaData</code> associated with the x

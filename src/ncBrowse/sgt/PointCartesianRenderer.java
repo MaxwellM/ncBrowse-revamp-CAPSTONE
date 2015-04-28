@@ -164,7 +164,7 @@ public class PointCartesianRenderer extends CartesianRenderer {
         pl.setLayer(ly);
         try {
             pl.draw(g);
-        } catch (LayerNotFoundException e) {}
+        } catch (LayerNotFoundException ignored) {}
 
     }
     /**

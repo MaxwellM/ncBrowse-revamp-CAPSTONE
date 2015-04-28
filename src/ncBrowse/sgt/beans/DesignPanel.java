@@ -247,20 +247,20 @@ class DesignPanel extends JComponent implements MouseListener,
             pdb.getPanelHolder().removeAllChangeListeners();
             // remove contents
             DragBox[] dbArray = pdb.getDragBoxArray();
-            for(int i=0; i < dbArray.length; i++) {
+            for (DragBox aDbArray : dbArray) {
                 ph = pdb.getPanelHolder();
-                if(dbArray[i] instanceof DataGroupDragBox) {
-                    DataGroup ag = ((DataGroupDragBox)dbArray[i]).getDataGroup();
+                if (aDbArray instanceof DataGroupDragBox) {
+                    DataGroup ag = ((DataGroupDragBox) aDbArray).getDataGroup();
                     ph.removeDataGroup(ag);
-                    pdb.removeDragBox((DataGroupDragBox)dbArray[i]);
-                } else if(dbArray[i] instanceof LegendDragBox) {
-                    Legend legend = ((LegendDragBox)dbArray[i]).getLegend();
+                    pdb.removeDragBox((DataGroupDragBox) aDbArray);
+                } else if (aDbArray instanceof LegendDragBox) {
+                    Legend legend = ((LegendDragBox) aDbArray).getLegend();
                     ph.removeLegend(legend);
-                    pdb.removeDragBox((LegendDragBox)dbArray[i]);
-                } else if(dbArray[i] instanceof LabelDragBox) {
-                    Label label = ((LabelDragBox)dbArray[i]).getLabel();
+                    pdb.removeDragBox((LegendDragBox) aDbArray);
+                } else if (aDbArray instanceof LabelDragBox) {
+                    Label label = ((LabelDragBox) aDbArray).getLabel();
                     ph.removeLabel(label);
-                    pdb.removeDragBox((LabelDragBox)dbArray[i]);
+                    pdb.removeDragBox((LabelDragBox) aDbArray);
                 }
             }
             //    pdb.getPanelHolder().removeChangeListener(this);
@@ -269,26 +269,25 @@ class DesignPanel extends JComponent implements MouseListener,
             model_.removePanel(ph);
             ph.removeAllChangeListeners();
         } else {
-            Iterator iter = pDragBoxes_.values().iterator();
-            while(iter.hasNext()) {
-                pdb = (PanelHolderDragBox)iter.next();
+            for (Object o : pDragBoxes_.values()) {
+                pdb = (PanelHolderDragBox) o;
                 Iterator dbIter = pdb.getDragBoxIterator();
-                while(dbIter.hasNext()) {
-                    DragBox db = (DragBox)dbIter.next();
-                    if(db.isSelected()) {
+                while (dbIter.hasNext()) {
+                    DragBox db = (DragBox) dbIter.next();
+                    if (db.isSelected()) {
                         ph = pdb.getPanelHolder();
-                        if(db instanceof DataGroupDragBox) {
-                            DataGroup ag = ((DataGroupDragBox)db).getDataGroup();
+                        if (db instanceof DataGroupDragBox) {
+                            DataGroup ag = ((DataGroupDragBox) db).getDataGroup();
                             ph.removeDataGroup(ag);
-                            pdb.removeDragBox((DataGroupDragBox)db);
-                        } else if(db instanceof LegendDragBox) {
-                            Legend legend = ((LegendDragBox)db).getLegend();
+                            pdb.removeDragBox((DataGroupDragBox) db);
+                        } else if (db instanceof LegendDragBox) {
+                            Legend legend = ((LegendDragBox) db).getLegend();
                             ph.removeLegend(legend);
-                            pdb.removeDragBox((LegendDragBox)db);
-                        } else if(db instanceof LabelDragBox) {
-                            Label label = ((LabelDragBox)db).getLabel();
+                            pdb.removeDragBox((LegendDragBox) db);
+                        } else if (db instanceof LabelDragBox) {
+                            Label label = ((LabelDragBox) db).getLabel();
                             ph.removeLabel(label);
-                            pdb.removeDragBox((LabelDragBox)db);
+                            pdb.removeDragBox((LabelDragBox) db);
                         }
                         break;
                     }
@@ -300,13 +299,12 @@ class DesignPanel extends JComponent implements MouseListener,
 
     boolean isAxisHolderDragBoxSelected() {
         PanelHolderDragBox pdb;
-        Iterator iter = pDragBoxes_.values().iterator();
-        while(iter.hasNext()) {
-            pdb = (PanelHolderDragBox)iter.next();
+        for (Object o : pDragBoxes_.values()) {
+            pdb = (PanelHolderDragBox) o;
             Iterator dbIter = pdb.getDragBoxIterator();
-            while(dbIter.hasNext()) {
-                DragBox db = (DragBox)dbIter.next();
-                if(db.isSelected() && db instanceof AxisHolderDragBox) {
+            while (dbIter.hasNext()) {
+                DragBox db = (DragBox) dbIter.next();
+                if (db.isSelected() && db instanceof AxisHolderDragBox) {
                     return true;
                 }
             }
@@ -316,13 +314,12 @@ class DesignPanel extends JComponent implements MouseListener,
 
     boolean isChildDragBoxSelected() {
         PanelHolderDragBox pdb;
-        Iterator iter = pDragBoxes_.values().iterator();
-        while(iter.hasNext()) {
-            pdb = (PanelHolderDragBox)iter.next();
+        for (Object o : pDragBoxes_.values()) {
+            pdb = (PanelHolderDragBox) o;
             Iterator dbIter = pdb.getDragBoxIterator();
-            while(dbIter.hasNext()) {
-                DragBox db = (DragBox)dbIter.next();
-                if(db.isSelected()) {
+            while (dbIter.hasNext()) {
+                DragBox db = (DragBox) dbIter.next();
+                if (db.isSelected()) {
                     return true;
                 }
             }
@@ -342,20 +339,18 @@ class DesignPanel extends JComponent implements MouseListener,
     public void paintComponent(Graphics g) {
         g.setColor(model_.getPageBackgroundColor());
         g.fillRect(0, 0, size.width, size.height);
-        Iterator iter = pDragBoxes_.values().iterator();
-        while(iter.hasNext()) {
-            ((PanelHolderDragBox)iter.next()).draw(g);
+        for (Object o : pDragBoxes_.values()) {
+            ((PanelHolderDragBox) o).draw(g);
         }
     }
 
     void clearAllSelections() {
-        Iterator pIter = pDragBoxes_.values().iterator();
-        while(pIter.hasNext()) {
-            PanelHolderDragBox pdb = (PanelHolderDragBox)pIter.next();
+        for (Object o : pDragBoxes_.values()) {
+            PanelHolderDragBox pdb = (PanelHolderDragBox) o;
             pdb.setSelected(false);
             Iterator dbIter = pdb.getDragBoxIterator();
-            while(dbIter.hasNext()) {
-                ((DragBox)dbIter.next()).setSelected(false);
+            while (dbIter.hasNext()) {
+                ((DragBox) dbIter.next()).setSelected(false);
             }
         }
     }
@@ -363,14 +358,13 @@ class DesignPanel extends JComponent implements MouseListener,
     private DragBox[] dragBoxesThatContain(Point pt) {
         PanelHolderDragBox pDragBox;
         Vector boxes = new Vector(4);
-        Iterator pIter = pDragBoxes_.values().iterator();
-        while(pIter.hasNext()) {
-            pDragBox = (PanelHolderDragBox)pIter.next();
-            if(pDragBox.contains(pt)) {
+        for (Object o : pDragBoxes_.values()) {
+            pDragBox = (PanelHolderDragBox) o;
+            if (pDragBox.contains(pt)) {
                 Iterator dbIter = pDragBox.getDragBoxIterator();
-                while(dbIter.hasNext()) {
-                    DragBox db = (DragBox)dbIter.next();
-                    if(db.contains(pt))  {
+                while (dbIter.hasNext()) {
+                    DragBox db = (DragBox) dbIter.next();
+                    if (db.contains(pt)) {
                         boxes.add(db);  // add dragBox
                     }
                 } // dbIter
@@ -440,7 +434,6 @@ class DesignPanel extends JComponent implements MouseListener,
             }
             repaint();
             firePropertyChange("panelSelected", null, dragBox);
-            return;
         } else {
             clearAllSelections();
             selectedBoxes_.removeAllElements();
@@ -455,7 +448,6 @@ class DesignPanel extends JComponent implements MouseListener,
             } else if(dragBox instanceof LegendDragBox) {
                 firePropertyChange("legendSelected", null, dragBox);
             }
-            return;
         }
     }
 
@@ -464,10 +456,9 @@ class DesignPanel extends JComponent implements MouseListener,
         PanelHolderDragBox pDragBox = null;
         DragBox db = null;
         dragState_ = -1;
-        Iterator iter = pDragBoxes_.values().iterator();
-        while(iter.hasNext()) {
-            pDragBox = (PanelHolderDragBox)iter.next();
-            if(pDragBox.isSelected() && pDragBox.handlesContain(e.getPoint())) {
+        for (Object o : pDragBoxes_.values()) {
+            pDragBox = (PanelHolderDragBox) o;
+            if (pDragBox.isSelected() && pDragBox.handlesContain(e.getPoint())) {
                 dragBox_ = pDragBox;
                 dragState_ = dragBox_.getSelectedHandle();
                 inMove_ = true;
@@ -476,9 +467,9 @@ class DesignPanel extends JComponent implements MouseListener,
             }
             // look for DragBoxes
             Iterator dbIter = pDragBox.getDragBoxIterator();
-            while(dbIter.hasNext()) {
-                db = (DragBox)dbIter.next();
-                if(db.isSelected() && db.handlesContain(e.getPoint())) {
+            while (dbIter.hasNext()) {
+                db = (DragBox) dbIter.next();
+                if (db.isSelected() && db.handlesContain(e.getPoint())) {
                     dragBox_ = db;
                     dragState_ = dragBox_.getSelectedHandle();
                     inMove_ = true;

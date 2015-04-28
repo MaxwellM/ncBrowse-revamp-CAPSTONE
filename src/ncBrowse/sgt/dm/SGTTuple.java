@@ -23,17 +23,17 @@ import ncBrowse.sgt.geom.Range2D;
  * @since 2.x
  */
 public interface SGTTuple extends SGTData {
-    public double[] getXArray();
-    public double[] getYArray();
-    public double[] getZArray();
-    public int getSize();
-    public GeoDate[] getTimeArray();
+    double[] getXArray();
+    double[] getYArray();
+    double[] getZArray();
+    int getSize();
+    GeoDate[] getTimeArray();
     /**
      * Get the <code>GeoDateArray</code> object.
      */
-    public GeoDateArray getGeoDateArray();
-    public double[] getAssociatedData();
-    public boolean hasAssociatedData();
-    public SGTMetaData getZMetaData();
-    public Range2D getZRange();
+    GeoDateArray getGeoDateArray();
+    double[] getAssociatedData();
+    boolean hasAssociatedData();
+    SGTMetaData getZMetaData();
+    Range2D getZRange();
 }

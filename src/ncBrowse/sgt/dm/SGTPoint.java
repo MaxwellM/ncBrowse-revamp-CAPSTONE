@@ -35,32 +35,32 @@ public interface SGTPoint extends SGTData {
     /**
      * Get the x coordinate.
      */
-    public double getX();
+    double getX();
     /**
      * Get the y coordinate.
      */
-    public double getY();
+    double getY();
     /**
      * Test if a value is associated with the SGTPoint.
      */
-    public boolean hasValue();
+    boolean hasValue();
     /**
      * Get the associated value.
      */
-    public double getValue();
+    double getValue();
     /**
      * Get the SGTMetaData object associated with the value.
      */
-    public SGTMetaData getValueMetaData();
+    SGTMetaData getValueMetaData();
     /**
      * Get the Time value.
      */
-    public GeoDate getTime();
+    GeoDate getTime();
     /**
      * Get the time as <code>long</code> referenced from
      * 1970-01-01.
      *
      * @since 3.0
      */
-    public long getLongTime();
+    long getLongTime();
 }

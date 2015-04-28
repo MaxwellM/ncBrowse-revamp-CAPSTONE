@@ -153,7 +153,7 @@ public class SimpleLine implements SGTLine, Cartesian,
         } catch (CloneNotSupportedException e) {
             newLine = new SimpleLine();
         }
-        return (SGTData)newLine;
+        return newLine;
     }
     /**
      * Get the X coordinate array.
@@ -340,10 +340,10 @@ public class SimpleLine implements SGTLine, Cartesian,
         double dstart = Double.POSITIVE_INFINITY;
         double dend = Double.NEGATIVE_INFINITY;
         int count = 0;
-        for(int i=0; i < array.length; i++) {
-            if(!Double.isNaN(array[i])) {
-                dstart = Math.min(dstart, array[i]);
-                dend = Math.max(dend, array[i]);
+        for (double anArray : array) {
+            if (!Double.isNaN(anArray)) {
+                dstart = Math.min(dstart, anArray);
+                dend = Math.max(dend, anArray);
                 count++;
             }
         }
@@ -358,10 +358,10 @@ public class SimpleLine implements SGTLine, Cartesian,
         long tend = Long.MIN_VALUE;
         long[] tar = tarray.getTime();
         int count = 0;
-        for(int i=0; i < tar.length; i++) {
-            if(!(tar[i] == Long.MAX_VALUE)) {
-                tstart = Math.min(tstart, tar[i]);
-                tend = Math.max(tend, tar[i]);
+        for (long aTar : tar) {
+            if (!(aTar == Long.MAX_VALUE)) {
+                tstart = Math.min(tstart, aTar);
+                tend = Math.max(tend, aTar);
                 count++;
             }
         }

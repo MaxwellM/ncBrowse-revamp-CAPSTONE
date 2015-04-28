@@ -70,7 +70,7 @@ public class LogTransform extends AxisTransform implements Cloneable {
         } catch (CloneNotSupportedException e) {
             newTransform = new LogTransform();
         }
-        return (AxisTransform)newTransform;
+        return newTransform;
     }
 
     public double getTransP(double u) {

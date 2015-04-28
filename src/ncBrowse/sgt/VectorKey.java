@@ -400,7 +400,7 @@ public class VectorKey implements Cloneable,
         scale.setMoveable(false);
         scale.setSelectable(false);
         scaleLabel_.addElement(scale);
-        ((VectorAttribute)vector.getAttribute()).addPropertyChangeListener(this);
+        vector.getAttribute().addPropertyChangeListener(this);
         modified("VectorKey: addVectorGraph()");
     }
     /**

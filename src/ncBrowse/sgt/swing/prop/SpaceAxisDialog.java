@@ -18,6 +18,7 @@ import ncBrowse.sgt.swing.util.ThreeDotsButton;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Enumeration;
+import java.util.Objects;
 
 /**
  * Edits a <code>SpaceAxis</code>. This dialog does not
@@ -259,8 +260,8 @@ public class SpaceAxisDialog extends JDialog {
             tempString[0] = "LEFT";
             tempString[1] = "CENTER";
             tempString[2] = "RIGHT";
-            for(int i=0; i < tempString.length; i++) {
-                horizCBModel.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                horizCBModel.addElement(aTempString);
             }
         }
         {
@@ -268,8 +269,8 @@ public class SpaceAxisDialog extends JDialog {
             tempString[0] = "TOP";
             tempString[1] = "MIDDLE";
             tempString[2] = "BOTTOM";
-            for(int i=0; i < tempString.length; i++) {
-                vertCBModel.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                vertCBModel.addElement(aTempString);
             }
         }
         {
@@ -277,8 +278,8 @@ public class SpaceAxisDialog extends JDialog {
             tempString[0] = "POSITIVE_SIDE";
             tempString[1] = "NEGATIVE_SIDE";
             tempString[2] = "NO_LABEL";
-            for(int i=0; i < tempString.length; i++) {
-                positionCBModel.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                positionCBModel.addElement(aTempString);
             }
         }
         {
@@ -286,8 +287,8 @@ public class SpaceAxisDialog extends JDialog {
             tempString[0] = "POSITIVE_SIDE";
             tempString[1] = "NEGATIVE_SIDE";
             tempString[2] = "BOTH_SIDES";
-            for(int i=0; i < tempString.length; i++) {
-                ticPositionCBModel.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                ticPositionCBModel.addElement(aTempString);
             }
         }
         positionComboBox.setSelectedIndex(1);
@@ -320,10 +321,10 @@ public class SpaceAxisDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -623,17 +624,17 @@ public class SpaceAxisDialog extends JDialog {
         sa_.setLabelColor(textColorPanel.getColor());
         if(labelFont_ != null) sa_.setLabelFont(labelFont_);
 
-        sa_.setLabelHeightP(Double.valueOf(heightTextField.getText()).doubleValue());
+        sa_.setLabelHeightP(Double.valueOf(heightTextField.getText()));
         sa_.setLabelPosition(positionComboBox.getSelectedIndex());
         //
         // range
         //
-        double min = Double.valueOf(minUserTextField.getText()).doubleValue();
-        double max = Double.valueOf(maxUserTextField.getText()).doubleValue();
-        double inc = Double.valueOf(incUserTextField.getText()).doubleValue();
+        double min = Double.valueOf(minUserTextField.getText());
+        double max = Double.valueOf(maxUserTextField.getText());
+        double inc = Double.valueOf(incUserTextField.getText());
         sa_.setRangeU(new Range2D(min, max, inc));
-        min = Double.valueOf(minPhysicalTextField.getText()).doubleValue();
-        max = Double.valueOf(maxPhysicalTextField.getText()).doubleValue();
+        min = Double.valueOf(minPhysicalTextField.getText());
+        max = Double.valueOf(maxPhysicalTextField.getText());
         sa_.setRangeP(new Range2D(min, max));
         if(originIsGeoDate_) {
             TimePoint pt = sa_.getTimeLocationU();
@@ -642,17 +643,17 @@ public class SpaceAxisDialog extends JDialog {
         } else {
             Point2D.Double pt = sa_.getLocationU();
             if(sa_.getOrientation() == Axis.HORIZONTAL) {
-                pt.y = Double.valueOf(originTextField.getText()).doubleValue();
+                pt.y = Double.valueOf(originTextField.getText());
             } else {
-                pt.x = Double.valueOf(originTextField.getText()).doubleValue();
+                pt.x = Double.valueOf(originTextField.getText());
             }
             sa_.setLocationU(pt);
         }
         //
         // tics
         //
-        sa_.setLargeTicHeightP(Double.valueOf(largeTicTextField.getText()).doubleValue());
-        sa_.setSmallTicHeightP(Double.valueOf(smallTicTextField.getText()).doubleValue());
+        sa_.setLargeTicHeightP(Double.valueOf(largeTicTextField.getText()));
+        sa_.setSmallTicHeightP(Double.valueOf(smallTicTextField.getText()));
         sa_.setNumberSmallTics(Integer.parseInt(numSmallTicsTextField.getText()));
         sa_.setTicPosition(ticPositionComboBox.getSelectedIndex());
 
@@ -683,7 +684,7 @@ public class SpaceAxisDialog extends JDialog {
                 for(Enumeration it = sa_.getGraph().xAxisElements();
                     it.hasMoreElements();) {
                     ax = (Axis)it.nextElement();
-                    if(ax.getId() != sa_.getId()) sa_.register(ax);
+                    if(!Objects.equals(ax.getId(), sa_.getId())) sa_.register(ax);
                 }
             } else {
                 if(sa_.getNumberRegisteredAxes() > 0) sa_.clearAllRegisteredAxes();
@@ -696,7 +697,7 @@ public class SpaceAxisDialog extends JDialog {
                 for(Enumeration it = sa_.getGraph().yAxisElements();
                     it.hasMoreElements();) {
                     ax = (Axis)it.nextElement();
-                    if(ax.getId() != sa_.getId()) sa_.register(ax);
+                    if(!Objects.equals(ax.getId(), sa_.getId())) sa_.register(ax);
                 }
             } else  {
                 if(sa_.getNumberRegisteredAxes() > 0) sa_.clearAllRegisteredAxes();

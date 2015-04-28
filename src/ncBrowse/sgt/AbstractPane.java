@@ -10,9 +10,7 @@
 
 package ncBrowse.sgt;
 
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.Point;
+import java.awt.*;
 import java.beans.PropertyChangeListener;
 
 /**
@@ -30,46 +28,46 @@ public interface AbstractPane {
     /**
      * Align to top of printer page.
      */
-    public static final int TOP = 0;
+    int TOP = 0;
     /**
      * Align to middle of printer page.
      */
-    public static final int MIDDLE = 1;
+    int MIDDLE = 1;
     /**
      * Align to bottom of printer page.
      */
-    public static final int BOTTOM = 2;
+    int BOTTOM = 2;
     /**
      * Align to left of printer page.
      */
-    public static final int LEFT = 0;
+    int LEFT = 0;
     /**
      * Align to center of printer page.
      */
-    public static final int CENTER = 1;
+    int CENTER = 1;
     /**
      * Align to right of printer page.
      */
-    public static final int RIGHT = 2;
+    int RIGHT = 2;
     /**
      * Align to location specified on printer page.
      */
-    public static final int SPECIFIED_LOCATION = -1;
+    int SPECIFIED_LOCATION = -1;
     /**
      * Fit onto printer page.  Magnify or shrink to fit onto printer page.
      * @since 3.0
      */
-    public static final int TO_FIT = 0;
+    int TO_FIT = 0;
     /**
      * Default scale for printing.  A value of 1.0 physical units = 72 pts.
      * @since 3.0
      */
-    public static final int DEFAULT_SCALE = 1;
+    int DEFAULT_SCALE = 1;
     /**
      * Shrink to fit onto printer page.  Will not magnify if graphic will already fit.
      * @since 3.0
      */
-    public static final int SHRINK_TO_FIT = 2;
+    int SHRINK_TO_FIT = 2;
     /**
      * The <code>AbstractPane</code> and all of the attached Classes
      * will be drawn. Drawing will occur in an offscreen image and then
@@ -85,7 +83,7 @@ public interface AbstractPane {
      * @see java.awt.Graphics
      * @see Layer
      */
-    public void draw();
+    void draw();
     /**
      * The <code>AbstractPane</code> and all of the attached Classes
      * will be drawn. Drawing will occur using the supplied
@@ -95,7 +93,7 @@ public interface AbstractPane {
      *
      * @see java.awt.Graphics
      */
-    public void draw(Graphics g);
+    void draw(Graphics g);
     /**
      * The <code>AbstractPane</code> and all of the attached Classes
      * will be drawn. Drawing will occur using the supplied
@@ -108,47 +106,47 @@ public interface AbstractPane {
      *
      * @see java.awt.Graphics
      */
-    public void draw(Graphics g, int width, int height);
+    void draw(Graphics g, int width, int height);
     /**
      * This method is called when the <code>AbstractPane</code> first becomes
      * visible.  The types of operations that should be implemented here include
      * those that require a valid <code>Graphics</code> object.
      */
-    public void init();
+    void init();
     /**
      * Test if the current <code>Graphics</code> object is a printer.
      *
      * @return true if a printer
      */
-    public boolean isPrinter();
+    boolean isPrinter();
     /**
      * Return an array of objects whose bounds include x,y.
      *
      * @since 3.0
      */
-    public Object[] getObjectsAt(int x, int y);
+    Object[] getObjectsAt(int x, int y);
     /**
      * Return an array of objects whose bounds are at point pt.
      *
      * @since 3.0
      */
-    public Object[] getObjectsAt(Point pt);
+    Object[] getObjectsAt(Point pt);
     /**
      * Get the printer page size.
      *
      * @return page size
      */
-    public java.awt.Dimension getPageSize();
+    java.awt.Dimension getPageSize();
     /**
      * Get the <code>Pane</code> identifier.
      *
      * @return <code>String</code> containing the <code>Pane</code> identifier.
      */
-    public String getId();
+    String getId();
     /**
      * Set the <code>Pane</code> identifier
      */
-    public void setId(String id);
+    void setId(String id);
     /**
      * Set printing scale mode.  Allowable choices are <code>TO_FIT</code>,
      * <code>SHRINK_TO_FIT</code> and
@@ -159,7 +157,7 @@ public interface AbstractPane {
      * @see AbstractPane#TO_FIT
      * @see AbstractPane#SHRINK_TO_FIT
      */
-    public void setPageScaleMode(int mode);
+    void setPageScaleMode(int mode);
     /**
      * Set alignment for printing.
      *
@@ -173,7 +171,7 @@ public interface AbstractPane {
      * @see AbstractPane#RIGHT
      * @see AbstractPane#SPECIFIED_LOCATION
      */
-    public void setPageAlign(int vert, int horz);
+    void setPageAlign(int vert, int horz);
     /**
      * Set vertical alignment for printing. Allowed choices include <code>TOP</code>,
      * <code>MIDDLE</code>, and  <code>BOTTOM</code> for vert and
@@ -186,7 +184,7 @@ public interface AbstractPane {
      * @see AbstractPane#BOTTOM
      * @see AbstractPane#SPECIFIED_LOCATION
      */
-    public void setPageVAlign(int vert);
+    void setPageVAlign(int vert);
     /**
      * Set horizontal alignment for printing. Allowed choices include <code>TOP</code>,
      * <code>MIDDLE</code>, and  <code>BOTTOM</code>.
@@ -197,7 +195,7 @@ public interface AbstractPane {
      * @see AbstractPane#RIGHT
      * @see AbstractPane#SPECIFIED_LOCATION
      */
-    public void setPageHAlign(int horz);
+    void setPageHAlign(int horz);
     /**
      * Get printing scale mode.
      * @return AUTO_SCALE, TO_FIT, or SHRINK_TO_FIT
@@ -206,7 +204,7 @@ public interface AbstractPane {
      * @see AbstractPane#TO_FIT
      * @see AbstractPane#SHRINK_TO_FIT
      */
-    public int getPageScaleMode();
+    int getPageScaleMode();
     /**
      * Get vertical alignment for printing. Allowed choices include
      * <code>LEFT</code>, <code>CENTER</code>, and <code>RIGHT</code>.
@@ -217,7 +215,7 @@ public interface AbstractPane {
      * @see AbstractPane#BOTTOM
      * @see AbstractPane#SPECIFIED_LOCATION
      */
-    public int getPageVAlign();
+    int getPageVAlign();
     /**
      * Get horizontal alignment for printing.
      *
@@ -227,23 +225,23 @@ public interface AbstractPane {
      * @see AbstractPane#RIGHT
      * @see AbstractPane#SPECIFIED_LOCATION
      */
-    public int getPageHAlign();
+    int getPageHAlign();
     /**
      * Set the printer page origin. Valid for HAlign = <code>SPECIFIED_LOCATION</code> or
      * VAlign = <code>SPECIFIED_LOCATION</code>.
      */
-    public void setPageOrigin(java.awt.Point p);
+    void setPageOrigin(java.awt.Point p);
     /**
      * Get the printer page origin. Valid for HAlign = <code>SPECIFIED_LOCATION</code> or
      * VAlign = <code>SPECIFIED_LOCATION</code>.
      */
-    public java.awt.Point getPageOrigin();
+    java.awt.Point getPageOrigin();
     /**
      * Get the first <code>Layer</code> associated with the <code>Pane</code>
      *
      * @return the first <code>Layer</code> object
      */
-    public Layer getFirstLayer();
+    Layer getFirstLayer();
     /**
      * Get the <code>Layer</code> associated with the
      * <code>Pane</code> indicated by the id.
@@ -251,7 +249,7 @@ public interface AbstractPane {
      * @param id identifier.
      * @exception LayerNotFoundException The <code>Layer</code> indicated by the id was not found.
      */
-    public Layer getLayer(String id) throws LayerNotFoundException;
+    Layer getLayer(String id) throws LayerNotFoundException;
     /**
      * Get the <code>Layer</code> associated with the
      * <code>Pane</code> indicated by the data id.
@@ -259,9 +257,9 @@ public interface AbstractPane {
      * @param id data identifier
      * @exception LayerNotFoundException The <code>Layer</code> indicated by the id was not found.
      *
-     * @see sgt.dm.SGTData
+     * @see ncBrowse.sgt.dm.SGTData
      */
-    public Layer getLayerFromDataId(String id) throws  LayerNotFoundException;
+    Layer getLayerFromDataId(String id) throws  LayerNotFoundException;
     /*
      * methods to get mouse input results
      */
@@ -273,12 +271,12 @@ public interface AbstractPane {
      * contains the mouse.  The pane object then passes the event on to the next
      * level.
      */
-    public Object getSelectedObject();
+    Object getSelectedObject();
     /**
      * Primarily used internally by sgt.  This can also be used to mark
      * an object as selected for use in an event handler.
      */
-    public void setSelectedObject(Object obj);
+    void setSelectedObject(Object obj);
     /**
      * Return the device coordinates of the zoom action. The coordinates are
      * in device units and may require transformation to the physical units or
@@ -286,7 +284,7 @@ public interface AbstractPane {
      *
      * @return zoom rectangle
      */
-    public java.awt.Rectangle getZoomBounds();
+    java.awt.Rectangle getZoomBounds();
     /**
      * Return the device coordinates of the start of the zoom action. The <code>Point</code>
      * is in device coordinates and may require transformation to physical units
@@ -295,23 +293,23 @@ public interface AbstractPane {
      * @return zoom start
      * @since 3.0
      */
-    public Point getZoomStart();
+    Point getZoomStart();
     /**
      * Get the current selected object at a point.  Used internally by
      * sgt.
      */
-    public Object getObjectAt(int x, int y);
+    Object getObjectAt(int x, int y);
     /**
      * Get the bounding rectangle in pixels (device units).
      *
      * @return Rectangle object containing the bounding box for the pane.
      **/
-    public java.awt.Rectangle getBounds();
+    java.awt.Rectangle getBounds();
     /**
      * Get the <code>Component</code> associated with
      * the pane.
      */
-    public java.awt.Component getComponent();
+    java.awt.Component getComponent();
     /*
      * methods to handle ChangeEvent and PropertyChangeEvent's
      */
@@ -322,7 +320,7 @@ public interface AbstractPane {
      * turned back on if the pane has been modified it
      * will then redraw.
      */
-    public void setBatch(boolean batch, String msg);
+    void setBatch(boolean batch, String msg);
     /**
      * Turn on/off batching of updates to the pane.  While
      * batching is <code>true</code> property change events will
@@ -330,20 +328,20 @@ public interface AbstractPane {
      * turned back on if the pane has been modified it
      * will then redraw.
      */
-    public void setBatch(boolean batch);
+    void setBatch(boolean batch);
     /**
      * Is batching turned on?
      */
-    public boolean isBatch();
+    boolean isBatch();
     /**
      * Notify the pane that something has changed and a redraw
      * is required.  Used internally by sgt.
      */
-    public void setModified(boolean mod, String mess);
+    void setModified(boolean mod, String mess);
     /**
      * Has the plot been modified?
      */
-    public boolean isModified();
+    boolean isModified();
     /**
      * Enable/disable the handling of <code>MouseEvent</code>s by
      * SGT.  Disabling mouse events will turn off object selection,
@@ -351,13 +349,13 @@ public interface AbstractPane {
      *
      * @since 3.0
      */
-    public void setMouseEventsEnabled(boolean enable);
+    void setMouseEventsEnabled(boolean enable);
     /**
      * Are <code>MouseEvent</code>s enabled for processing by SGT?
      *
      * @since 3.0
      */
-    public boolean isMouseEventsEnabled();
+    boolean isMouseEventsEnabled();
     /*
      * Pane PropertyChange methods
      */
@@ -366,10 +364,10 @@ public interface AbstractPane {
      * <code>Pane</code> and <code>JPane</code> include
      * "objectSelected" and "zoomRectangle".
      */
-    public void addPropertyChangeListener(PropertyChangeListener l);
+    void addPropertyChangeListener(PropertyChangeListener l);
     /**
      * Remove the PropertyChangeListener from the list.
      */
-    public void removePropertyChangeListener(PropertyChangeListener l);
+    void removePropertyChangeListener(PropertyChangeListener l);
 
 }

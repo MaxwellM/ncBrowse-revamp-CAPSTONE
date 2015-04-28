@@ -49,7 +49,7 @@ public class SineTransform extends AxisTransform implements Cloneable {
         } catch (CloneNotSupportedException e) {
             newTransform = new SineTransform();
         }
-        return (AxisTransform)newTransform;
+        return newTransform;
     }
     public double getTransP(double u) {
         throw new MethodNotImplementedError();

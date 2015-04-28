@@ -739,26 +739,18 @@ public class DataGroupLayer extends Layer {
     }
 
     private void setAllClip(SoTDomain domain) {
-        Iterator iter = dataLayers_.iterator();
-        while(iter.hasNext()) {
-            Object obj = iter.next();
-            if(obj instanceof Layer) {
-                Layer ly = (Layer)obj;
-                ((CartesianGraph)ly.getGraph()).setClip(domain.getXRange(),
-                                                        domain.getYRange());
-            }
-        }
+        dataLayers_.stream().filter(obj -> obj instanceof Layer).forEach(obj -> {
+            Layer ly = (Layer) obj;
+            ((CartesianGraph) ly.getGraph()).setClip(domain.getXRange(),
+                domain.getYRange());
+        });
     }
 
     private void setAllClipping(boolean clip) {
-        Iterator iter = dataLayers_.iterator();
-        while(iter.hasNext()) {
-            Object obj = iter.next();
-            if(obj instanceof Layer) {
-                Layer ly = (Layer)obj;
-                ((CartesianGraph)ly.getGraph()).setClipping(clip);
-            }
-        }
+        dataLayers_.stream().filter(obj -> obj instanceof Layer).forEach(obj -> {
+            Layer ly = (Layer) obj;
+            ((CartesianGraph) ly.getGraph()).setClipping(clip);
+        });
     }
 
     private Rectangle getPanelBounds() {

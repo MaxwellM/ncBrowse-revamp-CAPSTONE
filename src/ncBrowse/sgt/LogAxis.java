@@ -54,7 +54,7 @@ public class LogAxis extends SpaceAxis implements Cloneable {
         } catch (CloneNotSupportedException e) {
             newAxis = new LogAxis(getId());
         }
-        return (Axis)newAxis;
+        return newAxis;
     }
   
   
@@ -111,8 +111,8 @@ public class LogAxis extends SpaceAxis implements Cloneable {
             /*      System.out.println("uRange.start/end: "+uRange_.start+"/"+uRange_.end);
                     System.out.println("uRangeP: "+graph_.getYUtoP(uRange_.start)+"/"+graph_.getYUtoP(uRange_.end));
             */    
-            double min = (double)Math.pow(10,imin);
-            double max = (double)Math.pow(10,imax);
+            double min = Math.pow(10,imin);
+            double max = Math.pow(10,imax);
       
             xt=min;
             x = xt;
@@ -182,7 +182,7 @@ public class LogAxis extends SpaceAxis implements Cloneable {
                 label.setLayer(graph_.getLayer());
                 try {
                     label.draw(g);
-                } catch (LayerNotFoundException e) {} 
+                } catch (LayerNotFoundException ignored) {}
                 //x = x + delta*labelInterval_;
             }
             if(title_ != null) {
@@ -196,7 +196,7 @@ public class LogAxis extends SpaceAxis implements Cloneable {
                 title.setOrientation(SGLabel.HORIZONTAL);
                 try {
                     title.draw(g);
-                } catch (LayerNotFoundException e) {}
+                } catch (LayerNotFoundException ignored) {}
             }
         } else {                               // orientation is vertical
             if(Debug.DEBUG) System.out.println("LogAxis: start drawing YAxis");
@@ -227,8 +227,8 @@ public class LogAxis extends SpaceAxis implements Cloneable {
             //System.out.println("uRangeP: "+graph_.getYUtoP(uRange_.start)+"/"+graph_.getYUtoP(uRange_.end));
 
     
-            double min = (double)Math.pow(10,imin);
-            double max = (double)Math.pow(10,imax);
+            double min = Math.pow(10,imin);
+            double max = Math.pow(10,imax);
 
       
             yt=min;
@@ -320,7 +320,7 @@ public class LogAxis extends SpaceAxis implements Cloneable {
                 label.setLayer(graph_.getLayer());
                 try {
                     label.draw(g);
-                } catch (LayerNotFoundException e) {}
+                } catch (LayerNotFoundException ignored) {}
                 //y = j*10;//delta*labelInterval_;
             }
             if(title_ != null) {
@@ -332,7 +332,7 @@ public class LogAxis extends SpaceAxis implements Cloneable {
                 title.setOrientation(SGLabel.VERTICAL);
                 try {
                     title.draw(g);
-                } catch (LayerNotFoundException e) {}
+                } catch (LayerNotFoundException ignored) {}
             }
         }
     }

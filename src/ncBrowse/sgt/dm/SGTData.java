@@ -37,7 +37,7 @@ public interface SGTData {
     /**
      * Get the title.
      */
-    public String getTitle();
+    String getTitle();
     /**
      * Get a title formatted for a Key. <code>JPlotLayout</code> will use this
      * if an explicit Key title is not given in the <code>addData</code> method.
@@ -48,7 +48,7 @@ public interface SGTData {
      * @see ncBrowse.sgt.PointCollectionKey
      * @see ncBrowse.sgt.VectorKey
      */
-    public SGLabel getKeyTitle();
+    SGLabel getKeyTitle();
     /**
      * Get the unique identifier.  The presence of the identifier
      * is optional, but if it is present it should be unique.  This
@@ -58,7 +58,7 @@ public interface SGTData {
      * @see ncBrowse.sgt.Pane
      * @see ncBrowse.sgt.Layer
      */
-    public String getId();
+    String getId();
     /**
      * Create a shallow copy. User should implement using the clone()
      * method, which requires the Cloneable interface be inherited.
@@ -81,27 +81,27 @@ public interface SGTData {
      * @return shallow copy
      * @see java.lang.Object
      */
-    public SGTData copy();
+    SGTData copy();
 
     /**
      * Returns true if the X coordinate is Time.
      */
-    public boolean isXTime();
+    boolean isXTime();
 
     /**
      * Returns true if the Y coordinate is Time.
      */
-    public boolean isYTime();
+    boolean isYTime();
 
     /**
      * Returns the X SGTMetaData.
      */
-    public SGTMetaData getXMetaData();
+    SGTMetaData getXMetaData();
 
     /**
      * Returns the Y SGTMetaData.
      */
-    public SGTMetaData getYMetaData();
+    SGTMetaData getYMetaData();
 
     /**
      * Returns the range of the X coordinates.  If all the data in the
@@ -112,21 +112,21 @@ public interface SGTData {
      *
      * @see ncBrowse.sgt.geom.GeoDate#isMissing()
      */
-    public SoTRange getXRange();
+    SoTRange getXRange();
 
     /**
      * Returns the range of the Y coordinates.
      * @see #getXRange()
      */
-    public SoTRange getYRange();
+    SoTRange getYRange();
 
     /**
      * Add a PropertyChangeListener to the listener list.
      */
-    public void addPropertyChangeListener(PropertyChangeListener l);
+    void addPropertyChangeListener(PropertyChangeListener l);
 
     /**
      * Remove a PropertyChangeListener from the listener list.
      */
-    public void removePropertyChangeListener(PropertyChangeListener l);
+    void removePropertyChangeListener(PropertyChangeListener l);
 }

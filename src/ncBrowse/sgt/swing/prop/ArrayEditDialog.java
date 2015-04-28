@@ -140,10 +140,10 @@ public class ArrayEditDialog extends JDialog implements ListSelectionListener {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -267,8 +267,8 @@ public class ArrayEditDialog extends JDialog implements ListSelectionListener {
      */
     public void setArray(float[] array) {
         model_ = new DefaultListModel();
-        for(int i=0; i < array.length; i++) {
-            model_.addElement(Float.toString(array[i]));
+        for (float anArray : array) {
+            model_.addElement(Float.toString(anArray));
         }
         arrayList.setModel(model_);
     }
@@ -280,7 +280,7 @@ public class ArrayEditDialog extends JDialog implements ListSelectionListener {
         Enumeration e = model_.elements();
         int index = 0;
         while(e.hasMoreElements()) {
-            array[index] = new Float((String)e.nextElement()).floatValue();
+            array[index] = new Float((String) e.nextElement());
             index++;
         }
         return array;

@@ -80,11 +80,7 @@ public abstract class SoTValue implements Serializable {
          * Test for equality
          */
         public boolean equals(SoTValue val) {
-            if(val.isTime()) {
-                return date_.equals(((SoTValue.GeoDate)val).getValue());
-            } else {
-                return false;
-            }
+            return val.isTime() && date_.equals(((GeoDate) val).getValue());
         }
         /**
          * Add to value.
@@ -150,7 +146,7 @@ public abstract class SoTValue implements Serializable {
             value_ = value;
         }
         public Object getObjectValue() {
-            return new java.lang.Long(value_);
+            return value_;
         }
         /**
          * Test if <code>SoTValue</code> is time
@@ -162,11 +158,7 @@ public abstract class SoTValue implements Serializable {
          * Test for equality
          */
         public boolean equals(SoTValue val) {
-            if(val.isTime()) {
-                return value_ == ((SoTValue.Time)val).getValue();
-            } else {
-                return false;
-            }
+            return val.isTime() && value_ == ((Time) val).getValue();
         }
         /**
          * Add to value.
@@ -232,7 +224,7 @@ public abstract class SoTValue implements Serializable {
             value_ = value;
         }
         public Object getObjectValue() {
-            return new java.lang.Integer(value_);
+            return value_;
         }
         /**
          * Test if <code>SoTValue</code> is time
@@ -244,11 +236,7 @@ public abstract class SoTValue implements Serializable {
          * Test for equality
          */
         public boolean equals(SoTValue val) {
-            if(val.isTime()) {
-                return false;
-            } else {
-                return value_ == ((SoTValue.Integer)val).getValue();
-            }
+            return !val.isTime() && value_ == ((Integer) val).getValue();
         }
         /**
          * Add to value.
@@ -312,7 +300,7 @@ public abstract class SoTValue implements Serializable {
             value_ = value;
         }
         public Object getObjectValue() {
-            return new java.lang.Short(value_);
+            return value_;
         }
         /**
          * Test if <code>SoTValue</code> is time
@@ -324,11 +312,7 @@ public abstract class SoTValue implements Serializable {
          * Test for equality
          */
         public boolean equals(SoTValue val) {
-            if(val.isTime()) {
-                return false;
-            } else {
-                return value_ == ((SoTValue.Short)val).getValue();
-            }
+            return !val.isTime() && value_ == ((Short) val).getValue();
         }
         /**
          * Add to value.
@@ -392,7 +376,7 @@ public abstract class SoTValue implements Serializable {
             value_ = value;
         }
         public Object getObjectValue() {
-            return new java.lang.Float(value_);
+            return value_;
         }
         /**
          * Test if <code>SoTValue</code> is time
@@ -404,11 +388,7 @@ public abstract class SoTValue implements Serializable {
          * Test for equality
          */
         public boolean equals(SoTValue val) {
-            if(val.isTime()) {
-                return false;
-            } else {
-                return value_ == ((SoTValue.Float)val).getValue();
-            }
+            return !val.isTime() && value_ == ((Float) val).getValue();
         }
         /**
          * Add to value.
@@ -472,7 +452,7 @@ public abstract class SoTValue implements Serializable {
             value_ = value;
         }
         public Object getObjectValue() {
-            return new java.lang.Double(value_);
+            return value_;
         }
         /**
          * Test if <code>SoTValue</code> is time
@@ -484,11 +464,7 @@ public abstract class SoTValue implements Serializable {
          * Test for equality
          */
         public boolean equals(SoTValue val) {
-            if(val.isTime()) {
-                return false;
-            } else {
-                return value_ == ((SoTValue.Double)val).getValue();
-            }
+            return !val.isTime() && value_ == ((Double) val).getValue();
         }
         /**
          * Add to value.

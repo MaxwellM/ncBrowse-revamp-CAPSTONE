@@ -10,14 +10,14 @@
 
 package ncBrowse.sgt.beans;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.border.*;
-import java.awt.event.*;
-
-import ncBrowse.sgt.swing.util.ThreeDotsButton;
 import ncBrowse.sgt.swing.prop.ColorEntryPanel;
 import ncBrowse.sgt.swing.prop.FontDialog;
+import ncBrowse.sgt.swing.util.ThreeDotsButton;
+
+import javax.swing.*;
+import javax.swing.border.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 
 /**
  * Edit/create a <code>Border</code> object to be used with <code>PanelHolder</code>.
@@ -165,11 +165,7 @@ public class BorderDialog extends JDialog {
     private void jbInit() throws Exception {
         panel1.setLayout(borderLayout1);
         cardPanel.setLayout(cardLayout1);
-        borderTypeCB.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    borderTypeCB_actionPerformed(e);
-                }
-            });
+        borderTypeCB.addActionListener(this::borderTypeCB_actionPerformed);
         bevelPanel.setLayout(gridBagLayout5);
         etchedPanel.setLayout(gridBagLayout3);
         jLabel1.setText("Border Type");
@@ -178,17 +174,9 @@ public class BorderDialog extends JDialog {
         borderPanel.setLayout(borderLayout2);
         linePanel.setLayout(gridBagLayout8);
         okButton.setText("OK");
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    okButton_actionPerformed(e);
-                }
-            });
+        okButton.addActionListener(this::okButton_actionPerformed);
         cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    cancelButton_actionPerformed(e);
-                }
-            });
+        cancelButton.addActionListener(this::cancelButton_actionPerformed);
         jLabel2.setText("Style:");
         jLabel3.setText("Highlight Outer:");
         jLabel4.setText("Highlight Inner:");
@@ -213,11 +201,7 @@ public class BorderDialog extends JDialog {
         titledPanel.setBorder(BorderFactory.createEtchedBorder());
         titledPanel.setLayout(gridBagLayout1);
         titledCB.setText("Titled");
-        titledCB.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    titledCB_actionPerformed(e);
-                }
-            });
+        titledCB.addActionListener(this::titledCB_actionPerformed);
         jLabel7.setText("Title:");
         jLabel14.setText("Position:");
         jLabel15.setText("Justification:");
@@ -228,11 +212,7 @@ public class BorderDialog extends JDialog {
         titleColorPanel.setTitle("Set Title Color");
         fontEditor.setEnabled(false);
         fontEditor.setAlignmentY((float) 0.0);
-        fontEditor.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    fontEditor_actionPerformed(e);
-                }
-            });
+        fontEditor.addActionListener(this::fontEditor_actionPerformed);
         fontEditor.setToolTipText("Edit font.");
         fontEditor.setActionCommand("...");
         fontPanel.setLayout(flowLayout1);
@@ -488,59 +468,77 @@ public class BorderDialog extends JDialog {
 
     void okButton_actionPerformed(ActionEvent e) {
         String borderType = (String)borderTypeCB.getSelectedItem();
-        if(borderType.equals("None")) {
-            working_ = null;
-            titledCB.setSelected(false);
-        } else if(borderType.equals("Beveled")) {
-            Color highlighto = bevelHOColorPanel.getColor();
-            Color highlighti = bevelHIColorPanel.getColor();
-            Color shadowo = bevelSOColorPanel.getColor();
-            Color shadowi = bevelSIColorPanel.getColor();
-            int style = BevelBorder.RAISED;
-            if(etchedStyleCB.getSelectedIndex() == 1) {
-                style = BevelBorder.LOWERED;
+        switch (borderType) {
+            case "None":
+                working_ = null;
+                titledCB.setSelected(false);
+                break;
+            case "Beveled": {
+                Color highlighto = bevelHOColorPanel.getColor();
+                Color highlighti = bevelHIColorPanel.getColor();
+                Color shadowo = bevelSOColorPanel.getColor();
+                Color shadowi = bevelSIColorPanel.getColor();
+                int style = BevelBorder.RAISED;
+                if (etchedStyleCB.getSelectedIndex() == 1) {
+                    style = BevelBorder.LOWERED;
+                }
+                working_ = new BevelBorder(style, highlighto, highlighti,
+                    shadowo, shadowi);
+                break;
             }
-            working_ = new BevelBorder(style, highlighto, highlighti,
-                                       shadowo, shadowi);
-        } else if(borderType.equals("Etched")) {
-            Color highlight = etchedHColorPanel.getColor();
-            Color shadow = etchedSColorPanel.getColor();
-            int style = EtchedBorder.RAISED;
-            if(etchedStyleCB.getSelectedIndex() == 1) {
-                style = EtchedBorder.LOWERED;
+            case "Etched": {
+                Color highlight = etchedHColorPanel.getColor();
+                Color shadow = etchedSColorPanel.getColor();
+                int style = EtchedBorder.RAISED;
+                if (etchedStyleCB.getSelectedIndex() == 1) {
+                    style = EtchedBorder.LOWERED;
+                }
+                working_ = new EtchedBorder(style, highlight, shadow);
+                break;
             }
-            working_ = new EtchedBorder(style, highlight, shadow);
-        } else if(borderType.equals("Line")) {
-            Color color = lineColorPanel.getColor();
-            int thick = Integer.parseInt(lineTF.getText());
-            boolean round = lineCB.isSelected();
+            case "Line":
+                Color color = lineColorPanel.getColor();
+                int thick = Integer.parseInt(lineTF.getText());
+                boolean round = lineCB.isSelected();
 
-            working_ = new LineBorder(color, thick, round);
+                working_ = new LineBorder(color, thick, round);
+                break;
         }
         if(titledCB.isSelected()) {
             int just = 0;
             int pos = 0;
             String posStr = (String)positionCB.getSelectedItem();
-            if(posStr.equals("Above Top")) {
-                pos = TitledBorder.ABOVE_TOP;
-            } else if (posStr.equals("Below Top")) {
-                pos = TitledBorder.BELOW_TOP;
-            } else if (posStr.equals("Above Bottom")) {
-                pos = TitledBorder.ABOVE_BOTTOM;
-            } else if (posStr.equals("Bottom")) {
-                pos = TitledBorder.BOTTOM;
-            } else if (posStr.equals("Below Bottom")) {
-                pos = TitledBorder.BELOW_BOTTOM;
-            } else {
-                pos = TitledBorder.TOP;
+            switch (posStr) {
+                case "Above Top":
+                    pos = TitledBorder.ABOVE_TOP;
+                    break;
+                case "Below Top":
+                    pos = TitledBorder.BELOW_TOP;
+                    break;
+                case "Above Bottom":
+                    pos = TitledBorder.ABOVE_BOTTOM;
+                    break;
+                case "Bottom":
+                    pos = TitledBorder.BOTTOM;
+                    break;
+                case "Below Bottom":
+                    pos = TitledBorder.BELOW_BOTTOM;
+                    break;
+                default:
+                    pos = TitledBorder.TOP;
+                    break;
             }
             String justStr = (String)justCB.getSelectedItem();
-            if(justStr.equals("Rigt")) {
-                just = TitledBorder.RIGHT;
-            } else if(justStr.equals("Center")) {
-                just = TitledBorder.CENTER;
-            } else {
-                just = TitledBorder.LEFT;
+            switch (justStr) {
+                case "Rigt":
+                    just = TitledBorder.RIGHT;
+                    break;
+                case "Center":
+                    just = TitledBorder.CENTER;
+                    break;
+                default:
+                    just = TitledBorder.LEFT;
+                    break;
             }
             border_ = new TitledBorder(working_,
                                        titleTF.getText(),

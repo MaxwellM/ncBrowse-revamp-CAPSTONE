@@ -137,7 +137,7 @@ class PaneProxy {
         }
         Graphics goff;
         Dimension isze = pane_.getSize();
-        if(offscreen_ == (Image) null) {
+        if(offscreen_ == null) {
             offscreen_ = pane_.createImage(isze.width, isze.height);
         } else {
             if(isze.width != panesize_.width || isze.height != panesize_.height) {
@@ -218,17 +218,18 @@ class PaneProxy {
         // draw Layers
         //
         Component[] comps = pane_.getComponents();
-        for(int i=0; i < comps.length; i++) {
+        for (Component comp : comps) {
             try {
-                if(comps[i] instanceof Layer) {
-                    ((Layer)comps[i]).draw(g);
-                } else if(comps[i] instanceof LayerControl) {
-                    ((LayerControl)comps[i]).draw(g);
+                if (comp instanceof Layer) {
+                    ((Layer) comp).draw(g);
+                } else if (comp instanceof LayerControl) {
+                    ((LayerControl) comp).draw(g);
                 }
                 /*       if(printer_ && comps[i] instanceof Panel) {
                          ((Panel)comps[i]).paintBorder(g);
                          } */
-            } catch (PaneNotFoundException e) {}
+            } catch (PaneNotFoundException ignored) {
+            }
         }
     }
     void drawDraggableItems(Graphics g) {
@@ -238,12 +239,13 @@ class PaneProxy {
         // draw draggable items in each layer
         //
         Component[] comps = pane_.getComponents();
-        for(int i=0; i < comps.length; i++) {
+        for (Component comp : comps) {
             try {
-                if(comps[i] instanceof LayerControl) {
-                    ((LayerControl)comps[i]).drawDraggableItems(g);
+                if (comp instanceof LayerControl) {
+                    ((LayerControl) comp).drawDraggableItems(g);
                 }
-            } catch (PaneNotFoundException e) {}
+            } catch (PaneNotFoundException ignored) {
+            }
         }
     }
 
@@ -305,20 +307,20 @@ class PaneProxy {
     }
     Layer getFirstLayer() {
         Component[] comps = pane_.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Layer) {
-                return (Layer)comps[i];
+        for (Component comp : comps) {
+            if (comp instanceof Layer) {
+                return (Layer) comp;
             }
         }
         return null;
     }
     Layer getLayer(String id) throws LayerNotFoundException {
         Component[] comps = pane_.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Layer) {
-                if(((Layer)comps[i]).getId() == id) return (Layer)comps[i];
-            } else if(comps[i] instanceof Panel) {
-                if(((Panel)comps[i]).hasLayer(id)) return (Layer)((Panel)comps[i]).getLayer(id);
+        for (Component comp : comps) {
+            if (comp instanceof Layer) {
+                if (((Layer) comp).getId() == id) return (Layer) comp;
+            } else if (comp instanceof Panel) {
+                if (((Panel) comp).hasLayer(id)) return (Layer) ((Panel) comp).getLayer(id);
             }
         }
         throw new LayerNotFoundException();
@@ -326,11 +328,11 @@ class PaneProxy {
 
     Layer getLayerFromDataId(String id) throws LayerNotFoundException {
         Component[] comps = pane_.getComponents();
-        for(int i=0; i < comps.length; i++) {
-            if(comps[i] instanceof Layer) {
-                if(((Layer)comps[i]).isDataInLayer(id)) return (Layer)comps[i];
-            } else if(comps[i] instanceof Panel) {
-                if(((Panel)comps[i]).isDataInPanel(id)) return (Layer)((Panel)comps[i]).getLayerFromDataId(id);
+        for (Component comp : comps) {
+            if (comp instanceof Layer) {
+                if (((Layer) comp).isDataInLayer(id)) return (Layer) comp;
+            } else if (comp instanceof Panel) {
+                if (((Panel) comp).isDataInPanel(id)) return (Layer) ((Panel) comp).getLayerFromDataId(id);
             }
         }
         throw new LayerNotFoundException();
@@ -357,13 +359,13 @@ class PaneProxy {
         Component[] comps = pane_.getComponents();
         if(comps.length != 0) {
             Layer ly;
-            for(int i=0; i < comps.length; i++) {
-                if(comps[i] instanceof Layer) {
-                    obj = ((Layer)comps[i]).getObjectAt(x, y, false);
-                    if(obj != null) return obj;
-                } else if(comps[i] instanceof Panel) {
-                    obj = ((Panel)comps[i]).getObjectAt(x, y, false);
-                    if(obj != null) return obj;
+            for (Component comp : comps) {
+                if (comp instanceof Layer) {
+                    obj = ((Layer) comp).getObjectAt(x, y, false);
+                    if (obj != null) return obj;
+                } else if (comp instanceof Panel) {
+                    obj = ((Panel) comp).getObjectAt(x, y, false);
+                    if (obj != null) return obj;
                 }
             }
         }
@@ -378,13 +380,13 @@ class PaneProxy {
         Component[] comps = pane_.getComponents();
         if(comps.length != 0) {
             Layer ly;
-            for(int i=0; i < comps.length; i++) {
-                if(comps[i] instanceof Layer) {
-                    obj = ((Layer)comps[i]).getObjectAt(x, y, false);
-                    if(obj != null) obList.addElement(obj);
-                } else if(comps[i] instanceof Panel) {
-                    obj = ((Panel)comps[i]).getObjectAt(x, y, false);
-                    if(obj != null) obList.addElement(obj);
+            for (Component comp : comps) {
+                if (comp instanceof Layer) {
+                    obj = ((Layer) comp).getObjectAt(x, y, false);
+                    if (obj != null) obList.addElement(obj);
+                } else if (comp instanceof Panel) {
+                    obj = ((Panel) comp).getObjectAt(x, y, false);
+                    if (obj != null) obList.addElement(obj);
                 }
             }
         }
@@ -460,16 +462,16 @@ class PaneProxy {
         Component[] comps = pane_.getComponents();
         if(comps.length != 0) {
             Layer ly;
-            for(int i=0; i < comps.length; i++) {
-                if(comps[i] instanceof Layer) {
-                    obj = ((Layer)comps[i]).getObjectAt(event.getX(), event.getY());
-                    if(obj != null) {
+            for (Component comp : comps) {
+                if (comp instanceof Layer) {
+                    obj = ((Layer) comp).getObjectAt(event.getX(), event.getY());
+                    if (obj != null) {
                         selectedobject_ = obj;
                         break;
                     }
-                } else if(comps[i] instanceof Panel) {
-                    obj = ((Panel)comps[i]).getObjectAt(event.getX(), event.getY(), false);
-                    if(obj != null) {
+                } else if (comp instanceof Panel) {
+                    obj = ((Panel) comp).getObjectAt(event.getX(), event.getY(), false);
+                    if (obj != null) {
                         selectedobject_ = obj;
                         break;
                     }
@@ -602,16 +604,16 @@ class PaneProxy {
             Component[] comps = pane_.getComponents();
             if(comps.length != 0) {
                 Layer ly;
-                for(int i=0; i < comps.length; i++) {
-                    if(comps[i] instanceof Layer) {
-                        obj = ((Layer)comps[i]).getObjectAt(event.getX(), event.getY());
-                        if(obj != null) {
+                for (Component comp : comps) {
+                    if (comp instanceof Layer) {
+                        obj = ((Layer) comp).getObjectAt(event.getX(), event.getY());
+                        if (obj != null) {
                             selectedobject_ = obj;
                             break;
                         }
-                    } else if(comps[i] instanceof Panel) {
-                        obj = ((Panel)comps[i]).getObjectAt(event.getX(), event.getY(), false);
-                        if(obj != null) {
+                    } else if (comp instanceof Panel) {
+                        obj = ((Panel) comp).getObjectAt(event.getX(), event.getY(), false);
+                        if (obj != null) {
                             selectedobject_ = obj;
                             break;
                         }
@@ -623,23 +625,19 @@ class PaneProxy {
                     // found selectable object begin single operation move
                     //
                     if(((Selectable)selectedobject_).isSelectable()) {
-                        if(Debug.DEBUG) System.out.println("MouseDown (isSelectable)");
+                        if (Debug.DEBUG) System.out.println("MouseDown (isSelectable)");
                         draggable_ = selectedobject_ instanceof Draggable;
-                        if(selectedobject_ instanceof Moveable) {
-                            moveable_ =  ((Moveable)selectedobject_).isMoveable();
-                        } else {
-                            moveable_ = false;
-                        }
-                        if(moveable_ || draggable_) {
+                        moveable_ = selectedobject_ instanceof Moveable && ((Moveable) selectedobject_).isMoveable();
+                        if (moveable_ || draggable_) {
                             in_move_ = true;
                         } else {
                             in_move_ = false;
                         }
                         moved_ = false;
-                        if(Debug.DEBUG) System.out.println("MouseDown (isDraggable) " +  draggable_);
-                        ((Selectable)selectedobject_).setSelected(false);
-                        selectedRect_ = new Rectangle(((Selectable)selectedobject_).getBounds());
-                        if(!draggable_ && moveable_) {
+                        if (Debug.DEBUG) System.out.println("MouseDown (isDraggable) " + draggable_);
+                        ((Selectable) selectedobject_).setSelected(false);
+                        selectedRect_ = new Rectangle(((Selectable) selectedobject_).getBounds());
+                        if (!draggable_ && moveable_) {
                             //
                             // draw initial box
                             //
@@ -647,10 +645,10 @@ class PaneProxy {
                             g.setColor(Color.red);
                             g.setXORMode(pane_.getBackground());
                             g.drawRect(selectedRect_.x, selectedRect_.y,
-                                       selectedRect_.width, selectedRect_.height);
+                                selectedRect_.width, selectedRect_.height);
                             g.setPaintMode();
                         }
-                        if(!draggable_) pane_.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
+                        if (!draggable_) pane_.setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
                         move_ref_ = new Point(event.getX(), event.getY());
                         return true;
                     }
@@ -736,7 +734,7 @@ class PaneProxy {
                     //      ((Draggable)selectedobject_).setLocationNoVeto(selectedRect_.x,
                     //                                                      selectedRect_.y);
                     ((LayerChild)selectedobject_).draw(g);
-                } catch (LayerNotFoundException e) {}
+                } catch (LayerNotFoundException ignored) {}
             }
             move_ref_ = new Point(event.getX(), event.getY());
         }

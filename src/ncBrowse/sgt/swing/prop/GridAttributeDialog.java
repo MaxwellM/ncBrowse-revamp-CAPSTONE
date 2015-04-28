@@ -213,8 +213,8 @@ public class GridAttributeDialog extends JDialog {
             tempString[2] = "CONTOUR";
             tempString[3] = "RASTER_CONTOUR";
             tempString[4] = "AREA_FILL_CONTOUR";
-            for(int i=0; i < tempString.length; i++) {
-                stringComboBoxModel1.addElement(tempString[i]);
+            for (String aTempString : tempString) {
+                stringComboBoxModel1.addElement(aTempString);
             }
         }
         gridStyleComboBox.setSelectedIndex(0);
@@ -271,10 +271,10 @@ public class GridAttributeDialog extends JDialog {
         Insets ins = getInsets();
         setSize(ins.left + ins.right + d.width, ins.top + ins.bottom + d.height);
         Component components[] = getContentPane().getComponents();
-        for (int i = 0; i < components.length; i++) {
-            Point p = components[i].getLocation();
+        for (Component component : components) {
+            Point p = component.getLocation();
             p.translate(ins.left, ins.top);
-            components[i].setLocation(p);
+            component.setLocation(p);
         }
         fComponentsAdjusted = true;
     }
@@ -486,8 +486,8 @@ public class GridAttributeDialog extends JDialog {
         TabbedPane.setEnabledAt(contourLevelIndex_, isContour);
         Component[] list = ContourLevelsPanel.getComponents();
         boolean clExists = conLevels_ != null;
-        for(int i=0; i < list.length; i++) {
-            list[i].setEnabled(clExists);
+        for (Component aList : list) {
+            aList.setEnabled(clExists);
         }
         newConLevelButton.setEnabled(true);
     }
@@ -497,8 +497,8 @@ public class GridAttributeDialog extends JDialog {
         TabbedPane.setEnabledAt(colorMapIndex_, isRaster);
         Component[] list = ColorMapPanel.getComponents();
         boolean cmExists = colorMap_ != null;
-        for(int i=0; i < list.length; i++) {
-            list[i].setEnabled(cmExists);
+        for (Component aList : list) {
+            aList.setEnabled(cmExists);
         }
         newColorMapButton.setEnabled(true);
     }
@@ -541,8 +541,8 @@ public class GridAttributeDialog extends JDialog {
 
     void updateGridAttribute() {
         if(paneList_ != null) {
-            for(int i=0; i < paneList_.length; i++) {
-                paneList_[i].setBatch(true, "GridAttributeDialog");
+            for (JPane aPaneList_ : paneList_) {
+                aPaneList_.setBatch(true, "GridAttributeDialog");
             }
         }
         updateConLevels();
@@ -550,8 +550,8 @@ public class GridAttributeDialog extends JDialog {
         attr_.setColorMap(colorMap_);
         attr_.setStyle(gridStyleComboBox.getSelectedIndex());
         if(paneList_ != null) {
-            for(int i=0; i < paneList_.length; i++) {
-                paneList_[i].setBatch(false, "GridAttributeDialog");
+            for (JPane aPaneList_ : paneList_) {
+                aPaneList_.setBatch(false, "GridAttributeDialog");
             }
         }
     }
@@ -697,7 +697,7 @@ public class GridAttributeDialog extends JDialog {
         int index = conLevelTable_.getSelectedRow();
         if(index < 0) return;
         conLevelModel_.insert(index,
-                              new Double(0.0),
+            0.0,
                               new ContourLineAttribute(ContourLineAttribute.SOLID));
     }
 
@@ -705,7 +705,7 @@ public class GridAttributeDialog extends JDialog {
         int index = conLevelTable_.getSelectedRow();
         if(index < 0) return;
         conLevelModel_.insert(index + 1,
-                              new Double(0.0),
+            0.0,
                               new ContourLineAttribute(ContourLineAttribute.SOLID));
     }
 
@@ -753,7 +753,7 @@ public class GridAttributeDialog extends JDialog {
         int size = conLevels_.size();
         for(int i=0; i < size; i++) {
             try {
-                val = new Double(conLevels_.getLevel(i));
+                val = conLevels_.getLevel(i);
                 attr = conLevels_.getContourLineAttribute(i);
                 conLevelModel_.add(val, attr);
             } catch (ContourLevelNotFoundException e) {
@@ -772,7 +772,7 @@ public class GridAttributeDialog extends JDialog {
         for(int i=0; i < size; i++) {
             val = (Double)conLevelModel_.getValueAt(i,0);
             attr = (ContourLineAttribute)conLevelModel_.getValueAt(i,1);
-            cl.addLevel(val.doubleValue(), attr);
+            cl.addLevel(val, attr);
         }
         cl.setDefaultContourLineAttribute(conLevels_.getDefaultContourLineAttribute());
         conLevels_ = cl;
@@ -821,7 +821,7 @@ public class GridAttributeDialog extends JDialog {
                 for(i=0; i < size-1; i++) {
                     a = (Double)values.elementAt(index[i]);
                     b = (Double)values.elementAt(index[i+1]);
-                    if(a.doubleValue() > b.doubleValue()) {
+                    if(a > b) {
                         //    if(a.compareTo(b) > 0) { // jdk1.2
                         temp = index[i];
                         index[i] = index[i+1];

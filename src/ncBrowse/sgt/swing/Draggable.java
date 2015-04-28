@@ -26,16 +26,16 @@ public interface Draggable {
      * Set the location of the <code>Draggable</code> object. Change in
      * location will not be vetoed.
      */
-    public void setLocationNoVeto(int x, int y);
+    void setLocationNoVeto(int x, int y);
     /**
      * Set the location of the <code>Draggable</code> object.
      */
-    public void setLocation(Point loc);
+    void setLocation(Point loc);
     /**
      * Set the location of the <code>Draggable</code> object and optionally don't
      * fire a <code>PropertyChangeEvent</code>
      *
      * @since 3.0
      */
-    public void setLocation(Point loc, boolean fireEvent);
+    void setLocation(Point loc, boolean fireEvent);
 }

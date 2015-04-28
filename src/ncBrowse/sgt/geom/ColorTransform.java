@@ -29,8 +29,8 @@ import ncBrowse.sgt.Transform;
 public class ColorTransform implements TransformColor {
     Transform mRedTransform;
     Transform mGreenTransform;
-    Transform mBlueTransform;;
-        
+    Transform mBlueTransform;
+
     public ColorTransform() {
     }
         

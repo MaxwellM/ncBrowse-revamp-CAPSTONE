@@ -74,17 +74,9 @@ public class ColorDialog extends JDialog {
         panel1.setLayout(gridBagLayout1);
         buttonPanel.setBorder(BorderFactory.createEtchedBorder());
         cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    cancelButton_actionPerformed(e);
-                }
-            });
+        cancelButton.addActionListener(this::cancelButton_actionPerformed);
         okButton.setText("OK");
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    okButton_actionPerformed(e);
-                }
-            });
+        okButton.addActionListener(this::okButton_actionPerformed);
         alphaPanel.setBorder(titledBorder1);
         alphaPanel.setLayout(gridBagLayout2);
         titledBorder1.setTitle("Alpha Channel");

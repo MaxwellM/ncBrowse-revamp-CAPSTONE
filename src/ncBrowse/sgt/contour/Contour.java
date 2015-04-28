@@ -10,30 +10,18 @@
 
 package ncBrowse.sgt.contour;
 
-import ncBrowse.sgt.CartesianGraph;
-import ncBrowse.sgt.ContourLineAttribute;
-import ncBrowse.sgt.DefaultContourLineAttribute;
-import ncBrowse.sgt.SGLabel;
-import ncBrowse.sgt.LayerNotFoundException;
-import ncBrowse.sgt.ContourLevels;
-import ncBrowse.sgt.ContourLevelNotFoundException;
-
+import ncBrowse.sgt.*;
 import ncBrowse.sgt.dm.SGTGrid;
-
-import ncBrowse.sgt.geom.Range2D;
-import ncBrowse.sgt.geom.Point2D;
-import ncBrowse.sgt.geom.GeoDate;
 import ncBrowse.sgt.geom.Debug;
+import ncBrowse.sgt.geom.GeoDate;
+import ncBrowse.sgt.geom.Point2D;
+import ncBrowse.sgt.geom.Range2D;
 
-import java.awt.Graphics;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-
-import java.util.Vector;
-import java.util.Enumeration;
-import java.beans.PropertyChangeListener;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.Enumeration;
+import java.util.Vector;
 
 /**
  * Contour constructs a set of <code>ContourLine</code> objects based on
@@ -284,7 +272,7 @@ public class Contour implements PropertyChangeListener {
             //
             // initialize for level
             //
-            zc = ((Double)lenum.nextElement()).doubleValue();
+            zc = (Double) lenum.nextElement();
             if(Debug.CONTOUR) {
                 System.out.println("zc = " + zc);
             }
@@ -407,7 +395,7 @@ public class Contour implements PropertyChangeListener {
                                         //       pt(1) = pt(2)
                                         //  pt(kmax+1) = pt(kmax)
                                         //
-                                        cl.setElementAt((Point2D.Double)cl.elementAt(1), 0);
+                                        cl.setElementAt(cl.elementAt(1), 0);
                                         cl.addPoint((Point2D.Double)cl.elementAt(k));
                                         cl.setClosed(false);
                                         cl.setKmax(kmax);
@@ -433,7 +421,7 @@ public class Contour implements PropertyChangeListener {
                                     j = j + isin_[3-exit];
                                     lin = exit + 2 - ((exit+2)/4)*4;
                                     computeCorners(i, j, zc);
-                                    continue loop350;
+                                    continue;
                                 }
                             }
                         }
@@ -445,7 +433,7 @@ public class Contour implements PropertyChangeListener {
                             //   pt(kmax+1) = pt(3)
                             //
                             cl.addPoint((Point2D.Double)cl.elementAt(1));
-                            cl.setElementAt((Point2D.Double)cl.elementAt(k), 0);
+                            cl.setElementAt(cl.elementAt(k), 0);
                             cl.addPoint((Point2D.Double)cl.elementAt(2));
                             cl.setClosed(true);
                             cl.setKmax(kmax);
@@ -731,7 +719,6 @@ public class Contour implements PropertyChangeListener {
                 if(space/ark < 0.80 || !roomFound) {
                     //    drawLineSegment(g, x[k], y[k], x[k+1], y[k+1]);
                     k=k+1;
-                    continue;
                 } else {
                     //
                     // add label to contour line

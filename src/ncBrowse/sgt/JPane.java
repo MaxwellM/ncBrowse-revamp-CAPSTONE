@@ -317,7 +317,7 @@ public class JPane extends javax.swing.JLayeredPane
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         proxy_.paint(g);
-    }
+}
 
     /**
      * Adds the specified component to the end of the <code>Pane</code>.
@@ -670,9 +670,11 @@ public class JPane extends javax.swing.JLayeredPane
      */
     protected void drawPage(Graphics g, PageFormat pf) {
         Dimension d = getSize();
-        Point pageOrigin = null;
+        Point pageOrigin;
         pageOrigin = proxy_.getPageOrigin();
-        if(pageOrigin == null) pageOrigin = new Point(0,0);
+        if(pageOrigin == null) {
+            pageOrigin = new Point(0, 0);
+        }
         Graphics2D g2 = (Graphics2D)g;
 
         double scale = 1.0;
@@ -688,7 +690,9 @@ public class JPane extends javax.swing.JLayeredPane
             } else if(xf > yf) {
                 scale = yf;
             }
-            if(scaleMode == AbstractPane.SHRINK_TO_FIT && scale > 1.0) scale = 1.0;
+            if(scaleMode == AbstractPane.SHRINK_TO_FIT && scale > 1.0) {
+                scale = 1.0;
+            }
         }
 
         switch(proxy_.getPageHAlign()) {

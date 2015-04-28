@@ -9,15 +9,11 @@
  */
 package ncBrowse.sgt;
 
+import ncBrowse.sgt.dm.SGTData;
 import ncBrowse.sgt.geom.Range2D;
 import ncBrowse.sgt.geom.SoTRange;
-import ncBrowse.sgt.geom.Debug;
 
-import ncBrowse.sgt.dm.SGTData;
-
-import java.awt.Graphics;
-import java.awt.Event;
-import java.awt.Point;
+import java.awt.*;
 import java.beans.PropertyChangeListener;
 
 /**
@@ -262,7 +258,7 @@ public abstract class Graph implements PropertyChangeListener {
         }
         return new Range2D(min, max, delta);
     }
-    static final double log10(double x) {
+    static double log10(double x) {
         return 0.4342944819*Math.log(x);
     }
     //

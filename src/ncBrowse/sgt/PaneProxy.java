@@ -10,33 +10,16 @@
 
 package ncBrowse.sgt;
 
-import ncBrowse.sgt.swing.Draggable;
 import ncBrowse.sgt.beans.Panel;
-
 import ncBrowse.sgt.geom.Debug;
+import ncBrowse.sgt.swing.Draggable;
 
-import java.awt.Graphics2D;
-import java.awt.Stroke;
-
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.Point;
-import java.awt.PrintGraphics;
-import java.awt.Container;
-import java.awt.Component;
-import java.awt.Color;
-import java.awt.Cursor;
-
-import java.awt.event.MouseEvent;
+import java.awt.*;
 import java.awt.event.InputEvent;
-
-import java.util.Vector;
-import java.util.Properties;
-
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.Vector;
 
 /**
  * PaneProxy implements the functionality common to <code>JPane</code>
@@ -260,9 +243,12 @@ class PaneProxy {
             g.drawImage(offscreen_, 0, 0, pane_);
             drawDraggableItems(g);
         } else {
-            if(Debug.DRAW_TRACE) System.out.println("PaneProxy: [" + ident_ +
-                                                    "] paint: calling draw(), batch="+batch_);
-            draw();
+            if(Debug.DRAW_TRACE) {
+                System.out.println("PaneProxy: [" + ident_ +
+                    "] paint: calling draw(), batch=" + batch_);
+            }
+            //DONT KNOW WHY BUT MUST BE draw(g) NOT draw()!!!!
+            draw(g);
         }
         modified_ = false;
     }

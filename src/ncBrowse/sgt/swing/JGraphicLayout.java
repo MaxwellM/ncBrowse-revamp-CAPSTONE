@@ -11,7 +11,7 @@
 package ncBrowse.sgt.swing;
 
 import ncBrowse.sgt.CartesianGraph;
-import ncBrowse.sgt.Pane;
+//import ncBrowse.sgt.Pane;
 import ncBrowse.sgt.SGLabel;
 import ncBrowse.sgt.Layer;
 import ncBrowse.sgt.JPane;

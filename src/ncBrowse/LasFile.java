@@ -42,9 +42,11 @@ public class LasFile implements NcFile {
   public IOException getException() { return mException; }
 
   public void delete() throws IOException {
-    if (mDelegate != null) mDelegate.close();
-    if (mFile != null){
-      mFile.delete();
+    if (mDelegate != null) {
+      mDelegate.close();
+    }
+    if ((mFile != null)&&(!mFile.delete())){
+      System.out.println("Failed to delete!");
     }
   }
 
@@ -96,10 +98,10 @@ public class LasFile implements NcFile {
         mSize = mLasVar.getSize();
         fout = new FileOutputStream(mFile);
         byte[] buf = new byte[4096];
-        int count = 0;
+        int count;
 
         while ( (count = sin.read(buf)) > 0) {
-          if (Thread.currentThread().interrupted()){
+          if (Thread.interrupted()){
             throw new InterruptedException();
           }
           mTotal += count;
@@ -111,8 +113,13 @@ public class LasFile implements NcFile {
       }
       catch (Exception ex) {
         if (fout != null) fout.close();
-        if (mDelegate != null) mDelegate.close();
-        mFile.delete();
+        if (mDelegate != null) {
+          mDelegate.close();
+        }
+        if (!mFile.delete()){
+          System.out.println("Failed to delete!");
+        }
+        //mFile.delete();
         mFile = null;
         if (ex instanceof IOException){
           throw (IOException) ex;

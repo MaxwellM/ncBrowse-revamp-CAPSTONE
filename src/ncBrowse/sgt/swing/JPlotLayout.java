@@ -157,8 +157,8 @@ public class JPlotLayout extends JGraphicLayout
      */
     public JPlotLayout(SGTData dataset, String id, Image img,
                        boolean is_key_pane) {
-        this(dataset instanceof SGTGrid? GRID:
-             (dataset instanceof PointCollection? POINTS: (dataset instanceof SGTVector? VECTOR: LINE)),
+        this((dataset instanceof SGTGrid) ? GRID :
+                ((dataset instanceof PointCollection) ? POINTS : ((dataset instanceof SGTVector) ? VECTOR : LINE)),
              dataset.isXTime(), dataset.isYTime(), id, img, is_key_pane);
     }
     /**
@@ -186,7 +186,7 @@ public class JPlotLayout extends JGraphicLayout
      *
      * @param isGrid if true data is grid
      * @param isPoints if true data is points
-     * @param isXtime if true x coordinate is time
+     * @param isXTime if true x coordinate is time
      * @param isYTime if true y coordinate is time
      * @param id identifier
      * @param img Logo image
@@ -225,10 +225,10 @@ public class JPlotLayout extends JGraphicLayout
         Layer layer, key_layer;
         CartesianGraph graph;
         LinearTransform xt, yt;
-        PlainAxis xbot = null;
-        PlainAxis yleft = null;
-        TimeAxis tbot = null;
-        TimeAxis tleft = null;
+        PlainAxis xbot;
+        PlainAxis yleft;
+        TimeAxis tbot;
+        TimeAxis tleft;
         double xpos, ypos;
         int halign;
         ColorMap cmap;
@@ -568,7 +568,7 @@ public class JPlotLayout extends JGraphicLayout
      * Add data to the layout. LineKey descriptor will be
      * taken from the dependent variable name.
      *
-     * @param data datum data to be added
+     * @param datum datum data to be added
      */
     public void addData(SGTData datum) {
         if(Debug.DEBUG) System.out.println("JPlotLayout.addData(SGTData)");
@@ -578,7 +578,7 @@ public class JPlotLayout extends JGraphicLayout
      * Add data to the layout. LineKey descriptor will be
      * taken from the dependent variable name.
      *
-     * @param data datum data to be added
+     * @param datum datum data to be added
      * @param attr attribute for graphics
      */
     public void addData(SGTData datum, Attribute attr) {
@@ -932,8 +932,7 @@ public class JPlotLayout extends JGraphicLayout
             if(datum instanceof SGTLine) {
                 if(datum.getYMetaData().isReversed() != revYAxis_) {
                     if(Debug.DEBUG) System.out.println("New datum has reversed ZUp!");
-                    SGTData modified = flipY(datum);
-                    datum = modified;
+                    datum = flipY(datum);
                 }
             }
             super.addData(datum);

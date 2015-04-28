@@ -176,35 +176,35 @@ public class JLineProfileLayout extends JGraphicLayout {
         //
         ypos = ySize_ - 1.2f*mainTitleHeight_;
         Font titleFont = new Font("Helvetica", Font.BOLD, 14);
-        mainTitle_ = new SGLabel("Line Profile Title",
-                                 "Profile Plot",
-                                 mainTitleHeight_,
-                                 new Point2D.Double(xpos, ypos),
-                                 SGLabel.BOTTOM,
-                                 halign);
-        mainTitle_.setFont(titleFont);
-        layer.addChild(mainTitle_);
+//        mainTitle_ = new SGLabel("Line Profile Title",
+//                                 "Profile Plot",
+//                                 mainTitleHeight_,
+//                                 new Point2D.Double(xpos, ypos),
+//                                 SGLabel.BOTTOM,
+//                                 halign);
+//        mainTitle_.setFont(titleFont);
+//        layer.addChild(mainTitle_);
         ypos = ypos - 1.2f*warnHeight_;
         Font title2Font = new Font("Helvetica", Font.PLAIN, 10);
-        title2_ = new SGLabel("Warning",
-                              "Warning: Browse image only",
-                              warnHeight_,
-                              new Point2D.Double(xpos, ypos),
-                              SGLabel.BOTTOM,
-                              halign);
-        title2_.setFont(title2Font);
-        layer.addChild(title2_);
+//        title2_ = new SGLabel("Warning",
+//                              "Warning: Browse image only",
+//                              warnHeight_,
+//                              new Point2D.Double(xpos, ypos),
+//                              SGLabel.BOTTOM,
+//                              halign);
+//        title2_.setFont(title2Font);
+//        layer.addChild(title2_);
         ypos = ypos - 1.1f*warnHeight_;
-        title3_ = new SGLabel("Warning 2",
-                              "Verify accuracy of plot before research use",
-                              warnHeight_,
-                              new Point2D.Double(xpos, ypos),
-                              SGLabel.BOTTOM,
-                              halign);
-        title3_.setFont(title2Font);
-        layer.addChild(title3_);
+//        title3_ = new SGLabel("Warning 2",
+//                              "Verify accuracy of plot before research use",
+//                              warnHeight_,
+//                              new Point2D.Double(xpos, ypos),
+//                              SGLabel.BOTTOM,
+//                              halign);
+//        title3_.setFont(title2Font);
+//        layer.addChild(title3_);
         //
-        title3_.setSelectable(false);
+//        title3_.setSelectable(false);
 
         layerCount_ = 0;
         //
@@ -869,11 +869,11 @@ public class JLineProfileLayout extends JGraphicLayout {
             xpos = (xMin_ + xMax_)*0.5;
         }
         double ypos = ySize_ - 1.2f*mainTitleHeight_;
-        mainTitle_.setLocationP(new Point2D.Double(xpos, ypos));
+//        mainTitle_.setLocationP(new Point2D.Double(xpos, ypos));
         ypos = ypos - 1.2f*warnHeight_;
-        title2_.setLocationP(new Point2D.Double(xpos, ypos));
+//        title2_.setLocationP(new Point2D.Double(xpos, ypos));
         ypos = ypos - 1.1f*warnHeight_;
-        title3_.setLocationP(new Point2D.Double(xpos, ypos));
+//        title3_.setLocationP(new Point2D.Double(xpos, ypos));
         if(keyPane_ == null) {
             lineKey_.setLocationP(new Point2D.Double(xSize_ - 0.01, ySize_));
         }

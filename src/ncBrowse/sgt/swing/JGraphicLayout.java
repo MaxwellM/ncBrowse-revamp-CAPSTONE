@@ -151,7 +151,7 @@ public abstract class JGraphicLayout extends JPane {
      * @undirected
      * @label titles
      */
-    protected SGLabel mainTitle_, title2_, title3_;
+    //protected SGLabel mainTitle_, title2_, title3_;
     /** Reference to Mouse event handler */
     protected SymMouse aSymMouse_;
     //
@@ -200,9 +200,9 @@ public abstract class JGraphicLayout extends JPane {
         overlayed_ = true;
         data_ = new Vector(10);
         iconImage_ = img;
-        mainTitle_ = null;
-        title2_ = null;
-        title3_ = null;
+        //mainTitle_ = null;
+        //title2_ = null;
+        //title3_ = null;
         me_ = this;
         if(aSymMouse_ == null) aSymMouse_ = new SymMouse();
         addMouseListener(aSymMouse_);
@@ -230,11 +230,11 @@ public abstract class JGraphicLayout extends JPane {
      * @param title2 secondary plot title
      * @param title3 tertiary plot title
      */
-    public void setTitles(String title, String title2, String title3) {
-        if(mainTitle_ != null) mainTitle_.setText(title);
-        if(title2_ != null) title2_.setText(title2);
-        if(title3_ != null) title3_.setText(title3);
-    }
+//    public void setTitles(String title, String title2, String title3) {
+//        if(mainTitle_ != null) mainTitle_.setText(title);
+//        if(title2_ != null) title2_.setText(title2);
+//        if(title3_ != null) title3_.setText(title3);
+//    }
     /**
      * Set the base units. The base units are set automatically based
      * on the first <code>SGTData</code> added to the list. Other

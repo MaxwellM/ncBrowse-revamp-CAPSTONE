@@ -403,33 +403,33 @@ public class JPlotLayout extends JGraphicLayout
         //
         ypos = ySize_ - 1.0f*mainTitleHeight_;
         Font titleFont = new Font("Helvetica", Font.BOLD, 14);
-        mainTitle_ = new SGLabel("Line Profile Title",
-                                 "Profile Plot",
-                                 mainTitleHeight_,
-                                 new Point2D.Double(xpos, ypos),
-                                 SGLabel.BOTTOM,
-                                 halign);
-        mainTitle_.setFont(titleFont);
-        layer.addChild(mainTitle_);
+//        mainTitle_ = new SGLabel("Line Profile Title",
+//                                 "Profile Plot",
+//                                 mainTitleHeight_,
+//                                 new Point2D.Double(xpos, ypos),
+//                                 SGLabel.BOTTOM,
+//                                 halign);
+//        mainTitle_.setFont(titleFont);
+//        layer.addChild(mainTitle_);
         ypos = ypos - 1.0f*warnHeight_;
         Font title2Font = new Font("Helvetica", Font.PLAIN, 10);
-        title2_ = new SGLabel("Second Title",
-                              "Warning: Browse image only",
-                              warnHeight_,
-                              new Point2D.Double(xpos, ypos),
-                              SGLabel.BOTTOM,
-                              halign);
-        title2_.setFont(title2Font);
-        layer.addChild(title2_);
+//        title2_ = new SGLabel("Second Title",
+//                              "Warning: Browse image only",
+//                              warnHeight_,
+//                              new Point2D.Double(xpos, ypos),
+//                              SGLabel.BOTTOM,
+//                              halign);
+//        title2_.setFont(title2Font);
+//        layer.addChild(title2_);
         ypos = ypos - 1.0f*warnHeight_;
-        title3_ = new SGLabel("Warning 2",
-                              "Verify accuracy of plot before research use",
-                              warnHeight_,
-                              new Point2D.Double(xpos, ypos),
-                              SGLabel.BOTTOM,
-                              halign);
-        title3_.setFont(title2Font);
-        layer.addChild(title3_);
+//        title3_ = new SGLabel("Warning 2",
+//                              "Verify accuracy of plot before research use",
+//                              warnHeight_,
+//                              new Point2D.Double(xpos, ypos),
+//                              SGLabel.BOTTOM,
+//                              halign);
+//        title3_.setFont(title2Font);
+//        layer.addChild(title3_);
 
         layerCount_ = 0;
         //
@@ -1803,11 +1803,11 @@ public class JPlotLayout extends JGraphicLayout
             xpos = (xMin_ + xMax_)*0.5;
         }
         double ypos = ySize_ - 1.0f*mainTitleHeight_;
-        mainTitle_.setLocationP(new Point2D.Double(xpos, ypos));
+//        mainTitle_.setLocationP(new Point2D.Double(xpos, ypos));
         ypos = ypos - 1.0f*warnHeight_;
-        title2_.setLocationP(new Point2D.Double(xpos, ypos));
+//        title2_.setLocationP(new Point2D.Double(xpos, ypos));
         ypos = ypos - 1.0f*warnHeight_;
-        title3_.setLocationP(new Point2D.Double(xpos, ypos));
+//      title3_.setLocationP(new Point2D.Double(xpos, ypos));
         //      if(plotType_ == GRID) {
         //        if(keyPane_ == null) {
         //          colorKey_.setLocationP(new Point2D.Double(xSize_*0.5, 0.0));
@@ -1824,32 +1824,32 @@ public class JPlotLayout extends JGraphicLayout
      * @param main main label height
      * @param second second and third label height
      */
-    public void setTitleHeightP(double main, double second) {
-        //    mainTitleHeight_ = main;
-        //    warnHeight_ = second;
-        //
-        // title
-        //
-        double ypos = ySize_ - 1.0f*main;
-        double xpos = mainTitle_.getLocationP().x;
-        boolean batch = isBatch();
-        setBatch(true, "JPlotLayout: setTitleHeightP");
-        if(main != mainTitleHeight_) {
-            mainTitleHeight_ = main;
-            mainTitle_.setHeightP(main);
-            mainTitle_.setLocationP(new Point2D.Double(xpos, ypos));
-        }
-        if(second != warnHeight_) {
-            warnHeight_ = second;
-            ypos = ypos - 1.0f*second;
-            title2_.setHeightP(second);
-            title2_.setLocationP(new Point2D.Double(xpos, ypos));
-            ypos = ypos - 1.0f*warnHeight_;
-            title3_.setHeightP(second);
-            title3_.setLocationP(new Point2D.Double(xpos, ypos));
-        }
-        if(!batch) setBatch(false, "JPlotLayout: setTitleHeightP");
-    }
+//    public void setTitleHeightP(double main, double second) {
+//        //    mainTitleHeight_ = main;
+//        //    warnHeight_ = second;
+//        //
+//        // title
+//        //
+//        double ypos = ySize_ - 1.0f*main;
+//        double xpos = mainTitle_.getLocationP().x;
+//        boolean batch = isBatch();
+//        setBatch(true, "JPlotLayout: setTitleHeightP");
+//        if(main != mainTitleHeight_) {
+//            mainTitleHeight_ = main;
+//            mainTitle_.setHeightP(main);
+//            mainTitle_.setLocationP(new Point2D.Double(xpos, ypos));
+//        }
+//        if(second != warnHeight_) {
+//            warnHeight_ = second;
+//            ypos = ypos - 1.0f*second;
+//            title2_.setHeightP(second);
+//            title2_.setLocationP(new Point2D.Double(xpos, ypos));
+//            ypos = ypos - 1.0f*warnHeight_;
+//            title3_.setHeightP(second);
+//            title3_.setLocationP(new Point2D.Double(xpos, ypos));
+//        }
+//        if(!batch) setBatch(false, "JPlotLayout: setTitleHeightP");
+//    }
     /**
      * Get main label height in physical units
      */
